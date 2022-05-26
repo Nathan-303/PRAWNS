@@ -21,7 +21,7 @@
 #' this location which contains all the graphs produced by this code. Defaults
 #' to FALSE
 
-#' @keywords
+#' @keywords heatmap, graph,
 #' @export
 #' @examples
 #' geographic_summary()
@@ -191,7 +191,7 @@ geographic_summary <- function(prawn_path,
 
 
 
-if (output_path=TRUE){
+if (output_path==TRUE){
 
     if (file.exists(output_path)) {
 
