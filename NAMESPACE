@@ -3,6 +3,7 @@
 export(create_prawns)
 export(geographic_summary)
 import(colorspace)
+import(exactextractr)
 import(ggplot2)
 import(ggpubr)
 import(raster)

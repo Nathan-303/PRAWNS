@@ -9,4 +9,5 @@
 #' @import stars
 #' @import viridis
 #' @import colorspace
+#' @import exactextractr
 NULL
