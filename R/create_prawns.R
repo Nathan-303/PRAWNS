@@ -22,8 +22,10 @@
 #' that are used in the different inputted tables, not necessary if the data is
 #' already nicely formatted so defaults to FALSE
 
-#' @keywords
+#' @keywords data
 #' @export
+
+#'
 #' @examples
 #' create_prawns()
 #'
@@ -32,7 +34,7 @@ create_prawns <- function(raster_path,
                           shapefile_path,
                           data_path,
                           key_variable,
-                          key_variable_aliases=FALSE
+                          key_variable_aliases=FALSE,
                           output_path=FALSE){
 
 # Calculate the average pollution for each area ----------------------------
@@ -78,10 +80,10 @@ create_prawns <- function(raster_path,
   additional_data_tibble <- additional_data[1]
 
   #If there's more than one table of additional data, combine them all
-  if(length((additional_data)>1))
+  if(length((additional_data)>1)){
     for (count in c(2:length(additional_data))){
       inner_join(additional_data_tibble,additional_data[count],by="LSOA11CD")
-    }
+    }}
 
 # Combine the pollution means with the additional data --------------------
 
@@ -90,4 +92,13 @@ create_prawns <- function(raster_path,
   #Link the averages for each polygon with the additional data
   #Save the results if a filepath was specified
   #Return the resulting object
+
+# Output the results ------------------------------------------------------
+if (output_path!=FALSE){
+  write.csv(prawns,
+            file=output_path)
+}
+
+
+prawns
 }
