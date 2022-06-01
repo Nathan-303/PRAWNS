@@ -34,18 +34,18 @@ geographic_summary <- function(prawn_path,
                                output_path=FALSE){
 
   #Reads in the demographic and pollution data
-  raw_data <- read.csv(file=prawn_path,
-                             row.names=1,
-                             check.names=FALSE) %>% tibble()
+  raw_data <- read.csv(file={{prawn_path}},
+                        row.names=1,
+                        check.names=FALSE) %>% tibble()
 
   #Reads in the shapefiles
-  raw_shapefiles <- vect(file=shape_path)
+  raw_shapefiles <- vect(x=shape_path)
 
   #Iterates separately for each entry in targets
 
 
   #Takes the subset of the data where the value in column_targeted matches target
-  filtered_data <- subset(superstack, subset= superstack$column_targeted == target)
+  filtered_data <- subset(raw_data, subset= raw_data$column_targeted == target)
 
   filtered_shapefiles <- subset(raw_shapefiles,subset = raw_shapefiles$key_variable %in% filtered_data$key_variable )
 
@@ -116,7 +116,7 @@ geographic_summary <- function(prawn_path,
 
       geom_quantile(quantiles=0.5,aes(color='Median'),size =1)+
 
-      geom_smooth(data=read.csv("Outputs/Output_data/NOx/NOxsuperstack2019.csv")
+      geom_smooth(data=read.csv(prawn_path)
                   , aes(
                     x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
                     y=Total,
@@ -127,7 +127,7 @@ geographic_summary <- function(prawn_path,
                   show.legend = FALSE)+
 
       #An extra line showing the UK average for comparison purposes
-      geom_line(data=read.csv("Outputs/Output_data/NOx/NOxsuperstack2019.csv"),stat="summary" , aes(
+      geom_line(data=read.csv(prawn_path),stat="summary" , aes(
         x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
         y=Total,colour='UK Average'),
         method="lm",
