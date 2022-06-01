@@ -22,6 +22,12 @@ I won't extend the roadmap more than 1 minor version beyond the WIP branch, feat
 		Creates a single page spread of graphs providing information on a geographic area identified by variables in the function input
 		Porting from an old project where it's a collection of scripts
 		Requires a PRAWNS csv file for easy operation
+		
+	-Neither need to function fully as a function at this point
+	
+0.1.0
+
+  create_prawns and geographic_summary working as functions
 
 0.0.1
 
