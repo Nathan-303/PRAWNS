@@ -54,10 +54,29 @@ Planned features:
 
 You can install the development version of PRAWNS from [GitHub](https://github.com/) with:
 
+
+
 ``` r
 # install.packages("devtools")
 devtools::install_github("Nathan-303/PRAWNS")
 ```
+
+##Data sources
+
+County lookup 2019:
+https://geoportal.statistics.gov.uk/datasets/ons::local-authority-district-to-county-april-2019-lookup-in-england/about
+
+2019_LSOA_stats:
+https://www.gov.uk/government/statistics/english-indices-of-deprivation-2019 (File 7)
+
+LSOA_Lookup (2011)
+https://geoportal.statistics.gov.uk/datasets/dc0b24da0880417abc979c705bce3fde/explore
+
+Shapefiles
+https://data.cambridgeshireinsight.org.uk/dataset/output-areas/resource/3bc4faef-38c7-417d-88a9-f302ad845ebe
+
+2019 polution data
+https://naei.beis.gov.uk/data/map-uk-das
 
 ## Example
 
