@@ -45,7 +45,7 @@ geographic_summary <- function(prawn_path,
 
 
   #Takes the subset of the data where the value in column_targeted matches target
-  filtered_data <- subset(raw_data, subset= raw_data$column_targeted == target)
+  filtered_data <- subset(raw_data, subset= {{column_targeted}} == targets)
 
   filtered_shapefiles <- subset(raw_shapefiles,subset = raw_shapefiles$key_variable %in% filtered_data$key_variable )
 
