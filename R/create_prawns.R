@@ -24,6 +24,8 @@
 #'
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #'
+#' @param pollutant_data_name what the pollutant is referred to as in the tables
+#'
 #' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
 
 #' @keywords data
@@ -137,8 +139,8 @@ create_prawns <- function(raster_path,
     data
   }
 
-  Superstack <- renamer(
-    data=Superstack,
+  prawns <- renamer(
+    data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   ) %>% mutate("Point sources"=Total-Total_no_points)
