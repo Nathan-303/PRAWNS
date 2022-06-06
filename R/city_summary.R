@@ -60,7 +60,7 @@ city_summary <- function(prawn_path,
 
     #Create a heatmap for the Nox in the area
     Pollutant_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size =0.05)+
-      aes(fill = Total)+
+      aes(fill = Total,geometry=geometry)+
       scale_fill_continuous(type ="viridis",direction =-1)+
       labs(title=paste0(pollutant," distribution"))+
       theme(axis.text.x = element_blank(),
@@ -70,11 +70,11 @@ city_summary <- function(prawn_path,
     #Create a histogram showing the prevalence of each decile in the area
     City_histogram <- ggplot(data=stitched_shapefile)+
 
-      aes(x=Cont_decile,fill=LSOA_Decile )+
+      aes(x=IMD,fill=IMD )+
       geom_bar()+
       labs(x="IMD decile",
            title=paste0(custom_name," IMD histogram"))+
-      scale_x_continuous(
+      scale_x_discrete(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
       scale_fill_viridis_d()+
@@ -82,32 +82,38 @@ city_summary <- function(prawn_path,
 
     #Create a graph showing the relationship between NOx and decile within the chosen area
     City_profile <- ggplot(data=stitched_shapefile)+
-      aes(x=Cont_decile,
-          y=NOx,
-      )+
+      aes(x="IMD",
+          y="Total")+
 
       coord_cartesian(xlim = c(1, 10),
                       ylim= c(0,50))+
 
-      scale_x_continuous(
+      scale_x_discrete(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
 
-      scale_y_continuous(
+      scale_y_discrete(
         expand = expansion(mult=0,add=0))+
 
       labs(x="IMD decile",
-           y="NOx emissions",
+           y=paste0(pollutant," emissions"),
            title=paste0(custom_name," NOx emission"))+
 
-      geom_line(stat="summary",color="blue")+
+      #Plot the line of best fit for the mean
+      geom_smooth(method="lm",
+                  formula=y~x,
+                  se=TRUE,
+                  show.legend=FALSE)#,
+                  #aes(color='Mean'))
 
-      geom_smooth(method="lm",formula=y~x,se=TRUE,show.legend=FALSE, aes(color='Mean'))+
+      #Plot a line passing through the mean at each decile
 
-      geom_boxplot(aes(x=Cont_decile,y=NOx,group=Cont_decile,color='Median'),width=0.5,alpha=0)+
+      #Plot the line of best fit for the median
+      geom_quantile(quantiles=0.5,
+                    aes(color='Median'),
+                    size =1)+
 
-      geom_quantile(quantiles=0.5,aes(color='Median'),size =1)+
-
+      #Plot a line passing through the median at each decile
       geom_smooth(data=read.csv(prawn_path)
                   , aes(
                     x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
@@ -122,11 +128,8 @@ city_summary <- function(prawn_path,
       geom_line(data=read.csv(prawn_path),stat="summary" , aes(
         x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
         y=Total,colour='UK Average'),
-        method="lm",
-        formula=y~x,
-        se=FALSE,
-        show.legend = FALSE,
-      )+
+        show.legend = FALSE
+      )
 
       scale_colour_manual(name="Line type",
                           breaks = c('Mean','Median','UK Average'),
@@ -135,13 +138,13 @@ city_summary <- function(prawn_path,
 
     #Creates a cumulative distribution plot showing what fractions of each decile are exposed to less than the amount of NOx on the axis
     city_freq <- ggplot(data=stitched_shapefile)+
-      aes(x=NOx,group=Cont_decile,colour=LSOA_Decile)+
+      aes(x=Total,group=IMD,colour=IMD)+
       scale_colour_viridis_d(option="turbo")+
       stat_ecdf(
       )+coord_cartesian(xlim = c(0, 100))+
-      labs(x="NOx emissions",
-           y="Fraction exposed to at least this much nox",
-           title=paste0(custom_name," Cumulative distribution"))+
+      labs(x= paste0(pollutant," emissions"),
+           y= paste0("Fraction exposed to at least this much ",pollutant),
+           title=paste0(" Cumulative distribution  of ",pollutant," emissions"))+
       scale_y_continuous(
         expand = expansion(mult=0,add=0),
       )+
@@ -159,10 +162,10 @@ city_summary <- function(prawn_path,
                "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
                ,"Waste treatment and disposal","point_sources"),
         names_to = "Emission_source",
-        values_to = "NOx_emissions")
+        values_to = "emissions")
     long_chunk$Emission_source <- factor(long_chunk$Emission_source)
 
-    long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,NOx_emissions,mean,.desc=TRUE))
+    long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
 
     city_sources <- Decile_vs_emission_by_variable(
       active_stack = long_chunk,

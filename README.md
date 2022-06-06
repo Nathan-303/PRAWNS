@@ -34,9 +34,13 @@ Patches (0.0.x) will be tagged on github and recorded in here
   
   data source for city_summary works
   
-0.0.2 (current)  
+0.0.2 (uploaded 6/6/22)  
 	
-	get the graphs for city_summary working
+	got the following graphs working in city_summary
+	  Decile_distribution
+	  Pollutant_distribution
+	  City_histogram
+	  City_freq
 	
 0.1.0
 
