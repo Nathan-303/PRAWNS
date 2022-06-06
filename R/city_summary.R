@@ -7,15 +7,10 @@
 #'
 #' @param shape_path The filepath for the shapefile that is to be used
 #'
-#' @param column_targeted The name of the column to be searched. It is reccomended
-#' to use somehtign like city or county/UA that is geographically specific, but
-#' any variable can be used
-#'
 #' @param targets The name of the thing you're trying to isolate e.g. "Manchester"
 #' can also be a vector of valid values
 #'
-#' @param key_variable The variable that is common between the shapefile and csv
-#' files specified in data_path, defaults to LSOA19CD
+#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
 #' @param output_path The filepath to output to, a folder will be created at
 #' this location which contains all the graphs produced by this code. Defaults
@@ -26,11 +21,10 @@
 #' @examples
 #' geographic_summary()
 #'
-geographic_summary <- function(prawn_path,
+city_summary <- function(prawn_path,
                                shape_path,
-                               column_targeted,
                                targets,
-                               key_variable="LSOA19CD",
+                         pollutant,
                                output_path=FALSE){
 
   #Reads in the demographic and pollution data
@@ -41,28 +35,24 @@ geographic_summary <- function(prawn_path,
   #Reads in the shapefiles
   raw_shapefile <- st_read(shape_path)
 
-  #Iterates separately for each entry in targets
-
-
-  #Takes the subset of the data where the value in column_targeted matches target
-  filtered_data <- filter(raw_data,TCITY15NM %in% c("London"))
+  #Takes the subset of the data where the city name matches the targets
+  filtered_data <- filter(raw_data,TCITY15NM %in% targets)
 
   filtered_shapefile <- filter(raw_shapefile,LSOA11CD %in% filtered_data$LSOA11CD)
-  #Stitch the data you want onto the shapefile, this section has assumptions about the column names, the continous and factored deciles are for graphing capacity
-  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD")
+  #Use  inner join to select only the elements of the shapefile that match the desired data
+  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD") %>%
+    #Trim the long name so it doesnt make the code a horrific mess
+    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.) %>%
+    #Convert IMD into a factor so it's treated as discrete, this makes the graphs behave better
+    mutate(IMD=as.factor(IMD))
 
-  stitched_shapefile
-}
-    stitched_shapefile$LSOA_Decile <- filtered_data$Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs. %>% factor()
-    stitched_shapefile$NOx <- filtered_data$Total
-    stitched_shapefile$Cont_decile <- filtered_data$Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.
 
 # Graph creation ----------------------------------------------------------
     #Create a map showing hpw the population is distrubuted between the deciles in the chosen area,
     Decile_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size=0.05)+
-      aes(fill =LSOA_Decile)+
+      aes(fill =IMD,geometry=geometry)+
       scale_fill_viridis_d()+
-      labs(title=paste0(custom_name," IMD distribution"))+
+      labs(title=paste0(pollutant," emissions by IMD decile"))+
       theme(axis.text.x = element_blank(),
             axis.text.y = element_blank(),
             axis.ticks = element_blank())+
@@ -70,9 +60,9 @@ geographic_summary <- function(prawn_path,
 
     #Create a heatmap for the Nox in the area
     Pollutant_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size =0.05)+
-      aes(fill = NOx)+
+      aes(fill = Total)+
       scale_fill_continuous(type ="viridis",direction =-1)+
-      labs(title=paste0(custom_name," NOx distribution"))+
+      labs(title=paste0(pollutant," distribution"))+
       theme(axis.text.x = element_blank(),
             axis.text.y = element_blank(),
             axis.ticks = element_blank())

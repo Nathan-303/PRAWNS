@@ -10,31 +10,38 @@ Roadmap:
 
 I won't extend the roadmap more than 1 minor version beyond the WIP branch, features planned beyond that will go in planned features
 
-0.0.0 (WIP)
+The current WIP build will appear at the top of this file, 
 
-	create_prawns
+Patches (0.0.x) will be tagged on github and recorded in here
+
+0.1.0 (WIP)
+
+	create_prawns (complete)
 		Reads the shapefile and creates the PRAWNS object as a csv file
 	 	Porting from an old project of mine where it's a collection of scripts
 		Fully self contained
 		-The input files for national statistics can't be changed in the function call
 
-	geographic_summary
+	city_summary
 		Creates a single page spread of graphs providing information on a geographic area identified by variables in the function input
 		Porting from an old project where it's a collection of scripts
 		Requires a PRAWNS csv file for easy operation
 		
-	-Neither need to function fully as a function at this point
+	
+0.0.1 (uploaded 6/6/22)
+
+  create_prawns works
+  
+  data source for city_summary works
+  
+0.0.2 (current)  
+	
+	get the graphs for city_summary working
 	
 0.1.0
 
-  create_prawns and geographic_summary working as functions
+  create_prawns and city_summary working as functions
 
-0.0.1
-
-	source_summary
-		creates a graph summarising the sources of the pollutants
-		Porting from a collection of scripts I've already written
-		
 1.0.0
 
   All functionality from pollutant processing hub ported as functions
@@ -49,6 +56,11 @@ Planned features:
 	
 	Accepts data from TIF format (relevant for modelled data from some sources)
 	
+	Source summary ported in
+	
+	Averages with and without london tracked against the city
+	
+	Each graph function within summary can be called separately
 	
 ## Installation
 
