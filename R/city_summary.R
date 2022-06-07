@@ -79,11 +79,11 @@ city_summary <- function(prawn_path,
         expand = expansion(mult=0,add=0))+
       scale_fill_viridis_d()+
       guides(fill=guide_legend(ncol=2, byrow=FALSE))
-
+#aoufbihwevbfiywaegrbvibrvkljbverkaljb
     #Create a graph showing the relationship between NOx and decile within the chosen area
-    City_profile <- ggplot(data=stitched_shapefile)+
+    City_profile <- ggplot(data=stitched_shapefile,
       aes(x="IMD",
-          y="Total")+
+          y="Total"))+
 
       coord_cartesian(xlim = c(1, 10),
                       ylim= c(0,50))+
@@ -103,8 +103,8 @@ city_summary <- function(prawn_path,
       geom_smooth(method="lm",
                   formula=y~x,
                   se=TRUE,
-                  show.legend=FALSE)#,
-                  #aes(color='Mean'))
+                  show.legend=FALSE,
+                  aes(color='Mean'))+
 
       #Plot a line passing through the mean at each decile
 
@@ -129,7 +129,7 @@ city_summary <- function(prawn_path,
         x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
         y=Total,colour='UK Average'),
         show.legend = FALSE
-      )
+      )+
 
       scale_colour_manual(name="Line type",
                           breaks = c('Mean','Median','UK Average'),
@@ -169,12 +169,12 @@ city_summary <- function(prawn_path,
 
     city_sources <- Decile_vs_emission_by_variable(
       active_stack = long_chunk,
-      chosen_decile = Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
+      chosen_decile = IMD,
       chosen_grouping = Emission_source,
       xaxis = "IMD Decile",
       yaxis = "NOx emissions",
-      title = paste0("Source breakdown for ",city_list[index]),
-      chosen_variable = NOx_emissions,
+      title = paste0("Source breakdown for ",targets),
+      chosen_variable = emissions,
       Pollutant = "NOx"
 
     )+

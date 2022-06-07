@@ -4,7 +4,6 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of PRAWNS is to ...
 
 Roadmap:
 
@@ -41,6 +40,11 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	  Pollutant_distribution
 	  City_histogram
 	  City_freq
+
+0.0.3
+
+  Port decile_vs_emission_by_variable into the package
+    Can be a flat migration, this function already works
 	
 0.1.0
 
