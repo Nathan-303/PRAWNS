@@ -35,6 +35,6 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     #calculate the mean and median for each decile
     summarise(mean=mean(total),median=median(total))
 
-  lm_summary <-
+  linear_fit <- lm(Total~IMD, data=data)
 }
 

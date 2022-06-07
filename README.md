@@ -44,7 +44,7 @@ Patches (0.0.x) will be tagged on github and recorded in here
 0.0.3
 
   Port decile_vs_emission_by_variable into the package
-    Can be a flat migration, this function already works
+    Should be a flat migration but things are weird, idk why, but writing this it might be the geom column
 	
 0.1.0
 
