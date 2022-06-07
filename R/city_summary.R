@@ -22,11 +22,15 @@
 #' geographic_summary()
 #'
 city_summary <- function(prawn_path,
-                               shape_path,
-                               targets,
+                         shape_path,
+                         targets,
                          pollutant,
-                               output_path=FALSE){
+                         output_path=FALSE,
+                         custom_name=FALSE){
 
+
+  #custom name set to targets for now, might change later
+  custom_name <- targets
   #Reads in the demographic and pollution data
   raw_data <- read.csv(file=prawn_path,
                         row.names=1,
@@ -36,15 +40,12 @@ city_summary <- function(prawn_path,
   raw_shapefile <- st_read(shape_path)
 
   #Takes the subset of the data where the city name matches the targets
-  filtered_data <- filter(raw_data,TCITY15NM %in% targets) %>%
-    #Trim the long name so it doesnt make the code a horrific mess
-    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.) %>%
-    #Convert IMD into a factor so it's treated as discrete, this makes the graphs behave better
-    mutate(IMD=as.factor(IMD))
+  filtered_data <- filter(raw_data,TCITY15NM %in% targets)
 
 
 
-  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD")
+  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD") %>%
+    mutate(IMD=as.numeric(IMD))
 
 
 # Graph creation ----------------------------------------------------------
@@ -81,14 +82,14 @@ city_summary <- function(prawn_path,
       guides(fill=guide_legend(ncol=2, byrow=FALSE))
 #aoufbihwevbfiywaegrbvibrvkljbverkaljb
     #Create a graph showing the relationship between NOx and decile within the chosen area
-    City_profile <- ggplot(data=stitched_shapefile,
-      aes(x="IMD",
-          y="Total"))+
+    City_profile <- ggplot(data=filtered_data)+
+      aes(x=IMD,
+          y=Total)+
 
       coord_cartesian(xlim = c(1, 10),
                       ylim= c(0,50))+
 
-      scale_x_discrete(
+      scale_x_continuous(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
 
@@ -116,7 +117,7 @@ city_summary <- function(prawn_path,
       #Plot a line passing through the median at each decile
       geom_smooth(data=read.csv(prawn_path)
                   , aes(
-                    x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
+                    x=IMD,
                     y=Total,
                     color='UK Average'),
                   method="lm",
@@ -126,7 +127,7 @@ city_summary <- function(prawn_path,
 
       #An extra line showing the UK average for comparison purposes
       geom_line(data=read.csv(prawn_path),stat="summary" , aes(
-        x=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
+        x=IMD,
         y=Total,colour='UK Average'),
         show.legend = FALSE
       )+
@@ -148,14 +149,14 @@ city_summary <- function(prawn_path,
       scale_y_continuous(
         expand = expansion(mult=0,add=0),
       )+
-      scale_x_continuous(
+      scale_x_discrete(
         expand = expansion(mult=0,add=0),
       )
     city_freq
 
 
     #Create a pivoted copy of the data so the sources can be graphed as separate variables
-    long_chunk <- stitched_shapefile %>% tibble() %>% mutate(point_sources=Total-Total_no_points)%>%
+    long_chunk <- filtered_data %>% tibble() %>% mutate(point_sources=Total-Total_no_points)%>%
       pivot_longer(
         cols=c("Agricultural","Domestic combustion","Energy production",
                "Industrial combustion","Industrial production","Natural",

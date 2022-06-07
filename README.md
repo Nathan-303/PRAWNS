@@ -24,7 +24,7 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	city_summary
 		Creates a single page spread of graphs providing information on a geographic area identified by variables in the function input
 		Porting from an old project where it's a collection of scripts
-		Requires a PRAWNS csv file for easy operation
+		Requires a PRAWNS csv file for easy operation as this lets me standerdise the input
 		
 	stat_wrangler (complete)
 	  Calculates the flat and % difference between the mean and median points for deciles
@@ -54,7 +54,7 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 0.0.4
 	Port decile_vs_emission_by_variable into the package
-    Should be a flat migration but things are weird, idk why, but writing this it might be the geom column
+    Correct the issue arising from IMD as a factor
     
 0.1.0
 
