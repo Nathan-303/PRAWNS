@@ -26,7 +26,7 @@ Patches (0.0.x) will be tagged on github and recorded in here
 		Porting from an old project where it's a collection of scripts
 		Requires a PRAWNS csv file for easy operation
 		
-	stat_wrangler
+	stat_wrangler (complete)
 	  Calculates the flat and % difference between the mean and median points for deciles
 	  Calculates the flat and % difference between the intercept of the regrassion lines plotted for all data and the median for each        decile
 	  
@@ -44,13 +44,18 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	  City_histogram
 	  City_freq
 
-0.0.3
+0.0.3 (uploaded 7/6/22)
 
-  Port decile_vs_emission_by_variable into the package
-    Should be a flat migration but things are weird, idk why, but writing this it might be the geom column
+  stat_wrangler
+    calculates the flat and % differences between specified deciles
+    complete and fully functional
 	
 	Renamed the long IMD decile column to IMD within create_prawns
-	
+
+0.0.4
+	Port decile_vs_emission_by_variable into the package
+    Should be a flat migration but things are weird, idk why, but writing this it might be the geom column
+    
 0.1.0
 
   create_prawns and city_summary working as functions
