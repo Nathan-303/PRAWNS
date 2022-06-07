@@ -41,7 +41,10 @@ create_prawns <- function(raster_path,
                           data_path,
                           key_variable,
                           key_variable_aliases=FALSE,
-                          output_path=FALSE){
+                          output_path=FALSE,
+                          pollutant_data_name,
+                          year,
+                          pollutant){
 
 # Calculate the average pollution for each area ----------------------------
 
@@ -143,7 +146,8 @@ create_prawns <- function(raster_path,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total-Total_no_points)
+  ) %>% mutate("Point sources"=Total-Total_no_points) %>%
+    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
 
 # Output the results ------------------------------------------------------

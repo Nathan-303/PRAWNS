@@ -26,7 +26,10 @@ Patches (0.0.x) will be tagged on github and recorded in here
 		Porting from an old project where it's a collection of scripts
 		Requires a PRAWNS csv file for easy operation
 		
-	
+	stat_wrangler
+	  Calculates the flat and % difference between the mean and median points for deciles
+	  Calculates the flat and % difference between the intercept of the regrassion lines plotted for all data and the median for each        decile
+	  
 0.0.1 (uploaded 6/6/22)
 
   create_prawns works
@@ -45,6 +48,8 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
   Port decile_vs_emission_by_variable into the package
     Should be a flat migration but things are weird, idk why, but writing this it might be the geom column
+	
+	Renamed the long IMD decile column to IMD within create_prawns
 	
 0.1.0
 
