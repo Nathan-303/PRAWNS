@@ -36,15 +36,15 @@ city_summary <- function(prawn_path,
   raw_shapefile <- st_read(shape_path)
 
   #Takes the subset of the data where the city name matches the targets
-  filtered_data <- filter(raw_data,TCITY15NM %in% targets)
-
-  filtered_shapefile <- filter(raw_shapefile,LSOA11CD %in% filtered_data$LSOA11CD)
-  #Use  inner join to select only the elements of the shapefile that match the desired data
-  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD") %>%
+  filtered_data <- filter(raw_data,TCITY15NM %in% targets) %>%
     #Trim the long name so it doesnt make the code a horrific mess
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.) %>%
     #Convert IMD into a factor so it's treated as discrete, this makes the graphs behave better
     mutate(IMD=as.factor(IMD))
+
+
+
+  stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD")
 
 
 # Graph creation ----------------------------------------------------------
