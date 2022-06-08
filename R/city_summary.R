@@ -25,12 +25,10 @@ city_summary <- function(prawn_path,
                          shape_path,
                          targets,
                          pollutant,
-                         output_path=FALSE,
-                         custom_name=FALSE){
+                         output_path=FALSE){
 
 
-  #custom name set to targets for now, might change later
-  custom_name <- targets
+
   #Reads in the demographic and pollution data
   raw_data <- read.csv(file=prawn_path,
                         row.names=1,
@@ -74,7 +72,7 @@ city_summary <- function(prawn_path,
       aes(x=IMD,fill=IMD )+
       geom_bar()+
       labs(x="IMD decile",
-           title=paste0(custom_name," IMD histogram"))+
+           title=paste0(targets," IMD histogram"))+
       scale_x_discrete(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
@@ -86,19 +84,14 @@ city_summary <- function(prawn_path,
       aes(x=IMD,
           y=Total)+
 
-      coord_cartesian(xlim = c(1, 10),
-                      ylim= c(0,50))+
-
       scale_x_continuous(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
 
-      scale_y_discrete(
-        expand = expansion(mult=0,add=0))+
 
       labs(x="IMD decile",
            y=paste0(pollutant," emissions"),
-           title=paste0(custom_name," NOx emission"))+
+           title=paste0(targets," NOx emission"))+
 
       #Plot the line of best fit for the mean
       geom_smooth(method="lm",
@@ -181,7 +174,7 @@ city_summary <- function(prawn_path,
     )+
       geom_quantile(quantiles=0.5,linetype=2)
     output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
-      annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",custom_name)))
+      annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",targets)))
 
 # Archive results ---------------------------------------------------------
 
