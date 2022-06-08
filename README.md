@@ -9,26 +9,11 @@ Roadmap:
 
 I won't extend the roadmap more than 1 minor version beyond the WIP branch, features planned beyond that will go in planned features
 
-The current WIP build will appear at the top of this file, 
+The current target build will appear at the top of this file, 
 
 Patches (0.0.x) will be tagged on github and recorded in here
 
-0.1.0 (WIP)
 
-	create_prawns (complete)
-		Reads the shapefile and creates the PRAWNS object as a csv file
-	 	Porting from an old project of mine where it's a collection of scripts
-		Fully self contained
-		-The input files for national statistics can't be changed in the function call
-
-	city_summary
-		Creates a single page spread of graphs providing information on a geographic area identified by variables in the function input
-		Porting from an old project where it's a collection of scripts
-		Requires a PRAWNS csv file for easy operation as this lets me standerdise the input
-		
-	stat_wrangler (complete)
-	  Calculates the flat and % difference between the mean and median points for deciles
-	  Calculates the flat and % difference between the intercept of the regrassion lines plotted for all data and the median for each        decile
 	  
 0.0.1 (uploaded 6/6/22)
 
@@ -52,13 +37,29 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	
 	Renamed the long IMD decile column to IMD within create_prawns
 
-0.0.4
-	Port decile_vs_emission_by_variable into the package
-    Correct the issue arising from IMD as a factor
-    
-0.1.0
+0.0.4 (uploaded 8/6/22)
 
-  create_prawns and city_summary working as functions
+	Ported decile_vs_emission_by_variable into the package
+    Corrected the issue arising from IMD as a factor
+    
+  A new and exciting error in the NOx emissions with trend lines
+    
+0.1.0 (Uploaded 8/6/22)
+
+	create_prawns (complete)
+		Reads the shapefile and creates the PRAWNS object as a csv file
+	 	Porting from an old project of mine where it's a collection of scripts
+		Fully self contained
+		-The input files for national statistics can't be changed in the function call
+
+	city_summary
+		Creates a single page spread of graphs providing information on a geographic area identified by variables in the function input
+		Porting from an old project where it's a collection of scripts
+		Requires a PRAWNS csv file for easy operation as this lets me standerdise the input
+		
+	stat_wrangler (complete)
+	  Calculates the flat and % difference between the mean and median points for deciles
+	  Calculates the flat and % difference between the intercept of the regrassion lines plotted for all data and the median for each        decile
 
 1.0.0
 
