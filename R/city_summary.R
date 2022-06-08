@@ -78,7 +78,7 @@ city_summary <- function(prawn_path,
         expand = expansion(mult=0,add=0))+
       scale_fill_viridis_d()+
       guides(fill=guide_legend(ncol=2, byrow=FALSE))
-#aoufbihwevbfiywaegrbvibrvkljbverkaljb
+#This is where the largest graph (mean/median and UK average starts)
     #Create a graph showing the relationship between NOx and decile within the chosen area
     City_profile <- ggplot(data=filtered_data)+
       aes(x=IMD,
@@ -86,6 +86,7 @@ city_summary <- function(prawn_path,
 
       scale_x_continuous(
         breaks=c(1:10),
+        minor_breaks = FALSE,
         expand = expansion(mult=0,add=0))+
 
 
@@ -96,18 +97,22 @@ city_summary <- function(prawn_path,
       #Plot the line of best fit for the mean
       geom_smooth(method="lm",
                   formula=y~x,
-                  se=TRUE,
+                  se=FALSE,
                   show.legend=FALSE,
                   aes(color='Mean'))+
 
       #Plot a line passing through the mean at each decile
+      geom_line(stat="summary",aes(color='Mean'))+
 
       #Plot the line of best fit for the median
       geom_quantile(quantiles=0.5,
                     aes(color='Median'),
                     size =1)+
 
-      #Plot a line passing through the median at each decile
+      #Plot a line through the medians for each decile
+      geom_line(stat="summary",fun=median,aes(color='Median'))+
+
+      #Plot a regression line for the whole UK for comparison
       geom_smooth(data=read.csv(prawn_path)
                   , aes(
                     x=IMD,
@@ -118,7 +123,7 @@ city_summary <- function(prawn_path,
                   se=FALSE,
                   show.legend = FALSE)+
 
-      #An extra line showing the UK average for comparison purposes
+      #An extra line showing the UK average at each decile for comparison purposes
       geom_line(data=read.csv(prawn_path),stat="summary" , aes(
         x=IMD,
         y=Total,colour='UK Average'),
