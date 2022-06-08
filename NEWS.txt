@@ -62,7 +62,11 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	  Calculates the flat and % difference between the mean and median points for deciles
 	  Calculates the flat and % difference between the intercept of the regrassion lines plotted for all data and the median for each        decile
 
-  
+0.1.1 (Uploaded 8/6/22)
+	
+	Updated the readme to be much better
+
+	Moved the changelogs to NEWS.txt  
   
 		
 Planned features:
