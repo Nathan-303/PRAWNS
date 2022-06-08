@@ -23,7 +23,7 @@ You can install the development version of PRAWNS from [GitHub](https://github.c
 devtools::install_github("Nathan-303/PRAWNS")
 ```
 
-##Data sources
+## Data sources
 
 County lookup 2019:
 https://geoportal.statistics.gov.uk/datasets/ons::local-authority-district-to-county-april-2019-lookup-in-england/about
@@ -42,12 +42,6 @@ https://naei.beis.gov.uk/data/map-uk-das
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(PRAWNS)
-## basic example code
-```
 Create the standardised PRAWNS object used for all the graphing and analysis 
 functions
 ``` r
