@@ -48,4 +48,26 @@ This is a basic example which shows you how to solve a common problem:
 library(PRAWNS)
 ## basic example code
 ```
+#Create the standardised PRAWNS object used for all the graphing and analysis 
+#functions
+create_prawns(raster_path= "Data/NOx_rasters_2019",
+              shapefile_path = "Data/2011_LSOA_shapefile_20m_generalised",
+              data_path= list.files("Data/LSOA_statistics"),
+              key_variable = "LSOA19CD",
+              key_variable_aliases =c("LSOA.code..2011.","?..LSOA11CD"),
+              output_path="Outputs/create_prawns_1_0_0_test.csv",
+              pollutant_data_name = "nox",
+              year=2019,
+              pollutant="NOx")
+}
 
+#Get a graphical summary of the distribution of a pollutant in a city
+city_summary(prawn_path = "Outputs/create_prawns_1_0_0_test.csv",
+                   shape_path = "Data/2011_LSOA_shapefile_20m_generalised",
+                   targets = "London",
+                   output_path= "Outputs/geographic_summary1_0_0_test",
+                    pollutant="NOx"
+                  )
+
+#Calculate the difference between the most and least deprived deciles
+stat_wrangler(prawn_path = prawn_path,deciles=c(1,10))
