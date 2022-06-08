@@ -45,7 +45,7 @@ city_summary <- function(prawn_path,
 
 
   stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD") %>%
-    mutate(IMD=as.numeric(IMD))
+    mutate(IMD=as.factor(IMD))
 
 
 # Graph creation ----------------------------------------------------------
@@ -180,7 +180,7 @@ city_summary <- function(prawn_path,
 
     )+
       geom_quantile(quantiles=0.5,linetype=2)
-    city_summary <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
+    output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
       annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",custom_name)))
 
 # Archive results ---------------------------------------------------------
@@ -205,7 +205,9 @@ if (output_path==TRUE){
              units = "mm",height = 160,width=160,
              device="png")
     }
-  }
+}
+
+    output
 }
 
 
