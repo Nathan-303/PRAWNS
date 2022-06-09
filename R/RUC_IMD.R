@@ -52,10 +52,10 @@ RUC_summary <- ggplot(temp)+
                 size =1)+
   
   #Plot a line through the medians for each decile
-  geom_line(stat="summary",fun=median,aes(linetype="Median"))
+  geom_line(stat="summary",fun=median,aes(linetype="Median"))+
   
 labs(x="IMD decile where 10 is least deprived",
-     y="Average NOx emissions/tonnes km^2",
+     y=paste0("Average ",pollutant," emissions/tonnes km^2"),
      title="NOx emissions by RUC classification 2019")+
   
   scale_x_continuous(
