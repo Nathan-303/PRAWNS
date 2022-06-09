@@ -76,7 +76,7 @@ create_prawns <- function(raster_path,
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
-  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv")
+  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv") %>% select(-FID)
 
   city_data <- read.csv("Data/LSOA_statistics/city lookup 2011.csv") %>%
     tibble()
@@ -87,13 +87,13 @@ create_prawns <- function(raster_path,
   LSOA_demographics <- read.csv("Data/LSOA_statistics/2019_LSOA_Stats.csv") %>%
     tibble() %>%
     rename(LSOA11CD=LSOA.code..2011.) %>%
-    inner_join(city_data,by="LSOA11CD")
+    inner_join(city_data,by="LSOA11CD")%>%
+    inner_join(rural_urban,by=c("LSOA11NM"="LSOA11NM"))
 
   #Links the demographic data to the references to the shapefile
   demo_linked_reference <- inner_join(city_data,LSOA_demographics,by=c("LSOA11CD"="LSOA11CD","FID"="FID",
                                                                        "LSOA11NM"="LSOA11NM","TCITY15CD"="TCITY15CD",
-                                                                       "TCITY15NM"="TCITY15NM")) %>%
-    inner_join(rural_urban,by=c("LSOA11NM"="LSOA11NM"))
+                                                                       "TCITY15NM"="TCITY15NM"))
 
   #Reads the county lookup data
   county_lookup <- read.csv("Data/LSOA_statistics/county lookup 2019.csv",row.names = 1)
