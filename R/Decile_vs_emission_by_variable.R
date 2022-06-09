@@ -25,11 +25,11 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
          title=title
     )+
 
-    geom_line(stat="summary",linetype="Mean"
+    geom_line(stat="summary",aes(linetype="Mean")
     )+
 
 
-    geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,linetype="Mean")+
+    geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,aes(linetype="Mean"))+
     #Plot the line of best fit for the median
     geom_quantile(quantiles=0.5,
                   aes(linetype="Median"),
@@ -48,7 +48,7 @@ if(UK_Average==TRUE){
       #formula={{chosen_variable}}~{{chosen_decile}},
       se=FALSE,
       show.legend = FALSE,
-      linetype="UK average"))+
+      aes(linetype="UK average")))+
 
      scale_linetype_manual("UK average"=1,"Mean"=2, "Median"=3)
 }
