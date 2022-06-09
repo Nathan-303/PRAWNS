@@ -92,7 +92,7 @@ city_summary <- function(prawn_path,
 
       labs(x="IMD decile",
            y=paste0(pollutant," emissions"),
-           title=paste0(targets," NOx emission"))+
+           title=paste0(targets," ", pollutant, "emission"))+
 
       #Plot the line of best fit for the mean
       geom_smooth(method="lm",
