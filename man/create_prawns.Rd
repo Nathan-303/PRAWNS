@@ -10,7 +10,10 @@ create_prawns(
   data_path,
   key_variable,
   key_variable_aliases = FALSE,
-  output_path = FALSE
+  output_path = FALSE,
+  pollutant_data_name,
+  year,
+  pollutant
 )
 }
 \arguments{
@@ -30,6 +33,12 @@ that are used in the different inputted tables, not necessary if the data is
 already nicely formatted so defaults to FALSE}
 
 \item{output_path}{The filepath to output to. Defaults to FALSE}
+
+\item{pollutant_data_name}{what the pollutant is referred to as in the tables}
+
+\item{year}{the year the data is from, used to standardise column names, currently doesnt work for years before 2000}
+
+\item{pollutant}{the pollutant being investigated, this should be in quotes and correspond with its name in the data}
 }
 \description{
 This function takes a raster and a shapefile, works out the average value for
