@@ -1,48 +1,58 @@
-#Runs the startup file to load in all the required libraries, a simple if statement 
-#stops it being run if the code has already been used
+#' A function for looking at the relationship between IMD and emissions for 
+#' rural urban classifications
+#'
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+#' @param targets The name of the thing you're trying to isolate e.g. "Manchester"
+#' can also be a vector of valid values
+#'
+#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#'
+#' @param output_path The filepath to output to, a folder will be created at
+#' this location which contains all the graphs produced by this code. Defaults
+#' to FALSE
+
+#' @keywords RUC
+#' @export
+#' @examples
+#' RUC_IMD()
+#'
 if(!exists("Started")){
   source("C:/Users/Nathan Gray/Documents/GitHub/Pollutant-processing-hub/Scripts/Startup.R")
   Started <- TRUE
 }
 
-active_stack <- Stack_seeker("NOx",2019) %>%   
-  
-  #mutate in the columns you want (removing natural NOx)
-  mutate("Point sources" =Total-Total_no_points) %>% 
-  tibble() %>% 
+#Read in the data with NA valuse changed to unclassified, raising red flags if necessary
+active_stack <-read.csv(prawn_path) %>% 
+  replace_na(list(RUC11="Unclassified"))
 
-replace_na(list(RUC11="Unclassified"))
-
-#Make the data long to eneble grouping by source
+#Make the data long to enable grouping by source
 temp <- active_stack %>% 
   tibble() %>% 
 
-  select(decile = Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
-         NOx_emissions=Total,
+  select(decile = IMD,
+         Emissions=Total,
          Classification=RUC11) %>% 
-  group_by(Classification,
-           decile) %>% 
-  summarise(Mean = mean(NOx_emissions, na.rm = T), 
-            Median = median(NOx_emissions, na.rm =T )) %>% 
-  pivot_longer(c(Mean, Median), names_to = "stat")
+  group_by(Classification)
 
 
 
 RUC_summary <- ggplot(temp)+
-  geom_smooth(aes(decile,
-                  value,
-                  colour = Classification
-  ),
-  method = "lm",
-  se=FALSE,
-  size=1)+
-  geom_line(aes(decile,
-                value,
-                colour = Classification
-  ),
-  size=0.5)+
+  aes(x=decile,
+      y=Emissions,
+      colour=Classification)+
+  geom_line(stat="summary",aes(linetype="Mean")
+  )+
   
-  facet_wrap(~stat)+
+  
+  geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,aes(linetype="Mean"))+
+  #Plot the line of best fit for the median
+  geom_quantile(quantiles=0.5,
+                aes(linetype="Median"),
+                size =1)+
+  
+  #Plot a line through the medians for each decile
+  geom_line(stat="summary",fun=median,aes(linetype="Median"))
   
 labs(x="IMD decile where 10 is least deprived",
      y="Average NOx emissions/tonnes km^2",
