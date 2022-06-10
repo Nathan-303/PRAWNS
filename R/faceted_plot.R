@@ -2,8 +2,8 @@
 #' e.g. if grouped by city there would be a tile for every city.
 #' @param prawn_path the data source to use, should be a quoted csv filepath
 #'
-#' @param group the varaibel to facet by, should be unquoted and an exact match
-#' for the column name in the data
+#' @param group Currently only takes "County" or "City" due to non standard
+#' evaluation, changes what the graph is faceted by
 #'
 #' @param pollutant the name of the pollutant, used to name the graphs
 #' @export
@@ -47,26 +47,26 @@ City_profile <- ggplot(data=filtered_data)+
   #Plot a line through the medians for each decile
   geom_line(stat="summary",fun=median,aes(color='Median'))+
 
-  #Plot a regression line for the whole UK for comparison
-  geom_smooth(data=read.csv(prawn_path)
-              , aes(
-                x=IMD,
-                y=Total,
-                color='UK Average'),
-              method="lm",
-              formula=y~x,
-              se=FALSE,
-              show.legend = FALSE)+
-
-  #An extra line showing the UK average at each decile for comparison purposes
-  geom_line(data=read.csv(prawn_path),stat="summary" , aes(
-    x=IMD,
-    y=Total,colour='UK Average'),
-    show.legend = FALSE
-  )+
+  # #Plot a regression line for the whole UK for comparison
+  # geom_smooth(data=read.csv(prawn_path)
+  #             , aes(
+  #               x=IMD,
+  #               y=Total,
+  #               color='UK Average'),
+  #             method="lm",
+  #             formula=y~x,
+  #             se=FALSE,
+  #             show.legend = FALSE)+
+  #
+  # #An extra line showing the UK average at each decile for comparison purposes
+  # geom_line(data=read.csv(prawn_path),stat="summary" , aes(
+  #   x=IMD,
+  #   y=Total,colour='UK Average'),
+  #   show.legend = FALSE
+  # )+
 
   scale_colour_manual(name="Line type",
                       breaks = c('Mean','Median','UK Average'),
-                      values=c('Mean'='blue','Median'='red','UK Average'='black'))
+                      values=c('Mean'='blue','Median'='red'))#,'UK Average'='black'))
 City_profile
 }
