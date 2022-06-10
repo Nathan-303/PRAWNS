@@ -8,7 +8,7 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 1.0.0 (WIP)
 
-  All functionality ported over
+	All functionality ported over
     
 	Successful roxygen compile and install
 	
@@ -78,15 +78,12 @@ Patches (0.0.x) will be tagged on github and recorded in here
 		
 Planned features:
 
-	Input files can be changed within the function call to create_prawns
-
-	Take pollutants other than NOx
-	
 	Accepts data from TIF format (relevant for modelled data from some sources)
-	
-	Source summary ported in
 	
 	Averages with and without london tracked against the city
 	
 	Each graph function within summary can be called separately
-	
+
+QOL updates:
+
+	rename the legend titles for RUC_IMD()	
