@@ -1,36 +1,23 @@
 #' A function for looking at the relationship between IMD and emissions for
-#' rural urban classifications
+#' rural urban classifications. The output is a list with two entries output1 is
+#' a graph of the emissions by decile for each classification, output 2 is their
+#'  populations
 #'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
-#' @param targets The name of the thing you're trying to isolate e.g. "Manchester"
-#' can also be a vector of valid values
-#'
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
-#' @param output_path The filepath to output to, a folder will be created at
-#' this location which contains all the graphs produced by this code. Defaults
-#' to FALSE
-
 #' @keywords RUC
 #' @export
 #' @examples
 #' RUC_IMD()
 #'
-if(!exists("Started")){
-  source("C:/Users/Nathan Gray/Documents/GitHub/Pollutant-processing-hub/Scripts/Startup.R")
-  Started <- TRUE
-}
 
+RUC_IMD <- function(prawn_path,
+                    pollutant){
 #Read in the data with NA valuse changed to unclassified, raising red flags if necessary
 active_stack <-read.csv(prawn_path) %>%
   replace_na(list(RUC11="Unclassified"))
-
-#create a summary of the data at the first decile to sort the legend using
-first_decile <- filter(active_stack,IMD==4) %>%
-  group_by(RUC11) %>%
-  summarise(mean=mean(Total)) %>%
-  mutate(mean=as.factor(mean))
 
 #Make the data long to enable grouping by source
 temp <- active_stack %>%
@@ -69,10 +56,6 @@ labs(x="IMD decile where 10 is least deprived",
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)
 
-ggsave(filename="Outputs/Plots/NOx/RUC_summary_2019.png",
-       plot=RUC_summary,
-       units = "mm",height = 113,width=160,
-       device="png")
 Area_population <- ggplot(data=active_stack)+
 
   aes(x=RUC11,fill=RUC11 )+
@@ -84,8 +67,7 @@ Area_population <- ggplot(data=active_stack)+
 
          axis.ticks = element_blank())
 
+output <- list(RUC_summary,Area_population)
 
-ggsave(filename="Outputs/Plots/NOx/NOX_source_summary_2019.png",
-       plot=Area_population,
-       units = "mm",height = 113,width=160,
-       device="png")
+output
+}
