@@ -72,6 +72,9 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 	Added linetype labelling to the source breakdown
   
+0.1.3 (Uploaded 10/6/22)
+	
+	Made a function for looking at inequalities by RUC classification
 		
 Planned features:
 
