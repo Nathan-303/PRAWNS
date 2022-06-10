@@ -87,6 +87,12 @@ Patches (0.0.x) will be tagged on github and recorded in here
 0.1.4 (Uploaded 10/6/22)
 
 	Ported in the faceted graph and improved it with an ifelse statement for city vs county/ua
+
+0.2.0 (Uploaded 10/6/22)
+
+	Ported in the average decile vs emissions for areas function
+
+	Completed porting in all existing functionality as functions
 		
 Planned features:
 
