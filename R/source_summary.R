@@ -37,7 +37,12 @@ output <- Decile_vs_emission_by_variable(
   yaxis = paste0(pollutant," emissions"),
   title = paste0("Source breakdown for ",pollutant, " emissions in ", year),
   chosen_variable = emissions,
-  Pollutant = pollutant)
+  Pollutant = pollutant)+
+
+  labs(linetype= "Metric used",
+       colour= "Emission source")
+
+
 
 output
 }
