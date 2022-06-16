@@ -1,5 +1,5 @@
 
-source_summary <- function(prawn_path,pollutant){
+source_summary <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,
          row.names=1,
@@ -25,7 +25,7 @@ output <- Decile_vs_emission_by_variable(
   chosen_grouping = Emission_source,
   xaxis = "IMD Decile",
   yaxis = paste0(pollutant," emissions"),
-  title = paste0("Source breakdown for ",targets),
+  title = paste0("Source breakdown for ",pollutant, " emissions in ", year),
   chosen_variable = emissions,
   Pollutant = pollutant)
 
