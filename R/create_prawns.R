@@ -13,6 +13,18 @@
 #' @param data_path The filepath for all csv files which contain additional data
 #' this data should have entries that correspond to polygons in the shapefile
 #'
+<<<<<<< HEAD
+=======
+#' @param key_variable The variable that is common between the shapefile and csv
+#' files specified in data_path
+#'
+#' @param output_path The filepath to output to. Defaults to FALSE
+#'
+#' @param key_variable_aliases Any alternate ways of namingf the key variable
+#' that are used in the different inputted tables, not necessary if the data is
+#' already nicely formatted so defaults to FALSE
+#'
+>>>>>>> parent of 0f7f0b3 (removed output path to aid clarity)
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #'
 #' @param pollutant_data_name what the pollutant is referred to as in the tables
@@ -30,6 +42,12 @@
 create_prawns <- function(raster_path,
                           shapefile_path,
                           data_path,
+<<<<<<< HEAD
+=======
+                          key_variable,
+                          key_variable_aliases=FALSE,
+                          output_path=FALSE,
+>>>>>>> parent of 0f7f0b3 (removed output path to aid clarity)
                           pollutant_data_name,
                           year,
                           pollutant){
@@ -137,6 +155,13 @@ create_prawns <- function(raster_path,
   ) %>% mutate("Point sources"=Total-Total_no_points) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
+
+# Output the results ------------------------------------------------------
+if (output_path!=FALSE){
+  write.csv(prawns,
+            file=output_path)
+}
+
 
 prawns
 }
