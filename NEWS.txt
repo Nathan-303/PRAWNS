@@ -93,6 +93,18 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	Ported in the average decile vs emissions for areas function
 
 	Completed porting in all existing functionality as functions
+
+0.2.1 (Uploaded 16/6/22)
+
+	Created faceted_sources, got it functional
+
+	Trimmed excess variables from create_prawns
+
+	Began work on bulk_processor
+
+	Began work on source_summary
+
+	Renamed city_processor to area_processor to reflect the added functionality
 		
 Planned features:
 
@@ -107,3 +119,7 @@ QOL updates:
 	rename the legend titles for RUC_IMD()
 
 	add uk average to the faceted graph	
+
+	add variable descriptons to decile vs emission by variable
+
+	add documantation to source_summary

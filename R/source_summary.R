@@ -1,0 +1,33 @@
+
+source_summary <- function(prawn_path,pollutant){
+
+long_chunk <- read.csv(file=prawn_path,
+         row.names=1,
+         check.names=FALSE) %>%
+  tibble() %>%
+
+  mutate(point_sources=Total-Total_no_points)%>%
+
+  pivot_longer(
+    cols=c("Agricultural","Domestic combustion","Energy production",
+           "Industrial combustion","Industrial production","Natural",
+           "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
+           ,"Waste treatment and disposal","point_sources"),
+    names_to = "Emission_source",
+    values_to = "emissions")
+long_chunk$Emission_source <- factor(long_chunk$Emission_source)
+
+long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
+
+output <- Decile_vs_emission_by_variable(
+  active_stack = long_chunk,
+  chosen_decile = IMD,
+  chosen_grouping = Emission_source,
+  xaxis = "IMD Decile",
+  yaxis = paste0(pollutant," emissions"),
+  title = paste0("Source breakdown for ",targets),
+  chosen_variable = emissions,
+  Pollutant = pollutant)
+
+output
+}
