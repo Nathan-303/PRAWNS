@@ -13,13 +13,6 @@
 #' @param data_path The filepath for all csv files which contain additional data
 #' this data should have entries that correspond to polygons in the shapefile
 #'
-#' @param key_variable The variable that is common between the shapefile and csv
-#' files specified in data_path
-#'
-#' @param key_variable_aliases Any alternate ways of namingf the key variable
-#' that are used in the different inputted tables, not necessary if the data is
-#' already nicely formatted so defaults to FALSE
-#'
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #'
 #' @param pollutant_data_name what the pollutant is referred to as in the tables
@@ -37,8 +30,6 @@
 create_prawns <- function(raster_path,
                           shapefile_path,
                           data_path,
-                          key_variable,
-                          key_variable_aliases=FALSE,
                           pollutant_data_name,
                           year,
                           pollutant){
