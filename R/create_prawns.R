@@ -67,7 +67,7 @@ create_prawns <- function(raster_path,
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
-  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv") %>% select(-FID)
+  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv") %>% tibble %>%  dplyr::select(-FID)
 
   city_data <- read.csv("Data/LSOA_statistics/city lookup 2011.csv") %>%
     tibble()
