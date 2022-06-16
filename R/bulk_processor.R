@@ -29,54 +29,88 @@
 #'
 
 bulk_processor <- function(raster_path,
-                            shapefile_path,
-                            data_path,
-                            key_variable,
-                            key_variable_aliases=FALSE,
-                            pollutant_data_name,
-                            year,
-                            pollutant){
+                           shapefile_path,
+                           data_folder,
+                           pollutant_data_name,
+                           year,
+                           pollutant,
+                           iteration){
 
+#store the procedural tag as a variable to save space and make the code clearer
+
+proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
+
+prawn_path <- paste0(proc_tag,"/PRAWN.csv")
 #create the folder that everything goes in
-dir.create(paste0(pollutant,"_emissions_in_",year,"_v",version))
+dir.create(path=paste0(pollutant,"_emissions_in_",year,"_v",iteration))
 
 #Create the prawns csv that the rest of the functions operate off
-create_prawns(raster_path= raster_path,
-              shapefile_path = shapefile_path,
-              data_path= list.files(data_path),
-              pollutant_data_name = pollutant_data_name,
-              year=year,
-              pollutant=pollutant)
 
+create_prawns(
+                raster_path= raster_path,
+                shapefile_path = shapefile_path,
+                data_path= list.files(data_folder),
+                pollutant_data_name = pollutant_data_name,
+                year=year,
+                pollutant=pollutant,
+                output_path = prawn_path)
 #Make and save a graph showing a summary of the pollutants
-long_chunk <- read.csv(file=prawn_path,
-                       row.names=1,
-                       check.names=FALSE) %>%
-              tibble() %>%
+source_breakdown <- source_summary(prawn_path=prawn_path,
+                                   pollutant=pollutant,
+                                   year=year)
 
-              mutate(point_sources=Total-Total_no_points)%>%
+  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.png"),
+         plot=source_breakdown,
+         device="png")
 
-              pivot_longer(
-    cols=c("Agricultural","Domestic combustion","Energy production",
-           "Industrial combustion","Industrial production","Natural",
-           "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
-           ,"Waste treatment and disposal","point_sources"),
-    names_to = "Emission_source",
-    values_to = "emissions")
-  long_chunk$Emission_source <- factor(long_chunk$Emission_source)
+#Make and save a graph where the sources are all faceted
+source_facets <- faceted_sources(prawn_path = prawn_path,
+                                 pollutant=pollutant)
 
-  long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.png"),
+         plot=source_facets,
+         device="png")
 
-  city_sources <- Decile_vs_emission_by_variable(
-    active_stack = long_chunk,
-    chosen_decile = IMD,
-    chosen_grouping = Emission_source,
-    xaxis = "IMD Decile",
-    yaxis = "NOx emissions",
-    title = paste0("Source breakdown for ",targets),
-    chosen_variable = emissions,
-    Pollutant = "NOx"
+#Make and save a graph showing IMD based inequality for each RUC code
+RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
+                         pollutant=pollutant)
 
-)+
-  geom_quantile(quantiles=0.5,linetype=2)
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.png"),
+         plot=RUC_breakdown[[1]],
+         device="png")
+
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.png"),
+         plot=RUC_breakdown[[2]],
+         device="png")
+#Facet the mean and median pollutantlevels by city
+city_facets <- faceted_plot(prawn_path = prawn_path,
+                            group= "TCITY15NM",
+                            pollutant = pollutant)
+
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.png"),
+        plot=city_facets,
+        device="png")
+
+#Facet the mean and median pollutant levels by county/unitary authority
+area_facets <- faceted_plot(prawn_path = prawn_path,
+                              group= "TCITY15NM",
+                              pollutant = pollutant)
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.png"),
+         plot=area_facets,
+         device="png")
+
+#Plot the average pollutant vs average IMD grouped by county/ua
+avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
+                               pollutant = pollutant,
+                               area_type = "Area")
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by area.png"),
+       plot=avg_imd_pol,
+       device="png")
+
+#calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
+numbers <- stat_wrangler(prawn_path = prawn_path,
+              deciles=c(1,10))
+
+  write.csv(x=numbers,
+            file=paste0(proc_tag,"/differnce between deciles.csv"))
 }
