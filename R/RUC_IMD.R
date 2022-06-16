@@ -23,7 +23,7 @@ active_stack <-read.csv(prawn_path) %>%
 temp <- active_stack %>%
   tibble() %>%
 
-  select(decile = IMD,
+  dplyr::select(decile = IMD,
          Emissions=Total,
          Classification=RUC11) %>%
         #group by the classification for graphing

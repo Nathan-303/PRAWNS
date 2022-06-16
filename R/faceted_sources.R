@@ -53,7 +53,7 @@ output <- ggplot(data=long_chunk
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=paste0(pollutant," emissions"),
-       title=paste0(pollutant," emissions faceted byt source")
+       title=paste0(pollutant," emissions faceted by source")
   )
  output
 }
