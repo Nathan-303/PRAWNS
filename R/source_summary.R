@@ -1,4 +1,10 @@
-
+#' summarises the source sectors and their relationship with IMD in the data specified
+#'
+#'@param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#'
+#'@param year The year used, used in graph names
 source_summary <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,

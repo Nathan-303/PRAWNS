@@ -12,7 +12,7 @@
 #'
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #'
-#' @param pollutant_data_name what the pollutant is referred to as in the raw data
+#' @param pollutant_data_name what the pollutant is referred to as in the raw data, should be quoted
 #'
 #' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
 

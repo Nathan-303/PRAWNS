@@ -3,9 +3,9 @@
 #' This function takes a prawns CSV and produces a summary of the geographic areas
 #' matching an inputted parameter
 #'
-#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#' @param prawn_path The filepath for the prawn CSV that is to be used, should be quoted
 #'
-#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names, should be a string
 #'
 #' @keywords faceted, sources
 #' @export
