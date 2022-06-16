@@ -2,9 +2,13 @@ Roadmap:
 
 I won't extend the roadmap more than 1 minor version beyond the WIP branch, features planned beyond that will go in planned features
 
-The current target build will appear at the top of this file, 
+If there is a current target major build it will appear at the top of this file, 
 
 Patches (0.0.x) will be tagged on github and recorded in here
+
+Minor versions (0.x.0) will have a [thematic name] and a summary of the direction taken since the last minor version at the top of the patch notes
+
+Major versions (x.0.0) will appear at the top of this document if they are a current target
 
 1.0.0 (WIP)
 
@@ -15,10 +19,6 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	Add subdivisions to bulk processor
 		results without london
 		results with NA values set to 0
-	
-	Improve clarity of labels on source breakdown
-
-	A function that makes a folder with all the results saved in it
 
 	A lovely readme that has vignettes for every function
 
@@ -60,6 +60,8 @@ Patches (0.0.x) will be tagged on github and recorded in here
   A new and exciting error in the NOx emissions with trend lines
     
 0.1.0 (Uploaded 8/6/22)
+	
+	[Spooky scary skeletons] Created the basic functionality that gives a standardised framework for building on
 
 	create_prawns (complete)
 		Reads the shapefile and creates the PRAWNS object as a csv file
@@ -95,6 +97,8 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	Ported in the faceted graph and improved it with an ifelse statement for city vs county/ua
 
 0.2.0 (Uploaded 10/6/22)
+	
+	[Night of the functional scripts] Recreated all scripts from the alpha as functions compatible with the prawns framework
 
 	Ported in the average decile vs emissions for areas function
 
@@ -112,17 +116,30 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 	Renamed city_processor to area_processor to reflect the added functionality
 
-0.2.3 (Uploaded 16/6/22)
+0.2.2 (Uploaded 16/6/22)
 
 	Completed source_summary
 
 	Completed bulk processor
 
-0.3.0 
+0.2.3 (Uploaded 16/6/22)
 
-	Documentation for all functions working
+	Added basic documentation for all functions
 
-	Make the easy quality of life updates
+	Removed some artifacts
+
+	Improved legend labels in some cases
+
+0.3.0 (WIP)
+	
+	[Stylish spectres] Many quality of life updates and removal of artifacts from the code, aiming to make a decent end user experience by improving presentation
+
+	Basic documentation for all functions
+	
+	Made the easy quality of life updates
+		Improved labels for RUC inequality plot
+		Fixed some output label typos
+		
 	
 Planned features:
 
@@ -135,12 +152,4 @@ Planned features:
 
 QOL updates:
 
-	rename the legend titles for RUC_IMD()
-
-	add uk average to the faceted graph	
-
-	add variable descriptons to decile vs emission by variable
-
-	add documantation to source_summary
-
-	add documentation to faceted_summary
+	add uk average to the faceted graph	(hard)
