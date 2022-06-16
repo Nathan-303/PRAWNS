@@ -1,8 +1,30 @@
-#This fuction creates a graph of emissions vs decile for a chosen variable,
-#it works off a variable already specified in R, this was chosen over a file path as
+#'Create a graph of emissions vs decile for a chosen variable
+#'
+#'it works off a variable already specified in R, this was chosen over a file path as
 #whilst it needs more steps it allows greater flexibility for a modular approach in the analysis
+#'
+#'@param active_stack the data to use for the graph, should be an existing object in r
+#'
+#'@param chosen_decile the decile to use for the x scale, should match a column in the data
+#'
+#'@param chosen_variable the variable to use for the y scale, should match a column in the data
+#'
+#'@param chosen_grouping the variable to group by, should match a column in the data
+#'
+#'@param title the title to give th graph
+#'
+#'@param xaxis the label for the x axis
+#'
+#'@param yaxis the label for the y axis
+#'
+#'@param UK_average whether to show the UK average for reference, defaults to FALSE
+#'
+#'@export
+#'decile_vs_emission_by_variable
 
-Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_variable,chosen_grouping,title,xaxis,yaxis,UK_Average=FALSE,Pollutant="Chaos",Custom_scale=NULL,archive=FALSE){
+
+
+Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_variable,chosen_grouping,title,xaxis,yaxis,UK_Average=FALSE){
 
   active_graph <- ggplot(data=active_stack)+
     aes(x={{chosen_decile}},
@@ -11,8 +33,6 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
     )+
 
     scale_color_viridis(option="turbo", discrete = TRUE)+
-
-    #coord_cartesian(xlim = c(1, 10),ylim=Custom_scale)+
 
     scale_x_continuous(
       breaks=c(1:10),
@@ -53,19 +73,6 @@ if(UK_Average==TRUE){
      scale_linetype_manual("UK average"=1,"Mean"=2, "Median"=3)
 }
 
-
-
-  if(archive==TRUE){
-    ggsave(filename=paste0("Outputs/Plots/",Pollutant,"/",title,".svg"),
-           plot=last_plot(),
-           device="svg")
-    (chicken <- drive_put(
-      media=paste0("Outputs/Plots/",Pollutant,"/",title,".svg"),
-      path=paste0("Nathan_inequality_plots/Emissions/",Pollutant,"/",title,".svg"),
-      type="svg"
-    ))
-
-  }
   active_graph
 
 }
