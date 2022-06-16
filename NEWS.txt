@@ -8,11 +8,13 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 1.0.0 (WIP)
 
-	All functionality ported over
+	All functionality ported over (done)
     
 	Successful roxygen compile and install
 	
-	Make the average without london the standard
+	Add subdivisions to bulk processor
+		results without london
+		results with NA values set to 0
 	
 	Improve clarity of labels on source breakdown
 
@@ -20,9 +22,13 @@ Patches (0.0.x) will be tagged on github and recorded in here
 
 	A lovely readme that has vignettes for every function
 
-0.2.0 (WIP)
+	Extend differnce between deciles to cover all sources if the option is selected
 
-	All functionality ported over
+0.3.0 (WIP)
+
+	bulk_processor working as intended
+
+	
 	
 0.0.1 (uploaded 6/6/22)
 
@@ -105,7 +111,19 @@ Patches (0.0.x) will be tagged on github and recorded in here
 	Began work on source_summary
 
 	Renamed city_processor to area_processor to reflect the added functionality
-		
+
+0.2.3 (Uploaded 16/6/22)
+
+	Completed source_summary
+
+	Completed bulk processor
+
+0.3.0 
+
+	Documentation for all functions working
+
+	Make the easy quality of life updates
+	
 Planned features:
 
 	Accepts data from TIF format (relevant for modelled data from some sources)
@@ -113,6 +131,7 @@ Planned features:
 	Averages with and without london tracked against the city
 	
 	Each graph function within summary can be called separately
+
 
 QOL updates:
 
@@ -123,3 +142,5 @@ QOL updates:
 	add variable descriptons to decile vs emission by variable
 
 	add documantation to source_summary
+
+	add documentation to faceted_summary
