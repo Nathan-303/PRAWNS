@@ -16,8 +16,6 @@
 #' @param key_variable The variable that is common between the shapefile and csv
 #' files specified in data_path
 #'
-#' @param output_path The filepath to output to. Defaults to FALSE
-#'
 #' @param key_variable_aliases Any alternate ways of namingf the key variable
 #' that are used in the different inputted tables, not necessary if the data is
 #' already nicely formatted so defaults to FALSE
@@ -41,7 +39,6 @@ create_prawns <- function(raster_path,
                           data_path,
                           key_variable,
                           key_variable_aliases=FALSE,
-                          output_path=FALSE,
                           pollutant_data_name,
                           year,
                           pollutant){
@@ -149,13 +146,6 @@ create_prawns <- function(raster_path,
   ) %>% mutate("Point sources"=Total-Total_no_points) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
-
-# Output the results ------------------------------------------------------
-if (output_path!=FALSE){
-  write.csv(prawns,
-            file=output_path)
-}
-
 
 prawns
 }
