@@ -5,6 +5,10 @@
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
 #'@param year The year used, used in graph names
+#'
+#'@export
+#'source_summary
+
 source_summary <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,
