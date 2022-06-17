@@ -8,8 +8,6 @@ create_prawns(
   raster_path,
   shapefile_path,
   data_path,
-  key_variable,
-  key_variable_aliases = FALSE,
   output_path = FALSE,
   pollutant_data_name,
   year,
@@ -24,13 +22,6 @@ compatible with folders containing multiple raster layers}
 
 \item{data_path}{The filepath for all csv files which contain additional data
 this data should have entries that correspond to polygons in the shapefile}
-
-\item{key_variable}{The variable that is common between the shapefile and csv
-files specified in data_path}
-
-\item{key_variable_aliases}{Any alternate ways of namingf the key variable
-that are used in the different inputted tables, not necessary if the data is
-already nicely formatted so defaults to FALSE}
 
 \item{output_path}{The filepath to output to. Defaults to FALSE}
 
