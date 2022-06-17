@@ -70,7 +70,9 @@ for ( index in c(1:3)){
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
     #Create the filtered data without London and save it at prawn_path
-    londonless_prawn <- read.csv(raw_path) %>%
+    londonless_prawn <- read.csv(raw_path,
+                                 row.names=1,
+                                 check.names=FALSE) %>%
                         tibble() %>%
                         filter(TCITY15NM!="London")
     #Write the filtered prawn
@@ -84,7 +86,9 @@ for ( index in c(1:3)){
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
     #Create the filtered data without London and save it at prawn_path
-    na_0_prawn <- read.csv(raw_path) %>%
+    na_0_prawn <- read.csv(raw_path,
+                           row.names=1,
+                           check.names=FALSE) %>%
                   tibble() %>%
                   replace(is.na(.),0)
     write.csv(x = na_0_prawn,
