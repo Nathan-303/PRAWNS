@@ -8,7 +8,7 @@
 #'
 #' @param pollutant the name of the pollutant, used to name the graphs
 #' @export
-#' faceted_plot()
+#' faceted_plot
 
 faceted_plot <- function(prawn_path,group,pollutant){
 

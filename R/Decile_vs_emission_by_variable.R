@@ -20,7 +20,7 @@
 #'@param UK_average whether to show the UK average for reference, defaults to FALSE
 #'
 #'@export
-#'decile_vs_emission_by_variable
+#'Decile_vs_emission_by_variable
 
 
 
