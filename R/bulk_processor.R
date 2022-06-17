@@ -41,7 +41,7 @@ bulk_processor <- function(raster_path,
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
-for ( index in c(1:3)){
+for ( index in c(1:2)){
 
   #Create the folder for the results using the raw data
   if (index==1){
@@ -85,12 +85,16 @@ for ( index in c(1:3)){
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
+
     #Create the filtered data without London and save it at prawn_path
     na_0_prawn <- read.csv(raw_path,
                            row.names=1,
                            check.names=FALSE) %>%
                   tibble() %>%
-                  replace(is.na(.),0)
+                  replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
+                              "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
+                              "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
+                              ,"Total_no_points"=0,"Waste treatment and disposal"=0))
     write.csv(x = na_0_prawn,
               file=prawn_path)
     }
