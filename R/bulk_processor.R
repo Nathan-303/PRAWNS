@@ -41,7 +41,7 @@ bulk_processor <- function(raster_path,
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
-for ( index in c(1:2)){
+for ( index in c(1:3)){
 
   #Create the folder for the results using the raw data
   if (index==1){
