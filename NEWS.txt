@@ -130,7 +130,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved legend labels in some cases
 
-0.3.0 (WIP)
+0.3.0 (Uploaded 17/6/22)
 	
 	[Stylish spectres] Many quality of life updates and removal of artifacts from the code, aiming to make a decent end user experience by improving presentation
 
@@ -139,18 +139,30 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Made the easy quality of life updates
 		Improved labels for RUC inequality plot
 		Fixed some output label typos
+
+0.3.1
+	
+	Got a succesful compile
+
+	Got a londonless summary in a subfolder of the bulk processor
+
+
 		
 0.4.0
 
 	[The vivisection] Functions upgraded to pick out bits within the data
 
 	bulk_processor upgrades:
-		creates a subfolder with london excluded
+		creates a subfolder with london excluded (0.3.1)
 		creates a subfolder where na=0
 
 	stat_wrangler upgrades:
 		works out the differences for all sources
-		returns the highest and lowest deciles and the dirrerences between them	
+		returns the highest and lowest deciles and the dirrerences between them
+
+	Modularity in decile vs emission by variable if UK average used
+
+
 Planned features:
 
 	Accepts data from TIF format (relevant for modelled data from some sources)
@@ -158,6 +170,8 @@ Planned features:
 	Averages with and without london tracked against the city
 	
 	Each graph function within summary can be called separately
+
+	Specify the smoothing formulas and summary functions
 
 
 QOL updates:
