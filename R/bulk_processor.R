@@ -40,20 +40,56 @@ bulk_processor <- function(raster_path,
 
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
-prawn_path <- paste0(proc_tag,"/PRAWN.csv")
-#create the folder that everything goes in
-dir.create(path=paste0(pollutant,"_emissions_in_",year,"_v",iteration))
+#This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
+for ( index in c(1:3)){
 
-#Create the prawns csv that the rest of the functions operate off
+  #Create the folder for the results using the raw data
+  if (index==1){
+    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
+    prawn_path <- paste0(proc_tag,"/PRAWN.csv")
+    #The base path remains unchanged and is used to fetch a raw copy of the prawn for processed versions
+    raw_path <- paste0(proc_tag,"/PRAWN.csv")
+    #create the folder that everything goes in
+    dir.create(path=paste0(proc_tag))
 
-create_prawns(
-                raster_path= raster_path,
-                shapefile_path = shapefile_path,
-                data_path= list.files(data_folder),
-                pollutant_data_name = pollutant_data_name,
-                year=year,
-                pollutant=pollutant,
-                output_path = prawn_path)
+    #create the base prawn for this function, it will also be used by iterations 2 and 3 but filtered
+    create_prawns(
+      raster_path= raster_path,
+      shapefile_path = shapefile_path,
+      data_path= list.files(data_folder),
+      pollutant_data_name = pollutant_data_name,
+      year=year,
+      pollutant=pollutant,
+      output_path = prawn_path)
+  }
+
+  #create the results without London,
+  if (index==2){
+    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/Londonless")
+    prawn_path <- paste0(proc_tag,"/PRAWN.csv")
+    #create the folder that everything goes in
+    dir.create(path=paste0(proc_tag))
+    #Create the filtered data without London and save it at prawn_path
+    londonless_prawn <- read.csv(raw_path) %>%
+                        tibble() %>%
+                        filter(TCITY15NM!="London")
+    #Write the filtered prawn
+    write.csv(x = londonless_prawn,
+              file=prawn_path)
+  }
+
+  if (index==3){
+    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/na is 0")
+    prawn_path <- paste0(proc_tag,"/PRAWN.csv")
+    #create the folder that everything goes in
+    dir.create(path=paste0(proc_tag))
+    #Create the filtered data without London and save it at prawn_path
+    na_0_prawn <- read.csv(raw_path) %>%
+                  tibble() %>%
+                  replace(is.na(.),0)
+    write.csv(x = na_0_prawn,
+              file=prawn_path)
+    }
 #Make and save a graph showing a summary of the pollutants
 source_breakdown <- source_summary(prawn_path=prawn_path,
                                    pollutant=pollutant,
@@ -113,4 +149,8 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
 
   write.csv(x=numbers,
             file=paste0(proc_tag,"/differnce between deciles.csv"))
+
+#close the for loop
+}
+#close the function
 }
