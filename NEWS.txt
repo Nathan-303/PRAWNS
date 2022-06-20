@@ -146,7 +146,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Got a londonless summary in a subfolder of the bulk processor
 
+0.3.2
 
+	Got the na free version working
+
+	stat_wrangler upgraded
 		
 0.4.0
 
@@ -158,7 +162,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	stat_wrangler upgrades:
 		works out the differences for all sources
-		returns the highest and lowest deciles and the dirrerences between them
+		
 
 	Modularity in decile vs emission by variable if UK average used
 
@@ -173,6 +177,7 @@ Planned features:
 
 	Specify the smoothing formulas and summary functions
 
+	stat_wrangler returns the highest and lowest deciles and the dirrerences between them
 
 QOL updates:
 

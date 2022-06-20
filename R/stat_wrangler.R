@@ -30,6 +30,15 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
     data <- input_path
   }
 
+  #make the data long so the sources can be processed separately
+  data <- data %>% pivot_longer(
+    cols=c("Agricultural","Domestic combustion","Energy production",
+           "Industrial combustion","Industrial production","Natural",
+           "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
+           ,"Waste treatment and disposal","point_sources"),
+    names_to = "Emission_source",
+    values_to = "emissions") %>% group_by(Emission_source)
+
   #get the summary stats for deciles 1 and 10
   point_summary <- filter(data, IMD %in% deciles) %>%
     #add grouping for summarise
