@@ -22,7 +22,9 @@
 stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
   #read the input file if a filepath is given
   if (prawn_path != FALSE){
-    data <- read.csv(prawn_path)
+    data <- read.csv(prawn_path,
+                     row.names=1,
+                     check.names=FALSE)
   }
 
   #reference an existing object if an object name is given
@@ -31,23 +33,27 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
   }
 
   #make the data long so the sources can be processed separately
-  data <- data %>% pivot_longer(
+  long_data <- data %>% pivot_longer(
     cols=c("Agricultural","Domestic combustion","Energy production",
            "Industrial combustion","Industrial production","Natural",
            "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
-           ,"Waste treatment and disposal","point_sources"),
+           ,"Waste treatment and disposal","Point sources"),
     names_to = "Emission_source",
-    values_to = "emissions") %>% group_by(Emission_source)
+    values_to = "emissions") %>%
+    group_by(Emission_source,IMD) %>%
+    mutate(emissions=replace_na(emissions,0))
 
   #get the summary stats for deciles 1 and 10
-  point_summary <- filter(data, IMD %in% deciles) %>%
+  point_summary <- filter(long_data, IMD %in% deciles) %>%
     #add grouping for summarise
-    group_by(IMD) %>%
+    #group_by(IMD) %>%
     #calculate the mean and median for each decile
-    summarise(mean=mean(Total),median=median(Total))
+    summarise(mean=mean(emissions),median=median(emissions))
 
   #create a linear model for use in the next part
-  linear_fit <- lm(Total~IMD, data=data)
+  linear_fit <- long_data %>% ungroup(IMD) %>%
+                do(mod=lm(formula=emissions~IMD, data=long_data)) #%>%
+                pivot_wider(names_from = term, values_from = estimate)
 
   #calculate the value of the linear model at each point
   linear_intercepts <- tibble(IMD=c(1,10),
