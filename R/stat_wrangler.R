@@ -58,22 +58,9 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
            median_percentage_differnce=median_flat_difference/median_1,)
 
   #jerry rig a fix to do(lm()) not wnting to work
-  fragments <- long_data %>%
-             group_split()
+  unbound <- long_data %>% do(tidy(lm(emissions~IMD, data=.)))
 
-  shard <- tidy(lm(formula=emissions~IMD,data=fragments[[1]])) %>%
-    pivot_wider(names_from=term,
-                values_from=c(estimate,p.value,std.error,statistic))
 
-  binding <- shard
-
-  for (index in c(2:length(fragments))){
-    shard <- tidy(lm(formula=emissions~IMD,data=fragments[[index]])) %>%
-      pivot_wider(names_from=term,
-                  values_from=c(estimate,p.value,std.error,statistic))
-
-      binding <- bind_rows(binding,shard)
-    }
   line_calculations <- mutate(binding,Emission_source=pull(group_keys(long_data))) %>%
 
     #rename the columns to avoid confusion
