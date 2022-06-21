@@ -158,7 +158,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	
 	altered stat_wrangler further
 
-	
+0.3.4	
+
+
 0.4.0
 
 	[The vivisection] Functions upgraded to pick out bits within the data
@@ -173,6 +175,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Modularity in decile vs emission by variable if UK average used
 
+0.5.0
+
+	[Forbidden knowlege] Vignettes for the primary functions completed, formulas specified to clip out the warnings
 
 Planned features:
 
