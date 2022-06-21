@@ -40,20 +40,46 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
            ,"Waste treatment and disposal","Point sources"),
     names_to = "Emission_source",
     values_to = "emissions") %>%
-    group_by(Emission_source,IMD) %>%
+    group_by(Emission_source) %>%
     mutate(emissions=replace_na(emissions,0))
 
   #get the summary stats for deciles 1 and 10
-  point_summary <- filter(long_data, IMD %in% deciles) %>%
+  point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% deciles) %>%
     #add grouping for summarise
     #group_by(IMD) %>%
     #calculate the mean and median for each decile
-    summarise(mean=mean(emissions),median=median(emissions))
+    summarise(mean=mean(emissions),median=median(emissions)) %>%
+    #Make the data wide so the summary columns can be calculated
+    pivot_wider(names_from=IMD,values_from=c(mean,median)) %>%
+    #calculate the flat and % differences between the deciles
+    mutate(mean_flat_difference=mean_10-mean_1,
+           mean_percentage_differnce=mean_flat_difference/mean_1,
+           median_flat_difference=median_10-median_1,
+           median_percentage_differnce=median_flat_difference/median_1,)
 
-  #create a linear model for use in the next part
-  linear_fit <- long_data %>% ungroup(IMD) %>%
-                do(mod=lm(formula=emissions~IMD, data=long_data)) #%>%
-                pivot_wider(names_from = term, values_from = estimate)
+  #jerry rig a fix to do(lm()) not wnting to work
+  fragments <- long_data %>%
+             group_split()
+
+  shard <- tidy(lm(formula=emissions~IMD,data=fragments[[1]])) %>%
+    pivot_wider(names_from=term,
+                values_from=c(estimate,p.value,std.error,statistic))
+
+  binding <- shard
+
+  for (index in c(2:length(fragments))){
+    shard <- tidy(lm(formula=emissions~IMD,data=fragments[[index]])) %>%
+      pivot_wider(names_from=term,
+                  values_from=c(estimate,p.value,std.error,statistic))
+
+      binding <- bind_rows(binding,shard)
+    }
+  binding <- mutate(binding,Emission_source=pull(group_keys(long_data))) #%>%
+
+    #calculate the intercepts
+    mutate(mean_line_1=estimate(intercept)
+
+    )
 
   #calculate the value of the linear model at each point
   linear_intercepts <- tibble(IMD=c(1,10),

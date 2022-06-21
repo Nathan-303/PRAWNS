@@ -140,25 +140,32 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		Improved labels for RUC inequality plot
 		Fixed some output label typos
 
-0.3.1
+0.3.1 (Uploaded 17/6/22)
 	
 	Got a succesful compile
 
 	Got a londonless summary in a subfolder of the bulk processor
 
-0.3.2
+0.3.2 (Uploaded 17/6/22)
 
 	Got the na free version working
 
 	stat_wrangler upgraded
-		
+
+0.3.3 (Uploaded 18/6/22)
+
+	vignette for bulk_processor
+	
+	altered stat_wrangler further
+
+	
 0.4.0
 
 	[The vivisection] Functions upgraded to pick out bits within the data
 
 	bulk_processor upgrades:
 		creates a subfolder with london excluded (0.3.1)
-		creates a subfolder where na=0
+		creates a subfolder where na=0 (0.3.2)
 
 	stat_wrangler upgrades:
 		works out the differences for all sources
@@ -182,3 +189,5 @@ Planned features:
 QOL updates:
 
 	add uk average to the faceted graph	(hard)
+
+	standard error calculated for star_wrangler
