@@ -161,6 +161,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 0.3.4	(Uploaded 21/6/22)
  
 	Successfully got the points at deciles 1 and 10 in stat_wrangler
+
+0.3.5 (Uploaded 21/6/22)
+
+	Completed the stat_wrangler upgrades 
+
+	Completed the gradient_pie function and baked it into bulk_processor
 0.4.0
 
 	[The vivisection] Functions upgraded to pick out bits within the data
@@ -170,13 +176,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		creates a subfolder where na=0 (0.3.2)
 
 	stat_wrangler upgrades:
-		works out the differences for all sources
-		Doesn't need the median line atm
+		works out the differences for all sources (0.3.5)
 
 	gradient_pie
-		
+		shows the driving forces behind the gradient
 
-	Modularity in decile vs emission by variable if UK average used
+	
 
 	
 
@@ -184,11 +189,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	[Forbidden knowlege] Vignettes for the primary functions completed, formulas specified to clip out the warnings
 
+	Modularity in decile vs emission by variable if UK average used
+
 Planned features:
 
 	Accepts data from TIF format (relevant for modelled data from some sources)
 	
-	Averages with and without london tracked against the city
+	Averages with and without london tracked against the city/county
 	
 	Each graph function within summary can be called separately
 
@@ -200,4 +207,6 @@ QOL updates:
 
 	add uk average to the faceted graph	(hard)
 
-	standard error calculated for star_wrangler
+	gradient_pie works in a standalone format
+
+
