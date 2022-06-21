@@ -87,16 +87,12 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
 
 
 
-  #calculate the value of the linear model at each point
-  linear_intercepts <- tibble(IMD=c(1,10),
-                              lm_intercept=linear_fit$coefficients[1]+linear_fit$coefficients[2]*c(1,10))
-
   #calculate the median for each decile
-  meds <- data %>% group_by(IMD) %>%
-    summarise(median=median(Total))
+  meds <- long_data  %>% group_by(IMD,Emission_source) %>%
+    summarise(median=median(emissions))
 
   #create a linear model for use in the next part
-  med_fit <- lm(median~IMD, data=meds)
+  med_fit <- meds %>% ungroup(IMD) %>% group_by(Emission_source) %>% do(tidy(lm(median~IMD, data=.)))
 
   #calculate the value of the linear model at each point
   med_intercepts <- tibble(IMD=c(1,10),
