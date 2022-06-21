@@ -1,25 +1,22 @@
 #'this function returns a tibble containing the absolute and percentage difference
 #'between the mean and median of the intercept and actual value at the top and
 #'bottom deciles, operates from a file or an object depending on if prawn or
-#'input path is used
+#'input path is used. The error values are currently not very well labeled
 #'@param prawn_path the path for the data source, defaults to FALSE this should
 #'reference a csv file
 #'
 #'@param input_path the object to use as a data source defaults to FALSE this
 #'should be the name of an existing object
 #'
-#'@param deciles the deciles targeted, should be a numeric vector of length 2 containing integers between 1 and 10
-#'
 #' @keywords data
 #' @export
-
 #'
 #' @examples
 #' stat_wrangler()
 #'
 #'
 
-stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
+stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   #read the input file if a filepath is given
   if (prawn_path != FALSE){
     data <- read.csv(prawn_path,
@@ -99,21 +96,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
   #calculate the value of the linear model at each point
 
   #Meld all three point values
-  output1 <- inner_join(point_summary,linear_intercepts,by="IMD") %>%
-             inner_join(med_intercepts,by="IMD")
+  output <- inner_join(point_summary,mean_regression,by="Emission_source") %>%
+             inner_join(median_regression,by="Emission_source")
 
-  #Calculate the flat difference between the deciles
-  output2 <- tibble(output1[1,]-output1[2,])
-
-
-  #Calculate the % difference between the deciles
-  output3 <- tibble(output2/output1[1,])
-
-  #bind the outputs together
-  output <- rbind(output1,output2) %>% rbind(output3) %>%
-    mutate(IMD=as.character(IMD))
-    output$IMD[3] <- "Flat difference"
-    output$IMD[4] <- "% difference"
+  #
 
   output
 }

@@ -153,7 +153,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
-              deciles=c(1,10))
+              )
 
   write.csv(x=numbers,
             file=paste0(proc_tag,"/differnce between deciles.csv"))

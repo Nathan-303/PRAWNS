@@ -5,9 +5,9 @@
 \title{this function returns a tibble containing the absolute and percentage difference
 between the mean and median of the intercept and actual value at the top and
 bottom deciles, operates from a file or an object depending on if prawn or
-input path is used}
+input path is used. The error values are currently not very well labeled}
 \usage{
-stat_wrangler(prawn_path = FALSE, input_path = FALSE, deciles)
+stat_wrangler(prawn_path = FALSE, input_path = FALSE)
 }
 \arguments{
 \item{prawn_path}{the path for the data source, defaults to FALSE this should
@@ -15,14 +15,12 @@ reference a csv file}
 
 \item{input_path}{the object to use as a data source defaults to FALSE this
 should be the name of an existing object}
-
-\item{deciles}{the deciles targeted, should be a numeric vector of length 2 containing integers between 1 and 10}
 }
 \description{
 this function returns a tibble containing the absolute and percentage difference
 between the mean and median of the intercept and actual value at the top and
 bottom deciles, operates from a file or an object depending on if prawn or
-input path is used
+input path is used. The error values are currently not very well labeled
 }
 \examples{
 stat_wrangler()
