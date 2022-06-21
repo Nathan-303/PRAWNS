@@ -58,7 +58,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
            median_percentage_differnce=median_flat_difference/median_1,)
 
   #
-  unbound <- long_data %>% do(tidy(lm(emissions~IMD, data=.))) %>%
+  mean_regression <- long_data %>% do(tidy(lm(emissions~IMD, data=.))) %>%
     #pivot out the stats so each source is on one row
     pivot_wider(names_from=term,
               values_from=c(estimate,p.value,std.error,statistic)) %>%
@@ -75,11 +75,11 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
 
 
   #calculate the median for each decile
-  meds <- long_data  %>% group_by(IMD,Emission_source) %>%
+  median_values <- long_data  %>% group_by(IMD,Emission_source) %>%
     summarise(median=median(emissions))
 
   #create a linear model for use in the next part
-  med_fit <- meds %>% ungroup(IMD) %>% group_by(Emission_source) %>%
+  median_regression <- median_values %>% ungroup(IMD) %>% group_by(Emission_source) %>%
     #get the tabulated stats from regression on the median data
     do(tidy(lm(median~IMD, data=.)))%>%
     #pivot out the data so each source is on one line
