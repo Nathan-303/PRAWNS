@@ -158,9 +158,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	
 	altered stat_wrangler further
 
-0.3.4	
-
-
+0.3.4	(Uploaded 21/6/22)
+ 
+	Successfully got the points at deciles 1 and 10 in stat_wrangler
 0.4.0
 
 	[The vivisection] Functions upgraded to pick out bits within the data
@@ -171,9 +171,14 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	stat_wrangler upgrades:
 		works out the differences for all sources
+		Doesn't need the median line atm
+
+	gradient_pie
 		
 
 	Modularity in decile vs emission by variable if UK average used
+
+	
 
 0.5.0
 
