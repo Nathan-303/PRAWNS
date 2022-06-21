@@ -44,7 +44,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
     mutate(emissions=replace_na(emissions,0))
 
   #get the summary stats for deciles 1 and 10
-  point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% deciles) %>%
+  point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% c(1,10)) %>%
     #add grouping for summarise
     #group_by(IMD) %>%
     #calculate the mean and median for each decile
@@ -74,12 +74,18 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
 
       binding <- bind_rows(binding,shard)
     }
-  binding <- mutate(binding,Emission_source=pull(group_keys(long_data))) #%>%
+  line_calculations <- mutate(binding,Emission_source=pull(group_keys(long_data))) %>%
+
+    #rename the columns to avoid confusion
+    rename(intercept="estimate_(Intercept)", gradient=estimate_IMD) %>%
 
     #calculate the intercepts
-    mutate(mean_line_1=estimate(intercept)
+    mutate(mean_line_1=intercept+gradient,
+           mean_line_10=intercept+10*gradient,
+           flat_mean_regression_differnce=mean_line_10-mean_line_1,
+           percentage_mean_regression=flat_mean_regression_differnce/mean_line_1)
 
-    )
+
 
   #calculate the value of the linear model at each point
   linear_intercepts <- tibble(IMD=c(1,10),
