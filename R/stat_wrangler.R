@@ -57,11 +57,11 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
            median_flat_difference=median_10-median_1,
            median_percentage_differnce=median_flat_difference/median_1,)
 
-  #jerry rig a fix to do(lm()) not wnting to work
-  unbound <- long_data %>% do(tidy(lm(emissions~IMD, data=.)))
-
-
-  line_calculations <- mutate(binding,Emission_source=pull(group_keys(long_data))) %>%
+  #
+  unbound <- long_data %>% do(tidy(lm(emissions~IMD, data=.))) %>%
+    #pivot out the stats so each source is on one row
+    pivot_wider(names_from=term,
+              values_from=c(estimate,p.value,std.error,statistic)) %>%
 
     #rename the columns to avoid confusion
     rename(intercept="estimate_(Intercept)", gradient=estimate_IMD) %>%
@@ -79,11 +79,24 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,deciles){
     summarise(median=median(emissions))
 
   #create a linear model for use in the next part
-  med_fit <- meds %>% ungroup(IMD) %>% group_by(Emission_source) %>% do(tidy(lm(median~IMD, data=.)))
+  med_fit <- meds %>% ungroup(IMD) %>% group_by(Emission_source) %>%
+    #get the tabulated stats from regression on the median data
+    do(tidy(lm(median~IMD, data=.)))%>%
+    #pivot out the data so each source is on one line
+    pivot_wider(names_from=term,
+                values_from=c(estimate,
+                              p.value,
+                              std.error,statistic)) %>%
+    #rename the columns to avoid issues
+    rename(intercept="estimate_(Intercept)", gradient=estimate_IMD) %>%
+
+    #calculate the intercepts
+    mutate(median_line_1=intercept+gradient,
+           median_line_10=intercept+10*gradient,
+           flat_median_regression_differnce=median_line_10-median_line_1,
+           percentage_median_regression=flat_median_regression_differnce/median_line_1)
 
   #calculate the value of the linear model at each point
-  med_intercepts <- tibble(IMD=c(1,10),
-                           median_intercept=med_fit$coefficients[1]+med_fit$coefficients[2]*c(1,10))
 
   #Meld all three point values
   output1 <- inner_join(point_summary,linear_intercepts,by="IMD") %>%
