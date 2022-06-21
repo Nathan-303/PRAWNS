@@ -1,0 +1,70 @@
+---
+title: "bulk_processor-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bulk_processor-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+#bulk_processor function
+
+## Purpose
+
+Run all the analysis functions that produce summary graphs for the whole area
+covered and save the results in standardised folders.
+
+## Variables
+
+### raster_path 
+The filepath for the raster that is to be used. This is compatible with folders containing multiple raster layers
+
+### shapefile_path 
+The filepath for the shapefile to be used
+
+### data_path 
+The filepath to a folder containing the additonal data
+
+### pollutant 
+The pollutant being investigated, this should be in quotes and correspond with its name in the data
+
+### pollutant_data_name
+what the pollutant is referred to as in the raw data, should be quoted
+
+### year
+The year the data is from, used to standardise column names, currently doesn't work for years before 2000
+
+### prawn_path 
+The filepath for the prawn CSV that is to be used.
+
+### pollutant 
+The name of the pollutant that's being examined, this is used in the graph names
+
+### version_number 
+The version of the package used, this is used when naming the output folder and aids in reproducibility
+
+## Output structure
+The name of the folder created is `paste0(pollutant,"_emissions_in_",year,"_v",iteration)` this contains graphs created using the other functions as well as two other subfolders ("Londonless" and "na is 0") which contain the same graphs but without London and with na valsue set to 0 respectively
+
+## Example code
+```{r setup,eval=FALSE}
+library(PRAWNS)
+Startup()
+```
+
+``` {r,eval=FALSE}
+bulk_processor(raster_path = "Data/pm2.5_rasters_2019",
+               shapefile_path = "Data/2011_LSOA_shapefile_20m_generalised",
+               data_folder = "Data/LSOA_statistics",
+               pollutant_data_name = "pm2_5",
+               year = 2019,
+               pollutant = "PM2.5",
+               iteration="0.3.0")
+```
