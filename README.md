@@ -17,28 +17,20 @@ and specific publicly available data files for the national statistics.
 You can install the development version of PRAWNS from [GitHub](https://github.com/) with:
 
 
-
 ``` r
 # install.packages("devtools")
 devtools::install_github("Nathan-303/PRAWNS")
 ```
+## Input data
+This package takes inputs with a particular data structure, and is designed 
+to work with specified data sources. A full explanation of what to use is included in the
+setting_up_data_sources vignette
 
-## Data sources
-
-County lookup 2019:
-https://geoportal.statistics.gov.uk/datasets/ons::local-authority-district-to-county-april-2019-lookup-in-england/about
-
-2019_LSOA_stats:
-https://www.gov.uk/government/statistics/english-indices-of-deprivation-2019 (File 7)
-
-LSOA_Lookup (2011)
-https://geoportal.statistics.gov.uk/datasets/dc0b24da0880417abc979c705bce3fde/explore
-
-Shapefiles
-https://data.cambridgeshireinsight.org.uk/dataset/output-areas/resource/3bc4faef-38c7-417d-88a9-f302ad845ebe
-
-2019 pollution data
-https://naei.beis.gov.uk/data/map-uk-das
+## Outputs
+This package produces csv files linking LSOAs to average emissions, as well as a variety of
+graphs using this data. Should further data processing be required, or additional data be used,
+the PRAWNS.csv object from ``create_prawns()`` or as a side effect of ``bulk_processor()`` can
+be further processed as it links all the data back to LSOA code.
 
 ## Example
 

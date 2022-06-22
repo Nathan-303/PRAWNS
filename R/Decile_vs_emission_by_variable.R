@@ -53,24 +53,25 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
     #Plot the line of best fit for the median
     geom_quantile(quantiles=0.5,
                   aes(linetype="Median"),
-                  size =1)+
+                  size =1,)+
 
     #Plot a line through the medians for each decile
     geom_line(stat="summary",fun=median,aes(linetype="Median"))
 
 if(UK_Average==TRUE){
     #New section to add the extra line
-   active_graph <- active_graph + geom_smooth(data=read.csv("Outputs/Output_data/NOx/NOxsuperstack2019.csv")
+   active_graph <- active_graph + geom_smooth(data=read.csv(prawn_path,
+                                                            row.names=1,
+                                                            check.names=FALSE)
                 , aes(
-      x={{chosen_decile}},
-      y={{chosen_variable}},
+      x=chosen_decile,
+      y=chosen_variable,
+      linetype="UK average"),
       method="lm",
       #formula={{chosen_variable}}~{{chosen_decile}},
       se=FALSE,
       show.legend = FALSE,
-      aes(linetype="UK average")))+
-
-     scale_linetype_manual("UK average"=1,"Mean"=2, "Median"=3)
+      )
 }
 
   active_graph
