@@ -35,7 +35,8 @@ compatible with folders containing multiple raster layers}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas
-matching an inputted parameter
+matching an inputted parameter. Refer to the vignette setting_up_data sources
+to obtain the correct input files and structure them for compatibility
 }
 \examples{
 bulk_processor()

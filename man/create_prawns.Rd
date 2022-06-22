@@ -35,7 +35,9 @@ this data should have entries that correspond to polygons in the shapefile}
 This function takes a raster and a shapefile, works out the average value for
 each polygon in the shapefile then uses an identifier present in the
 shapefile to link with other data sources. This the pollution for areas to be
-worked out then linked to statistics associated with those areas.
+worked out then linked to statistics associated with those areas. Refer to +
+the vignette setting_up_data sources to obtain the correct input files and
+structure them for compatibility
 }
 \examples{
 create_prawns()
