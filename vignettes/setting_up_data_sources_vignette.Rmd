@@ -1,0 +1,55 @@
+---
+title: "setting_up_data_sources_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{setting_up_data_sources_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# Introduction
+This package is designed to work with specifically formatted data, and this vignette explains how to source it. Increased compatibility may be added in the future.
+
+Due to the structure of create_prawns, each file should be given a specific name and placed in the filepath shown. The specified filepath is relative to the working directory
+
+# Data sources
+These should all be downloaded as a csv file from the link given, and named according to the text in the [square brackets]. They should be at the location specified in {curly brackets}
+
+## Shapefiles {Data/2011_LSOA_shapefile_20m_generalised}
+Shapefiles containing the boundaries for every LSOA in England. 
+Download (2011 LSOA boundaries> Generalised (20 metres) clipped to the coastline) the link below then unzip and rename the folder https://webarchive.nationalarchives.gov.uk/ukgwa/20160110200248/http://www.ons.gov.uk/ons/guide-method/geography/products/census/spatial/2011/index.html
+
+## Demographic data {Data/LSOA_statistics/}
+A variety of files containing demographic data and other information about each LSOA
+
+### County lookup [county lookup 2019.csv]{Data/LSOA_statistics/}
+A csv file that allows each LSOA to be referenced to a county
+https://geoportal.statistics.gov.uk/datasets/ons::local-authority-district-to-county-april-2019-lookup-in-england/about
+
+### City lookup [city lookup 2011.csv]{Data/LSOA_statistics/}
+A csv file that allows the city each LSOA is in
+https://geoportal.statistics.gov.uk/datasets/dc0b24da0880417abc979c705bce3fde_0/explore
+
+### LSOA statistics[2019_LSOA_stats.csv]{Data/LSOA_statistics/}
+A csv file containing demographic data for each LSOA
+https://www.gov.uk/government/statistics/english-indices-of-deprivation-2019 (File 7)
+
+### Rural urban classification [LSOA_urban_rural.csv]{Data/LSOA_statistics/}
+A csv file containing the RUC of each LSOA
+https://data.gov.uk/dataset/b1165cea-2655-4cf7-bf22-dfbd3cdeb242/rural-urban-classification-2011-of-lower-layer-super-output-areas-in-england-and-wales
+
+## Emissions data 
+unzip the folder and rename it  ``paste0(pollutant,"_rasters_",year`` where pollutant is the name of the pollutant and year is the year the data is for. Place this folder in the data folder
+
+Raster files containing a breakdown of the emissions of a single pollutant across England
+
+This package functions with all data in the format provided by the NAEI, although will not process data from before 2000 due to the methods used to select the year column
+https://naei.beis.gov.uk/data/map-uk-das
+#
+

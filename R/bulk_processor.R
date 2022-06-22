@@ -2,7 +2,9 @@
 #' a folder that is created with an appropriate procedurally generated name
 #'
 #' This function takes a prawns CSV and produces a summary of the geographic areas
-#' matching an inputted parameter
+#' matching an inputted parameter. Refer to the vignette setting_up_data sources
+#' to obtain the correct input files and structure them for compatibility
+#'
 #'@param raster_path The filepath for the raster that is to be used. This is
 #' compatible with folders containing multiple raster layers
 #'

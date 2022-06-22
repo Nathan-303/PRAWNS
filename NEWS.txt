@@ -184,7 +184,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	created city_processor vignette	
 
-	
+0.4.2 (Uploaded 22/6/22)
+
+	created setting_up_data_sources vignette, updated function documentation to route through it	
 
 0.5.0
 
@@ -197,12 +199,8 @@ Planned features:
 	Accepts data from TIF format (relevant for modelled data from some sources)
 	
 	Averages with and without london tracked against the city/county
-	
-	Each graph function within summary can be called separately
 
 	Specify the smoothing formulas and summary functions
-
-	stat_wrangler returns the highest and lowest deciles and the dirrerences between them
 
 QOL updates:
 
