@@ -12,17 +12,15 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 1.0.0 (WIP)
 
-	All functionality ported over (done)
+	All functionality ported over (0.2.0)
     
-	Successful roxygen compile and install
+	Successful roxygen compile and install (solved)
 	
-	Add subdivisions to bulk processor
+	Add subdivisions to bulk processor (0.4.0)
 		results without london
 		results with NA values set to 0
 
 	A lovely readme that has vignettes for every function
-
-	Extend differnce between deciles to cover all sources if the option is selected
 
 0.3.0 (WIP)
 
@@ -182,7 +180,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	gradient_pie
 		shows the driving forces behind the gradient (0.3.5)
 
-	
+0.4.1 (Uploaded 22/6/22)
+
+	created city_processor vignette	
 
 	
 
@@ -210,4 +210,4 @@ QOL updates:
 
 	gradient_pie works in a standalone format
 
-
+	check the bulk_processor in the city_processor vignette works
