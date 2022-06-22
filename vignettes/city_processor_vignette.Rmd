@@ -1,0 +1,60 @@
+---
+title: "city_processor_vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{city_processor_vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# city_processor function
+
+## Purpose
+This function produces a graphic summarising the emissions in a city with tiled graphs. it requires a PRAWN csv and an LSOA tagged shapefile to work
+
+## Variables
+
+### prawn_path 
+The filepath for the prawn CSV that is to be used.
+
+### shape_path 
+The filepath for the shapefile that is to be used
+
+### targets 
+The name of the thing you're trying to isolate e.g. "Manchester" can also be a vector of valid values
+
+### pollutant 
+The name of the pollutant that's being examined, this is used in the graph names
+
+### output_path 
+The filepath to output to, a folder will be created at this location which contains all the graphs produced by this code. Defaults to FALSE
+
+## Output structure
+This function returns a single image file consisting of tiled graphs
+```{r setup,eval=FALSE}
+library(PRAWNS)
+Startup()
+create_prawns(raster_path= "Data/NOx_rasters_2019",
+              shapefile_path = "Data/2011_LSOA_shapefile_20m_generalised",
+              data_path= list.files("Data/LSOA_statistics"),
+              key_variable = "LSOA19CD",
+              key_variable_aliases =c("LSOA.code..2011.","?..LSOA11CD"),
+              output_path="Outputs/create_prawns_1_0_0_test.csv",
+              pollutant_data_name = "nox",
+              year=2019,
+              pollutant="NOx")
+```
+```{r,eval=FALSE}
+city_summary(prawn_path = "Outputs/create_prawns_1_0_0_test.csv",
+                   shape_path = "Data/2011_LSOA_shapefile_20m_generalised",
+                   targets = "London",
+                   output_path= "Outputs/geographic_summary1_0_0_test",
+                    pollutant="NOx"
+                  )
+```
