@@ -69,7 +69,9 @@ create_prawns <- function(raster_path,
                    ) %>% unnest(poll_mean)
   #output a csv wit the minimum processiong done if is.raw=true
   if (is_raw==TRUE){
-    write.csv(file=output_path)
+    write.csv(file=output_path,x = output
+              )
+    output
   }else{
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
@@ -153,7 +155,8 @@ if (output_path!=FALSE){
   write.csv(prawns,
             file=output_path)
 }
-}
+
 
 prawns
+  }
 }
