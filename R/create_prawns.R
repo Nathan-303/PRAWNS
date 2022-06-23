@@ -22,6 +22,8 @@
 #' @param pollutant_data_name what the pollutant is referred to as in the tables
 #'
 #' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
+#'
+#' @param is_raw whether or not to output a csv only containing the LSOAs mapped to the emissions
 
 #' @keywords data
 #' @export
@@ -37,7 +39,8 @@ create_prawns <- function(raster_path,
                           output_path=FALSE,
                           pollutant_data_name,
                           year,
-                          pollutant){
+                          pollutant,
+                          is_raw=FALSE){
 
 # Calculate the average pollution for each area ----------------------------
 
@@ -64,8 +67,10 @@ create_prawns <- function(raster_path,
                    poll_mean=pollution_mean,
                    LSOA11CD=LSOA_shapefile$LSOA11CD
                    ) %>% unnest(poll_mean)
-  #
-
+  #output a csv wit the minimum processiong done if is.raw=true
+  if (is_raw==TRUE){
+    write.csv(file=output_path)
+  }else{
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
@@ -148,7 +153,7 @@ if (output_path!=FALSE){
   write.csv(prawns,
             file=output_path)
 }
-
+}
 
 prawns
 }
