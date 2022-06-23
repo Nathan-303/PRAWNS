@@ -188,15 +188,35 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	created setting_up_data_sources vignette, updated function documentation to route through it	
 
-0.4.3
+0.4.3 (Uploaded 22/6/22)
 
 	Updated the text in the readme file
+
+0.4.4 
+
+	Added is_raw to create_prawns
+
+	Added a disclaimer about the pie chart to the bulk processor readme
+
+	Trimmed the cumulative distribution with coord cartesian 0.99 as a hard cap to force better scaling
+		mentioned in the vignette
+		also improved the colour palette
 0.5.0
 
 	[Forbidden knowlege] Vignettes for the primary functions completed
 
-	Readme improvements
+	Readme improvements (progressive)
 
+	add raw_prawn to create_prawns output (0.4.4)
+		not joined to any of the other data
+		modular advantage
+
+	upgrade cumulative distribution in city_processor (0.4.4)
+		display one axis as a percentage
+		clip the xaxis better
+		improve palette
+	
+	Added a disclaimer about the pie chart in the bulk processor vignette (0.4.4)
 
 Planned features:
 
@@ -204,7 +224,11 @@ Planned features:
 	
 	UK average tracked against cit
 
-	Replace the manual version umber in bulk processor with an actual version tracker
+	Replace the manual version number in bulk processor with an actual version tracker
+
+	Add error tracing functionality
+
+	Include raw_prawn
 
 QOL updates:
 
