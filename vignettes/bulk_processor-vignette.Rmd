@@ -53,6 +53,16 @@ The version of the package used, this is used when naming the output folder and 
 ## Output structure
 The name of the folder created is `paste0(pollutant,"_emissions_in_",year,"_v",iteration)` this contains graphs created using the other functions as well as two other subfolders ("Londonless" and "na is 0") which contain the same graphs but without London and with na valsue set to 0 respectively
 
+## Disclaimer about pie chart
+The pie chart produced works on a lot of assumptions, and whilst it can be used as an indicator of what the data is doing, it should not be presented without making the following abundantly clear:
+
+* It is calculated using the values predicted on the line of best fit, working out the values at deciles 1 and 10, calculating the differnce then expressing it as a percentage of the difference in the total line
+
+* The assumption is made that the sum of the lines of best fit for each source sector is equal to the line of best fit for all sources combined, this is an approximation
+
+* The pie chart will give a generally accurate qualitative representation of how unequal the source sectors are, but this is not quantitative and may be misleading, it should be used to flag interesting things about the data but not as a diagnostic tool in itself
+
+
 ## Example code
 ```{r setup,eval=FALSE}
 library(PRAWNS)
