@@ -173,8 +173,7 @@ city_summary <- function(prawn_path,
       xaxis = "IMD Decile",
       yaxis = "NOx emissions",
       title = paste0("Source breakdown for ",targets),
-      chosen_variable = emissions,
-      Pollutant = "NOx"
+      chosen_variable = emissions
 
     )+
       geom_quantile(quantiles=0.5,linetype=2)
