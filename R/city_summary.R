@@ -144,8 +144,7 @@ city_summary <- function(prawn_path,
       labs(x= paste0(pollutant," emissions"),
            y= paste0("Fraction exposed to at least this much ",pollutant),
            title=paste0(" Cumulative distribution  of ",pollutant," emissions"))+
-      scale_y_continuous(
-        expand = expansion(mult=0,add=0),
+      coord_cartesian(ylim=c(0,0.99),expand=FALSE,xlim=NULL
       )+
       scale_x_continuous(
         expand = expansion(mult=0,add=0),

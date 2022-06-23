@@ -37,6 +37,9 @@ The filepath to output to, a folder will be created at this location which conta
 
 ## Output structure
 This function returns a single image file consisting of tiled graphs
+
+## Note on the cumulative distribution plot
+The cumulative distribution function does not go all the way to 1 on the y axis, instead capping at 0.99. This is not a bug, clipping the graph there through use of coord cartesian prevents the rendering of very high values on the x axis. This allows the automatic scaling of the x axis to produce sensible results
 ```{r setup,eval=FALSE}
 library(PRAWNS)
 Startup()
