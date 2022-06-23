@@ -137,9 +137,9 @@ city_summary <- function(prawn_path,
 
     #Creates a cumulative distribution plot showing what fractions of each decile are exposed to less than the amount of NOx on the axis
     city_freq <- ggplot(data=stitched_shapefile)+
-      aes(x=Total,group=IMD,colour=IMD)+
-      scale_colour_viridis_d(option="turbo")+
-      stat_ecdf(
+      aes(x=Total,colour=IMD)+
+      scale_colour_viridis_d(option="viridis")+
+      stat_ecdf(geom="step",pad=FALSE
       )+coord_cartesian(xlim = c(0, 100))+
       labs(x= paste0(pollutant," emissions"),
            y= paste0("Fraction exposed to at least this much ",pollutant),
@@ -147,7 +147,7 @@ city_summary <- function(prawn_path,
       scale_y_continuous(
         expand = expansion(mult=0,add=0),
       )+
-      scale_x_discrete(
+      scale_x_continuous(
         expand = expansion(mult=0,add=0),
       )
     city_freq
