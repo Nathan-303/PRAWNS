@@ -11,7 +11,8 @@ create_prawns(
   output_path = FALSE,
   pollutant_data_name,
   year,
-  pollutant
+  pollutant,
+  is_raw = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ this data should have entries that correspond to polygons in the shapefile}
 \item{year}{the year the data is from, used to standardise column names, currently doesnt work for years before 2000}
 
 \item{pollutant}{the pollutant being investigated, this should be in quotes and correspond with its name in the data}
+
+\item{is_raw}{whether or not to output a csv only containing the LSOAs mapped to the emissions}
 }
 \description{
 This function takes a raster and a shapefile, works out the average value for
