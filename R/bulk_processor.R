@@ -35,8 +35,8 @@ bulk_processor <- function(raster_path,
                            year,
                            pollutant
                            ){
-  #work out the version pf tha package for reproducibility, calculating it here makes the code more streamlined
-  iteration <- packageVersion("PRAWNS")
+  #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
+  iteration <- as.character(packageVersion("PRAWNS"))
 #store the procedural tag as a variable to save space and make the code clearer
 
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
