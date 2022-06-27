@@ -12,10 +12,6 @@
 #'
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
-#' @param output_path The filepath to output to, a folder will be created at
-#' this location which contains all the graphs produced by this code. Defaults
-#' to FALSE
-
 #' @keywords heatmap, graph,
 #' @export
 #' @examples
@@ -25,7 +21,7 @@ city_summary <- function(prawn_path,
                          shape_path,
                          targets,
                          pollutant,
-                         output_path=FALSE){
+                         ){
 
 
 
@@ -179,29 +175,7 @@ city_summary <- function(prawn_path,
     output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
       annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",targets)))
 
-# Archive results ---------------------------------------------------------
 
-
-
-if (output_path==TRUE){
-
-    if (file.exists(output_path)) {
-
-      ggsave(filename=paste0(output_path,"/Nox in ",targets[index]),
-             plot=last_plot(),
-             units = "mm",height = 160,width=160,
-             device="png")
-
-    } else {
-
-      dir.create(output_path)
-
-      ggsave(filename=paste0(output_path,"/Nox in ",targets[index]),
-             plot=last_plot(),
-             units = "mm",height = 160,width=160,
-             device="png")
-    }
-}
 
     output
 }
