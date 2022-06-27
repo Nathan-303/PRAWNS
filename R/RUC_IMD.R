@@ -34,18 +34,29 @@ RUC_summary <- ggplot(temp)+
   aes(x=decile,
       y=Emissions,
       colour=fct_reorder(Classification,Emissions,.desc=TRUE))+
-  geom_line(stat="summary",aes(linetype="Mean")
-  )+
+
+  geom_line(stat="summary",
+            aes(linetype="Mean"),
+            fun=mean)+
 
 
-  geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,aes(linetype="Mean"))+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE,
+              show.legend=FALSE,
+              aes(linetype="Mean"))+
+
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
                 aes(linetype="Median"),
-                size =1)+
+                size =1,
+                formula=y~x)+
 
   #Plot a line through the medians for each decile
-  geom_line(stat="summary",fun=median,aes(linetype="Median"))+
+  geom_line(stat="summary",
+            fun=median,
+            aes(linetype="Median"),
+            )+
 
 labs(x="IMD decile where 10 is least deprived",
      y=paste0("Average ",pollutant," emissions/tonnes km^2"),
