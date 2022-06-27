@@ -38,18 +38,32 @@ output <- ggplot(data=long_chunk
              scale="free_y"
              )+
 
-  geom_line(stat="summary",aes(linetype="Mean")
+  geom_line(stat="summary",
+            aes(linetype="Mean"),
+            fun=mean,
+            na.rm=TRUE
   )+
 
 
-  geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,aes(linetype="Mean"))+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE,
+              show.legend=FALSE,
+              aes(linetype="Mean"),
+              na.rm = TRUE)+
+
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
                 aes(linetype="Median"),
-                size =1)+
+                size =1,
+                formula=y~x,
+                na.rm=TRUE)+
 
   #Plot a line through the medians for each decile
-  geom_line(stat="summary",fun=median,aes(linetype="Median"))+
+  geom_line(stat="summary",
+            fun=median,
+            aes(linetype="Median"),
+            na.rm=TRUE)+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=paste0(pollutant," emissions"),
