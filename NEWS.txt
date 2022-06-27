@@ -196,7 +196,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		mentioned in the vignette
 		also improved the colour palette
 
-0.5.0 (Uploaded 27/6/22)
+0.5.0 (Uploaded 23/6/22)
 
 	[Forbidden knowlege] Vignettes for the primary functions completed
 
@@ -239,7 +239,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Obliterated city_summary as area summary does the same but better
 
-0.6.0
+0.6.0 (Uploaded 27/6/22)
 
 	[Haunted housekeeping] Fight through the planned features and QOL updates list
 		Warnings in decile vs emission by variable (0.5.2)
@@ -249,20 +249,29 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added automated version tracker to bulk_processor (0.5.2)
 
-	Add an NA warning for decile vs emission by variable
-
 	Add capacity to create raw prawns (0.5.1)
 
-	Only the quartile regression warnings remain
+	Only the quartile regression warnings remain (0.5.4)
 
-Planned features:
+0.6.1
 
-	Accepts data from TIF format (relevant for modelled data from some sources)
+	
+0.7.0 (WIP)
+	
+	[Aberrations and abominations] Track errors and improve the handling range
 
-	Add error tracing functionality
+	na tracker in bulk_processor
+		shows the %na in each source field
+
+	reads the data in tif format, enabling the use of modelled data
+
+	has the UK average as a line in the faceted graphs (mean line)
+
+	outputs the shape of the shapefile so it can be checked
+
 
 QOL updates:
 
-	add uk average to the faceted graph	(hard)
-
 	check the bulk_processor in the city_processor vignette works
+
+	suppress the warnings from quantile regression/explain in the vignette
