@@ -45,7 +45,9 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
          title=title
     )+
 
-    geom_line(stat="summary",aes(linetype="Mean")
+    geom_line(stat="summary",
+              aes(linetype="Mean"),
+              na.rm = TRUE
     )+
 
 
@@ -53,15 +55,20 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
                 formula=y~x,
                 se=FALSE,
                 show.legend=FALSE,
-                aes(linetype="Mean"))+
+                aes(linetype="Mean"),
+                na.rm = TRUE)+
     #Plot the line of best fit for the median
     geom_quantile(quantiles=0.5,
                   aes(linetype="Median"),
                   size =1,
-                  formula=y~x)+
+                  formula=y~x,
+                  na.rm = TRUE)+
 
     #Plot a line through the medians for each decile
-    geom_line(stat="summary",fun=median,aes(linetype="Median"))
+    geom_line(stat="summary",
+              fun=median,
+              aes(linetype="Median"),
+              na.rm = TRUE)
 
 if(UK_Average==TRUE){
     #New section to add the extra line
