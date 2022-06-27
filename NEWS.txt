@@ -227,12 +227,25 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 0.5.3 (Uploaded 27/6/22)
 
-	Srtipped the bulk of the warnings from faceted plot, solution may be nonunique remains
+	Srtipped the bulk of the warnings from faceted areas, solution may be nonunique remains
+
+	Fixed version name automation
+
+0.5.4 (Uploaded 27/6/22)
+
+	Removed warnings from RUC classification
+
+	Removed warnings from faceted_sources
+
+	Obliterated city_summary as area summary does the same but better
 
 0.6.0
 
 	[Haunted housekeeping] Fight through the planned features and QOL updates list
 		Warnings in decile vs emission by variable (0.5.2)
+		Warnings in faceted_plot (0.5.3)
+		Warnings in RUC breakdown (0.5.4)
+		Warnings in faceted_sources (0.5.4)
 
 	Added automated version tracker to bulk_processor (0.5.2)
 
@@ -252,5 +265,3 @@ QOL updates:
 	add uk average to the faceted graph	(hard)
 
 	check the bulk_processor in the city_processor vignette works
-
-	formulas specified to clip out the warnings
