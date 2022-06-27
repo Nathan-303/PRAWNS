@@ -36,15 +36,20 @@ City_profile <- ggplot(data=filtered_data)+
               aes(color='Mean'))+
 
   #Plot a line passing through the mean at each decile
-  geom_line(stat="summary",aes(color='Mean'))+
+  geom_line(stat="summary",
+            aes(color='Mean'),
+            fun=mean)+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
                 aes(color='Median'),
-                size =1)+
+                size =1,
+                formula=y~x,)+
 
   #Plot a line through the medians for each decile
-  geom_line(stat="summary",fun=median,aes(color='Median'))+
+  geom_line(stat="summary",
+            fun=median,
+            aes(color='Median'))+
 
   # #Plot a regression line for the whole UK for comparison
   # geom_smooth(data=read.csv(prawn_path)

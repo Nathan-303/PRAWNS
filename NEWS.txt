@@ -225,13 +225,20 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Banished the warnings from decile vs emission by variable
 
+0.5.3 (Uploaded 27/6/22)
+
+	Srtipped the bulk of the warnings from faceted plot, solution may be nonunique remains
+
 0.6.0
 
 	[Haunted housekeeping] Fight through the planned features and QOL updates list
+		Warnings in decile vs emission by variable (0.5.2)
 
 	Added automated version tracker to bulk_processor (0.5.2)
 
-	Add an NA warning for 
+	Add an NA warning for decile vs emission by variable
+
+	Add capacity to create raw prawns (0.5.1)
 
 
 Planned features:
