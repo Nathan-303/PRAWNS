@@ -47,7 +47,8 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
 
     geom_line(stat="summary",
               aes(linetype="Mean"),
-              na.rm = TRUE
+              na.rm = TRUE,
+              fun=mean
     )+
 
 
