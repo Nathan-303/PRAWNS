@@ -21,12 +21,6 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		results with NA values set to 0
 
 	A lovely readme that has vignettes for every function
-
-0.3.0 (WIP)
-
-	bulk_processor working as intended
-
-	
 	
 0.0.1 (uploaded 6/6/22)
 
@@ -201,7 +195,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Trimmed the cumulative distribution with coord cartesian 0.99 as a hard cap to force better scaling
 		mentioned in the vignette
 		also improved the colour palette
-0.5.0
+
+0.5.0 (Uploaded 27/6/22)
 
 	[Forbidden knowlege] Vignettes for the primary functions completed
 
@@ -217,6 +212,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		improve palette
 	
 	Added a disclaimer about the pie chart in the bulk processor vignette (0.4.4)
+
+0.5.1
+
+	Purged output_path from city_summary as it was needless complexity
+
+	Explained is_raw in the vignette for create_prawns
 
 0.6.0
 
