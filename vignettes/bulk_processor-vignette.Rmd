@@ -30,7 +30,7 @@ The filepath for the raster that is to be used. This is compatible with folders 
 The filepath for the shapefile to be used
 
 ### data_path 
-The filepath to a folder containing the additonal data
+The filepath to a folder containing the additonal data, defaults to FALSE so that it doesn't need to be specified if is_raw==TRUE, but needs to be filled with a valid filepath if this is not the case
 
 ### pollutant 
 The pollutant being investigated, this should be in quotes and correspond with its name in the data
@@ -50,13 +50,19 @@ The name of the pollutant that's being examined, this is used in the graph names
 ### version_number 
 The version of the package used, this is used when naming the output folder and aids in reproducibility
 
+
+### is_raw
+Whether to ignore all but the most basic inputs. This defaults to FALSE and does not need to be included in every call to the function. If it is set to TRUE then only the average emissions for each LSOA will be calculated, and the results will not be linked to any other CSV files. This option should be selected if the user doesn't want to use any of the linked data and is instead seeking their own sources.
+
+If is_raw==TRUE then the variable data sources does not need to be filled as it defaults to false and is not used.
+
 ## Output structure
 The name of the folder created is `paste0(pollutant,"_emissions_in_",year,"_v",iteration)` this contains graphs created using the other functions as well as two other subfolders ("Londonless" and "na is 0") which contain the same graphs but without London and with na valsue set to 0 respectively
 
 ## Disclaimer about pie chart
 The pie chart produced works on a lot of assumptions, and whilst it can be used as an indicator of what the data is doing, it should not be presented without making the following abundantly clear:
 
-* It is calculated using the values predicted on the line of best fit, working out the values at deciles 1 and 10, calculating the differnce then expressing it as a percentage of the difference in the total line
+* It is calculated using the values predicted on the line of best fit, working out the values at deciles 1 and 10, calculating the difference then expressing it as a percentage of the difference in the total line
 
 * The assumption is made that the sum of the lines of best fit for each source sector is equal to the line of best fit for all sources combined, this is an approximation
 
