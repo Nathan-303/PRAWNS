@@ -7,7 +7,7 @@
 create_prawns(
   raster_path,
   shapefile_path,
-  data_path,
+  data_path = FALSE,
   output_path = FALSE,
   pollutant_data_name,
   year,
