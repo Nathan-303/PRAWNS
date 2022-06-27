@@ -102,15 +102,21 @@ area_summary <- function(prawn_path,
                   aes(color='Mean'))+
 
       #Plot a line passing through the mean at each decile
-      geom_line(stat="summary",aes(color='Mean'))+
+      geom_line(stat="summary",
+                aes(color='Mean',
+                    fun=mean))+
 
       #Plot the line of best fit for the median
       geom_quantile(quantiles=0.5,
                     aes(color='Median'),
-                    size =1)+
+                    size =1,
+                    formula=y~x,
+                    na.rm=TRUE)+
 
       #Plot a line through the medians for each decile
-      geom_line(stat="summary",fun=median,aes(color='Median'))+
+      geom_line(stat="summary",
+                fun=median,
+                aes(color='Median'))+
 
       #Plot a regression line for the whole UK for comparison
       geom_smooth(data=read.csv(prawn_path)
@@ -124,7 +130,9 @@ area_summary <- function(prawn_path,
                   show.legend = FALSE)+
 
       #An extra line showing the UK average at each decile for comparison purposes
-      geom_line(data=read.csv(prawn_path),stat="summary" , aes(
+      geom_line(data=read.csv(prawn_path),stat="summary" ,
+                fun=mean,
+                aes(
         x=IMD,
         y=Total,colour='UK Average'),
         show.legend = FALSE
@@ -178,6 +186,8 @@ area_summary <- function(prawn_path,
 
     )+
       geom_quantile(quantiles=0.5,linetype=2)
+
+    #Create the gridded oputput object
     output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
       annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",targets)))
 
