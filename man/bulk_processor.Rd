@@ -12,7 +12,7 @@ bulk_processor(
   pollutant_data_name,
   year,
   pollutant,
-  iteration
+  iteration = as.character(packageVersion("PRAWNS"))
 )
 }
 \arguments{
@@ -30,8 +30,6 @@ compatible with folders containing multiple raster layers}
 \item{data_path}{The filepath to a folder containing the additonal data}
 
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
-
-\item{version_number}{the version of the package used, aids in reproducibility}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas
