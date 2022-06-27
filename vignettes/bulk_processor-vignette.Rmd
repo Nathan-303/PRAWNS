@@ -47,10 +47,6 @@ The filepath for the prawn CSV that is to be used.
 ### pollutant 
 The name of the pollutant that's being examined, this is used in the graph names
 
-### version_number 
-The version of the package used, this is used when naming the output folder and aids in reproducibility
-
-
 ### is_raw
 Whether to ignore all but the most basic inputs. This defaults to FALSE and does not need to be included in every call to the function. If it is set to TRUE then only the average emissions for each LSOA will be calculated, and the results will not be linked to any other CSV files. This option should be selected if the user doesn't want to use any of the linked data and is instead seeking their own sources.
 
