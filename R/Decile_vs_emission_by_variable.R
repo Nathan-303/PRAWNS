@@ -49,11 +49,16 @@ Decile_vs_emission_by_variable <- function(active_stack,chosen_decile,chosen_var
     )+
 
 
-    geom_smooth(method="lm",formula=y~x,se=FALSE,show.legend=FALSE,aes(linetype="Mean"))+
+    geom_smooth(method="lm",
+                formula=y~x,
+                se=FALSE,
+                show.legend=FALSE,
+                aes(linetype="Mean"))+
     #Plot the line of best fit for the median
     geom_quantile(quantiles=0.5,
                   aes(linetype="Median"),
-                  size =1,)+
+                  size =1,
+                  formula=y~x)+
 
     #Plot a line through the medians for each decile
     geom_line(stat="summary",fun=median,aes(linetype="Median"))
