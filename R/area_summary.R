@@ -25,7 +25,7 @@ area_summary <- function(prawn_path,
                          shape_path,
                          targets,
                          pollutant,
-                         output_path=FALSE){}
+                         output_path=FALSE){
 
 
 
@@ -216,6 +216,6 @@ if (output_path==TRUE){
 }
 
     output
-#}
+}
 
 

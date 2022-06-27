@@ -26,9 +26,9 @@ test <- ggplot(data=area_rank)+
 
   aes(x=dep,
       y=token,
-      colour=stat)
+      colour=stat)+
 
-  +geom_line()+
+  geom_line()+
 
   geom_smooth(method="lm",
               formula=y~x,
