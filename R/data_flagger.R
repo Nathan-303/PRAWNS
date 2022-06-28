@@ -2,7 +2,7 @@
 #'
 #'@param prawn_path the location of the prawn to be analysed
 #'
-
+prawn_path <- "PM2.5_emissions_in_2019_v0.4.3/rawPRAWN.csv"
 data_flagger <- function(prawn_path){
 
   #read in the data
@@ -10,8 +10,33 @@ data_flagger <- function(prawn_path){
                    row.names=1,
                    check.names=FALSE) %>% tibble()
 
+
+  cols <- as.numeric(ncol(data))
+
+  #select all the data columns, the first two and the last columns will always be useless and LSOA respectively
+  long_data <- data %>% select(-c(1,2,cols)) %>%
+    #make the data longer, pivoting along everything
+    pivot_longer(cols=everything(),
+                 names_to = "Emission_source",
+                 values_to = "Emissions") %>%
+
   #Pivot the data longer so each source can be treated separately
-  %>% group_by()
+  group_by(Emission_source)
+
+
+  summary <- long_data %>% summarise(
+                       mean_emission=mean(Emissions),
+                       median_emission=median(Emissions),
+                       stdev=sd(Emissions),
+                       max=max(Emissions),
+                       na=sum(is.na(Emissions)/length(Emissions)))
+
+  naless_summary <- ong_data %>% summarise(
+    mean_emission=mean(Emissions),
+    median_emission=median(Emissions),
+    stdev=sd(Emissions),
+    max=max(Emissions),
+    na=sum(is.na(Emissions)/length(Emissions)))
 
   #mutate in the standard deviation, median, mean and max
   mutate(mean =mean,
