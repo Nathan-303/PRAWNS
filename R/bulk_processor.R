@@ -50,7 +50,7 @@ for ( index in c(1:3)){
     proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #The base path remains unchanged and is used to fetch a raw copy of the prawn for processed versions
-    raw_path <- paste0(proc_tag,"/PRAWN.csv")
+    raw_path <- paste0(proc_tag,"/rawPRAWN.csv")
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
 
@@ -63,6 +63,22 @@ for ( index in c(1:3)){
       year=year,
       pollutant=pollutant,
       output_path = prawn_path)
+
+    #output the raw form of the prawn as well so that it can be examined if needed
+    create_prawns(
+      raster_path= raster_path,
+      shapefile_path = shapefile_path,
+      data_path= list.files(data_folder),
+      pollutant_data_name = pollutant_data_name,
+      year=year,
+      pollutant=pollutant,
+      output_path = raw_path,
+      is_raw = TRUE)
+
+    write.csv(x =  data_flagger(raw_path),
+              file = paste0(proc_tag,"data_summary.csv")
+              )
+
   }
 
   #create the results without London,
