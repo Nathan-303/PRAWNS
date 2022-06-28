@@ -51,27 +51,19 @@ City_profile <- ggplot(data=filtered_data)+
             fun=median,
             aes(color='Median'))+
 
-  # #Plot a regression line for the whole UK for comparison
-  # geom_smooth(data=read.csv(prawn_path)
-  #             , aes(
-  #               x=IMD,
-  #               y=Total,
-  #               color='UK Average'),
-  #             method="lm",
-  #             formula=y~x,
-  #             se=FALSE,
-  #             show.legend = FALSE)+
-  #
-  # #An extra line showing the UK average at each decile for comparison purposes
-  # geom_line(data=read.csv(prawn_path),stat="summary" , aes(
-  #   x=IMD,
-  #   y=Total,colour='UK Average'),
-  #   show.legend = FALSE
-  # )+
+#Plot a regression line for the whole UK for comparison
+geom_smooth(data=read.csv(prawn_path) %>% select(-c(TCITY15NM,Area))
+            , aes(
+              x=IMD,
+              y=Total,
+              color='UK mean'),
+            method="lm",
+            formula=y~x,
+            se=FALSE)+
 
-  scale_colour_manual(name="Line type",
-                      breaks = c('Mean','Median','UK Average'),
-                      values=c('Mean'='blue','Median'='red'))#,'UK Average'='black'))
+  scale_colour_manual(name="Colour",
+                      breaks = c('Mean','Median','UK mean'),
+                      values=c('Mean'='blue','Median'='red','UK mean'='black'))
 #Add on the facets conditional to the group variable
 if (group=="TCITY15NM"){
   City_profile <- City_profile+ facet_wrap(~TCITY15NM,scales="free_y")
