@@ -55,6 +55,9 @@ If is_raw==TRUE then the variable data sources does not need to be filled as it 
 ## Output structure
 The name of the folder created is `paste0(pollutant,"_emissions_in_",year,"_v",iteration)` this contains graphs created using the other functions as well as two other subfolders ("Londonless" and "na is 0") which contain the same graphs but without London and with na valsue set to 0 respectively
 
+## Expected warnings
+There will be multiple copies of the warning "In rq.fit.br(wx, wy, tau = tau, ...) : Solution may be nonunique" this is inherent to the method of quantile regression used and doesn't indicate a problem in the code or degradation of reqult quality
+
 ## Disclaimer about pie chart
 The pie chart produced works on a lot of assumptions, and whilst it can be used as an indicator of what the data is doing, it should not be presented without making the following abundantly clear:
 
