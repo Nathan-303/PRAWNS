@@ -2,6 +2,7 @@
 #'
 #'@param prawn_path the location of the prawn to be analysed
 #'
+#'@export
 prawn_path <- "PM2.5_emissions_in_2019_v0.4.3/rawPRAWN.csv"
 data_flagger <- function(prawn_path){
 
@@ -22,27 +23,17 @@ data_flagger <- function(prawn_path){
 
   #Pivot the data longer so each source can be treated separately
   group_by(Emission_source)
+  napercent <- long_data %>% summarise(percentage_missing_data=sum(is.na(Emissions)/length(Emissions)))
 
+  naless_data <- long_data %>% replace(is.na(.), 0)
 
-  summary <- long_data %>% summarise(
+  summary <- naless_data %>% summarise(
                        mean_emission=mean(Emissions),
                        median_emission=median(Emissions),
                        stdev=sd(Emissions),
                        max=max(Emissions),
-                       na=sum(is.na(Emissions)/length(Emissions)))
+                       ) %>%
+    inner_join(napercent,by="Emission_source")
 
-  naless_summary <- ong_data %>% summarise(
-    mean_emission=mean(Emissions),
-    median_emission=median(Emissions),
-    stdev=sd(Emissions),
-    max=max(Emissions),
-    na=sum(is.na(Emissions)/length(Emissions)))
-
-  #mutate in the standard deviation, median, mean and max
-  mutate(mean =mean,
-         median =median,
-         stdev= stde)
-  #output the  data in a location next to the prawn used
-  write.csv(x = output,
-            file = paste0())
+  summary
 }
