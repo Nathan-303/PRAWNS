@@ -82,6 +82,11 @@ for ( index in c(1:3)){
               file = paste0(proc_tag,"/data_summary.csv")
               )
 
+    shape_test <- shapefile_checker(shapefile_path)
+
+    ggsave(filename= paste0(proc_tag,"/shapefile_test"),
+           plot=shape_test,
+           device="png")
   }
 
   #create the results without London,
