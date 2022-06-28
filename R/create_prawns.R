@@ -12,9 +12,6 @@
 #'
 #' @param shapefile_path The filepath for the shapefile to be used
 #'
-#' @param data_path The filepath for all csv files which contain additional data
-#' this data should have entries that correspond to polygons in the shapefile
-#'
 #' @param output_path The filepath to output to. Defaults to FALSE
 #'
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
@@ -35,7 +32,6 @@
 
 create_prawns <- function(raster_path,
                           shapefile_path,
-                          data_path=FALSE,
                           output_path=FALSE,
                           pollutant_data_name,
                           year,

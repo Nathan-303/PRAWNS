@@ -10,8 +10,6 @@
 #'
 #' @param shapefile_path The filepath for the shapefile to be used
 #'
-#' @param data_path The filepath to a folder containing the additonal data
-#'
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #'
 #' @param pollutant_data_name what the pollutant is referred to as in the raw data, should be quoted
@@ -30,7 +28,6 @@
 
 bulk_processor <- function(raster_path,
                            shapefile_path,
-                           data_folder,
                            pollutant_data_name,
                            year,
                            pollutant,
@@ -60,7 +57,6 @@ for ( index in c(1:3)){
     create_prawns(
       raster_path= raster_path,
       shapefile_path = shapefile_path,
-      data_path= list.files(data_folder),
       pollutant_data_name = pollutant_data_name,
       year=year,
       pollutant=pollutant,
@@ -70,7 +66,6 @@ for ( index in c(1:3)){
     create_prawns(
       raster_path= raster_path,
       shapefile_path = shapefile_path,
-      data_path= list.files(data_folder),
       pollutant_data_name = pollutant_data_name,
       year=year,
       pollutant=pollutant,
