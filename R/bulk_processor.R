@@ -57,14 +57,14 @@ for ( index in c(1:3)){
     dir.create(path=paste0(proc_tag))
 
     #create the base prawn for this function, it will also be used by iterations 2 and 3 but filtered
-    # create_prawns(
-    #   raster_path= raster_path,
-    #   shapefile_path = shapefile_path,
-    #   data_path= list.files(data_folder),
-    #   pollutant_data_name = pollutant_data_name,
-    #   year=year,
-    #   pollutant=pollutant,
-    #   output_path = prawn_path)
+    create_prawns(
+      raster_path= raster_path,
+      shapefile_path = shapefile_path,
+      data_path= list.files(data_folder),
+      pollutant_data_name = pollutant_data_name,
+      year=year,
+      pollutant=pollutant,
+      output_path = prawn_path)
 
     #output the raw form of the prawn as well so that it can be examined if needed
     create_prawns(
