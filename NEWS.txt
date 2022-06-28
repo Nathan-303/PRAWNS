@@ -253,21 +253,29 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Only the quartile regression warnings remain (0.5.4)
 
-0.6.1
+0.6.1 (Uploaded 28/6/22)
 
 	Got a data summary going to check the numbers and added it into bulk_processor, also folded the raw_prawns into bulk_processor
+
+0.6.2 (Uploaded 28/6/22)
+
+	Output the shapefile as a graph on its own so that it can be checked
+		Fold it into bulk processor
+
+	Got the UK average line on the faceted plot
+	
 0.7.0 (WIP)
 	
 	[Aberrations and abominations] Track errors and improve the handling range
 
-	na tracker in bulk_processor
+	na tracker in bulk_processor (0.6.1)
 		shows the %na in each source field
 
 	reads the data in tif format, enabling the use of modelled data
 
-	has the UK average as a line in the faceted graphs (mean line)
+	has the UK average as a line in the faceted graphs (mean line) (0.6.2)
 
-	outputs the shape of the shapefile so it can be checked
+	outputs the shape of the shapefile so it can be checked (0.6.2)
 
 
 QOL updates:
@@ -276,6 +284,12 @@ QOL updates:
 
 	suppress the warnings from quantile regression/explain in the vignette
 
-	vignette for data_flagger
+	vignettes
+		data_flagger
+		shapefile_checker
 
 	optimisation: make it so is.raw executes in a single pass rather than two
+
+	improve variable name consistency between functions
+		shapefile path
+		data_path
