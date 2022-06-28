@@ -1,9 +1,9 @@
 #'A function showing a summary of the prawn inputted to allow the data to be roughly checked
 #'
-#'@param prawn_path the location of the prawn to be analysed
+#'@param prawn_path the location of the prawn to be analysed, should be the filepath to a csv file containing a raw prawn
 #'
 #'@export
-prawn_path <- "PM2.5_emissions_in_2019_v0.4.3/rawPRAWN.csv"
+
 data_flagger <- function(prawn_path){
 
   #read in the data
