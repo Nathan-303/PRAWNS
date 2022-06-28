@@ -5,7 +5,7 @@
 #'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
-#' @param shape_path The filepath for the shapefile that is to be used
+#' @param shapefile_path The filepath for the shapefile that is to be used
 #'
 #' @param targets The name of the thing you're trying to isolate e.g. "Manchester"
 #' can also be a vector of valid values
@@ -22,7 +22,7 @@
 #' area_summary()
 #'
 area_summary <- function(prawn_path,
-                         shape_path,
+                         shapefile_path,
                          targets,
                          pollutant,
                          output_path=FALSE){
@@ -35,7 +35,7 @@ area_summary <- function(prawn_path,
                         check.names=FALSE) %>% tibble()
 
   #Reads in the shapefiles
-  raw_shapefile <- st_read(shape_path)
+  raw_shapefile <- st_read(shapefile_path)
 
   #Takes the subset of the data where the city name matches the targets
   filtered_data <- filter(raw_data,TCITY15NM %in% targets)
