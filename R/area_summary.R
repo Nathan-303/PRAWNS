@@ -40,6 +40,10 @@ area_summary <- function(prawn_path,
   #Takes the subset of the data where the city name matches the targets
   filtered_data <- filter(raw_data,TCITY15NM %in% targets)
 
+  if (dim(filtered_data)[1]==0){
+    stop(paste0("Nothing matches " ,targets," in the data, check for typos"))
+  }
+
 
 
   stitched_shapefile <- inner_join(filtered_data,raw_shapefile, by="LSOA11CD") %>%
@@ -103,8 +107,9 @@ area_summary <- function(prawn_path,
 
       #Plot a line passing through the mean at each decile
       geom_line(stat="summary",
-                aes(color='Mean',
-                    fun=mean))+
+                fun=mean,
+                aes(color='Mean'
+                    ))+
 
       #Plot the line of best fit for the median
       geom_quantile(quantiles=0.5,
@@ -148,7 +153,7 @@ area_summary <- function(prawn_path,
       aes(x=Total,group=IMD,colour=IMD)+
       scale_colour_viridis_d(option="turbo")+
       stat_ecdf(
-      )+coord_cartesian(xlim = c(0, 100))+
+      )+coord_cartesian(xlim = c(0, 0.99))+
       labs(x= paste0(pollutant," emissions"),
            y= paste0("Fraction exposed to at least this much ",pollutant),
            title=paste0(" Cumulative distribution  of ",pollutant," emissions"))+
@@ -181,9 +186,7 @@ area_summary <- function(prawn_path,
       xaxis = "IMD Decile",
       yaxis = "NOx emissions",
       title = paste0("Source breakdown for ",targets),
-      chosen_variable = emissions,
-      Pollutant = "NOx"
-
+      chosen_variable = emissions
     )+
       geom_quantile(quantiles=0.5,linetype=2)
 
@@ -195,7 +198,7 @@ area_summary <- function(prawn_path,
 
 
 
-if (output_path==TRUE){
+if (output_path!=FALSE){
 
     if (file.exists(output_path)) {
 
