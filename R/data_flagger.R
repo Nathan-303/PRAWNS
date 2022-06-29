@@ -15,7 +15,7 @@ data_flagger <- function(prawn_path){
   cols <- as.numeric(ncol(data))
 
   #select all the data columns, the first two and the last columns will always be useless and LSOA respectively
-  long_data <- data %>% select(-c(1,2,cols)) %>%
+  long_data <- data %>% dplyr::select(-c(1,2,cols)) %>%
     #make the data longer, pivoting along everything
     pivot_longer(cols=everything(),
                  names_to = "Emission_source",
