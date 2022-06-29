@@ -271,6 +271,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Removed data_path and data_folder from create and bulk because they did nothing but distract
 
+	Added shapefile_path naming consistency to area_processor
+
 0.7.0 (WIP)
 	
 	[Aberrations and abominations] Track errors and improve the handling range
@@ -294,9 +296,5 @@ QOL updates:
 		shapefile_checker
 
 	optimisation: make it so is.raw executes in a single pass rather than two
-
-	improve variable name consistency between functions
-		shapefile path
-		data_path
 
  	(awkward) add input flexibility, but this is not necessary to the main functionality, the presence of raw renders it obsolete so this not exists to stop you wanting it
