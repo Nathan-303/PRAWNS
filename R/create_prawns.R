@@ -8,7 +8,9 @@
 #' structure them for compatibility
 #'
 #' @param raster_path The filepath for the raster that is to be used. This is
-#' compatible with folders containing multiple raster layers
+#' compatible with folders containing multiple raster layers, mutually exclusive with tif path
+#'
+#' @param tif_path The filepath for the tif file used to input modelled data, mutually sxclusive with raster_path
 #'
 #' @param shapefile_path The filepath for the shapefile to be used
 #'
@@ -30,7 +32,8 @@
 #' create_prawns()
 #'
 
-create_prawns <- function(raster_path,
+create_prawns <- function(raster_path=FALSE,
+                          tif_path=FALSE,
                           shapefile_path,
                           output_path=FALSE,
                           pollutant_data_name,
@@ -40,7 +43,8 @@ create_prawns <- function(raster_path,
 
 # Calculate the average pollution for each area ----------------------------
 
-
+#run an ifelse to read either the rasters or a tif, the outputs (source_stack) are the same class of object
+  if(raster_path!=FALSE){
   #Create a list of all the raster files present in the folder specified by raster_path
   filelist <- list.files(raster_path,
     pattern = ".asc",
@@ -50,6 +54,10 @@ create_prawns <- function(raster_path,
   source_stack <- rast(filelist[1])
   for(index in 2:length(filelist)){
     source_stack <- c(source_stack,rast(filelist[index]))
+  }
+  }else{
+    source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
+
   }
   #Read the shapefile
   LSOA_shapefile <- vect(shapefile_path)
@@ -156,3 +164,4 @@ if (output_path!=FALSE){
 prawns
   }
 }
+
