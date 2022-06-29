@@ -34,6 +34,7 @@
 
 create_prawns <- function(raster_path=FALSE,
                           tif_path=FALSE,
+                          csv_coordinates_path=FALSE,
                           shapefile_path,
                           output_path=FALSE,
                           pollutant_data_name,
@@ -43,7 +44,8 @@ create_prawns <- function(raster_path=FALSE,
 
 # Calculate the average pollution for each area ----------------------------
 
-#run an ifelse to read either the rasters or a tif, the outputs (source_stack) are the same class of object
+#Three chained if statements, which trigger if there is a path to the appropriate file in the function call
+  #If its'a raster
   if(raster_path!=FALSE){
   #Create a list of all the raster files present in the folder specified by raster_path
   filelist <- list.files(raster_path,
@@ -55,9 +57,21 @@ create_prawns <- function(raster_path=FALSE,
   for(index in 2:length(filelist)){
     source_stack <- c(source_stack,rast(filelist[index]))
   }
-  }else{
+  }
+  #If its a tif
+  if(tif_path!=FALSE){
     source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
 
+  }
+  #If it's a csv
+  if(csv_coordinates_path!=FALSE){
+    csv_raster <- read.csv(file="Data/pm2.5test.csv",skip = 5,
+                           row.names=1,
+                           check.names=FALSE) %>% tibble()
+
+    base_raster <- rasterFromXYZ(csv_raster,crs="OSGB")
+
+    source_stack <- rast(base_raster)
   }
   #Read the shapefile
   LSOA_shapefile <- vect(shapefile_path)
@@ -76,7 +90,8 @@ create_prawns <- function(raster_path=FALSE,
     write.csv(file=output_path,x = output
               )}
     output
-  }else{
+  }
+  else{
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 

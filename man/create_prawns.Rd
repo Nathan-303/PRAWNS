@@ -7,6 +7,7 @@
 create_prawns(
   raster_path = FALSE,
   tif_path = FALSE,
+  csv_coordinates_path = FALSE,
   shapefile_path,
   output_path = FALSE,
   pollutant_data_name,
