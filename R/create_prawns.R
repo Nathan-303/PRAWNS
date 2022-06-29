@@ -72,8 +72,9 @@ create_prawns <- function(raster_path=FALSE,
                    ) %>% unnest(poll_mean)
   #output a csv wit the minimum processiong done if is.raw=true
   if (is_raw==TRUE){
+    if(output_path!=FALSE){
     write.csv(file=output_path,x = output
-              )
+              )}
     output
   }else{
 
