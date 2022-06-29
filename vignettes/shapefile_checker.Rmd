@@ -1,0 +1,27 @@
+---
+title: "shapefile_checker"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shapefile_checker}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# shapefile_checker function
+This function outputs a basic plot of the shapefile input, look at it and see if it's the shape you were expecting
+
+## Inputs
+### shapefile_path
+The filepath to the shapefile used
+## Outputs
+Png of the shapefile inputted
+
+```{r setup}
+library(PRAWNS)
+```

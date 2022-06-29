@@ -1,0 +1,28 @@
+---
+title: "data_flagger"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{data_flagger}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# data_flagger function
+This function calculates basic summary statistics for a raw prawns object, returning the mean, median, standard deviation, max value and percentage of the data that is na
+
+## Inputs
+### prawn_path
+
+## Outputs
+A tibble containg summary statistics about the data inputted
+
+The location of a csv file containg data to be processed
+```{r setup}
+library(PRAWNS)
+```
