@@ -79,7 +79,7 @@ for ( index in c(1:3)){
 
     shape_test <- shapefile_checker(shapefile_path)
 
-    ggsave(filename= paste0(proc_tag,"/shapefile_test"),
+    ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
            plot=shape_test,
            device="png")
 
