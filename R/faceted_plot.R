@@ -12,7 +12,7 @@
 
 faceted_plot <- function(prawn_path,group,pollutant){
 
-filtered_data <- read.csv(prawn_path)
+filtered_data <- read.csv(prawn_path) %>% tibble()
 
 City_profile <- ggplot(data=filtered_data)+
   aes(x=IMD,

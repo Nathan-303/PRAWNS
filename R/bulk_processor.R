@@ -72,7 +72,7 @@ for ( index in c(1:3)){
       output_path = crude_path,
       is_raw = TRUE)
 
-    data_summary <- data_flagger(crude_path)
+    data_summary <- data_flagger(crude_path) %>% tibble()
     write.csv(x =  data_summary,
               file = paste0(proc_tag,"/data_summary.csv")
               )
