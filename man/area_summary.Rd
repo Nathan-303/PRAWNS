@@ -4,12 +4,18 @@
 \alias{area_summary}
 \title{A function for creating a graphic summarising a city}
 \usage{
-area_summary(prawn_path, shape_path, targets, pollutant, output_path = FALSE)
+area_summary(
+  prawn_path,
+  shapefile_path,
+  targets,
+  pollutant,
+  output_path = FALSE
+)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 
-\item{shape_path}{The filepath for the shapefile that is to be used}
+\item{shapefile_path}{The filepath for the shapefile that is to be used}
 
 \item{targets}{The name of the thing you're trying to isolate e.g. "Manchester"
 can also be a vector of valid values}

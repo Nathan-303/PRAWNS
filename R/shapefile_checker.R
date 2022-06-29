@@ -1,6 +1,6 @@
 #' Outputs the shapefile as a graphic so it can be visually checked
 #'
-#' @param shapefile_path
+#' @param shapefile_path the path to the shapefiles that are being checked
 #'@export
 #
 

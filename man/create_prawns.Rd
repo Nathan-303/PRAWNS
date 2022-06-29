@@ -5,9 +5,9 @@
 \title{A function for creating the data source for PRAWNS functions``}
 \usage{
 create_prawns(
-  raster_path,
+  raster_path = FALSE,
+  tif_path = FALSE,
   shapefile_path,
-  data_path = FALSE,
   output_path = FALSE,
   pollutant_data_name,
   year,
@@ -17,12 +17,11 @@ create_prawns(
 }
 \arguments{
 \item{raster_path}{The filepath for the raster that is to be used. This is
-compatible with folders containing multiple raster layers}
+compatible with folders containing multiple raster layers, mutually exclusive with tif path}
+
+\item{tif_path}{The filepath for the tif file used to input modelled data, mutually sxclusive with raster_path}
 
 \item{shapefile_path}{The filepath for the shapefile to be used}
-
-\item{data_path}{The filepath for all csv files which contain additional data
-this data should have entries that correspond to polygons in the shapefile}
 
 \item{output_path}{The filepath to output to. Defaults to FALSE}
 

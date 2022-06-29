@@ -8,7 +8,6 @@ a folder that is created with an appropriate procedurally generated name}
 bulk_processor(
   raster_path,
   shapefile_path,
-  data_folder,
   pollutant_data_name,
   year,
   pollutant,
@@ -26,8 +25,6 @@ compatible with folders containing multiple raster layers}
 \item{year}{the year the data is from, used to standardise column names, currently doesnt work for years before 2000}
 
 \item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names}
-
-\item{data_path}{The filepath to a folder containing the additonal data}
 
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
