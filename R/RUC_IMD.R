@@ -60,7 +60,7 @@ RUC_summary <- ggplot(temp)+
 
 labs(x="IMD decile where 10 is least deprived",
      y=paste0("Average ",pollutant," emissions/tonnes km^2"),
-     title="NOx emissions by RUC classification 2019",
+     title=paste0(pollutant," emissions by RUC classification 2019"),
      linetype="Metric used",
      colour= "RUC classification")+
 
