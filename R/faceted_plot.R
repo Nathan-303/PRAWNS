@@ -52,7 +52,7 @@ City_profile <- ggplot(data=filtered_data)+
             aes(color='Median'))+
 
 #Plot a regression line for the whole UK for comparison
-geom_smooth(data=read.csv(prawn_path) %>% select(-c(TCITY15NM,Area))
+geom_smooth(data=read.csv(prawn_path) %>% tibble %>% dplyr::select(-c(TCITY15NM,Area))
             , aes(
               x=IMD,
               y=Total,
