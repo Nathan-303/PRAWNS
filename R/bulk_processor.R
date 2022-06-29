@@ -82,6 +82,8 @@ for ( index in c(1:3)){
     ggsave(filename= paste0(proc_tag,"/shapefile_test"),
            plot=shape_test,
            device="png")
+
+    print("Basic PRAWN creation and data tests successful")
   }
 
   #create the results without London,
@@ -99,6 +101,8 @@ for ( index in c(1:3)){
     #Write the filtered prawn
     write.csv(x = londonless_prawn,
               file=prawn_path)
+
+    print("Creation of PRAWNS without London successful")
   }
 
   if (index==3){
@@ -118,6 +122,8 @@ for ( index in c(1:3)){
                               ,"Total_no_points"=0,"Waste treatment and disposal"=0))
     write.csv(x = na_0_prawn,
               file=prawn_path)
+
+    print("Creation of prawns where na values are set to 0 successful")
     }
 #Make and save a graph showing a summary of the pollutants
 source_breakdown <- source_summary(prawn_path=prawn_path,
@@ -187,6 +193,8 @@ pie <- gradient_pie(pollutant = pollutant,
  ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.png"),
        plot=pie,
        device="png")
+
+ print(paste0("Graphing pass ",index," of 3 successful"))
 #close the for loop
 }
 #close the function
