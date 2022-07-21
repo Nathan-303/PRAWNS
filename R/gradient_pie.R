@@ -24,7 +24,6 @@ output <- ggplot(data=raw %>% filter(Emission_source!="Total"),
            y=mean_flat_difference,
            fill=fct_reorder(Emission_source,mean_flat_difference)))+
   geom_col()+
-  coord_polar(theta="y")+
   scale_fill_viridis_d()+
   labs(title = paste0("How each source of ",pollutant," contributes to the inequality gradient"))
 
