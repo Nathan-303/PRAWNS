@@ -20,12 +20,15 @@ gradient_pie <- function(pollutant, input_path){
                   check.names=FALSE)
 
 output <- ggplot(data=raw %>% filter(Emission_source!="Total"),
-       aes(x="",
+       aes(x=fct_reorder(Emission_source,mean_flat_difference),
            y=mean_flat_difference,
            fill=fct_reorder(Emission_source,mean_flat_difference)))+
   geom_col()+
   scale_fill_viridis_d()+
-  labs(title = paste0("How each source of ",pollutant," contributes to the inequality gradient"))
+  labs(title = paste0("Using a linear model to predict the scope of the difference in emissions"),
+       y=paste0("The change in predicted ", pollutant," concentration"))+
+  theme(axis.ticks.x=element_blank(),
+        axis.text.x=element_blank())
 
 output
 }
