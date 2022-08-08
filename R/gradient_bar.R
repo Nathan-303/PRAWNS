@@ -14,7 +14,7 @@
 #' gradient_pie()
 
 
-gradient_pie <- function(pollutant, input_path){
+gradient_bar <- function(pollutant, input_path){
   raw <- read.csv(input_path,
                   row.names=1,
                   check.names=FALSE)

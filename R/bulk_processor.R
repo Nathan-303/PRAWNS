@@ -186,7 +186,7 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
             file=paste0(proc_tag,"/difference between deciles.csv"))
 
 
-pie <- gradient_pie(pollutant = pollutant,
+pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
