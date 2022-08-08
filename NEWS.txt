@@ -309,11 +309,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added vignettes for data_flagger and shapefile_checker
 
-0.7.4
+0.7.4 (Uploaded 8/8/22)
 
 	Change the pie chart to bars
 
-0.8.0
+0.8.0 (Uploaded 8/8/22)
 
 	[Forbidden knowlege 2: electric boogaloo] Update vignettes and add csv raster compatibility
 
@@ -321,7 +321,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added vignettes for data_flagger and shapefile_checker (0.7.3)
 
-	Remove pie chart, make it bars so it's true
+	Remove pie chart, make it bars so it's true (0.7.4)
 
 
 0.9.0 
