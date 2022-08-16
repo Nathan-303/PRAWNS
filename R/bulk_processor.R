@@ -62,15 +62,6 @@ for ( index in c(1:3)){
       pollutant=pollutant,
       output_path = prawn_path)
 
-    #output the raw form of the prawn as well so that it can be examined if needed
-    create_prawns(
-      raster_path= raster_path,
-      shapefile_path = shapefile_path,
-      pollutant_data_name = pollutant_data_name,
-      year=year,
-      pollutant=pollutant,
-      output_path = crude_path,
-      is_raw = TRUE)
 
     data_summary <- data_flagger(crude_path) %>% tibble()
     write.csv(x =  data_summary,

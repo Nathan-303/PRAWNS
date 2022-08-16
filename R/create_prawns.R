@@ -84,14 +84,17 @@ create_prawns <- function(raster_path=FALSE,
   output <- tibble(poll_mean=pollution_mean,
                    LSOA11CD=LSOA_shapefile$LSOA11CD
                    ) %>% unnest(poll_mean)
-  #output a csv wit the minimum processiong done if is.raw=true
-  if (is_raw==TRUE){
-    if(output_path!=FALSE){
-    write.csv(file=output_path,x = output
-              )}
-    output
-  }
-  else{
+  #output a csv with minimum processing
+  if(output_path!=FALSE){
+    if (is_raw==TRUE){
+    write.csv(file=output_path,
+              x = output)
+      output
+    }else{
+      raw_path <- paste0(file_path_sans_ext(output_path),"raw.csv")
+        write.csv(file=output_path,
+                    x = output)
+
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
