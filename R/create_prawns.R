@@ -91,7 +91,7 @@ create_prawns <- function(raster_path=FALSE,
               x = output)
       output
     }else{
-      raw_path <- paste0(file_path_sans_ext(output_path),"raw.csv")
+      raw_path <- paste0(tools::file_path_sans_ext(output_path),"raw.csv")
         write.csv(file=output_path,
                     x = output)
 
@@ -181,5 +181,5 @@ if (output_path!=FALSE){
 
 prawns
   }
-}
+}}
 
