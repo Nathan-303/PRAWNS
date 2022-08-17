@@ -355,3 +355,5 @@ QOL updates:
 	optimisation: make it so is.raw executes in a single pass rather than two
 
  	(awkward) add input flexibility, but this is not necessary to the main functionality, the presence of raw renders it obsolete so this not exists to stop you wanting it
+
+	make the tif and csv paths dynamic
