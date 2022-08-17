@@ -94,7 +94,9 @@ create_scottish_prawns <- function(raster_path=FALSE,
   else{
 
 # Combine the pollution means with the additional data --------------------
-refined_chunk <- read.csv("Data/SIMD+2020v2+-+ranks.csv") %>% tibble()
+refined_chunk <- read.csv("Data/SIMD+2020v2+-+ranks.csv") %>% tibble() %>%
+  #make a column with the deprivation decile
+  mutate(SIMD_decile=ntile(SIMD2020v2_Rank,10))
 
   prawns <- inner_join(output,refined_chunk,by="Data_Zone")
 
