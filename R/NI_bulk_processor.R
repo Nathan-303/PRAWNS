@@ -63,7 +63,7 @@ for ( index in c(1:3)){
       output_path = prawn_path)
 
     #output the raw form of the prawn as well so that it can be examined if needed
-    create_scottish_prawns(
+    create_NI_prawns(
       raster_path= raster_path,
       shapefile_path = shapefile_path,
       pollutant_data_name = pollutant_data_name,

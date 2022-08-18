@@ -94,9 +94,9 @@ create_NI_prawns <- function(raster_path=FALSE,
   else{
 
 # Combine the pollution means with the additional data --------------------
-refined_chunk <- read.csv("Data/NIMDM17_SOAresults") %>% tibble() %>%
+refined_chunk <- read.csv("Data/NIMDM17_SOAresults.csv") %>% tibble() %>%
   #make a column with the deprivation decile
-  mutate(IMD=ntile(MDM_Rank,10))
+  mutate(IMD=ntile(MDM_Rank..where.1.is.most.deprived.,10))
 
   prawns <- inner_join(output,refined_chunk,by="SOA2001")
 
