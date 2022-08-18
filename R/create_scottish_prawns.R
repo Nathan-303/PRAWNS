@@ -84,7 +84,7 @@ create_scottish_prawns <- function(raster_path=FALSE,
   output <- tibble(poll_mean=pollution_mean,
                    Data_Zone=DZ_shapefile$DataZone
                    ) %>% unnest(poll_mean)
-  #output a csv wit the minimum processiong done if is.raw=true
+  #output a csv wit the minimum processing done if is.raw=true
   if (is_raw==TRUE){
     if(output_path!=FALSE){
     write.csv(file=output_path,x = output
