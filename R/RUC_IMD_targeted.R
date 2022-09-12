@@ -49,7 +49,7 @@ RUC_summary <- ggplot(temp)+
 
 labs(x="IMD decile where 10 is least deprived",
      y=paste0("Average ",pollutant," emissions/tonnes km^2"),
-     title=paste0(pollutant," emissions by RUC classification 2019"),
+     title=paste0(pollutant," emissions by RUC classification 2020"),
      linetype="Metric used",
      colour= "RUC classification")+
 
@@ -58,7 +58,9 @@ labs(x="IMD decile where 10 is least deprived",
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-  coord_cartesian(ylim=c(0,15),expand = FALSE)
+
+  scale_y_continuous(breaks=c(0,3,6,9,12,15),expand = expansion(mult=0,add=0))
+  coord_cartesian(ylim=c(0,15),expand = FALSE,)
 
 
 Area_population <- ggplot(data=active_stack)+
@@ -70,7 +72,9 @@ Area_population <- ggplot(data=active_stack)+
   theme(
          axis.text.x = element_blank(),
 
-         axis.ticks = element_blank())
+         axis.ticks = element_blank())+
+
+  scale_colour_viridis_d("turbo")
 
 output <- list(RUC_summary,Area_population)
 
