@@ -78,6 +78,8 @@ Area_population <- ggplot(data=active_stack)+
 
   scale_colour_viridis_d(option = "turbo")
 
+shaper <- active_stack %>% group_by(RUC11) %>% summarise(mean=mean(IMD),mode=mode(IMD),median=median(IMD))
+
 output <- list(RUC_summary,Area_population)
 
 output
