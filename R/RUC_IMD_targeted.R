@@ -59,8 +59,10 @@ labs(x="IMD decile where 10 is least deprived",
     minor_breaks = FALSE)+
 
 
-  scale_y_continuous(breaks=c(0,3,6,9,12,15),expand = expansion(mult=0,add=0))
-  coord_cartesian(ylim=c(0,15),expand = FALSE,)
+  scale_y_continuous(breaks=c(0,3,6,9,12,15))+
+  coord_cartesian(ylim=c(0,15),expand = FALSE)+
+
+    scale_colour_viridis_d(option="turbo")
 
 
 Area_population <- ggplot(data=active_stack)+
@@ -74,7 +76,7 @@ Area_population <- ggplot(data=active_stack)+
 
          axis.ticks = element_blank())+
 
-  scale_colour_viridis_d("turbo")
+  scale_colour_viridis_d(option = "turbo")
 
 output <- list(RUC_summary,Area_population)
 
