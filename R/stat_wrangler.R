@@ -92,7 +92,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     rename(intercept="estimate_(Intercept)", gradient=estimate_IMD
            ) %>%
 
-    bind_cols(medarr$r.squared) %>% rename(R_squared="...10")
+    bind_cols(medarr$r.squared) %>% rename(R_squared="...10") %>%
 
     #calculate the intercepts
     mutate(median_line_1=intercept+gradient,
