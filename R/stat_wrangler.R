@@ -87,20 +87,19 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
                 values_from=c(estimate,
                               p.value,
                               std.error,
-                              statistic,
-                              r.squared)) %>%
+                              statistic)) %>%
     #rename the columns to avoid issues
-    rename(intercept="estimate_(Intercept)", gradient=estimate_IMD) %>%
+    rename(intercept="estimate_(Intercept)", gradient=estimate_IMD
+           ) %>%
+
+    bind_cols(medarr$r.squared) %>% rename(R_squared="...10")
 
     #calculate the intercepts
     mutate(median_line_1=intercept+gradient,
            median_line_10=intercept+10*gradient,
            flat_median_regression_differnce=median_line_10-median_line_1,
-           percentage_median_regression=flat_median_regression_differnce/median_line_1,
-           rsquared=medarr$r.squared)
+           percentage_median_regression=flat_median_regression_differnce/median_line_1)
 
-
-    mlem <- do(lm(median~IMD,data=ungroup(x=median_values,IMD)))
   #calculate the value of the linear model at each point
 
   #Meld all three point values
