@@ -74,7 +74,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   #calculate the median for each decile
   median_values <- long_data  %>% group_by(IMD,Emission_source) %>%
     summarise(median=median(emissions))
-
+  #Get the r2 value through shenanigans
+  medarr <- median_values %>% ungroup(IMD) %>% group_by(Emission_source) %>%
+    #get the tabulated stats from regression on the median data
+    do(glance(lm(median~IMD, data=.)))
   #create a linear model for use in the next part
   median_regression <- median_values %>% ungroup(IMD) %>% group_by(Emission_source) %>%
     #get the tabulated stats from regression on the median data
@@ -83,7 +86,9 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     pivot_wider(names_from=term,
                 values_from=c(estimate,
                               p.value,
-                              std.error,statistic)) %>%
+                              std.error,
+                              statistic,
+                              r.squared)) %>%
     #rename the columns to avoid issues
     rename(intercept="estimate_(Intercept)", gradient=estimate_IMD) %>%
 
@@ -91,8 +96,11 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     mutate(median_line_1=intercept+gradient,
            median_line_10=intercept+10*gradient,
            flat_median_regression_differnce=median_line_10-median_line_1,
-           percentage_median_regression=flat_median_regression_differnce/median_line_1)
+           percentage_median_regression=flat_median_regression_differnce/median_line_1,
+           rsquared=medarr$r.squared)
 
+
+    mlem <- do(lm(median~IMD,data=ungroup(x=median_values,IMD)))
   #calculate the value of the linear model at each point
 
   #Meld all three point values
