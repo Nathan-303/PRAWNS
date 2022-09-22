@@ -63,11 +63,6 @@ for ( index in c(1:3)){
       output_path = prawn_path)
 
 
-    data_summary <- data_flagger(crude_path) %>% tibble()
-    write.csv(x =  data_summary,
-              file = paste0(proc_tag,"/data_summary.csv")
-              )
-
     shape_test <- shapefile_checker(shapefile_path)
 
     ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),

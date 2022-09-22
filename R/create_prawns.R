@@ -82,7 +82,7 @@ create_prawns <- function(raster_path=FALSE,
   pollution_mean <- exact_extract(source_stack,transient,'mean')
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
   output <- tibble(poll_mean=pollution_mean,
-                   LSOA11CD=LSOA_shapefile$LSOA11CD
+                   LSOA11CD=LSOA_shapefile$LSOA11CD, expanse=expanse(LSOA_shapefile)
                    ) %>% unnest(poll_mean)
   #output a csv with minimum processing
   if(output_path!=FALSE){
