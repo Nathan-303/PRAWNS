@@ -82,7 +82,7 @@ create_welsh_prawns <- function(raster_path=FALSE,
   pollution_mean <- exact_extract(source_stack,transient,'mean')
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
   output <- tibble(poll_mean=pollution_mean,
-                   Data_Zone=DZ_shapefile$DataZone
+                   LSOA11CD=LSOA_shapefile$LSOA11CD
                    ) %>% unnest(poll_mean)
   #output a csv wit the minimum processing done if is.raw=true
   if (is_raw==TRUE){
@@ -98,9 +98,10 @@ create_welsh_prawns <- function(raster_path=FALSE,
 link <- read.csv("Data/wales_lookup.csv",skip = 2)
 refined_chunk <- read.csv("Data/WIMD.csv") %>% tibble() %>%
   #make a column with the deprivation decile
-  mutate(IMD=ntile(WIMD,10)) %>% inner_join(link,by=("LSOA.Name"))
+  mutate(IMD=ntile(WIMD,10),
+         LSOA.Name=trimws(LSOA.Name, which="right")) %>% inner_join(link,by=("LSOA.Name"))
 
-  prawns <- inner_join(output,refined_chunk,by="LSOA.Name")
+  prawns <- inner_join(output,refined_chunk,by="LSOA11CD")
 
 
   renamer <- function(data,last_two_digits_year,pollutant_data_name){
