@@ -48,8 +48,7 @@ for ( index in c(1:3)){
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #The base path remains unchanged and is used to fetch a raw copy of the prawn for processed versions
     raw_path <- paste0(proc_tag,"/PRAWN.csv")
-    #The crude path is used to output the unrefined prawn
-    crude_path <- paste0(proc_tag,"/crude_PRAWN.csv")
+
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
 
@@ -63,10 +62,7 @@ for ( index in c(1:3)){
       output_path = prawn_path)
 
 
-    data_summary <- data_flagger(crude_path) %>% tibble()
-    write.csv(x =  data_summary,
-              file = paste0(proc_tag,"/data_summary.csv")
-              )
+
 
     shape_test <- shapefile_checker(shapefile_path)
 
