@@ -329,9 +329,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added a targeted function to get the median of the datsa without London, map it to RUC and calculate average IMD for each RUC
 
+	Got r2 values for the median
+
+	Calculated area for each LSOA
+
 0.8.2
 
-	Got r2 values for the median
+	
 	
 0.9.0 
 
