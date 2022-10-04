@@ -335,7 +335,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 0.8.2
 
+	Made a section for just London
 	
+	Make graphs with only th median lines plotted
 	
 0.9.0 
 
