@@ -28,7 +28,7 @@ test <- ggplot(data=area_rank)+
       y=token,
       colour=stat)+
 
-  geom_line()+
+  geom_point()+
 
   geom_smooth(method="lm",
               formula=y~x,
