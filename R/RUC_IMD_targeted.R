@@ -80,7 +80,9 @@ Area_population <- ggplot(data=active_stack)+
 
 shaper <- active_stack %>% group_by(RUC11) %>% summarise(mean=mean(IMD),mode=mode(IMD),median=median(IMD))
 
-output <- list(RUC_summary,Area_population)
+dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
+
+output <- list(RUC_summary,Area_population,dec_histo)
 
 output
 }

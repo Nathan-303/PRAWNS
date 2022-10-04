@@ -80,7 +80,9 @@ Area_population <- ggplot(data=active_stack)+
 
          axis.ticks = element_blank())
 
-output <- list(RUC_summary,Area_population)
+dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
+
+output <- list(RUC_summary,Area_population,dec_histo)
 
 output
 }

@@ -157,6 +157,10 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
   ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.png"),
          plot=RUC_breakdown[[2]],
          device="png")
+
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.png"),
+         plot=RUC_breakdown[[3]],
+         device="png")
 #Facet the mean and median pollutantlevels by city
 city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
