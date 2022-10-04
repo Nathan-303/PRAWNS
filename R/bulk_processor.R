@@ -113,7 +113,7 @@ for ( index in c(1:4)){
     print("Creation of prawns where na values are set to 0 successful")
   }
   if (index==4){
-    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/Londonless")
+    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/London_only")
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
