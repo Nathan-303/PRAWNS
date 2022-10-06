@@ -36,7 +36,7 @@ test <- ggplot(data=area_rank)+
               show.legend=FALSE)+
 
   labs(x="Average deprivation rank",
-       y=y=expression(paste0("Average ",pollutant, "emissions in ",year,"/tonnes ",km^2)),
+       y=expression(paste0("Average ",pollutant, "emissions in ",year,"/tonnes ",km^2)),
        title=paste0("Deprivation vs ",pollutant, "emission, grouped by ",area_type))
 
 
