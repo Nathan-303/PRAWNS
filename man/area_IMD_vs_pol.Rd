@@ -5,7 +5,7 @@
 \title{Plots the average IMD vs the average NOx for geographical areas (cities or
 county/UA)}
 \usage{
-area_IMD_vs_pol(prawn_path, pollutant, area_type)
+area_IMD_vs_pol(prawn_path, pollutant, area_type, year)
 }
 \arguments{
 \item{prawn_path}{The filepath for the csv to work from}

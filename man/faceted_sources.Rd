@@ -4,7 +4,7 @@
 \alias{faceted_sources}
 \title{A function for faceting the sources of a pollutant}
 \usage{
-faceted_sources(prawn_path, pollutant)
+faceted_sources(prawn_path, pollutant, year)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used, should be quoted}

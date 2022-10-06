@@ -9,7 +9,7 @@
 #'
 #'@export
 
-area_IMD_vs_pol <- function(prawn_path,pollutant,area_type){
+area_IMD_vs_pol <- function(prawn_path,pollutant,area_type,year){
   if(area_type=="County/UA"){
 active_stack <- read.csv(prawn_path) %>% group_by(Area)
   }else{

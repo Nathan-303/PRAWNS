@@ -13,7 +13,7 @@
 #' faceted_sources()
 #'
 
-faceted_sources <- function(prawn_path,pollutant){
+faceted_sources <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>% mutate(point_sources=Total-Total_no_points)%>%
   pivot_longer(

@@ -150,7 +150,8 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
 
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
-                                 pollutant=pollutant)
+                                 pollutant=pollutant,
+                                 year=year)
 
   ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.png"),
          plot=source_facets,
@@ -191,7 +192,8 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
 #Plot the average pollutant vs average IMD grouped by county/ua
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                pollutant = pollutant,
-                               area_type = "Area")
+                               area_type = "Area",
+                               year=year)
   ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by area.png"),
        plot=avg_imd_pol,
        device="png")
