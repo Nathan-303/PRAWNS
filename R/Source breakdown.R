@@ -61,7 +61,7 @@ source_summary <- ggplot(temp)+
   facet_wrap(~stat)+
   
   labs(x="IMD decile where 10 is least deprived",
-       y=expression(paste0("Average NOx emissions/tonnes ",km^2)),
+       y=expression(paste0("Average NOx emissions in ",year,"/tonnes ",km^2)),
        linetype="Dataset",
        colour="Emission source")+
   
@@ -86,11 +86,6 @@ source_summary <- ggplot(temp)+
   scale_colour_viridis_d(option="turbo")
 
 source_summary
-
-ggsave(filename="Outputs/Plots/NOx/NOX_source_summary_2019_turbopalette.png",
-       plot=source_summary,
-       units = "mm",height = 339,width=480,
-       device="png")
 
 }
              
