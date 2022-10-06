@@ -31,44 +31,48 @@ output <- ggplot(data=long_chunk
                           )+
 
   aes(x=IMD,
-      y=emissions
-      )+
+      y=emissions)+
 
   facet_wrap(~Emission_source,
              scale="free_y"
              )+
 
-  scale_x_continuous(
-               breaks=c(1:10),
-               expand = expansion(mult=0,add=0),
-               minor_breaks = FALSE)+
-
   geom_line(stat="summary",
-            aes(linetype="Mean"),
+            aes(linetype="Mean",size=1),
             fun=mean,
-            na.rm=TRUE
+            na.rm=TRUE, colour="blue"
   )+
 
 
   geom_smooth(method="lm",
               formula=y~x,
               se=FALSE,
-              show.legend=FALSE,
-              aes(linetype="Mean"),
-              na.rm = TRUE)+
+              aes(linetype="Mean",size=2),
+              na.rm = TRUE,colour="blue")+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
-                aes(linetype="Median"),
-                size =1,
+                aes(linetype="Median",size=2),
                 formula=y~x,
-                na.rm=TRUE)+
+                na.rm=TRUE,colour="black")+
+
+
 
   #Plot a line through the medians for each decile
   geom_line(stat="summary",
             fun=median,
-            aes(linetype="Median"),
-            na.rm=TRUE)+
+            aes(linetype="Median",size=1),
+            na.rm=TRUE,colour="black")+
+
+  scale_x_continuous(
+    breaks=c(1:10),
+    expand = expansion(mult=0,add=0),
+    minor_breaks = FALSE)+
+
+  scale_size_identity(name= "Line plotted",
+                      breaks=c(1,2),
+                      labels=c("Average points","Linear regression"),
+                      guide="legend")+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
