@@ -360,13 +360,16 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Improved labelling of faceted_sources
 
 	Altered bulk processor to properly distinguish between county/ua and city
+
+	Improved labelling of ruc imd
+
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
 		London is excluded
 	
 0.9.0 
 
-	[End of the beginning] Make all the planned qol changes and improvements so it's in a releasable state
+	[An unsettling aesthetic] Improved graph labelling and formatting
 
 	Optimisation of is_raw
 
