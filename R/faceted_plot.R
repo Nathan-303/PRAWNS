@@ -63,7 +63,11 @@ geom_smooth(data=read.csv(prawn_path) %>% tibble %>% dplyr::select(-c(TCITY15NM,
 
   scale_colour_manual(name="Colour",
                       breaks = c('Mean','Median','UK mean'),
-                      values=c('Mean'='blue','Median'='red','UK mean'='black'))
+                      values=c('Mean'='blue','Median'='red','UK mean'='black'))+
+
+  labs(x="IMD decile where 10 is least deprived",
+       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^2))
+
 #Add on the facets conditional to the group variable
 if (group=="TCITY15NM"){
   City_profile <- City_profile+ facet_wrap(~TCITY15NM,scales="free_y")
