@@ -72,7 +72,7 @@ source_summary <- ggplot(temp)+
   facet_wrap(~stat)+
   
   labs(x="IMD decile where 10 is least deprived",
-       y=expression(paste0("Average ",pollutant, "emissions in ",year,"/tonnes ",km^2)),
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        linetype="Dataset",
        colour="Emission source")+
   
