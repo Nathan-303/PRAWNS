@@ -39,7 +39,7 @@ temp = bind_rows(
   london_free %>% 
     mutate(justLondon = "Without London")
 ) %>% 
-  select(decile = Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.,
+  dplyr::select(decile = IMD,
          NOx_emissions,
          justLondon,
          Emission_source) %>% 

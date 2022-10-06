@@ -76,6 +76,7 @@ for ( index in c(1:4)){
 
     ggsave(filename= paste0(proc_tag,"/medmeancomp.png"),
            plot=stat_facet,
+           units = "mm",height = 339,width=480,
            device="png")
 
 
