@@ -14,7 +14,8 @@
 #'
 
 RUC_IMD <- function(prawn_path,
-                    pollutant){
+                    pollutant,
+                    year){
 #Read in the data with NA valuse changed to unclassified, raising red flags if necessary
 active_stack <-read.csv(prawn_path) %>%
   replace_na(list(RUC11="Unclassified"))
@@ -59,8 +60,8 @@ RUC_summary <- ggplot(temp)+
             )+
 
 labs(x="IMD decile where 10 is least deprived",
-     y=paste0("Average ",pollutant," emissions/tonnes km^2"),
-     title=paste0(pollutant," emissions by RUC classification 2019"),
+     y=y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+     title=paste0(pollutant," emissions by RUC classification",year),
      linetype="Metric used",
      colour= "RUC classification")+
 

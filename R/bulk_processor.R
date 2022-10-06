@@ -159,7 +159,8 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
 
 #Make and save a graph showing IMD based inequality for each RUC code
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
-                         pollutant=pollutant)
+                         pollutant=pollutant,
+                         year=year)
 
   ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.png"),
          plot=RUC_breakdown[[1]],
