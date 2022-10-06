@@ -61,7 +61,7 @@ source_summary <- ggplot(temp)+
   facet_wrap(~stat)+
   
   labs(x="IMD decile where 10 is least deprived",
-       y="Average NOx emissions/tonnes km^2",
+       y=expression(paste0("Average NOx emissions/tonnes ",km^2)),
        linetype="Dataset",
        colour="Emission source")+
   
