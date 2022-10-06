@@ -1,13 +1,6 @@
-active_stack <- Stack_seeker("NOx",2019) %>%   replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
-                                                               "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
-                                                               "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
-                                                               ,"Total_no_points"=0,"Waste treatment and disposal"=0)) %>% 
-  
-  #mutate in the columns you want (removing natural NOx)
-  mutate("Point sources" =Total-Total_no_points,
-         "Other sources"=Solvents+Natural+Agricultural+`Waste treatment and disposal`+`Energy production`+`Industrial combustion`+`Industrial production`+`Point sources`) %>% 
-  tibble()
+side_by_side_stats() <- function(pollutant,year,prawn_path){
 
+active_stack <- read.csv(prawn_path)
 
 #Make the data long to eneble grouping by source
 long_stack <- active_stack %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`) %>% 
@@ -98,4 +91,6 @@ ggsave(filename="Outputs/Plots/NOx/NOX_source_summary_2019_turbopalette.png",
        plot=source_summary,
        units = "mm",height = 339,width=480,
        device="png")
+
+}
              
