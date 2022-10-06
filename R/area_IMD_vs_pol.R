@@ -45,7 +45,7 @@ test <- ggplot(data=area_rank)+
 
   labs(x="Mean deprivation decile",
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-       title=paste0("Deprivation vs ",pollutant, "emission, grouped by ",area_type))
+       title=paste0("Deprivation vs ",pollutant, " emission, grouped by ",area_type))
 
 
 test
