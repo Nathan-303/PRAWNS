@@ -38,6 +38,11 @@ output <- ggplot(data=long_chunk
              scale="free_y"
              )+
 
+  scale_x_continuous(
+               breaks=c(1:10),
+               expand = expansion(mult=0,add=0),
+               minor_breaks = FALSE)+
+
   geom_line(stat="summary",
             aes(linetype="Mean"),
             fun=mean,
@@ -66,7 +71,7 @@ output <- ggplot(data=long_chunk
             na.rm=TRUE)+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
-       y=paste0(pollutant," emissions"),
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=paste0(pollutant," emissions faceted by source")
   )
  output
