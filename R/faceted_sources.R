@@ -19,7 +19,7 @@ long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble
   pivot_longer(
     cols=c("Agricultural","Domestic combustion","Energy production",
            "Industrial combustion","Industrial production","Natural",
-           "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
+           "Other transport and mobile machinery","Road transport","Solvents","Total"
            ,"Waste treatment and disposal","point_sources"),
     names_to = "Emission_source",
     values_to = "emissions")
