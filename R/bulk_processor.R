@@ -70,6 +70,15 @@ for ( index in c(1:4)){
            plot=shape_test,
            device="png")
 
+    stat_facet <- side_by_side_stats(pollutant=pollutant,
+                                    prawn_path=prawn_path,
+                                    year=2020)
+
+    ggsave(filename= paste0(proc_tag,"/medmeancomp.png"),
+           plot=stat_facet,
+           device="png")
+
+
     print("Basic PRAWN creation and data tests successful")
   }
 
@@ -201,6 +210,8 @@ pie <- gradient_bar(pollutant = pollutant,
  ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.png"),
        plot=pie,
        device="png")
+
+
 
  print(paste0("Graphing pass ",index," of 3 successful"))
 #close the for loop
