@@ -192,11 +192,19 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
 #Plot the average pollutant vs average IMD grouped by county/ua
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                pollutant = pollutant,
-                               area_type = "Area",
+                               area_type = "County/UA",
                                year=year)
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by area.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.png"),
        plot=avg_imd_pol,
        device="png")
+
+  avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
+                                 pollutant = pollutant,
+                                 area_type = "City",
+                                 year=year)
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.png"),
+         plot=avg_imd_pol,
+         device="png")
 
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
