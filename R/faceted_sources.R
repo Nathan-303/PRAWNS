@@ -38,36 +38,40 @@ output <- ggplot(data=long_chunk
              )+
 
   geom_line(stat="summary",
-            aes(linetype="Mean",size=1),
+            aes(colour="Mean",size=1),
             fun=mean,
-            na.rm=TRUE, colour="blue"
+            na.rm=TRUE
   )+
 
 
   geom_smooth(method="lm",
               formula=y~x,
               se=FALSE,
-              aes(linetype="Mean",size=2),
-              na.rm = TRUE,colour="blue")+
+              aes(colour="Mean",size=2),
+              na.rm = TRUE)+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
-                aes(linetype="Median",size=2),
+                aes(colour="Median",size=2),
                 formula=y~x,
-                na.rm=TRUE,colour="black")+
+                na.rm=TRUE)+
 
 
 
   #Plot a line through the medians for each decile
   geom_line(stat="summary",
             fun=median,
-            aes(linetype="Median",size=1),
-            na.rm=TRUE,colour="black")+
+            aes(colour="Median",size=1),
+            na.rm=TRUE)+
 
   scale_x_continuous(
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
+
+  scale_colour_manual(breaks=c("blue","black"),
+                      labels=c("Median","Mean"))+
+
 
   scale_size_identity(name= "Line plotted",
                       breaks=c(1,2),
