@@ -69,8 +69,7 @@ output <- ggplot(data=long_chunk
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-  scale_colour_manual(breaks=c("blue","black"),
-                      labels=c("Median","Mean"))+
+  scale_colour_manual(values = c("Median"="blue","Mean"="black"), name= "Average used")+
 
 
   scale_size_identity(name= "Line plotted",
