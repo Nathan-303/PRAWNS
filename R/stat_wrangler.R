@@ -40,6 +40,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     group_by(Emission_source) %>%
     mutate(emissions=replace_na(emissions,0))
 
+  square_mine <-long_data %>%
+    #get the rsquared
+    do(glance(lm(emissions~IMD, data=.)))
+
   #get the summary stats for deciles 1 and 10
   point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% c(1,10)) %>%
     #add grouping for summarise
@@ -92,7 +96,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     rename(intercept="estimate_(Intercept)", gradient=estimate_IMD
            ) %>%
 
-    bind_cols(medarr$r.squared) %>% rename(R_squared="...10") %>%
+    bind_cols(medarr$r.squared) %>% rename(median_R_squared="...10") %>%
 
     #calculate the intercepts
     mutate(median_line_1=intercept+gradient,
@@ -104,10 +108,13 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   #Meld all three point values
   output <- inner_join(point_summary,mean_regression,by="Emission_source") %>%
-             inner_join(median_regression,by="Emission_source")
+             inner_join(median_regression,by="Emission_source") %>%
+             bind_cols(square_mine$r.squared)
 
   #
 
   output
+
+  square_mine
 }
 
