@@ -369,7 +369,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		r2 values
 		p values
 
-	Made colour bars in the legend chunkier (WIP)
+	Made colour bars in the legend for sidebysidestats  chunkier
 
 	Ported gradient histogram (WIP)
 

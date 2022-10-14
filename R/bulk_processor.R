@@ -212,8 +212,8 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
               )
   statnames <- c("Mean regression model","Median regression model","difference between deciles")
   for (position in c(1:3)){
-  write.csv(x=numbers[index],
-            file=paste0(proc_tag,"/",statnames[index],".csv"))
+  write.csv(x=numbers[position],
+            file=paste0(proc_tag,"/",statnames[position],".csv"))
 }
 
 pie <- gradient_bar(pollutant = pollutant,
