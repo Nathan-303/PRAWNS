@@ -83,7 +83,9 @@ Area_population <- ggplot(data=active_stack)+
 
 dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
 
-output <- list(RUC_summary,Area_population,dec_histo)
+dec_histo2 <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11,scale="free_y")+geom_bar()
+
+output <- list(RUC_summary,Area_population,dec_histo,dec_histo2)
 
 output
 }
