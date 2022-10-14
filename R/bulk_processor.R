@@ -210,10 +210,11 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
-
-  write.csv(x=numbers,
-            file=paste0(proc_tag,"/difference between deciles.csv"))
-
+  statnames <- c("Mean regression model","Median regression model","difference between deciles")
+  for (position in c(1:3)){
+  write.csv(x=numbers[index],
+            file=paste0(proc_tag,"/",statnames[index],".csv"))
+}
 
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
