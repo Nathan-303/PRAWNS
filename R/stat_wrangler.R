@@ -117,7 +117,9 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   #
 
-  output
+  bigout <- list(mean_reg_mod,med_reg_mod,output)
+
+  bigout
 
 
 }
