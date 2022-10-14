@@ -46,7 +46,7 @@ output <- ggplot(data=long_chunk
              )+
 
   geom_line(stat="summary",
-            aes(colour="Mean",size=1),
+            aes(colour="Mean",linetype="Average points"),
             fun=mean,
             na.rm=TRUE
   )+
@@ -55,12 +55,12 @@ output <- ggplot(data=long_chunk
   geom_smooth(method="lm",
               formula=y~x,
               se=FALSE,
-              aes(colour="Mean",size=2),
+              aes(colour="Mean",linetype="Linear regression"),
               na.rm = TRUE)+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
-                aes(colour="Median",size=2),
+                aes(colour="Median",linetype="Linear regression"),
                 formula=y~x,
                 na.rm=TRUE)+
 
@@ -69,7 +69,7 @@ output <- ggplot(data=long_chunk
   #Plot a line through the medians for each decile
   geom_line(stat="summary",
             fun=median,
-            aes(colour="Median",size=1),
+            aes(colour="Median",linetype="Average points"),
             na.rm=TRUE)+
 
   scale_x_continuous(
@@ -77,18 +77,20 @@ output <- ggplot(data=long_chunk
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-  scale_colour_manual(values = c("Median"="blue","Mean"="black"), name= "Average used")+
+  scale_colour_manual(values = c("Median"="blue","Mean"="orange"), name= "Average used")+
 
 
-  scale_size_identity(name= "Line plotted",
-                      breaks=c(1,2),
-                      labels=c("Average points","Linear regression"),
-                      guide="legend")+
+  scale_linetype_manual(name= "Line plotted", values =c("Linear regression"=1,"Average points"=2)
+                      # breaks=c(1,2),
+                      # labels=c("Average points","Linear regression"),
+                      # guide="legend"
+                      )+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=paste0(pollutant," emissions faceted by source")
   )+
   theme(legend.position = "bottom")
+
  output
 }
