@@ -15,17 +15,25 @@
 
 faceted_sources <- function(prawn_path,pollutant,year){
 
-long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>% mutate(point_sources=Total-Total_no_points)%>%
+long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
+
+  mutate(point_sources=Total-Total_no_points)%>%
+
+  rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
+         `Waste treatment \nand disposal`=`Waste treatment and disposal`,
+         ) %>%
+
   pivot_longer(
     cols=c("Agricultural","Domestic combustion","Energy production",
            "Industrial combustion","Industrial production","Natural",
-           "Other transport and mobile machinery","Road transport","Solvents","Total"
-           ,"Waste treatment and disposal","point_sources"),
+           `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
+           ,`Waste treatment \nand disposal`,"Point sources"),
     names_to = "Emission_source",
     values_to = "emissions")
+
 long_chunk$Emission_source <- as.factor(long_chunk$Emission_source)
 
-long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
+long_chunk <- long_chunk %>% group_by(Emission_source) %>%   mutate(Emission_source=fct_reorder(Emission_source,emissions,median,.desc=TRUE))
 
 output <- ggplot(data=long_chunk
                           )+
@@ -33,7 +41,7 @@ output <- ggplot(data=long_chunk
   aes(x=IMD,
       y=emissions)+
 
-  facet_wrap(~Emission_source,
+  facet_wrap(~fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE),
              scale="free_y"
              )+
 
