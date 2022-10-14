@@ -30,9 +30,9 @@ temp <- active_stack %>%
         #group by the classification for graphing
          group_by(Classification)
 
-RUC_linear_model <- %>% temp
+RUC_linear_model <- temp %>%
   #get the rsquared
-  do(glance(lm(Emissions~IMD, data=.)))
+  do(glance(lm(Emissions~decile, data=.)))
 
 
 RUC_summary <- ggplot(temp)+
