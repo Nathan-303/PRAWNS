@@ -40,7 +40,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     group_by(Emission_source) %>%
     mutate(emissions=replace_na(emissions,0))
 
-  square_mine <-long_data %>%
+  mean_reg_mod <-long_data %>%
     #get the rsquared
     do(glance(lm(emissions~IMD, data=.)))
 
@@ -104,6 +104,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
            flat_median_regression_differnce=median_line_10-median_line_1,
            percentage_median_regression=flat_median_regression_differnce/median_line_1)
 
+
+    med_reg_mod <- median_values %>% ungroup(IMD) %>% group_by(Emission_source) %>%
+      #get the rsquared
+      do(glance(lm(median~IMD, data=.)))
   #calculate the value of the linear model at each point
 
   #Meld all three point values
@@ -115,6 +119,6 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   output
 
-  square_mine
+
 }
 
