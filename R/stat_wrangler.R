@@ -112,8 +112,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   #Meld all three point values
   output <- inner_join(point_summary,mean_regression,by="Emission_source") %>%
-             inner_join(median_regression,by="Emission_source") %>%
-             bind_cols(square_mine$r.squared)
+             inner_join(median_regression,by="Emission_source")
 
   #
 
