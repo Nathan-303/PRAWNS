@@ -33,7 +33,7 @@ output <- ggplot(data=long_chunk
   aes(x=IMD,
       y=emissions)+
 
-  facet_wrap(~Emission_source,
+  facet_wrap(~fct_reorder(Emission_source,Emissions,.desc=TRUE)),
              scale="free_y"
              )+
 
