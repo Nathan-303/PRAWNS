@@ -30,6 +30,10 @@ temp <- active_stack %>%
         #group by the classification for graphing
          group_by(Classification)
 
+RUC_linear_model <- %>% temp
+  #get the rsquared
+  do(glance(lm(Emissions~IMD, data=.)))
+
 
 RUC_summary <- ggplot(temp)+
   aes(x=decile,
@@ -85,7 +89,7 @@ dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
 
 dec_histo2 <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11,scale="free_y")+geom_bar()
 
-output <- list(RUC_summary,Area_population,dec_histo,dec_histo2)
+output <- list(RUC_summary,Area_population,dec_histo,dec_histo2,RUC_linear_model)
 
 output
 }
