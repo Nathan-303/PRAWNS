@@ -363,24 +363,28 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved labelling of ruc imd
 
-0.8.6
+0.8.6 (Uploaded 14/10/22)
 
-	Improved statistical measure logging (WIP)
+	Improved statistical measure logging
 		r2 values
 		p values
 
 	Made colour bars in the legend for sidebysidestats  chunkier
 
+
+0.8.7 (uploaded 14/10/22)
+
+	calculated p and r2 values for counties/UAs
+
+	free_y variant of RUC population
+
+	Split faceted source text labels into multiple lines so it reads well
+
+	Organise the facets for source sectors
+
+0.8.8
+
 	Ported gradient histogram (WIP)
-
-	calculated p and r2 values for counties/UAs (WIP)
-
-	Organise the facets for source sectors(WIP)
-
-	free_y variant of RUC population (WIP)
-
-
-
 
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
