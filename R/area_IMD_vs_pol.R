@@ -50,5 +50,10 @@ test <- ggplot(data=area_rank)+
 
 test
 
+model <- area_rank %>%  do(tidy(lm(token~dep, data=.)))
+
+output <- list(test,model)
+
+output
 
 }
