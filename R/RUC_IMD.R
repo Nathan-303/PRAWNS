@@ -75,7 +75,9 @@ labs(x="IMD decile where 10 is least deprived",
   scale_x_continuous(
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)
+    minor_breaks = FALSE)+
+
+  scale_colour_viridis_d(option = "turbo")
 
 Area_population <- ggplot(data=active_stack)+
 
