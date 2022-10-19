@@ -384,7 +384,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 0.8.8
 
-	Ported gradient histogram (WIP)
+	Ported gradient histogram as a script
+
+	Included model analysis for county/ua
+
+
+
+	Added new lines to the RUC plot legends to improve sizing (WIP)
 
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
@@ -398,7 +404,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Check and improve all vignettes
 
-	Include units in graph axis
+	Include units in graph axis (0.8.4)
+
+	Calculated and signposted p and r2 values
+		source sectors (0.8.6)
+		for counties/UAs (0.8.7)
+		for average county (0.8.8)
 
 
 Minor details:
