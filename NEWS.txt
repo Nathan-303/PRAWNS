@@ -382,15 +382,23 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Organise the facets for source sectors
 
-0.8.8
+0.8.8 (Uploaded 19/10/22)
 
-	Ported gradient histogram as a script
+	Ported gradient histogram function
 
 	Included model analysis for county/ua
 
+0.8.9 (Uploaded 19/10/22)
+ 
+	Added new lines to the RUC plot legends to improve sizing
 
+	Changed RUC plot to turbo
 
-	Added new lines to the RUC plot legends to improve sizing (WIP)
+0.8.10
+
+	Minor tweaks to area summary
+
+	Added histogram of gradients to bulk processor (WIP)
 
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
@@ -400,9 +408,6 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	[An unsettling aesthetic] Improved graph labelling and formatting
 
-	Optimisation of is_raw
-
-	Check and improve all vignettes
 
 	Include units in graph axis (0.8.4)
 
@@ -411,10 +416,16 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		for counties/UAs (0.8.7)
 		for average county (0.8.8)
 
-
+	Included histogram of area and city gradients in bulk processor
 Minor details:
 
+	Improve internal folder structure 
 
+	Tag for rendering only certain things e.g. londonless, na=0, london only
+
+	Optimisation of is_raw
+
+	Check and improve all vignettes
 
 Planned content updates:
 

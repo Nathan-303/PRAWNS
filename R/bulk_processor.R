@@ -208,6 +208,11 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
+area_histogram <- plot_area_gradients{prawn_path=prawn_path}
+
+ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties/UAs.png"),
+       plot=area_histogram,
+       device="png")
 
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
@@ -221,6 +226,11 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
 
+  area_histogram <- plot_area_gradients{prawn_path=prawn_path}
+
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.png"),
+         plot=area_histogram,
+         device="png")
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
