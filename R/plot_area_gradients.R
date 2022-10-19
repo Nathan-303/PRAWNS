@@ -1,4 +1,4 @@
-plot_couty_gradients <- function(prawn_path){
+plot_area_gradients <- function(prawn_path){
 
 raw <- read.csv(prawn_path,
                 row.names=1,
