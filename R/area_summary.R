@@ -55,7 +55,7 @@ area_summary <- function(prawn_path,
     Decile_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size=0.05)+
       aes(fill =IMD,geometry=geometry)+
       scale_fill_viridis_d()+
-      labs(title=paste0(pollutant," emissions by IMD decile"))+
+      labs(title=paste0("IMD distribution"))+
       theme(axis.text.x = element_blank(),
             axis.text.y = element_blank(),
             axis.ticks = element_blank())+
@@ -153,7 +153,7 @@ area_summary <- function(prawn_path,
       aes(x=Total,group=IMD,colour=IMD)+
       scale_colour_viridis_d(option="turbo")+
       stat_ecdf(
-      )+coord_cartesian(xlim = c(0, 0.99))+
+      )+
       labs(x= paste0(pollutant," emissions"),
            y= paste0("Fraction exposed to at least this much ",pollutant),
            title=paste0(" Cumulative distribution  of ",pollutant," emissions"))+
