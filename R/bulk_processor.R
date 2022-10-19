@@ -179,6 +179,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          device="png")
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
+
 #Facet the mean and median pollutantlevels by city
 city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
@@ -192,6 +193,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
 area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
                               pollutant = pollutant)
+
   ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.png"),
          plot=area_facets,
          device="png")
@@ -208,9 +210,10 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
-area_histogram <- plot_area_gradients{prawn_path=prawn_path}
 
-ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties/UAs.png"),
+area_histogram <- plot_area_gradients(prawn_path=prawn_path)
+
+ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.png"),
        plot=area_histogram,
        device="png")
 
@@ -226,7 +229,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
 
-  area_histogram <- plot_area_gradients{prawn_path=prawn_path}
+  area_histogram <- plot_area_gradients(prawn_path=prawn_path)
 
   ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.png"),
          plot=area_histogram,
