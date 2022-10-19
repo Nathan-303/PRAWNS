@@ -1,3 +1,13 @@
+#' Create a histogram showign the gradients for every county/ua or city
+
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+
+#'
+#' @keywords faceted, sources
+#' @export
+#' @examples
+#' plot_area_gradients()
 plot_area_gradients <- function(prawn_path){
 
 raw <- read.csv(prawn_path,
