@@ -17,7 +17,10 @@ RUC_IMD <- function(prawn_path,
                     pollutant,
                     year){
 #Read in the data with NA valuse changed to unclassified, raising red flags if necessary
-active_stack <-read.csv(prawn_path) %>% mutate(across(RUC11,str_replace_all,c("Rural town and fringe n a sparse setting","Rural village and dispersed in a sparse setting",c("The moon","The sun"))) %>%
+active_stack <-read.csv(prawn_path) %>% mutate(across(RUC11,str_replace_all,c(
+  "Rural town and fringe in a sparse setting"="Rural town and fringe \nin a sparse setting",
+  "Rural village and dispersed in a sparse setting"= "Rural village and dispersed \nin a sparse setting",
+  "Urban city and town in a sparse setting"="Urban city and town \nin a sparse setting")))%>%
   replace_na(list(RUC11="Unclassified"))
 
 #Make the data long to enable grouping by source
