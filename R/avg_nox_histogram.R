@@ -22,7 +22,9 @@ avg_nox_histogram <- function(prawn_path){
     
     scale_x_continuous(limits = c(0,50),expand=c(0,0))
    
-  histo
+  caveat <- nrow(raw %>% filter(Total>=50))
+  
+  output <- list(histo,caveat)
+  
 }
 
-nrow(raw %>% filter(Total>=50))
