@@ -400,19 +400,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added histogram of gradients to bulk processor
 
-0.8.11
+0.8.11 (uploaded 20/10/22)
 
 	Adapted histogram of gradients to work for cities as well as counties/uas
 
 	Added a histogram of NOx emmisions function and worked it into bulk_processor
 
 	Trialled saving a TIFF file
-
-0.8.12
-
-	Added mean and median to NOx histogram
-
-	
 
 0.9.0 
 
@@ -428,6 +422,16 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Included histogram of area and city gradients in bulk processor (0.8.11)
 
 	Made a histogram for the average emission per LSOA (0.8.11)
+
+0.10.0
+
+	[Shifting faces] Beautiful graphs, and any other things that come up
+
+	Function for saving graphs to streamline bulk_processor and allow centralised edits to saving format
+		Set all graphs to the standard sizes
+		tiff or png format saving
+
+	Formatted within graphs to optimise text size and white space
 
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted

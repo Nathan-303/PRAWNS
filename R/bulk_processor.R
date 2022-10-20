@@ -20,6 +20,8 @@
 #'
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
+#' @param dpi The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process
+#'
 #' @keywords faceted, sources
 #' @export
 #' @examples
@@ -31,7 +33,8 @@ bulk_processor <- function(raster_path,
                            pollutant_data_name,
                            year,
                            pollutant,
-                           iteration=as.character(packageVersion("PRAWNS"))
+                           iteration=as.character(packageVersion("PRAWNS")),
+                           dpi=600
                            ){
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
@@ -155,7 +158,7 @@ noxxogram <- avg_nox_histogram(prawn_path)
          width=8.3,
          height=4.7,
          units = "cm",
-         res=600,
+         dpi = dpi,
          device="tiff")
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,

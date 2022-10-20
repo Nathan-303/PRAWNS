@@ -11,7 +11,8 @@ bulk_processor(
   pollutant_data_name,
   year,
   pollutant,
-  iteration = as.character(packageVersion("PRAWNS"))
+  iteration = as.character(packageVersion("PRAWNS")),
+  dpi = 600
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ compatible with folders containing multiple raster layers}
 \item{year}{the year the data is from, used to standardise column names, currently doesnt work for years before 2000}
 
 \item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names}
+
+\item{dpi}{The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process}
 
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
