@@ -8,13 +8,17 @@
 #' @export
 #' @examples
 #' plot_area_gradients()
-plot_area_gradients <- function(prawn_path){
+plot_area_gradients <- function(prawn_path,area_type){
 
 raw <- read.csv(prawn_path,
                 row.names=1,
                 check.names=FALSE)
+if (area_type == "County/UA"{
+  refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,Area) %>% group_by(Area)
+  }else{
+    refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,TCITY15NM)
+}
 
-refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,Area) %>% group_by(Area)
 
 
 coeffs <- refined %>%
