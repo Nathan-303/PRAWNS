@@ -394,18 +394,26 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Changed RUC plot to turbo
 
-0.8.10
+0.8.10 (Uploaded 19/10/22)
 
 	Minor tweaks to area summary
 
-	Added histogram of gradients to bulk processor (WIP)
+	Added histogram of gradients to bulk processor
 
+0.8.11
 
+	Adapted histogram of gradients to work for cities as well as counties/uas
 
-	Added refined_things to bulk_processor	
-		Graphs with only the median lines plotted
-		London is excluded
+	Added a histogram of NOx emmisions function and worked it into bulk_processor
+
+	Trialled saving a TIFF file
+
+0.8.12
+
+	Added mean and median to NOx histogram
+
 	
+
 0.9.0 
 
 	[Slaying the hydra] Many housekeeping upgrades such as legend formatting and additions such as additional stats, functions and graphs
@@ -417,7 +425,14 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 		for counties/UAs (0.8.7)
 		for average county (0.8.8)
 
-	Included histogram of area and city gradients in bulk processor
+	Included histogram of area and city gradients in bulk processor (0.8.11)
+
+	Made a histogram for the average emission per LSOA (0.8.11)
+
+	Added refined_things to bulk_processor	
+		Graphs with only the median lines plotted
+		London is excluded
+	
 Minor details:
 
 	Improve internal folder structure 
@@ -427,6 +442,10 @@ Minor details:
 	Optimisation of is_raw
 
 	Check and improve all vignettes
+
+	Histogram of average nox is cropped arbitrarily at 50
+
+	Figure out why city gradient histogram is horrifically mangled
 
 Planned content updates:
 

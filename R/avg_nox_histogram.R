@@ -26,5 +26,7 @@ avg_nox_histogram <- function(prawn_path){
   
   output <- list(histo,caveat)
   
+  output
+  
 }
 
