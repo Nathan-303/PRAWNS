@@ -148,6 +148,14 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
          plot=source_breakdown,
          device="png")
 
+noxxogram <- avg_nox_histogram(prawn_path)
+
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.tiff"),
+         plot=noxxogram[[2]],
+         width=8.3,
+         height=4.7,
+         units = "cm"
+         device="tiff")
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
