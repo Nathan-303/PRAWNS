@@ -22,6 +22,7 @@
 #'
 #' @param dpi The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process
 #'
+#' @param file_format The file format to save in, should be all lower case and in quotes, as it's piped straight into a ggsave function
 #' @keywords faceted, sources
 #' @export
 #' @examples
@@ -35,7 +36,7 @@ bulk_processor <- function(raster_path,
                            pollutant,
                            iteration=as.character(packageVersion("PRAWNS")),
                            dpi=600
-                           ){
+                           file_format="png"){
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
 #store the procedural tag as a variable to save space and make the code clearer
@@ -153,13 +154,13 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
 
 noxxogram <- avg_nox_histogram(prawn_path)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.tiff"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format),
          plot=noxxogram[[1]],
          width=8.3,
          height=4.7,
          units = "cm",
          dpi = dpi,
-         device="tiff")
+         device=file_format)
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
