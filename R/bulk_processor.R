@@ -35,7 +35,7 @@ bulk_processor <- function(raster_path,
                            year,
                            pollutant,
                            iteration=as.character(packageVersion("PRAWNS")),
-                           dpi=600
+                           dpi=600,
                            file_format="png"){
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
@@ -78,10 +78,13 @@ for ( index in c(1:4)){
                                     prawn_path=prawn_path,
                                     year=2020)
 
-    ggsave(filename= paste0(proc_tag,"/medmeancomp.png"),
+    ggsave(filename= paste0(proc_tag,"/medmeancomp.",file_format),
            plot=stat_facet,
-           units = "mm",height = 339,width=480,
-           device="png")
+           width=8.3,
+           height=4.7,
+           units = "cm",
+           dpi = dpi,
+           device=file_format))
 
 
     print("Basic PRAWN creation and data tests successful")
@@ -148,9 +151,13 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
                                    pollutant=pollutant,
                                    year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format),
          plot=source_breakdown,
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
 noxxogram <- avg_nox_histogram(prawn_path)
 
@@ -166,30 +173,50 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format),
          plot=source_facets,
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
 #Make and save a graph showing IMD based inequality for each RUC code
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format),
          plot=RUC_breakdown[[1]],
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format),
          plot=RUC_breakdown[[2]],
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format),
          plot=RUC_breakdown[[3]],
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format),
          plot=RUC_breakdown[[4]],
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
@@ -198,18 +225,26 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format),
         plot=city_facets,
-        device="png")
+        width=8.3,
+        height=4.7,
+        units = "cm",
+        dpi = dpi,
+        device=file_format))
 
 #Facet the mean and median pollutant levels by county/unitary authority
 area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
                               pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format),
          plot=area_facets,
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
 #Plot the average pollutant vs average IMD grouped by county/ua
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
@@ -217,36 +252,52 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                area_type = "County/UA",
                                year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format),
        plot=avg_imd_pol[[1]],
-       device="png")
+       width=8.3,
+       height=4.7,
+       units = "cm",
+       dpi = dpi,
+       device=file_format))
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
 
 area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
 
-ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.png"),
+ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format),
        plot=area_histogram,
-       device="png")
+       width=8.3,
+       height=4.7,
+       units = "cm",
+       dpi = dpi,
+       device=file_format))
 
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
                                  area_type = "City",
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format),
          plot=avg_imd_pol[[1]],
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
 
   area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="City")
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.png"),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format),
          plot=area_histogram,
-         device="png")
+         width=8.3,
+         height=4.7,
+         units = "cm",
+         dpi = dpi,
+         device=file_format))
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
@@ -260,9 +311,13 @@ pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
- ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.png"),
+ ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format),
        plot=pie,
-       device="png")
+       width=8.3,
+       height=4.7,
+       units = "cm",
+       dpi = dpi,
+       device=file_format))
 
 
 
