@@ -2,6 +2,7 @@
 
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
+#' @param area_type They type of area to group by, either city or county/UA
 
 #'
 #' @keywords faceted, sources

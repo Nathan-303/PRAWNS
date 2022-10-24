@@ -43,6 +43,8 @@ bulk_processor <- function(raster_path,
 
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
+file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")
+
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
 for ( index in c(1:4)){
 
@@ -151,7 +153,7 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
                                    pollutant=pollutant,
                                    year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format1),
          plot=source_breakdown,
          width=8.3,
          height=4.7,
@@ -161,7 +163,7 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
 
 noxxogram <- avg_nox_histogram(prawn_path)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=noxxogram[[1]],
          width=8.3,
          height=4.7,
@@ -173,7 +175,7 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format1),
          plot=source_facets,
          width=8.3,
          height=4.7,
@@ -186,7 +188,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format1),
          plot=RUC_breakdown[[1]],
          width=8.3,
          height=4.7,
@@ -194,7 +196,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          dpi = dpi,
          device=file_format)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
          width=8.3,
          height=4.7,
@@ -202,7 +204,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          dpi = dpi,
          device=file_format)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
          width=8.3,
          height=4.7,
@@ -210,7 +212,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          dpi = dpi,
          device=file_format)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
          width=8.3,
          height=4.7,
@@ -225,7 +227,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format1),
         plot=city_facets,
         width=8.3,
         height=4.7,
@@ -238,7 +240,7 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
                               pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format1),
          plot=area_facets,
          width=8.3,
          height=4.7,
@@ -252,7 +254,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                area_type = "County/UA",
                                year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format1),
        plot=avg_imd_pol[[1]],
        width=8.3,
        height=4.7,
@@ -265,7 +267,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
 area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
 
-ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format),
+ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
        plot=area_histogram,
        width=8.3,
        height=4.7,
@@ -278,7 +280,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  area_type = "City",
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
          plot=avg_imd_pol[[1]],
          width=8.3,
          height=4.7,
@@ -291,7 +293,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
   area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="City")
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format),
+  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
          width=8.3,
          height=4.7,
@@ -311,7 +313,7 @@ pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
- ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format),
+ ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format1),
        plot=pie,
        width=8.3,
        height=4.7,
