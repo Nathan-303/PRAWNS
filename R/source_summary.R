@@ -38,7 +38,8 @@ output <- Decile_vs_emission_by_variable(
   chosen_variable = emissions)+
 
   labs(linetype= "Metric used",
-       colour= "Emission source")
+       colour= "Emission source",
+       title=NULL)
 
 
 

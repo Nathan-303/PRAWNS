@@ -85,7 +85,7 @@ for ( index in c(1:4)){
            plot=stat_facet,
            file_format = file_format,
            type=2,
-           scaling=0.2)
+           scaling=0.3)
 
 
     print("Basic PRAWN creation and data tests successful")

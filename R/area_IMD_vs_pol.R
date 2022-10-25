@@ -44,7 +44,8 @@ test <- ggplot(data=area_rank)+
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
-       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       title=NULL)
 
 
 test
