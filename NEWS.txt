@@ -475,6 +475,8 @@ Minor details:
 
 	Legend to bottom for faceted county/ua and city plots
 
+	Exclude_facets parameter to sacrifice the county/ua and city facets for speed
+
 Planned content updates:
 
 	[The pendulum] Time based resolution of data

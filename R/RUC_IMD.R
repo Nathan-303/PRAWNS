@@ -82,7 +82,7 @@ labs(x="IMD decile where 10 is least deprived",
 Area_population <- ggplot(data=active_stack)+
 
   aes(x=RUC11,fill=RUC11 )+
-  geom_bar()++
+  geom_bar()+
   theme(
          axis.text.x = element_blank(),
 
