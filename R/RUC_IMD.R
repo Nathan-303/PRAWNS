@@ -69,7 +69,8 @@ RUC_summary <- ggplot(temp)+
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
      linetype="Metric used",
-     colour= "RUC classification")+
+     colour= "RUC classification",
+     title=NULL)+
 
   scale_x_continuous(
     breaks=c(1:10),

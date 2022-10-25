@@ -427,9 +427,23 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Incorporated variable file format and resolution into bulk_processor for graph saving
 
-0.9.2
+0.9.2 (Uploaded 25/10/22)
 
 	Got agg_ device working to better scale graphs
+
+0.9.3 (Uploaded 25/10/22)
+	
+	Rolled out a new function to _agg everything: graph_saver()
+
+	Converted bulk_processor to use graph_saver
+
+0.9.4	
+
+	Scaling parameter added and tweaked to get graphs with the right font sizes
+
+	Removed graph titles
+
+	Removed decile vs emission by variable and source_summary, replace with a standalone at some point
 
 0.10.0
 
@@ -449,15 +463,17 @@ Minor details:
 
 	Improve internal folder structure 
 
-	Tag for rendering only certain things e.g. londonless, na=0, london only
+	Tag for rendering only certain things e.g. londonless, na=0, london only solution: do for (n in c(desired outputs))
 
 	Optimisation of is_raw
 
 	Check and improve all vignettes
 
-	Histogram of average nox is cropped arbitrarily at 50
+	Histogram of average nox is cropped arbitrarily at 50 include in vignette
 
 	Figure out why city gradient histogram is horrifically mangled
+
+	Legend to bottom for faceted county/ua and city plots
 
 Planned content updates:
 
