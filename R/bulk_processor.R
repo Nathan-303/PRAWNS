@@ -156,7 +156,7 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
          plot=source_breakdown,
          file_format = file_format,
          type=2,
-         scaling=0.4)
+         scaling=0.5)
 
 noxxogram <- avg_nox_histogram(prawn_path)
 
@@ -164,7 +164,7 @@ noxxogram <- avg_nox_histogram(prawn_path)
          plot=noxxogram[[1]],
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.6)
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
@@ -174,7 +174,7 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
          plot=source_facets,
          file_format = file_format,
          type=2,
-         scaling=0.5)
+         scaling=0.6)
 
 #Make and save a graph showing IMD based inequality for each RUC code
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
@@ -185,25 +185,25 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          plot=RUC_breakdown[[1]],
          file_format = file_format,
          type=2,
-         scaling=0.5)
+         scaling=0.6)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.4)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.4)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.4)
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
@@ -239,7 +239,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
        plot=avg_imd_pol[[1]],
        file_format = file_format,
        type=1,
-       scaling=1)
+       scaling=0.4)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
@@ -250,7 +250,7 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
        plot=area_histogram,
        file_format = file_format,
        type=1,
-       scaling=1)
+       scaling=0.4)
 
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
@@ -261,7 +261,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          plot=avg_imd_pol[[1]],
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.4)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
@@ -272,7 +272,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          plot=area_histogram,
          file_format = file_format,
          type=1,
-         scaling=1)
+         scaling=0.4)
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
@@ -290,7 +290,7 @@ pie <- gradient_bar(pollutant = pollutant,
        plot=pie,
        file_format = file_format,
        type=1,
-       scaling=1)
+       scaling=0.4)
 
 
 

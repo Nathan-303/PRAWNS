@@ -7,12 +7,14 @@
 #' @param type The graph size to save to 1 is a single column figure on a two
 #' column page, 2 is a full page spread, both use a 16:9 aspect ratio, 3 is an
 #' entire page
+#' @param scaling The =scaling parameter to use, flexible because there are many
+#'  things at play when the default is picked
 #` @keywords faceted, sources
 #' @export
 #' @examples
 #' graph_saver()
 
-graph_saver <- function(plot, filename,file_format,type){
+graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
 
 
 
@@ -29,7 +31,7 @@ graph_saver <- function(plot, filename,file_format,type){
              units = "cm",
              dpi = 600,
              device=file_format,
-             scaling=0.2)}
+             scaling=scaling)}
 
   if (type==2){
 # 2 column graphs
@@ -40,7 +42,7 @@ graph_saver <- function(plot, filename,file_format,type){
              units = "cm",
              dpi = 600,
              device=file_format,
-             scaling=0.3)
+             scaling=scaling)
   }
 # Full page graphs
    if (type==3){
@@ -51,7 +53,7 @@ graph_saver <- function(plot, filename,file_format,type){
             units = "mm",
             dpi = 600,
             device=file_format,
-            scaling=0.5)
+            scaling=scaling)
    }
 
 
