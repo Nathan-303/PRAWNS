@@ -423,9 +423,14 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Made a histogram for the average emission per LSOA (0.8.11)
 
-0.9.1
+0.9.1 (uploaded 24/10/22)
 
 	Incorporated variable file format and resolution into bulk_processor for graph saving
+
+0.9.2
+
+	Got agg_ device working to better scale graphs
+
 0.10.0
 
 	[Shifting faces] Beautiful graphs, and any other things that come up

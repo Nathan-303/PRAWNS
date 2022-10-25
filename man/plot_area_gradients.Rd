@@ -8,6 +8,8 @@ plot_area_gradients(prawn_path, area_type)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
+
+\item{area_type}{They type of area to group by, either city or county/UA}
 }
 \description{
 Create a histogram showign the gradients for every county/ua or city
