@@ -82,11 +82,9 @@ output <- ggplot(data=long_chunk
 
 
   scale_linetype_identity(name= "Line plotted",
-                          breaks=c(1,2)
-                        labels =c("Linear regression","Average points")
-                      # breaks=c(1,2),
-                      # labels=c("Average points","Linear regression"),
-                      # guide="legend"
+                          breaks=c("solid","dashed"),
+                          labels =c("Linear regression","Average points"),
+                          guide="legend"
                       )+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
