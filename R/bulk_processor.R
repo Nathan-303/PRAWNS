@@ -81,13 +81,10 @@ for ( index in c(1:4)){
                                     prawn_path=prawn_path,
                                     year=2020)
 
-    ggsave(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
+    graph_saver(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
            plot=stat_facet,
-           width=8.3,
-           height=4.7,
-           units = "cm",
-           dpi = dpi,
-           device=file_format)
+           file_format = file_format,
+           type=2)
 
 
     print("Basic PRAWN creation and data tests successful")
