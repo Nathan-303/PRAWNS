@@ -229,7 +229,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
        plot=avg_imd_pol[[1]],
        file_format = file_format,
        type=1,
-       scaling=0.4)
+       scaling=0.7)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))

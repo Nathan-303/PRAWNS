@@ -35,9 +35,9 @@ test <- ggplot(data=area_rank)+
               formula=y~x,
               se=FALSE,)+
 
-  scale_linetype_manual(name="Linear regression",values=c(1,2))+
+  scale_linetype_manual(name="Line plotted",values=c(1,2))+
 
-  scale_shape_manual(name="Average used for NOx",
+  scale_shape_manual(name="NOx average",
                      values =c(16,4))+
 
 
