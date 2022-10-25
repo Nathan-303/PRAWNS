@@ -147,18 +147,8 @@ for ( index in c(1:4)){
 
     print("Creation of PRAWNS with only London succesful")
   }
-#Make and save a graph showing a summary of the pollutants
-source_breakdown <- source_summary(prawn_path=prawn_path,
-                                   pollutant=pollutant,
-                                   year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format1),
-         plot=source_breakdown,
-         file_format = file_format,
-         type=2,
-         scaling=0.5)
-
-noxxogram <- avg_nox_histogram(prawn_path)
+  noxxogram <- avg_nox_histogram(prawn_path)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=noxxogram[[1]],
