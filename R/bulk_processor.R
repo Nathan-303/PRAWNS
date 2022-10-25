@@ -43,9 +43,8 @@ bulk_processor <- function(raster_path,
 
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
-file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")
-
-if(grepl("agg_",file_format)==TRUE){file_format <- (eval(parse(text=file_format)))}
+if(grepl("agg_",file_format)==TRUE){
+  file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")}
 
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
 for ( index in c(1:4)){
@@ -155,72 +154,51 @@ source_breakdown <- source_summary(prawn_path=prawn_path,
                                    pollutant=pollutant,
                                    year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," source summary.",file_format1),
          plot=source_breakdown,
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=2)
 
 noxxogram <- avg_nox_histogram(prawn_path)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=noxxogram[[1]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1)
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format1),
          plot=source_facets,
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=2)
 
 #Make and save a graph showing IMD based inequality for each RUC code
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format1),
          plot=RUC_breakdown[[1]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=2)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1))
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1)
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
@@ -229,26 +207,20 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format1),
         plot=city_facets,
-        width=8.3,
-        height=4.7,
-        units = "cm",
-        dpi = dpi,
-        device=file_format)
+        file_format = file_format,
+        type=3)
 
 #Facet the mean and median pollutant levels by county/unitary authority
 area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
                               pollutant = pollutant)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format1),
          plot=area_facets,
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=3)
 
 #Plot the average pollutant vs average IMD grouped by county/ua
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
@@ -256,52 +228,40 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                area_type = "County/UA",
                                year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format1),
        plot=avg_imd_pol[[1]],
-       width=8.3,
-       height=4.7,
-       units = "cm",
-       dpi = dpi,
-       device=file_format)
+       file_format = file_format,
+       type=1)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
 
 area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
 
-ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
+graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
        plot=area_histogram,
-       width=8.3,
-       height=4.7,
-       units = "cm",
-       dpi = dpi,
-       device=file_format)
+       file_format = file_format,
+       type=1)
 
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
                                  area_type = "City",
                                  year=year)
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
          plot=avg_imd_pol[[1]],
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
 
   area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="City")
 
-  ggsave(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
-         width=8.3,
-         height=4.7,
-         units = "cm",
-         dpi = dpi,
-         device=file_format)
+         file_format = file_format,
+         type=1))
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
@@ -315,13 +275,10 @@ pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
- ggsave(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format1),
+ graph_saver(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format1),
        plot=pie,
-       width=8.3,
-       height=4.7,
-       units = "cm",
-       dpi = dpi,
-       device=file_format)
+       file_format = file_format,
+       type=1)
 
 
 

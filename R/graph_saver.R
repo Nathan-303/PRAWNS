@@ -51,7 +51,7 @@ graph_saver <- function(plot, filename,file_format,type){
             units = "mm",
             dpi = 600,
             device=file_format,
-            scaling=0.3) 
+            scaling=1) 
    }   
 
       
