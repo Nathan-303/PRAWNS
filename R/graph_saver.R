@@ -10,14 +10,14 @@
 #` @keywords faceted, sources
 #' @export
 #' @examples
-#' grapher()
+#' graph_saver()
 
-grapher <- function(plot, filename,file_format,type){
+graph_saver <- function(plot, filename,file_format,type){
  
   
   
   if(grepl("agg_",file_format)==TRUE){
-    file_format1 <- gsub(pattern="agg_",x=file_format,replacement = ""),
+    file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")
     file_format <- (eval(parse(text=file_format)))}
 
   if (type==1){
@@ -42,7 +42,7 @@ grapher <- function(plot, filename,file_format,type){
              device=file_format,
              scaling=0.3)
   }
-# Large faceted graphs
+# Full page graphs
    if (type==3){
      ggsave(filename= filename,
             plot=plot,
@@ -55,5 +55,5 @@ grapher <- function(plot, filename,file_format,type){
    }   
 
       
-    }
 }
+
