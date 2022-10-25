@@ -73,7 +73,8 @@ if (group=="TCITY15NM"){
   City_profile <- City_profile+ facet_wrap(~TCITY15NM,scales="free_y")
   }else{
     City_profile <- City_profile+
-    facet_wrap(~Area,scales="free_y")}
+    facet_wrap(~Area,scales="free_y")+
+      theme(legend.position = "bottom")}
 
 City_profile
 }
