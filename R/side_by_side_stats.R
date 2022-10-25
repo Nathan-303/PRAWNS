@@ -1,3 +1,12 @@
+#' Make a nice graph
+#'
+#' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#` @keywords faceted, sources
+#' @export
+#' @examples
+#' side_by_sidestats()
+#'
 side_by_side_stats <- function(pollutant,year,prawn_path){
 
 active_stack <- read.csv(prawn_path,

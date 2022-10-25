@@ -45,6 +45,8 @@ proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
 file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")
 
+if(grepl("agg_",file_format)==TRUE){file_format <- (eval(parse(text=file_format)))}
+
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
 for ( index in c(1:4)){
 
@@ -80,7 +82,7 @@ for ( index in c(1:4)){
                                     prawn_path=prawn_path,
                                     year=2020)
 
-    ggsave(filename= paste0(proc_tag,"/medmeancomp.",file_format),
+    ggsave(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
            plot=stat_facet,
            width=8.3,
            height=4.7,
