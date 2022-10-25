@@ -188,7 +188,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
          file_format = file_format,
-         type=1))
+         type=1)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
@@ -261,7 +261,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
          file_format = file_format,
-         type=1))
+         type=1)
 #calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path,
               )
