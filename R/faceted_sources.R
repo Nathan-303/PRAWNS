@@ -87,8 +87,7 @@ output <- ggplot(data=long_chunk
                       )+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
-       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-       title=paste0(pollutant," emissions faceted by source")
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))
   )+
   theme(legend.position = "bottom")
 

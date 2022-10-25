@@ -35,7 +35,6 @@ output <- Decile_vs_emission_by_variable(
   chosen_grouping = Emission_source,
   xaxis = "IMD Decile",
   yaxis = paste0(pollutant," emissions"),
-  title = paste0("Source breakdown for ",pollutant, " emissions in ", year),
   chosen_variable = emissions)+
 
   labs(linetype= "Metric used",

@@ -68,7 +68,6 @@ RUC_summary <- ggplot(temp)+
 
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-     title=paste0(pollutant," emissions by RUC classification",year),
      linetype="Metric used",
      colour= "RUC classification")+
 
@@ -82,9 +81,7 @@ labs(x="IMD decile where 10 is least deprived",
 Area_population <- ggplot(data=active_stack)+
 
   aes(x=RUC11,fill=RUC11 )+
-  geom_bar()+
-  labs(
-       title="population distribution")+
+  geom_bar()++
   theme(
          axis.text.x = element_blank(),
 
