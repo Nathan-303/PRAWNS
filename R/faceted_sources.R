@@ -77,10 +77,13 @@ output <- ggplot(data=long_chunk
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-  scale_colour_manual(values = c("Median"="blue","Mean"="orange"), name= "Average used")+
+  scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
+                      name= "Average used")+
 
 
-  scale_linetype_manual(name= "Line plotted", values =c("Linear regression"=1,"Average points"=2)
+  scale_linetype_identity(name= "Line plotted",
+                          breaks=c(1,2)
+                        labels =c("Linear regression","Average points")
                       # breaks=c(1,2),
                       # labels=c("Average points","Linear regression"),
                       # guide="legend"
