@@ -437,13 +437,17 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Converted bulk_processor to use graph_saver
 
-0.9.4	
+0.9.4	(Uploaded 25/10/22)
 
 	Scaling parameter added and tweaked to get graphs with the right font sizes
 
 	Removed graph titles
 
 	Removed decile vs emission by variable and source_summary, replace with a standalone at some point
+
+0.9.5
+
+	Aesthetic tweaks to graphs based on appearance in rendered pdf
 
 0.10.0
 
