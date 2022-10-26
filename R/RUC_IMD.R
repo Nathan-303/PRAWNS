@@ -72,6 +72,12 @@ labs(x="IMD decile where 10 is least deprived",
      colour= "RUC classification",
      title=NULL)+
 
+guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
+                                                colour="black",
+                                                shape=c(NA,NA),
+                                                size=c(1,1)),
+       keywidth = 3))+
+
   scale_x_continuous(
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
