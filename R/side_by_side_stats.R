@@ -105,7 +105,13 @@ source_summary <- ggplot(temp)+
 
   scale_colour_viridis_d(option="turbo")+
 
-  guides(colour=guide_legend(override.aes=list(size=3)))
+  guides(colour=guide_legend(override.aes=list(size=3)),
+
+         linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
+                                                  colour="black",
+                                                  shape=c(NA,NA),
+                                                  size=c(1,1)))
+  )
 
 source_summary
 
