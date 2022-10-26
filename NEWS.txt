@@ -445,17 +445,21 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Removed decile vs emission by variable and source_summary, replace with a standalone at some point
 
-0.9.5
+0.9.5 (Uploaded 26/10/22)
 
 	Aesthetic tweaks to graphs based on appearance in rendered pdf
+
+	Sorted the linetype scales for all relevant graphs
+
+0.9.6
 
 0.10.0
 
 	[Shifting faces] Beautiful graphs, and any other things that come up
 
 	Function for saving graphs to streamline bulk_processor and allow centralised edits to saving format
-		Set all graphs to the standard sizes
-		tiff or png format saving
+		Set all graphs to the standard size (0.9.4)
+		tiff or png format saving (0.9.3)
 
 	Formatted within graphs to optimise text size and white space
 
