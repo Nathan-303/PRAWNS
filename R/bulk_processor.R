@@ -175,7 +175,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          plot=RUC_breakdown[[1]],
          file_format = file_format,
          type=2,
-         scaling=0.6)
+         scaling=0.8)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
@@ -229,7 +229,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
        plot=avg_imd_pol[[1]],
        file_format = file_format,
        type=1,
-       scaling=0.7)
+       scaling=0.5)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))

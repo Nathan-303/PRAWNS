@@ -76,7 +76,8 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                 colour="black",
                                                 shape=c(NA,NA),
                                                 size=c(1,1)),
-       keywidth = 3))+
+       keywidth = 3),
+       colour=guide_legend(byrow=TRUE))+
 
   scale_x_continuous(
     breaks=c(1:10),
@@ -87,12 +88,15 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
 
 Area_population <- ggplot(data=active_stack)+
 
+
   aes(x=RUC11,fill=RUC11 )+
   geom_bar()+
   theme(
          axis.text.x = element_blank(),
 
-         axis.ticks = element_blank())
+         axis.ticks = element_blank(),
+
+         legend.spacing.y = unit(1,"cm"))
 
 dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
 
