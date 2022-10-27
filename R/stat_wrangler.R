@@ -33,12 +33,22 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   long_data <- data %>% pivot_longer(
     cols=c("Agricultural","Domestic combustion","Energy production",
            "Industrial combustion","Industrial production","Natural",
-           "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
+  "Other transport and mobile machinery","Road transport","Solvents","Total"
            ,"Waste treatment and disposal","Point sources"),
     names_to = "Emission_source",
     values_to = "emissions") %>%
     group_by(Emission_source) %>%
     mutate(emissions=replace_na(emissions,0))
+
+
+  #get the residuals
+  resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data())))
+
+  res_plot <- ggplot(data=resid)+
+    aes(x=IMD,y=resids)+
+    geom_point(shape=4,alpha=0.01)+
+    geom_hline(yintercept = 0)+
+    facet_wrap(~Emission_source,scale="free_y")
 
   mean_reg_mod <-long_data %>%
     #get the rsquared
