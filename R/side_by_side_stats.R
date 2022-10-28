@@ -1,5 +1,6 @@
 #' Make a nice graph
 #'
+#' @param year the year the data was taken, used for axis titles
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #` @keywords faceted, sources
