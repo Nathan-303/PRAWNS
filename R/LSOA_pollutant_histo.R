@@ -30,24 +30,14 @@ long_data <- raw %>% pivot_longer(
 
 axis_key <- long_data %>% summarise(min=quantile(emissions,probs=0),bound=quantile(emissions,probs=0.99)) %>% group_by(Emission_source) %>% tibble
 
-hmm <- inner_join(long_data %>% select(Emission_source,emissions),axis_key, by="Emission_source") %>% filter(emissions<=bound)
+hmm <- inner_join(long_data %>% dplyr::select(Emission_source,emissions),axis_key, by="Emission_source") %>% filter(emissions<=bound)
 
 histo <- ggplot(data=hmm)+
   
   geom_histogram(bins=80,aes(x=emissions))+
   
   coord_cartesian(expand=FALSE)+
-  # 
-  # geom_vline(aes(xintercept = mean(emissions),colour="Mean"),,size=2)+
-  # 
-  # geom_vline(aes(xintercept = median(emissions),colour="Median"),,size=2)+
-  
-  scale_colour_manual(name="Averages",
-                      values=c("Mean"="orange","Median"="blue"),
-                      breaks=c("Mean","Median"),
-                      guide="legend",)+
-  
-  labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
+labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
        y="Frequency")+
   
   facet_wrap(~Emission_source,scale="free")
