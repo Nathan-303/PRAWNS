@@ -9,6 +9,8 @@ side_by_side_stats(pollutant, year, prawn_path)
 \arguments{
 \item{pollutant}{the pollutant being investigated, this should be in quotes and correspond with its name in the data}
 
+\item{year}{the year the data was taken, used for axis titles}
+
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
 \description{
