@@ -451,8 +451,19 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Sorted the linetype scales for all relevant graphs
 
-0.9.6 (Uploa
+0.9.6 (Uploaded 27/10/22)
 
+	Calculated p values for a scattering of chunks
+
+	Mean end median line on total nox histogram
+
+	Faceted nox histogram
+
+0.9.7
+
+	Update bulk_processor for faceted histogram
+
+	Included p values in bulk processor run
 0.10.0
 
 	[Shifting faces] Beautiful graphs, and any other things that come up
@@ -466,7 +477,10 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
 		London is excluded
-	
+		
+	minimalist parameter for bulk processor
+		only does londonless
+		no residuals or p analysis
 Minor details:
 
 	Improve internal folder structure 

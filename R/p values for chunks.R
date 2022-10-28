@@ -1,6 +1,4 @@
-library(WGCNA)
-
-data <- read.csv(prawn_path,
+p_values_for_chunks <- function(prawn_path){data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
 
@@ -38,4 +36,5 @@ reveal <- ggplot(data=aha)+
 
 reveal
 
+}
 
