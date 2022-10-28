@@ -286,6 +286,13 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             type=2,
             scaling=0.7)
 
+sourceogram <- lsoa_pollutant_histo(prawn_path)
+
+graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
+            plot=sourceogram,
+            file_format = file_format,
+            type=2,
+            scaling=0.7)
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
