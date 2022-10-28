@@ -276,6 +276,16 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
               file_format = file_format,
               type=2,
               scaling=0.7)
+
+
+p_plot <- p_values_for_chunks(prawn_path)
+
+graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format1),
+            plot=p_plot,
+            file_format = file_format,
+            type=2,
+            scaling=0.7)
+
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
