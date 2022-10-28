@@ -271,7 +271,11 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
   write.csv(x=numbers[position],
             file=paste0(proc_tag,"/",statnames[position],".csv"))
 }
-
+  graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
+              plot=statnames[4],
+              file_format = file_format,
+              type=2,
+              scaling=0.7)
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
