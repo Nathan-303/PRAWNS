@@ -271,11 +271,11 @@ numbers <- stat_wrangler(prawn_path = prawn_path,
   write.csv(x=numbers[position],
             file=paste0(proc_tag,"/",statnames[position],".csv"))
 }
-  graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
-              plot=statnames[4],
-              file_format = file_format,
-              type=2,
-              scaling=0.7)
+  # graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
+  #             plot=numbers[4],
+  #             file_format = file_format,
+  #             type=2,
+  #             scaling=0.7)
 
 
 p_plot <- p_values_for_chunks(prawn_path)
@@ -286,7 +286,7 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             type=2,
             scaling=0.7)
 
-sourceogram <- lsoa_pollutant_histo(prawn_path)
+sourceogram <- LSOA_pollutant_histo(prawn_path)
 
 graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
             plot=sourceogram,
