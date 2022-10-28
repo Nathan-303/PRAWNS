@@ -4,7 +4,7 @@ data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
 
-
+set.seed(8653)
 
 test <- sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace=FALSE)
 
@@ -36,7 +36,6 @@ reveal <- ggplot(data=aha)+
   coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")
 
 
-
-q <- p.a384
+reveal
 
 
