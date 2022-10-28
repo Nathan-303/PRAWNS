@@ -41,13 +41,18 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     mutate(emissions=replace_na(emissions,0))
 
 
-  # #get the residuals
-  # resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data()))) %>% filter(resids<=50)
-  #
-  # res_plot <- ggplot(data=resid,aes(x=factor(IMD),y=resids))+
-  #   geom_violin(trim=TRUE)+
-  #   geom_hline(yintercept = 0)+
-  #   facet_wrap(~Emission_source,scale="free_y")
+  #get the residuals
+  resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data()))) %>% group_by(IMD,Emission_source)
+
+  res_anchor <- resid %>% summarise(bound=quantile(emissions,probs=0.95))
+
+  hmm <- inner_join(resid %>% select(Emission_source,resids,IMD),axis_key, by="Emission_source") %>% filter(resids<=bound)
+
+
+  res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids))+
+    geom_violin(trim=TRUE)+
+    geom_hline(yintercept = 0)+
+    facet_wrap(~Emission_source,scale="free_y")
 
   mean_reg_mod <-long_data %>%
     #get the rsquared
@@ -125,7 +130,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   #
 
-  bigout <- list(mean_reg_mod,med_reg_mod,output)
+  bigout <- list(mean_reg_mod,med_reg_mod,output,res_plot)
 
   bigout
 
