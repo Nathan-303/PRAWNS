@@ -183,13 +183,13 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          type=1,
          scaling=0.4)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
          file_format = file_format,
          type=1,
          scaling=0.4)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC IMD histogram2.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
          file_format = file_format,
          type=1,
