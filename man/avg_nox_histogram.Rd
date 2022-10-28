@@ -2,15 +2,19 @@
 % Please edit documentation in R/avg_nox_histogram.R
 \name{avg_nox_histogram}
 \alias{avg_nox_histogram}
-\title{Create a histogram showign the gradients for every county/ua or city}
+\title{Create a histogram of the average NOx per LSOA with the median and mean values labelled}
 \usage{
-avg_nox_histogram(prawn_path)
+avg_nox_histogram(prawn_path, pollutant = "NOx", year = 2020)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
+
+\item{pollutant}{The pollutant used, shows in axis title, defaults to NOx}
+
+\item{year}{The year of measurements, used in axis title, defaults to 2020}
 }
 \description{
-Create a histogram showign the gradients for every county/ua or city
+Create a histogram of the average NOx per LSOA with the median and mean values labelled
 }
 \examples{
 avg_nox_histogram()
