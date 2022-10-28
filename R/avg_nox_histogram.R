@@ -9,24 +9,34 @@
 #' @examples
 #' avg_nox_histogram()
 avg_nox_histogram <- function(prawn_path){
-  
+
   raw <- read.csv(prawn_path,
                   row.names=1,
                   check.names=FALSE)
- 
+
   histo <- ggplot(data=raw)+
-    
+
     aes(x=Total)+
-    
+
     geom_histogram(bins=80)+
-    
-    scale_x_continuous(limits = c(0,50),expand=c(0,0))
-   
+
+    scale_x_continuous(limits = c(0,50),expand=c(0,0))+
+
+    geom_vline(xintercept = mean(raw$Total),colour="orange",size=2)+
+
+    geom_vline(xintercept = median(raw$Total),colour="blue",size=2)+
+
+    scale_colour_identity(breaks=c("orange","blue"),
+                        values=c("Mean","Median"),
+                        guide="legend",
+                        name="Averages"
+                        )
+
   caveat <- nrow(raw %>% filter(Total>=50))
-  
+
   output <- list(histo,caveat)
-  
+
   output
-  
+
 }
 
