@@ -41,14 +41,13 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     mutate(emissions=replace_na(emissions,0))
 
 
-  #get the residuals
-  resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data())))
-
-  res_plot <- ggplot(data=resid)+
-    aes(x=IMD,y=resids)+
-    geom_point(shape=4,alpha=0.01)+
-    geom_hline(yintercept = 0)+
-    facet_wrap(~Emission_source,scale="free_y")
+  # #get the residuals
+  # resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data()))) %>% filter(resids<=50)
+  #
+  # res_plot <- ggplot(data=resid,aes(x=factor(IMD),y=resids))+
+  #   geom_violin(trim=TRUE)+
+  #   geom_hline(yintercept = 0)+
+  #   facet_wrap(~Emission_source,scale="free_y")
 
   mean_reg_mod <-long_data %>%
     #get the rsquared
