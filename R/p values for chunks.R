@@ -1,3 +1,12 @@
+#' Create a faceted histogram showing all but the top 1% of the nox emission average across lsoas
+
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+#' @keywords faceted, sources
+#' @export
+#' @examples
+#' p_values_for_chunks()
+
 p_values_for_chunks <- function(prawn_path){data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
