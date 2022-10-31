@@ -87,6 +87,9 @@ for ( index in c(1:4)){
            type=2,
            scaling=0.3)
 
+  #clear up
+    rm(shape_test)
+    rm(stat_facet)
 
     print("Basic PRAWN creation and data tests successful")
   }
@@ -106,6 +109,8 @@ for ( index in c(1:4)){
     #Write the filtered prawn
     write.csv(x = londonless_prawn,
               file=prawn_path)
+
+    rm(londonless_prawn)
 
     print("Creation of PRAWNS without London successful")
   }
@@ -128,6 +133,8 @@ for ( index in c(1:4)){
     write.csv(x = na_0_prawn,
               file=prawn_path)
 
+    rm(na_0_prawn)
+
     print("Creation of prawns where na values are set to 0 successful")
   }
   if (index==4){
@@ -144,7 +151,7 @@ for ( index in c(1:4)){
     #Write the filtered prawn
     write.csv(x = londonless_prawn,
               file=prawn_path)
-
+    rm(londonless_prawn)
     print("Creation of PRAWNS with only London succesful")
   }
 
@@ -155,6 +162,8 @@ for ( index in c(1:4)){
          file_format = file_format,
          type=1,
          scaling=0.6)
+
+  rm(noxxogram)
 #Make and save a graph where the sources are all faceted
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
@@ -166,6 +175,7 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
          type=2,
          scaling=0.6)
 
+  rm(source_facets)
 #Make and save a graph showing IMD based inequality for each RUC code
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
                          pollutant=pollutant,
@@ -197,6 +207,8 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
+    rm(RUC_breakdown)
+
 #Facet the mean and median pollutantlevels by city
 city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
@@ -207,7 +219,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
         file_format = file_format,
         type=3,
         scaling=0.5)
-
+  rm(city_facets)
 #Facet the mean and median pollutant levels by county/unitary authority
 area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
@@ -219,6 +231,7 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
          type=3,
          scaling=0.5)
 
+    rm(area_facets)
 #Plot the average pollutant vs average IMD grouped by county/ua
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                pollutant = pollutant,
@@ -234,6 +247,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
 
+  rm(avg_imd_pol)
+
 area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
 
 graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
@@ -242,6 +257,7 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
        type=1,
        scaling=0.4)
 
+  rm(area_histogram)
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
                                  area_type = "City",
@@ -263,6 +279,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          file_format = file_format,
          type=1,
          scaling=0.4)
+
+  rm(avg_imd_pol)
 # calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path)
 
@@ -276,7 +294,7 @@ graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1)
             file_format = file_format,
             type=2,
             scaling=0.7)
-
+ rm(numbers)
 
 p_plot <- p_values_for_chunks(prawn_path)
 
@@ -285,6 +303,7 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             file_format = file_format,
             type=2,
             scaling=0.7)
+  rm(p_plot)
 
 sourceogram <- LSOA_pollutant_histo(prawn_path)
 
@@ -293,6 +312,8 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
             file_format = file_format,
             type=2,
             scaling=0.7)
+
+rm(sourceogram)
 
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
@@ -304,6 +325,7 @@ pie <- gradient_bar(pollutant = pollutant,
        type=1,
        scaling=0.4)
 
+ rm(pie)
 
 
  print(paste0("Graphing pass ",index," of 3 successful"))
