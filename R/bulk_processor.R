@@ -272,7 +272,7 @@ numbers <- stat_wrangler(prawn_path = prawn_path)
             file=paste0(proc_tag,"/",statnames[position],".csv"))
 }
 graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
-            plot=numbers[4],
+            plot=numbers[4][[1]],
             file_format = file_format,
             type=2,
             scaling=0.7)
