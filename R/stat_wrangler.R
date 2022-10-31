@@ -46,7 +46,9 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   res_anchor <- resid %>% summarise(bound=quantile(emissions,probs=0.95))
 
-  hmm <- inner_join(resid %>% dplyr::select(Emission_source,resids,IMD),res_anchor, by="Emission_source") %>% filter(resids<=bound)
+  hmm <- inner_join(resid %>%
+                      dplyr::select(Emission_source,resids,IMD),res_anchor, by="Emission_source") %>%
+    filter(resids<=bound)
 
 
   res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids))+

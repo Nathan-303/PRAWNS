@@ -263,19 +263,19 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          file_format = file_format,
          type=1,
          scaling=0.4)
-#calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
-numbers <- stat_wrangler(prawn_path = prawn_path,
-              )
+# calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
+numbers <- stat_wrangler(prawn_path = prawn_path)
+
   statnames <- c("Mean regression model","Median regression model","difference between deciles")
   for (position in c(1:3)){
   write.csv(x=numbers[position],
             file=paste0(proc_tag,"/",statnames[position],".csv"))
 }
-  # graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
-  #             plot=numbers[4],
-  #             file_format = file_format,
-  #             type=2,
-  #             scaling=0.7)
+graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
+            plot=numbers[4],
+            file_format = file_format,
+            type=2,
+            scaling=0.7)
 
 
 p_plot <- p_values_for_chunks(prawn_path)
@@ -293,6 +293,7 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
             file_format = file_format,
             type=2,
             scaling=0.7)
+
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))

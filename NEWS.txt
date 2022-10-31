@@ -463,7 +463,14 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Update bulk_processor for faceted histogram
 
-	Included p values in bulk processor run
+	Included p value plots in bulk processor run
+
+	Included residual plots in bulk processor run
+
+0.9.8
+
+	Used rm() to clear up after self within bulk_processor (WIP)
+
 0.10.0
 
 	[Shifting faces] Beautiful graphs, and any other things that come up

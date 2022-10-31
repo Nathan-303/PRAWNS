@@ -7,12 +7,13 @@
 #' @examples
 #' p_values_for_chunks()
 
-p_values_for_chunks <- function(prawn_path){data <- read.csv(prawn_path,
+p_values_for_chunks <- function(prawn_path){
+  data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
 
 set.seed(8653)
-
+if (nrow(data)<=73*384){
 test <- sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace=FALSE)
 
 chunkable <- bind_cols(data,test) %>% rename(chunk=`...85`) %>% group_by(chunk)
@@ -41,6 +42,9 @@ reveal <- ggplot(data=aha)+
   geom_histogram(boundary=0,bins = 60)+
   facet_wrap(~Emission_source,scale="free_y")+
   coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")
+}else{
+  reveal <- ggplot(data)+geom_bar(aes(x=IMD))+labs(title="Not here")
+}
 
 
 reveal
