@@ -473,7 +473,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Used rm() to clear up after self within bulk_processor
 
-0.9.9
+0.9.9 (uploaded 1/11/22)
 
 	Reordered deciles after removal of London in side by side stats
 
@@ -481,7 +481,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Fixed gradient histogram for cities
 
-0.10.0
+0.10.0 (Uploaded 1/11/22)
 
 	[Shifting faces] Beautiful graphs, and any other things that come up
 
@@ -491,6 +491,20 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Formatted within graphs to optimise text size and white space
 
+0.10.1
+
+	Cropped nox histogram at 99th percentile rather than arbitrarily
+
+	Made graphs use na=0 rather than ignore by default
+
+0.10.2
+
+	Made bulk_processor verbose so finding errors is easier
+
+	Changed legend position for faceted plot
+0.11.0
+
+	[Busting the ghosts in the machine]
 	Added refined_things to bulk_processor	
 		Graphs with only the median lines plotted
 		London is excluded
@@ -504,13 +518,7 @@ Minor details:
 
 	Tag for rendering only certain things e.g. londonless, na=0, london only solution: do for (n in c(desired outputs))
 
-	Optimisation of is_raw
-
 	Check and improve all vignettes
-
-	Histogram of average nox is cropped arbitrarily at 50 include in vignette/switch to using 99% quantile
-
-	Figure out why city gradient histogram is horrifically mangled
 
 	Legend to bottom for faceted county/ua and city plots
 
