@@ -15,13 +15,11 @@ avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
 
   raw <- read.csv(prawn_path,
                   row.names=1,
-                  check.names=FALSE)
+                  check.names=FALSE) %>% mutate(upperbound=quantile(Total,0.99)) %>% filter(Total<=upperbound)
 
   histo <- ggplot(data=raw)+
 
     geom_histogram(bins=80,aes(x=Total))+
-
-    scale_x_continuous(limits = c(0,50),expand=c(0,0))+
 
     geom_vline(aes(xintercept = mean(Total),colour="Mean"),,size=2)+
 
@@ -37,7 +35,7 @@ avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
     labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
          y="Frequency")
 
-  caveat <- nrow(raw %>% filter(Total>=50))
+  caveat <- "top1percent"
 
   output <- list(histo,caveat)
 
