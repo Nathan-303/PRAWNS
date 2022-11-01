@@ -23,6 +23,8 @@
 #' @param dpi The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process
 #'
 #' @param file_format The file format to save in, should be all lower case and in quotes, as it's piped straight into a ggsave function
+#'
+#' @param gotta_go_fast Allows the code to sacrifice things that take a long time to get it to run faster, defaults to "No"
 #' @keywords faceted, sources
 #' @export
 #' @examples
@@ -36,7 +38,8 @@ bulk_processor <- function(raster_path,
                            pollutant,
                            iteration=as.character(packageVersion("PRAWNS")),
                            dpi=600,
-                           file_format="png"){
+                           file_format="png",
+                           gotta_go_fast="No"){
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
 #store the procedural tag as a variable to save space and make the code clearer
@@ -103,7 +106,8 @@ for ( index in c(1:3)){
 
     print("Basic PRAWN creation and data tests successful")
   }
-
+#Begin a skip in the fastest mode
+if(gotta_go_fast != "zooom"){
   #create the results without London,
   if (index==2){
     proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/Londonless")
@@ -145,7 +149,8 @@ for ( index in c(1:3)){
     rm(londonless_prawn)
     print("Creation of PRAWNS with only London succesful")
   }
-
+#End a skip if in the fastest mode
+}
 #Make a histogram showing the distribution of NOx averages
 print("Making a histogram of pollutant averages")
 
@@ -206,7 +211,8 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
     rm(RUC_breakdown)
-
+#Begin a skip if in anything but the fastest mode
+if(gotta_go_fast != "No"){
 #Facet the mean and median pollutantlevels by city
 print("Faceting by city, this may take a while")
 city_facets <- faceted_plot(prawn_path = prawn_path,
@@ -219,6 +225,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
         type=3,
         scaling=0.5)
   rm(city_facets)
+
 
 #Facet the mean and median pollutant levels by county/unitary authority
 print("Faceting by county/UA, this may take a while")
@@ -233,6 +240,8 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
          scaling=0.5)
 
     rm(area_facets)
+#End a skip if going in anything but the slowest mode
+}
 #Plot the average pollutant vs average IMD grouped by county/ua
 print("Plotting county/UA as a scatter where the axes are average IMD and average pollutant")
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
@@ -287,6 +296,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
   rm(avg_imd_pol)
 
+#Begin skip if going in fastest mode
+if(!(gotta_go_fast%in%c("zooom"))){
 print("Doing lots of maths")
 # calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path)
@@ -295,7 +306,24 @@ numbers <- stat_wrangler(prawn_path = prawn_path)
   for (position in c(1:3)){
   write.csv(x=numbers[position],
             file=paste0(proc_tag,"/",statnames[position],".csv"))
+  }
+  print("Putting the change in concentration from most to least deprived on a bar graph")
+
+  pie <- gradient_bar(pollutant = pollutant,
+                      #The input path is the same as the output file for numbers
+                      input_path=paste0(proc_tag,"/difference between deciles.csv"))
+
+  graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ in total difference betweem most and least deprived.",file_format1),
+              plot=pie,
+              file_format = file_format,
+              type=1,
+              scaling=0.4)
+
+  rm(pie)
+#end skip if going in fastest mode
 }
+#Begin skip if going in anything but slowest mode
+if(!(gotta_go_fast%in%c("zooom","yes"))){
 graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
             plot=numbers[4][[1]],
             file_format = file_format,
@@ -312,6 +340,9 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             type=2,
             scaling=0.7)
   rm(p_plot)
+
+#End skip if going in anything but slowest mode
+}
 print("Plotting a histogram of all the sources")
 sourceogram <- LSOA_pollutant_histo(prawn_path)
 
@@ -323,18 +354,7 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 
 rm(sourceogram)
 
-print("Putting the change in concentration from most to least deprived on a bar graph")
-pie <- gradient_bar(pollutant = pollutant,
-                    #The input path is the same as the output file for numbers
-                    input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
- graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ in total difference betweem most and least deprived.",file_format1),
-       plot=pie,
-       file_format = file_format,
-       type=1,
-       scaling=0.4)
-
- rm(pie)
 
 
  print(paste0("Graphing pass ",index," of 3 successful"))
