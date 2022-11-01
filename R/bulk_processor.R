@@ -323,12 +323,12 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 
 rm(sourceogram)
 
-print("")
+print("Putting the change in concentration from most to least deprived on a bar graph")
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
 
- graph_saver(filename= paste0(proc_tag,"/pie chart of how ",pollutant," sources contribute to the inequality gradient.",file_format1),
+ graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ in total difference betweem most and least deprived.",file_format1),
        plot=pie,
        file_format = file_format,
        type=1,
