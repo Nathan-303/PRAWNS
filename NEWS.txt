@@ -477,6 +477,10 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Reordered deciles after removal of London in side by side stats
 
+	Reordered deciles for London only
+
+	Fixed gradient histogram for cities
+
 0.10.0
 
 	[Shifting faces] Beautiful graphs, and any other things that come up
@@ -504,13 +508,15 @@ Minor details:
 
 	Check and improve all vignettes
 
-	Histogram of average nox is cropped arbitrarily at 50 include in vignette
+	Histogram of average nox is cropped arbitrarily at 50 include in vignette/switch to using 99% quantile
 
 	Figure out why city gradient histogram is horrifically mangled
 
 	Legend to bottom for faceted county/ua and city plots
 
 	Exclude_facets parameter to sacrifice the county/ua and city facets for speed
+
+	Fate of gradient_bar
 
 Planned content updates:
 
