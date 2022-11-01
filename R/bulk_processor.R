@@ -148,7 +148,9 @@ for ( index in c(1:4)){
                                  row.names=1,
                                  check.names=FALSE) %>%
       tibble() %>%
-      filter(TCITY15NM=="London")
+      filter(TCITY15NM=="London") %>%
+      mutate(IMD=ntile(Index.of.Multiple.Deprivation..IMD..Rank..where.1.is.most.deprived.,10))
+
     #Write the filtered prawn
     write.csv(x = londonless_prawn,
               file=prawn_path)
