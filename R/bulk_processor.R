@@ -223,7 +223,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
 #Facet the mean and median pollutant levels by county/unitary authority
 print("Faceting by county/UA, this may take a while")
 area_facets <- faceted_plot(prawn_path = prawn_path,
-                              group= "TCITY15NM",
+                              group= "fireball or something",
                               pollutant = pollutant)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format1),
