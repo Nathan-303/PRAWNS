@@ -66,10 +66,10 @@ for ( index in c(1:3)){
       pollutant_data_name = pollutant_data_name,
       year=year,
       pollutant=pollutant,
-      output_path = "PRAWN with NA.csv")
+      output_path = paste0(proc_tag,"/PRAWN with NA.csv"))
 
     #set all na values to 0
-    transformer <- read.csv(prawn_path,
+    transformer <- read.csv(paste0(proc_tag,"/PRAWN with NA.csv"),
                     row.names=1,
                     check.names=FALSE) %>%
 
