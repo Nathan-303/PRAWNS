@@ -47,7 +47,7 @@ if(grepl("agg_",file_format)==TRUE){
   file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")}
 
 #This loop creates three different outputs using different data: the base data, the data without london and the data with na values replaced with 0
-for ( index in c(1:4)){
+for ( index in c(1:3)){
 
   #Create the folder for the results using the raw data
   if (index==1){
@@ -59,17 +59,27 @@ for ( index in c(1:4)){
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
 
-    #create the base prawn for this function, it will also be used by iterations 2 and 3 but filtered
+    #create the base prawn for this function, it will also be used by iterations 2 and 3 but filtered, it is created with NA values included so the data can be analysed
     create_prawns(
       raster_path= raster_path,
       shapefile_path = shapefile_path,
       pollutant_data_name = pollutant_data_name,
       year=year,
       pollutant=pollutant,
-      output_path = prawn_path)
+      output_path = "PRAWN with NA.csv")
 
+    #set all na values to 0
+    transformer <- read.csv(prawn_path,
+                    row.names=1,
+                    check.names=FALSE) %>%
 
+      replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
+                      "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
+                      "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
+                      ,"Total_no_points"=0,"Waste treatment and disposal"=0))
 
+    write.csv(x=transformer,
+              file=prawn_path)
 
     shape_test <- shapefile_checker(shapefile_path)
 
@@ -117,28 +127,6 @@ for ( index in c(1:4)){
   }
 
   if (index==3){
-    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/na is 0")
-    prawn_path <- paste0(proc_tag,"/PRAWN.csv")
-    #create the folder that everything goes in
-    dir.create(path=paste0(proc_tag))
-
-    #Create the filtered data without London and save it at prawn_path
-    na_0_prawn <- read.csv(raw_path,
-                           row.names=1,
-                           check.names=FALSE) %>%
-                  tibble() %>%
-                  replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
-                              "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
-                              "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
-                              ,"Total_no_points"=0,"Waste treatment and disposal"=0))
-    write.csv(x = na_0_prawn,
-              file=prawn_path)
-
-    rm(na_0_prawn)
-
-    print("Creation of prawns where na values are set to 0 successful")
-  }
-  if (index==4){
     proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/London_only")
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #create the folder that everything goes in
