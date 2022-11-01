@@ -41,7 +41,7 @@ long_stack$Emission_source <- factor(long_stack$Emission_source)
 
 long_stack <- long_stack %>% mutate(Emission_source=fct_reorder(Emission_source,NOx_emissions,mean,.desc=TRUE))
 
-london_free <- filter(long_stack,!TCITY15NM=="London")
+london_free <- filter(long_stack,!TCITY15NM=="London") %>% mutate(IMD=ntile(Index.of.Multiple.Deprivation..IMD..Rank..where.1.is.most.deprived.,10))
 
 temp = bind_rows(
   long_stack %>%
