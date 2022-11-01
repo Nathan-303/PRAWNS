@@ -17,7 +17,7 @@ raw <- read.csv(prawn_path,
 if (area_type == "County/UA"){
   refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,Area) %>% group_by(Area)
   }else{
-    refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,TCITY15NM)
+    refined <- raw %>% dplyr::select(LSOA11CD,IMD,Total,TCITY15NM) %>% group_by(TCITY15NM)
 }
 
 
