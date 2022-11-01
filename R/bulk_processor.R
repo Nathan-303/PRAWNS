@@ -146,6 +146,9 @@ for ( index in c(1:3)){
     print("Creation of PRAWNS with only London succesful")
   }
 
+#Make a histogram showing the distribution of NOx averages
+print("Making a histogram of pollutant averages")
+
   noxxogram <- avg_nox_histogram(prawn_path)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
@@ -155,7 +158,9 @@ for ( index in c(1:3)){
          scaling=0.6)
 
   rm(noxxogram)
+
 #Make and save a graph where the sources are all faceted
+print("Making a faceted graph of sources")
 source_facets <- faceted_sources(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
@@ -167,7 +172,9 @@ source_facets <- faceted_sources(prawn_path = prawn_path,
          scaling=0.6)
 
   rm(source_facets)
+
 #Make and save a graph showing IMD based inequality for each RUC code
+print("Graphing IMD vs pollutant for each RUC")
 RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
@@ -201,6 +208,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
     rm(RUC_breakdown)
 
 #Facet the mean and median pollutantlevels by city
+print("Faceting by city, this may take a while")
 city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant)
@@ -211,7 +219,9 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
         type=3,
         scaling=0.5)
   rm(city_facets)
+
 #Facet the mean and median pollutant levels by county/unitary authority
+print("Faceting by county/UA, this may take a while")
 area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "TCITY15NM",
                               pollutant = pollutant)
@@ -224,6 +234,7 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
 
     rm(area_facets)
 #Plot the average pollutant vs average IMD grouped by county/ua
+print("Plotting county/UA as a scatter where the axes are average IMD and average pollutant")
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                pollutant = pollutant,
                                area_type = "County/UA",
@@ -240,6 +251,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
 
   rm(avg_imd_pol)
 
+print("Calculating the individual gradients for each county/UA and putting them on a histogram")
 area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
 
 graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
@@ -249,6 +261,8 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
        scaling=0.4)
 
   rm(area_histogram)
+
+print("Repeating what was done for county/UA but for cities instead")
 avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
                                  pollutant = pollutant,
                                  area_type = "City",
@@ -272,6 +286,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          scaling=0.4)
 
   rm(avg_imd_pol)
+
+print("Doing lots of maths")
 # calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
 numbers <- stat_wrangler(prawn_path = prawn_path)
 
@@ -287,6 +303,7 @@ graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1)
             scaling=0.7)
  rm(numbers)
 
+print("Calculating p values for randomly sliced and diced data")
 p_plot <- p_values_for_chunks(prawn_path)
 
 graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format1),
@@ -295,7 +312,7 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             type=2,
             scaling=0.7)
   rm(p_plot)
-
+print("Plotting a histogram of all the sources")
 sourceogram <- LSOA_pollutant_histo(prawn_path)
 
 graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
@@ -306,6 +323,7 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 
 rm(sourceogram)
 
+print("")
 pie <- gradient_bar(pollutant = pollutant,
                     #The input path is the same as the output file for numbers
                     input_path=paste0(proc_tag,"/difference between deciles.csv"))
