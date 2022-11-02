@@ -39,8 +39,10 @@ test <- ggplot()+
                      fill="orange"),
                  bins=50)+
 
-  scale_fill_identity(guide="legend",labels=c("p>0.05","p<0.05"),breaks=c("blue","orange"))
-  coord_cartesian(ylim=c(0,14),expand=FALSE)
-
+  scale_fill_identity(guide="legend",labels=c("p>0.05","p<0.05"),breaks=c("blue","orange"),name="p value")+
+  scale_y_continuous(expand=expansion(add =c(0,1)))+
+  labs(x=bquote("Gradient / tonnes NOx "~km^2~IMD^-1, ),
+       y="Frequency"
+  )
 test
 }
