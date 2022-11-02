@@ -22,6 +22,6 @@ stat_wrangler and is currently designed to work within the environment of a
 bulk_processor call
 }
 \examples{
-gradient_pie()
+gradient_bar()
 }
 \keyword{data}

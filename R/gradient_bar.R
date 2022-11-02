@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' gradient_pie()
+#' gradient_bar()
 
 
 gradient_bar <- function(pollutant, input_path){
