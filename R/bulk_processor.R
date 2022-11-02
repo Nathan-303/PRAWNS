@@ -212,7 +212,8 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
 
     rm(RUC_breakdown)
 #Begin a skip if in anything but the fastest mode
-if(gotta_go_fast != "No"){
+
+if(gotta_go_fast == "No"){
 #Facet the mean and median pollutantlevels by city
 print("Faceting by city, this may take a while")
 city_facets <- faceted_plot(prawn_path = prawn_path,

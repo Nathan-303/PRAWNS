@@ -13,7 +13,8 @@ bulk_processor(
   pollutant,
   iteration = as.character(packageVersion("PRAWNS")),
   dpi = 600,
-  file_format = "png"
+  file_format = "png",
+  gotta_go_fast = "No"
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ compatible with folders containing multiple raster layers}
 \item{dpi}{The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process}
 
 \item{file_format}{The file format to save in, should be all lower case and in quotes, as it's piped straight into a ggsave function}
+
+\item{gotta_go_fast}{Allows the code to sacrifice things that take a long time to get it to run faster, defaults to "No"}
 
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
