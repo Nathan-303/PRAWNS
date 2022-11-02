@@ -32,12 +32,14 @@ curiosity <- coeffs %>% filter(p.value<=0.05)
 
 test <- ggplot()+
   geom_histogram(data=coeffs,
-                 aes(x=estimate),bins=50)+
+                 aes(x=estimate,fill="blue"),bins=50)+
 
   geom_histogram(data=curiosity,
-                 aes(x=estimate),
-                 fill="orange",bins=50)+
+                 aes(x=estimate,
+                     fill="orange"),
+                 bins=50)+
 
+  scale_fill_identity(guide="legend",labels=c("p>0.05","p<0.05"),breaks=c("blue","orange"))
   coord_cartesian(ylim=c(0,14),expand=FALSE)
 
 test
