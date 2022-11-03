@@ -13,7 +13,7 @@
 #' faceted_sources()
 #'
 
-faceted_sources <- function(prawn_path,pollutant,year){
+faceted_boxplot <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
@@ -29,7 +29,16 @@ long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble
            `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
            ,`Waste treatment \nand disposal`,"Point sources"),
     names_to = "Emission_source",
-    values_to = "emissions") %>% group_by(Emission_source) %>% mutate(bound=quantile(emissions,0.99)) %>% filter(emissions<=bound)
+    values_to = "emissions") %>% group_by(Emission_source)
+
+boxxy <- long_chunk %>% group_by(IMD,Emission_source) %>% summarise(q90=quantile(emissions,c(0.90)),
+                                                                      q10=quantile(emissions,c(0.10)),
+                                                                      q1=quantile(emissions,c(0.25)),
+                                                                      q3=quantile(emissions,c(0.75)),
+                                                                      med=quantile(emissions,c(0.5))) %>%
+  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions")
+
+
 
 long_chunk$Emission_source <- as.factor(long_chunk$Emission_source)
 
@@ -44,31 +53,31 @@ output <- ggplot(data=long_chunk
   facet_wrap(~fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE),
              scale="free_y"
              )+
-  stat_boxplot(inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),outlier.shape = NA,ymin=min(emissions),ymax)+
+  geom_boxplot(data=boxxy,inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),coef=10000000000000000000000000000000000000000000000000000000000000)+
 
-  # geom_line(stat="summary",
-  #           aes(linetype="Average points",colour="Mean"),
-  #
-  #           fun=mean,
-  #           na.rm=TRUE
-  # )+
-  #
-  #
-  # geom_smooth(method="lm",
-  #             formula=y~x,
-  #             se=FALSE,
-  #             aes(linetype="Linear regression",colour="Mean"),
-  #
-  #             size=1,
-  #             na.rm = TRUE)+
-  #
-  # #Plot the line of best fit for the median
-  # geom_quantile(quantiles=0.5,
-  #               aes(linetype="Linear regression",colour="Median"),
-  #
-  #               formula=y~x,
-  #               size=1,
-  #               na.rm=TRUE)+
+geom_line(stat="summary",
+          aes(linetype="Average points",colour="Mean"),
+
+          fun=mean,
+          na.rm=TRUE
+)+
+
+
+  geom_smooth(method="lm",
+              formula=y~x,
+              se=FALSE,
+              aes(linetype="Linear regression",colour="Mean"),
+
+              size=1,
+              na.rm = TRUE)+
+
+#Plot the line of best fit for the median
+geom_quantile(quantiles=0.5,
+              aes(linetype="Linear regression",colour="Median"),
+
+              formula=y~x,
+              size=1,
+              na.rm=TRUE)+
   #
   #
   #
