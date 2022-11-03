@@ -19,7 +19,9 @@ active_stack <- read.csv(prawn_path) %>% group_by(Area)
 area_rank <- active_stack %>% summarise(Mean =mean(Total),
                                           Median=median(Total),
                                           dep=mean(IMD)) %>%
-  pivot_longer(c(Mean, Median), names_to = "Average used for NOx",values_to = "token") %>% group_by(`Average used for NOx`)
+  pivot_longer(c(Mean, Median), names_to = "Average used for NOx",values_to = "token") %>%
+  group_by(`Average used for NOx`) %>%
+  mutate(tile=ntile(dep,8))
 
 
 test <- ggplot(data=area_rank)+
@@ -29,9 +31,9 @@ test <- ggplot(data=area_rank)+
       shape=`Average used for NOx`,
       linetype=`Average used for NOx`)+
 
-  geom_boxplot(aes(x=dep),group=x,y=token,)
-
-  geom_point()+
+  geom_boxplot(aes(x=dep,group=tile,y=token))+
+#
+#   geom_point()+
 
   geom_smooth(method="lm",
               formula=y~x,
