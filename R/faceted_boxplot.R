@@ -29,7 +29,7 @@ long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble
            `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
            ,`Waste treatment \nand disposal`,"Point sources"),
     names_to = "Emission_source",
-    values_to = "emissions")
+    values_to = "emissions") %>% group_by(Emission_source) %>% mutate(bound=quantile(emissions,0.99)) %>% filter(emissions<=bound)
 
 long_chunk$Emission_source <- as.factor(long_chunk$Emission_source)
 
@@ -44,9 +44,7 @@ output <- ggplot(data=long_chunk
   facet_wrap(~fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE),
              scale="free_y"
              )+
-  geom_boxplot(inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),outlier.shape = NA)+
-
-  coord_cartesian(ylim = quantile(emissions, c(0.1, 0.9),na.rm=TRUE))+
+  stat_boxplot(inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),outlier.shape = NA,ymin=min(emissions),ymax)+
 
   # geom_line(stat="summary",
   #           aes(linetype="Average points",colour="Mean"),
