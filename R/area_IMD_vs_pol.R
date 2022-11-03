@@ -29,6 +29,8 @@ test <- ggplot(data=area_rank)+
       shape=`Average used for NOx`,
       linetype=`Average used for NOx`)+
 
+  geom_boxplot(aes(x=dep),group=x,y=token,)
+
   geom_point()+
 
   geom_smooth(method="lm",
