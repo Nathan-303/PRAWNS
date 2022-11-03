@@ -29,7 +29,16 @@ long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble
            `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
            ,`Waste treatment \nand disposal`,"Point sources"),
     names_to = "Emission_source",
-    values_to = "emissions")
+    values_to = "emissions") %>% group_by(Emission_source)
+
+boxxy <- long_chunk %>% group_by(IMD,Emission_source) %>% summarise(q90=quantile(emissions,c(0.90)),
+                                                                      q10=quantile(emissions,c(0.10)),
+                                                                      q1=quantile(emissions,c(0.25)),
+                                                                      q3=quantile(emissions,c(0.75)),
+                                                                      med=quantile(emissions,c(0.5))) %>%
+  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions")
+
+
 
 long_chunk$Emission_source <- as.factor(long_chunk$Emission_source)
 
@@ -44,13 +53,14 @@ output <- ggplot(data=long_chunk
   facet_wrap(~fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE),
              scale="free_y"
              )+
+  geom_boxplot(data=boxxy,inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),coef=10000000000000000000000000000000000000000000000000000000000000)+
 
-  geom_line(stat="summary",
-            aes(linetype="Average points",colour="Mean"),
+geom_line(stat="summary",
+          aes(linetype="Average points",colour="Mean"),
 
-            fun=mean,
-            na.rm=TRUE
-  )+
+          fun=mean,
+          na.rm=TRUE
+)+
 
 
   geom_smooth(method="lm",
@@ -61,30 +71,30 @@ output <- ggplot(data=long_chunk
               size=1,
               na.rm = TRUE)+
 
-  #Plot the line of best fit for the median
-  geom_quantile(quantiles=0.5,
-                aes(linetype="Linear regression",colour="Median"),
+#Plot the line of best fit for the median
+geom_quantile(quantiles=0.5,
+              aes(linetype="Linear regression",colour="Median"),
 
-                formula=y~x,
-                size=1,
-                na.rm=TRUE)+
-
-
-
-  #Plot a line through the medians for each decile
-  geom_line(stat="summary",
-            fun=median,
-            aes(linetype="Average points",colour="Median"),
-
-            na.rm=TRUE)+
-
-  scale_x_continuous(
-    breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)+
-
-  scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
-                      name= "Average used")+
+              formula=y~x,
+              size=1,
+              na.rm=TRUE)+
+  #
+  #
+  #
+  # #Plot a line through the medians for each decile
+  # geom_line(stat="summary",
+  #           fun=median,
+  #           aes(linetype="Average points",colour="Median"),
+  #
+  #           na.rm=TRUE)+
+  #
+  # scale_x_continuous(
+  #   breaks=c(1:10),
+  #   expand = expansion(mult=0,add=0),
+  #   minor_breaks = FALSE)+
+  #
+  # scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
+  #                     name= "Average used")+
 
 
   scale_linetype_manual(name= "Line plotted",
