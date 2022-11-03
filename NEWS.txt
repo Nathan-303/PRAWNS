@@ -509,15 +509,22 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Fixed faceted plots calling only city
 
-0.10.4
+0.10.4 (Uploaded 3/11/22)
 
 	Added legend to gradient histogram
 
+0.10.5
+
+	Boxplots added to faceted sources
 0.11.0
 
 	[Busting the ghosts in the machine]
 
-	Speed parameter for bulk processor that enables faster runs by trimming off some functions
+	Speed parameter for bulk processor that enables faster runs by trimming off some functions (0.10.3)
+
+	Made bulk processor say when it starts graphs so problems can be identified easier (0.10.2)
+
+	Added boxplots to faceted_sources (0.10.5)
 
 Minor details:
 
