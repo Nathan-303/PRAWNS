@@ -53,7 +53,12 @@ output <- ggplot(data=long_chunk
   facet_wrap(~fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE),
              scale="free_y"
              )+
-  geom_boxplot(data=boxxy,inherit.aes=FALSE,aes(x=factor(IMD),y=emissions),coef=10000000000000000000000000000000000000000000000000000000000000)+
+
+  geom_boxplot(data=boxxy,
+               inherit.aes=FALSE,
+               aes(x=factor(IMD),
+                   y=emissions),
+               coef=10000000000000000000000000000000000000000000000000000000000000)+
 
 geom_line(stat="summary",
           aes(linetype="Average points",colour="Mean"),
@@ -97,10 +102,11 @@ geom_quantile(quantiles=0.5,
   #                     name= "Average used")+
 
 
-  scale_linetype_manual(name= "Line plotted",
+  scale_linetype_manual(name= "Line plotted:",
                           values = c("Linear regression"="solid","Average points"="dashed"),
                           guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
                       )+
+  scale_colour_discrete(name="Average used:")
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
