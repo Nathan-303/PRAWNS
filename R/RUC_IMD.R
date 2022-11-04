@@ -60,7 +60,8 @@ RUC_summary <- ggplot(temp)+
                coef=10000000000000000000000000000000000000000000000000000000000000)+
 
   geom_line(stat="summary",
-            aes(colour="Mean"),
+            aes(linetype="Average points",colour="Mean"),
+
             fun=mean)+
 
 
@@ -68,13 +69,18 @@ RUC_summary <- ggplot(temp)+
               formula=y~x,
               se=FALSE,
               show.legend=FALSE,
-              aes(colour="Mean"))+
+              aes(linetype="Linear regression",colour="Mean"))+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
                 aes(colour="Median"),
                 size =1,
                 formula=y~x)+
+
+  scale_linetype_manual(name= "Line plotted:",
+                        values = c("Linear regression"="solid","Average points"="dashed"),
+                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
+  )+
 
 
 labs(x="IMD decile where 10 is least deprived",
@@ -87,19 +93,17 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                 shape=c(NA,NA),
                                                 size=c(1,1)),
        keywidth = 3),
-       colour=guide_legend(byrow=TRUE))+
+       colour=guide_legend(byrow=TRUE),
+       ncol=2)+
 
-  theme(legend.position = c(1,0),
-        legend.justification = c(1,0))
+  theme(legend.position = "bottom")+
 
 
-#
-#   scale_x_continuous(
-#     breaks=c(1:10),
-#     expand = expansion(mult=0,add=0),
-#     minor_breaks = FALSE)+
 
-  scale_colour_viridis_d(option = "turbo")
+  scale_x_continuous(
+    breaks=c(1:10),
+    expand = expansion(mult=0,add=0),
+    minor_breaks = FALSE)
 
 Area_population <- ggplot(data=active_stack)+
 
