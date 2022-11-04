@@ -49,7 +49,8 @@ RUC_summary <- ggplot(temp)+
   aes(x=decile,
       y=Emissions)+
 
-  facet_wrap(~fct_reorder(Classification,Emissions,.desc=TRUE),scales = "free_y")+
+  facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE),
+             scales = "free_y")+
 
   geom_boxplot(data=boxxy,
                inherit.aes=FALSE,
@@ -74,12 +75,6 @@ RUC_summary <- ggplot(temp)+
                 aes(colour="Median"),
                 size =1,
                 formula=y~x)+
-
-  #Plot a line through the medians for each decile
-  geom_line(stat="summary",
-            fun=median,
-            aes(colour="Median"),
-            )+
 
 
 labs(x="IMD decile where 10 is least deprived",
