@@ -147,23 +147,9 @@ if(gotta_go_fast != "zooom"){
     write.csv(x = londonless_prawn,
               file=prawn_path)
 
-    boxxy <- londonless_prawn %>% group_by(decile,Classification) %>% summarise(q90=quantile(Emissions,c(0.90)),
-                                                                    q10=quantile(Emissions,c(0.10)),
-                                                                    q1=quantile(Emissions,c(0.25)),
-                                                                    q3=quantile(Emissions,c(0.75)),
-                                                                    med=quantile(Emissions,c(0.5))) %>%
-      pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
 
-    london_window <- ggplot(data=londonless_prawn %>% pivot_longer(cols=c("Total","Road transport","Domestic combustion"),values_to = "Emissions",names_to="Source"),
-                            aes(x=IMD,
-                                y=Emissions,
-                                colour=Source))+
-      geom_quantile(quantiles=0.5,
-                    aes(colour="Median"),
-                    size =1,
-                    formula=y~x)
 
-      geom_smooth()
+
     rm(londonless_prawn)
 
     print("Creation of PRAWNS with only London succesful")
