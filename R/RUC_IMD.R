@@ -37,19 +37,26 @@ RUC_linear_model <- temp %>%
   #get the rsquared
   do(glance(lm(Emissions~decile, data=.)))
 
-boxxy <- long_chunk %>% group_by(IMD,RUC11) %>% summarise(q90=quantile(Total,c(0.90)),
-                                                                    q10=quantile(Total,c(0.10)),
-                                                                    q1=quantile(Total,c(0.25)),
-                                                                    q3=quantile(Total,c(0.75)),
-                                                                    med=quantile(Total,c(0.5))) %>%
-  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions")
+boxxy <- temp %>% group_by(decile,Classification) %>% summarise(q90=quantile(Emissions,c(0.90)),
+                                                                    q10=quantile(Emissions,c(0.10)),
+                                                                    q1=quantile(Emissions,c(0.25)),
+                                                                    q3=quantile(Emissions,c(0.75)),
+                                                                    med=quantile(Emissions,c(0.5))) %>%
+  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
 
 
 RUC_summary <- ggplot(temp)+
   aes(x=decile,
       y=Emissions)+
 
-  facet_wrap(~fct_reorder(Classification,Emissions,.desc=TRUE),scales = "free_y")
+  facet_wrap(~fct_reorder(Classification,Emissions,.desc=TRUE),scales = "free_y")+
+
+  geom_boxplot(data=boxxy,
+               inherit.aes=FALSE,
+               aes(x=factor(decile),
+                   y=Emissions),
+               varwidth = TRUE,
+               coef=10000000000000000000000000000000000000000000000000000000000000)+
 
   geom_line(stat="summary",
             aes(linetype="Mean"),
@@ -73,11 +80,7 @@ RUC_summary <- ggplot(temp)+
             fun=median,
             aes(linetype="Median"),
             )+
-  geom_boxplot(data=boxxy,
-               inherit.aes=FALSE,
-               aes(x=factor(IMD),
-                   y=emissions),
-               coef=10000000000000000000000000000000000000000000000000000000000000)+
+
 
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
@@ -91,11 +94,11 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                 size=c(1,1)),
        keywidth = 3),
        colour=guide_legend(byrow=TRUE))+
-
-  scale_x_continuous(
-    breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)+
+#
+#   scale_x_continuous(
+#     breaks=c(1:10),
+#     expand = expansion(mult=0,add=0),
+#     minor_breaks = FALSE)+
 
   scale_colour_viridis_d(option = "turbo")
 
