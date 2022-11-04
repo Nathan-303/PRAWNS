@@ -21,9 +21,9 @@ avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
 
     geom_histogram(bins=80,aes(x=Total))+
 
-    geom_vline(aes(xintercept = mean(Total),colour="Mean"),size=1.5,key_glyph="path")+
+    geom_vline(aes(xintercept = mean(Total),colour="Mean"),size=1,key_glyph="path")+
 
-    geom_vline(aes(xintercept = median(Total),colour="Median"),size=1.5,key_glyph="path")+
+    geom_vline(aes(xintercept = median(Total),colour="Median"),size=1,key_glyph="path")+
 
     scale_colour_manual(name="Averages",
                         values=c("Mean"="orange","Median"="blue"),
@@ -33,10 +33,7 @@ avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
     coord_cartesian(expand=FALSE)+
 
     labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
-         y="Frequency")+
-
-    theme(legend.position = "bottom")
-
+         y="Frequency")
   caveat <- "top1percent"
 
   output <- list(histo,caveat)
