@@ -37,6 +37,13 @@ RUC_linear_model <- temp %>%
   #get the rsquared
   do(glance(lm(Emissions~decile, data=.)))
 
+boxxy <- long_chunk %>% group_by(IMD,RUC11) %>% summarise(q90=quantile(Total,c(0.90)),
+                                                                    q10=quantile(Total,c(0.10)),
+                                                                    q1=quantile(Total,c(0.25)),
+                                                                    q3=quantile(Total,c(0.75)),
+                                                                    med=quantile(Total,c(0.5))) %>%
+  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions")
+
 
 RUC_summary <- ggplot(temp)+
   aes(x=decile,
@@ -66,6 +73,11 @@ RUC_summary <- ggplot(temp)+
             fun=median,
             aes(linetype="Median"),
             )+
+  geom_boxplot(data=boxxy,
+               inherit.aes=FALSE,
+               aes(x=factor(IMD),
+                   y=emissions),
+               coef=10000000000000000000000000000000000000000000000000000000000000)+
 
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
