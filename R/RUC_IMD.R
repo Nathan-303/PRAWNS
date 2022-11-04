@@ -53,13 +53,13 @@ RUC_summary <- ggplot(temp)+
 
   geom_boxplot(data=boxxy,
                inherit.aes=FALSE,
-               aes(x=factor(decile),
-                   y=Emissions),
-               varwidth = TRUE,
+               aes(x=decile,
+                   y=Emissions,
+                   group=factor(decile)),
                coef=10000000000000000000000000000000000000000000000000000000000000)+
 
   geom_line(stat="summary",
-            aes(linetype="Mean"),
+            aes(colour="Mean"),
             fun=mean)+
 
 
@@ -67,25 +67,24 @@ RUC_summary <- ggplot(temp)+
               formula=y~x,
               se=FALSE,
               show.legend=FALSE,
-              aes(linetype="Mean"))+
+              aes(colour="Mean"))+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
-                aes(linetype="Median"),
+                aes(colour="Median"),
                 size =1,
                 formula=y~x)+
 
   #Plot a line through the medians for each decile
   geom_line(stat="summary",
             fun=median,
-            aes(linetype="Median"),
+            aes(colour="Median"),
             )+
 
 
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-     linetype="Average used",
-     colour= "RUC classification",
+     colour="Average used",
      title=NULL)+
 
 guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
@@ -94,6 +93,11 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                 size=c(1,1)),
        keywidth = 3),
        colour=guide_legend(byrow=TRUE))+
+
+  theme(legend.position = c(1,0),
+        legend.justification = c(1,0))
+
+
 #
 #   scale_x_continuous(
 #     breaks=c(1:10),
