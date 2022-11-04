@@ -40,8 +40,9 @@ RUC_linear_model <- temp %>%
 
 RUC_summary <- ggplot(temp)+
   aes(x=decile,
-      y=Emissions,
-      colour=fct_reorder(Classification,Emissions,.desc=TRUE))+
+      y=Emissions)+
+
+  facet_wrap(~fct_reorder(Classification,Emissions,.desc=TRUE),scales = "free_y")
 
   geom_line(stat="summary",
             aes(linetype="Mean"),
