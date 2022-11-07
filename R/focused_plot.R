@@ -82,7 +82,12 @@ focused_window <- ggplot(data = focused_long_prawn)+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-       title=NULL)
+       title=NULL)+
+
+  scale_x_continuous(
+    breaks=c(1:10),
+    expand = expansion(mult=0,add=0),
+    minor_breaks = FALSE)
 
 focused_window
 }
