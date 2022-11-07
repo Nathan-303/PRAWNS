@@ -7,6 +7,7 @@
 #'
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names, should be a string
 #'
+#' @param year The year of the data, used in graph labelling
 #' @keywords faceted, sources
 #' @export
 #' @examples
@@ -56,8 +57,9 @@ output <- ggplot(data=long_chunk
 
   geom_boxplot(data=boxxy,
                inherit.aes=FALSE,
-               aes(x=factor(IMD),
-                   y=emissions),
+               aes(x=IMD,
+                   y=emissions,
+                   group=IMD),
                coef=10000000000000000000000000000000000000000000000000000000000000)+
 
 geom_line(stat="summary",
@@ -106,7 +108,6 @@ geom_quantile(quantiles=0.5,
                           values = c("Linear regression"="solid","Average points"="dashed"),
                           guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
                       )+
-  scale_colour_discrete(name="Average used:")+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
