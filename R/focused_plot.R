@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' focused_plot()
-focused_plot <- function(focused_prawn_path,base_prawn_path){
+focused_plot <- function(focused_prawn_path,base_prawn_path,pollutant,year){
 
 active_stack <- read.csv(focused_prawn_path,
                                  check.names = FALSE,
@@ -21,7 +21,7 @@ boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(Total,c(0.90)
                                                           med=quantile(Total,c(0.5))) %>%
   pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
 
-focused_long_prawn <- active_stack %>% pivot_longer(cols=c("Total","Road transport","Domestic combustion"),
+focused_long_prawn <- active_stack %>% pivot_longer(cols=c("Total"),
                                                            values_to = "Emissions",
                                                            names_to="Source")
 
@@ -42,7 +42,7 @@ focused_window <- ggplot(data = focused_long_prawn)+
                 formula=y~x,
                 aes(x=IMD,
                     y=Total,
-                    colour="Total for \nEngland",
+                    colour="Total for\nEngland",
                     linetype="Median"))+
 
   geom_smooth(data=focused_long_prawn %>% filter(Source=="Total"),
@@ -75,7 +75,14 @@ focused_window <- ggplot(data = focused_long_prawn)+
                 colour = "Total"),
             size=1)+
 
-  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"))
+  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"))+
+
+  scale_colour_manual(breaks = c("Total","Total for\nEngland"),
+                      values=c("orange","blue"))+
+
+  labs(x=paste0("IMD decile where 10 is least deprived"),
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       title=NULL)
 
 focused_window
 }
