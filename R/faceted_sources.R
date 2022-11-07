@@ -106,7 +106,7 @@ geom_quantile(quantiles=0.5,
                           values = c("Linear regression"="solid","Average points"="dashed"),
                           guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
                       )+
-  scale_colour_discrete(name="Average used:")
+  scale_colour_discrete(name="Average used:")+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
