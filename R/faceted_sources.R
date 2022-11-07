@@ -83,23 +83,23 @@ geom_quantile(quantiles=0.5,
               formula=y~x,
               size=1,
               na.rm=TRUE)+
-  #
-  #
-  #
-  # #Plot a line through the medians for each decile
-  # geom_line(stat="summary",
-  #           fun=median,
-  #           aes(linetype="Average points",colour="Median"),
-  #
-  #           na.rm=TRUE)+
-  #
-  # scale_x_continuous(
-  #   breaks=c(1:10),
-  #   expand = expansion(mult=0,add=0),
-  #   minor_breaks = FALSE)+
-  #
-  # scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
-  #                     name= "Average used")+
+
+
+
+  #Plot a line through the medians for each decile
+  geom_line(stat="summary",
+            fun=median,
+            aes(linetype="Average points",colour="Median"),
+
+            na.rm=TRUE)+
+
+  scale_x_continuous(
+    breaks=c(1:10),
+    expand = expansion(mult=0,add=0),
+    minor_breaks = FALSE)+
+
+  scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
+                      name= "Average used")+
 
 
   scale_linetype_manual(name= "Line plotted:",
