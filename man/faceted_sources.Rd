@@ -10,6 +10,8 @@ faceted_sources(prawn_path, pollutant, year)
 \item{prawn_path}{The filepath for the prawn CSV that is to be used, should be quoted}
 
 \item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names, should be a string}
+
+\item{year}{The year of the data, used in graph labelling}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas

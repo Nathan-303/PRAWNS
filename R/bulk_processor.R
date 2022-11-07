@@ -147,13 +147,13 @@ if(gotta_go_fast != "zooom"){
     write.csv(x = londonless_prawn,
               file=prawn_path)
 
-    focused_plot(prawn_path,raw_path,pollutant,year)
+    london_focus <- focused_plot(prawn_path,raw_path,pollutant,year)
 
-    graph_saver(filename= paste0(proc_tag,"/Total",pollutant," emissions for London",file_format1),
-                plot=noxxogram[[1]],
+    graph_saver(filename= paste0(proc_tag,"/Total",pollutant," emissions for London.",file_format1),
+                plot=london_focus,
                 file_format = file_format,
                 type=1,
-                scaling=0.6)
+                scaling=0.5)
 
     rm(londonless_prawn)
 
