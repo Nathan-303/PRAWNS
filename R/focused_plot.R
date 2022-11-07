@@ -1,10 +1,19 @@
+#' Make a nice graph
+#'
+#' @param focused_prawn_path the filepath to the prawn csv file that contains only rhe target region
+#' @param base_prawn_path the filepath to the prawn csv with the whole data set, used to plot an average line for comparison
+#' @export
+#' @examples
+#' focused_plot()
+focused_plot <- function(focused_prawn_path,base_prawn_path){
 
-focused_plot <- function(focused_prawn_path){
-
-data <- active_stack <- read.csv(focused_prawn_path,
+active_stack <- read.csv(focused_prawn_path,
                                  check.names = FALSE,
                                  row.names = 1)
 
+allthings <- read.csv(base_prawn_path,
+                                       check.names = FALSE,
+                                       row.names = 1)
 boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(Total,c(0.90)),
                                                           q10=quantile(Total,c(0.10)),
                                                           q1=quantile(Total,c(0.25)),
@@ -24,7 +33,17 @@ focused_window <- ggplot(data = focused_long_prawn)+
   geom_quantile(quantiles=0.5,
                 size =1,
                 formula=y~x,
-                aes(colour=Source))+
+                aes(colour=Source,
+                    linetype="Median"))+
+
+  geom_quantile(data=allthings,
+                quantiles=0.5,
+                size =1,
+                formula=y~x,
+                aes(x=IMD,
+                    y=Total,
+                    colour="Total for \nEngland",
+                    linetype="Median"))+
 
   geom_smooth(data=focused_long_prawn %>% filter(Source=="Total"),
               method="lm",
@@ -33,15 +52,30 @@ focused_window <- ggplot(data = focused_long_prawn)+
               show.legend=FALSE,
               aes(x=IMD,
                   y=Emissions,
-                  linetype="dashed"),
-              colour="blue")+
+                  linetype="Mean",
+                  colour="Total"),
+              )+
+
+  geom_smooth(data=allthings,
+              method="lm",
+              formula=y~x,
+              se=FALSE,
+              show.legend=FALSE,
+              aes(x=IMD,
+                  y=Total,
+                  linetype="Mean",
+                  colour="Total for\nEngland"),
+              )+
 
   geom_line(data=focused_long_prawn %>% filter(Source=="Total"),
             stat="summary",
             aes(x=IMD,
                 y=Emissions,
-                linetype="dotted"),
-            colour = "blue")
+                linetype="Mean points",
+                colour = "Total"),
+            size=1)+
+
+  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"))
 
 focused_window
 }
