@@ -513,9 +513,21 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added legend to gradient histogram
 
-0.10.5
+0.10.5 (Uploaded 3/11/22)
 
 	Boxplots added to faceted sources
+
+0.10.6 (Uploaded 4/11/22)
+
+	Changed RUC IMD to facets
+
+	Improved legend for nox histogram
+
+0.10.7
+
+	Added focused_plot to make a concise graph for a filtered input (WIP)
+
+	Put focused plot within the london only section of bulk processor (WIP)
 0.11.0
 
 	[Busting the ghosts in the machine]
@@ -525,6 +537,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Made bulk processor say when it starts graphs so problems can be identified easier (0.10.2)
 
 	Added boxplots to faceted_sources (0.10.5)
+
+	Made focused plot to produce a summary of London (0.10.7)
 
 Minor details:
 
