@@ -530,6 +530,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Put focused plot within the london only section of bulk processor
 
 	Undid comment shenanigans in faceted sources
+
+0.10.8 (Uploaded 9/11/22)
+
+	Reworked area_imd_vs_pol to include boxplot and use faceting
+
 0.11.0
 
 	[Busting the ghosts in the machine]
@@ -541,6 +546,10 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Added boxplots to faceted_sources (0.10.5)
 
 	Made focused plot to produce a summary of London (0.10.7)
+
+	Reworked average IMD vs average NOx (0.10.8)
+
+	check_prawn function
 
 Minor details:
 
