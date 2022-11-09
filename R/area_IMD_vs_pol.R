@@ -19,37 +19,50 @@ active_stack <- read.csv(prawn_path) %>% group_by(Area)
 area_rank <- active_stack %>% summarise(Mean =mean(Total),
                                           Median=median(Total),
                                           dep=mean(IMD)) %>%
-  pivot_longer(c(Mean, Median), names_to = "Average used for NOx",values_to = "token") %>%
-  group_by(`Average used for NOx`) %>%
+  pivot_longer(c(Mean, Median), names_to = "NOx_average",values_to = "token") %>%
+  group_by(NOx_average) %>%
   mutate(tile=ntile(dep,8))
 
 
 test <- ggplot(data=area_rank)+
 
   aes(x=dep,
-      y=token,
-      shape=`Average used for NOx`,
-      linetype=`Average used for NOx`)+
+      y=token)+
 
-  geom_boxplot(aes(x=dep,group=tile,y=token))+
-#
-#   geom_point()+
+geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
+             aes(x=dep,
+                 group=tile,
+                 y=token,
+                 colour="Median"),
+             show.legend = FALSE,
+             outlier.shape = NA)+
 
-  geom_smooth(method="lm",
+  geom_boxplot(data=area_rank %>% filter(NOx_average=="Mean"),
+               aes(x=dep,
+                   group=tile,
+                   y=token,
+                   colour="Mean"),
+               show.legend = FALSE,
+               outlier.shape = NA)+
+
+  geom_point(data=area_rank,
+             aes(colour="Mean"),
+             shape="cross")+
+
+  geom_smooth(aes(colour=NOx_average),
+              method="lm",
               formula=y~x,
               se=FALSE,)+
 
-  scale_linetype_manual(name="Line plotted",values=c(1,2))+
-
-  scale_shape_manual(name="NOx average",
-                     values =c(16,4))+
-
+  scale_colour_manual(name="Average used",values=c("orange","blue"))+
 
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
-       title=NULL)
+       title=NULL)+
+
+  facet_wrap(~NOx_average)
 
 
 test
