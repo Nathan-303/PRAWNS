@@ -523,7 +523,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved legend for nox histogram
 
-0.10.7
+0.10.7 (Uploaded 7/11/22)
 
 	Added focused_plot to make a concise graph for a filtered input
 
