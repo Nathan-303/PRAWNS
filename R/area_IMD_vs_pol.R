@@ -32,30 +32,27 @@ test <- ggplot(data=area_rank)+
 geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
              aes(x=dep,
                  group=tile,
-                 y=token,
-                 colour="Median"),
+                 y=token),
              show.legend = FALSE,
              outlier.shape = NA)+
 
   geom_boxplot(data=area_rank %>% filter(NOx_average=="Mean"),
                aes(x=dep,
                    group=tile,
-                   y=token,
-                   colour="Mean"),
+                   y=token),
                show.legend = FALSE,
                outlier.shape = NA)+
 
-  geom_point(data=area_rank,
-             aes(colour="Mean"),
-             shape="cross")+
-
-  geom_smooth(aes(colour=NOx_average),
+  geom_smooth(
               method="lm",
               formula=y~x,
               se=FALSE,)+
 
-  scale_colour_manual(name="Average used",values=c("orange","blue"))+
-
+  geom_point(data=area_rank,
+             colour="orange",
+             shape="cross",
+             size=1.5,
+             stroke=1.5)+
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
