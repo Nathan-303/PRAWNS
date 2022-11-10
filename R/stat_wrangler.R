@@ -48,8 +48,13 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   hmm <- inner_join(resid %>%dplyr::select(Emission_source,resids,IMD),res_anchor, by=c("Emission_source","IMD")) %>%filter(resids<=bound)
 
+  down_the_rabbit_hole <- ggplot(data=hmm,aes(x=resids))+
 
-  res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids))+
+    geom_histogram()+
+
+    facet_wrap(~Emission_source,scale="free")
+
+  res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids^2))+
     geom_violin(trim=TRUE)+
     geom_hline(yintercept = 0)+
     facet_wrap(~Emission_source,scale="free_y")
@@ -134,6 +139,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   bigout
 
+  down_the_rabbit_hole
 
 }
 
