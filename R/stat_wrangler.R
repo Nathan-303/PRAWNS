@@ -152,11 +152,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   #
 
-  bigout <- list(mean_reg_mod,med_reg_mod,output,res_plot)
+  bigout <- list(mean_reg_mod,med_reg_mod,output,res_plot,deeper_down)
 
   bigout
 
-  down_the_rabbit_hole
 
 }
 

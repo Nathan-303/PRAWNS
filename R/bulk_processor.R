@@ -341,6 +341,12 @@ graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1)
             file_format = file_format,
             type=2,
             scaling=0.7)
+
+  graph_saver(filename= paste0(proc_tag,"/histogram of linear fit residuals.",file_format1),
+              plot=numbers[5][[1]],
+              file_format = file_format,
+              type=2,
+              scaling=0.7)
  rm(numbers)
 
 print("Calculating p values for randomly sliced and diced data")
@@ -353,8 +359,8 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
             scaling=0.7)
   rm(p_plot)
 
-#End skip if going in anything but slowest mode
-}
+#End skip if going in anything but slowest mode, numbers was created outside the skip and is removed inside, so this tidies it up if the skil happened
+}else{rm(numbers)}
 print("Plotting a histogram of all the sources")
 sourceogram <- LSOA_pollutant_histo(prawn_path)
 
