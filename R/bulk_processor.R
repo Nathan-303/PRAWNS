@@ -92,7 +92,7 @@ for ( index in c(1:3)){
 
     stat_facet <- side_by_side_stats(pollutant=pollutant,
                                     prawn_path=prawn_path,
-                                    year=2020)
+                                    year=year)
 
     graph_saver(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
            plot=stat_facet,
