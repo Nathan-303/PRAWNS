@@ -7,7 +7,7 @@ between the mean and median of the intercept and actual value at the top and
 bottom deciles, operates from a file or an object depending on if prawn or
 input path is used. The error values are currently not very well labeled}
 \usage{
-stat_wrangler(prawn_path = FALSE, input_path = FALSE)
+stat_wrangler(prawn_path = FALSE, input_path = FALSE, MSE_tinker = 0.999)
 }
 \arguments{
 \item{prawn_path}{the path for the data source, defaults to FALSE this should
@@ -15,6 +15,12 @@ reference a csv file}
 
 \item{input_path}{the object to use as a data source defaults to FALSE this
 should be the name of an existing object}
+
+\item{MSE_tinker}{calculates the RMSE when only the quantile specified is used
+in analysis. if this is the default at 0.99 then MSE99 in the output will be
+calculated from a model where data above the 99th percentile is removed. if
+small alterations to this change RMSE dramatically it shows that the highest
+values are having a large inmact on the RMSE}
 }
 \description{
 this function returns a tibble containing the absolute and percentage difference

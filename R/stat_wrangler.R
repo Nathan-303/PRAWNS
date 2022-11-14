@@ -89,7 +89,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999){
   RMSE99 <- topgone %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE99=mean(resids)) %>% mutate(RMSE99=MSE99^0.5)
   mean_reg_mod <-long_data %>%
     #get the rsquared
-    do(glance(lm(emissions~IMD, data=.)) %>% inner_join(RMSE,by="Emission_source")%>% inner_join(RMSE99,by="Emission_source")
+    do(glance(lm(emissions~IMD, data=.))) %>% inner_join(RMSE,by="Emission_source")%>% inner_join(RMSE99,by="Emission_source")
 
   #get the summary stats for deciles 1 and 10
   point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% c(1,10)) %>%
