@@ -8,6 +8,11 @@
 #'@param input_path the object to use as a data source defaults to FALSE this
 #'should be the name of an existing object
 #'
+#'@param MSE_tinker calculates the RMSE when only the quantile specified is used
+#'in analysis. if this is the default at 0.99 then MSE99 in the output will be
+#'calculated from a model where data above the 99th percentile is removed. if
+#'small alterations to this change RMSE dramatically it shows that the highest
+#'values are having a large inmact on the RMSE
 #' @keywords data
 #' @export
 #'
@@ -16,7 +21,7 @@
 #'
 #'
 
-stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
+stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999){
   #read the input file if a filepath is given
   if (prawn_path != FALSE){
     data <- read.csv(prawn_path,
@@ -48,7 +53,10 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   hmm <- inner_join(resid %>%dplyr::select(Emission_source,resids,IMD),res_anchor, by=c("Emission_source","IMD")) %>%filter(resids<=bound)
 
-  gaussianinputs <- hmm %>% group_by(Emission_source) %>% summarise(mean=mean(resids),stev=sd(resids))
+  topgone <- long_data %>% mutate(bound=quantile(emissions,probs=MSE_tinker)) %>%
+    filter(emissions<=bound) %>%
+    mutate(resids=resid(lm(emissions~IMD,data=cur_data())))
+
   #make a new function because range isnt wahat it says it is
   rangeffs <- function(data){
     thing <- range(data)
@@ -77,8 +85,8 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     facet_wrap(~Emission_source,scale="free_y")
 
 
-  RMSE <- resid %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE=mean(resids)) %>% mutate(RMSE=mean^0.5)
-  RMSE99 <- hmm %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE99=mean(resids)) %>% mutate(RMSE99=mean^0.5)
+  RMSE <- resid %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE=mean(resids)) %>% mutate(RMSE=MSE^0.5)
+  RMSE99 <- topgone %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE99=mean(resids)) %>% mutate(RMSE99=MSE99^0.5)
   mean_reg_mod <-long_data %>%
     #get the rsquared
     do(glance(lm(emissions~IMD, data=.)) %>% inner_join(RMSE,by="Emission_source")%>% inner_join(RMSE99,by="Emission_source")
