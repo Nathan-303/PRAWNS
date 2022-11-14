@@ -49,7 +49,12 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   hmm <- inner_join(resid %>%dplyr::select(Emission_source,resids,IMD),res_anchor, by=c("Emission_source","IMD")) %>%filter(resids<=bound)
 
   gaussianinputs <- hmm %>% group_by(Emission_source) %>% summarise(mean=mean(resids),stev=sd(resids))
-
+  #make a new function because range isnt wahat it says it is
+  rangeffs <- function(data){
+    thing <- range(data)
+    result <- thing[2]-thing[1]
+    result
+  }
   down_the_rabbit_hole <- ggplot(data=hmm,aes(x=resids))+
 
     geom_histogram()+
@@ -58,7 +63,9 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
     geom_line(aes(y=dnorm(resids,
                           mean=tapply(resids,Emission_source,mean)[PANEL],
-                          sd=tapply(resids,Emission_source,sd)[PANEL])*nrow(data)))
+                          sd=tapply(resids,Emission_source,sd)[PANEL])*
+                            #Scale the line so it's visible
+                            tapply(resids,Emission_source,rangeffs)[PANEL]/30*nrow(data)))
 
   res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids^2))+
     geom_violin(trim=TRUE)+
