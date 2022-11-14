@@ -76,9 +76,12 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
     geom_hline(yintercept = 0)+
     facet_wrap(~Emission_source,scale="free_y")
 
+
+  RMSE <- resid %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE=mean(resids)) %>% mutate(RMSE=mean^0.5)
+  RMSE99 <- hmm %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE99=mean(resids)) %>% mutate(RMSE99=mean^0.5)
   mean_reg_mod <-long_data %>%
     #get the rsquared
-    do(glance(lm(emissions~IMD, data=.)))
+    do(glance(lm(emissions~IMD, data=.)) %>% inner_join(RMSE,by="Emission_source")%>% inner_join(RMSE99,by="Emission_source")
 
   #get the summary stats for deciles 1 and 10
   point_summary <- filter(group_by(long_data,IMD,Emission_source), IMD %in% c(1,10)) %>%
