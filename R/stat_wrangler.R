@@ -48,11 +48,19 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
 
   hmm <- inner_join(resid %>%dplyr::select(Emission_source,resids,IMD),res_anchor, by=c("Emission_source","IMD")) %>%filter(resids<=bound)
 
+#Calculate the density of the residuals so that the peak can be found for plotting a gaussian
+  res_peak <- hmm %>% select(resids,Emission_source) %>% group_by(Emission_source) %>% nest() %>%
+    mutate(dens=purrr::map(data,~hist(.x$resids,plot=FALSE,breaks=30))) %>%
+    select(-data)
 
-  res_peak <- resid %>% select(resids,Emission_source) %>% group_by(Emission_source) %>% nest() %>% mutate(dens=purrr::map(data,~hist(.x$resids,plot=FALSE,)))
+#Get the maximum frequency for each source sector
+  for(sector in c(1:nrow(res_peak))){
+  confusion <- res_peak[[2]][sector] %>% map("density")
 
-  confusion <- purrr::map(re_peak,~density(.x$resids,bins=30))
+  chaos <- tibble(density=unlist(map(res_peak[[2]][sector],"density")),
+                  value=unlist(map(res_peak[[2]][sector],"mids")))
 
+  }
   down_the_rabbit_hole <- ggplot(data=hmm,aes(x=resids))+
 
     geom_histogram()+
