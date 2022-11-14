@@ -44,13 +44,21 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   #get the residuals
   resid <- long_data %>% mutate(resids=resid(lm(emissions~IMD,data=cur_data()))) %>% group_by(IMD,Emission_source)
 
-  res_anchor <- resid %>% summarise(bound=quantile(emissions,probs=0.95))
+  res_anchor <- resid %>% summarise(bound=quantile(emissions,probs=0.99))
 
   hmm <- inner_join(resid %>%dplyr::select(Emission_source,resids,IMD),res_anchor, by=c("Emission_source","IMD")) %>%filter(resids<=bound)
+
+
+  res_peak <- resid %>% select(resids,Emission_source) %>% group_by(Emission_source) %>% nest() %>% mutate(dens=purrr::map(data,~hist(.x$resids,plot=FALSE,)))
+
+  confusion <- purrr::map(re_peak,~density(.x$resids,bins=30))
 
   down_the_rabbit_hole <- ggplot(data=hmm,aes(x=resids))+
 
     geom_histogram()+
+
+    stat_function(fun=dnorm,
+      colour="blue")+
 
     facet_wrap(~Emission_source,scale="free")
 
