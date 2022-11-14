@@ -57,15 +57,19 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE){
   }
   down_the_rabbit_hole <- ggplot(data=hmm,aes(x=resids))+
 
-    geom_histogram()+
+    geom_histogram(bins = 60)+
 
-    facet_wrap(~Emission_source,scale="free")+
+    scale_y_continuous(expand=c(0,0))+
+
+    facet_wrap(~Emission_source,scale="free")
+
+  deeper_down <- down_the_rabbit_hole+
 
     geom_line(aes(y=dnorm(resids,
                           mean=tapply(resids,Emission_source,mean)[PANEL],
                           sd=tapply(resids,Emission_source,sd)[PANEL])*
                             #Scale the line so it's visible
-                            tapply(resids,Emission_source,rangeffs)[PANEL]/30*nrow(data)))
+                            tapply(resids,Emission_source,rangeffs)[PANEL]/60*nrow(data)))
 
   res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids^2))+
     geom_violin(trim=TRUE)+
