@@ -535,6 +535,22 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Reworked area_imd_vs_pol to include boxplot and use faceting
 
+0.10.9 (Uploaded 14/11/22)
+
+	Corrected year scaling in one bulk processor call
+
+	Plotted residuals as a histogram and added to bulk processor call
+
+	Calculated RMSE alongside each model fit
+
+0.10.10 
+
+	Removed redundant packages from startup
+
+0.10.11
+
+
+
 0.11.0
 
 	[Busting the ghosts in the machine]
