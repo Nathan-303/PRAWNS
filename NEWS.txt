@@ -551,6 +551,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved formatting of RUC IMD outputs
 
+	Rearranged facets in RUC decile histogram to match the faceted emissions
+
 0.11.0
 
 	[Busting the ghosts in the machine]
@@ -566,6 +568,10 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Reworked average IMD vs average NOx (0.10.8)
 
 	check_prawn function
+
+	Upgraded RUC_IMD (0.10.11)
+
+	Removed redundancies from startup (0.10.10)
 
 Minor details:
 
