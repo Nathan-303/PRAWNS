@@ -102,7 +102,7 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
 
   scale_x_continuous(
     breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
+    expand = expansion(mult=0,add=0.1),
     minor_breaks = FALSE)
 
 Area_population <- ggplot(data=active_stack)+
@@ -117,9 +117,9 @@ Area_population <- ggplot(data=active_stack)+
 
          legend.spacing.y = unit(1,"cm"))
 
-dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()
+dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11)+geom_bar()+scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE)
 
-dec_histo2 <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11,scale="free_y")+geom_bar()
+dec_histo2 <- ggplot(data=active_stack)+aes(x=IMD)+facet_wrap(~RUC11,scale="free_y")+geom_bar()+scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE)
 
 output <- list(RUC_summary,Area_population,dec_histo,dec_histo2,RUC_linear_model)
 
