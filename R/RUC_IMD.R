@@ -117,13 +117,13 @@ Area_population <- ggplot(data=active_stack)+
 
          legend.spacing.y = unit(1,"cm"))
 
-dec_histo <- ggplot(data=active_stack)+aes(x=IMD)+
-  facet_wrap(~RUC11)+geom_bar()+
+dec_histo <- ggplot(data=temp)+aes(x=decile)+
+  facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE))+geom_bar()+
   scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE,expand=expansion(mult=0,add=0.1))+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))
 
-dec_histo2 <- ggplot(data=active_stack)+aes(x=IMD)+
-  facet_wrap(~RUC11,scale="free_y")+geom_bar()+
+dec_histo2 <- ggplot(data=temp)+aes(x=decile)+
+  facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE),scale="free_y")+geom_bar()+
   scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE,expand=expansion(mult=0,add=0.1))+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))
 
