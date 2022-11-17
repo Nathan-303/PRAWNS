@@ -14,12 +14,16 @@ active_stack <- read.csv(focus,
 allthings <- read.csv(base_prawn_path,
                                        check.names = FALSE,
                                        row.names = 1)
-boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(Total,c(0.90)),
+part_boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(Total,c(0.90)),
                                                           q10=quantile(Total,c(0.10)),
                                                           q1=quantile(Total,c(0.25)),
                                                           q3=quantile(Total,c(0.75)),
-                                                          med=quantile(Total,c(0.5))) %>%
+                                                          med=quantile(Total,c(0.5)))
+
+boxxy <- part_boxxy%>%
   pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
+
+outliers <- active_stack %>% inner_join(part_boxxy,by="IMD") %>% filter(Total>q90|Total<q10)
 
 focused_long_prawn <- active_stack %>% pivot_longer(cols=c("Total"),
                                                            values_to = "Emissions",
@@ -88,18 +92,8 @@ focused_window <- ggplot(data = focused_long_prawn)+
 
   scale_x_continuous(
     breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)+
-
-  geom_point(position="jitter")
-
-  chaos <-  ggplot(data = focused_long_prawn)+
-    aes(x=IMD,
-        y=Emissions)+
-
-    geom_boxplot(data=focused_long_prawn,aes(x=IMD,group=IMD,y=Emissions))+
-
-    coord_cartesian(ylim=c(0,150))
+    expand = expansion(mult=0,add=0.1),
+    minor_breaks = FALSE)
 focused_window
 
 }
