@@ -7,7 +7,7 @@
 #' focused_plot()
 focused_plot <- function(focused_prawn_path,base_prawn_path,pollutant,year){
 
-active_stack <- read.csv(focused_prawn_path,
+active_stack <- read.csv(focus,
                                  check.names = FALSE,
                                  row.names = 1)
 
@@ -28,7 +28,9 @@ focused_long_prawn <- active_stack %>% pivot_longer(cols=c("Total"),
 focused_window <- ggplot(data = focused_long_prawn)+
   aes(x=IMD,
       y=Emissions)+
-  geom_boxplot(data=boxxy,aes(x=IMD,group=IMD,y=Emissions)) +
+  geom_boxplot(data=boxxy,
+               aes(x=IMD,group=IMD,y=Emissions),
+               coef=3) +
 
   geom_quantile(quantiles=0.5,
                 size =1,
@@ -87,7 +89,17 @@ focused_window <- ggplot(data = focused_long_prawn)+
   scale_x_continuous(
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)
+    minor_breaks = FALSE)+
 
+  geom_point(position="jitter")
+
+  chaos <-  ggplot(data = focused_long_prawn)+
+    aes(x=IMD,
+        y=Emissions)+
+
+    geom_boxplot(data=focused_long_prawn,aes(x=IMD,group=IMD,y=Emissions))+
+
+    coord_cartesian(ylim=c(0,150))
 focused_window
+
 }
