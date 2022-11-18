@@ -37,6 +37,14 @@ faces <- ggplot(data=active_stack)+
   geom_line(stat="summary",aes(linetype="Average points",colour="Mean"))+
   facet_wrap(~face,scale="free")
 
+trimmed_stack <- 
+LSOA_sizes <- ggplot(data=active_stack)+
+  aes(x=expanse)+
+  geom_histogram()+
+  scale_x_continuous(limits=c(0,100))+
+  scale_y_continuous(limits=c)
+  facet_wrap(~IMD,scale="free_y")
 
+LSOA_sizes
 #sort the sizes into 
 } 
