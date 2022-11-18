@@ -52,7 +52,7 @@ trimmed_stack <- active_stack %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
   filter(expanse<=bound&Emission_source=="Total") %>% mutate(IMDtext=paste0("IMD decile: ", IMD))
 LSOA_sizes <- ggplot(data=trimmed_stack)+
   aes(x=expanse)+
-  geom_histogram(bins=120,center=0)+
+  geom_histogram(bins=120,boundary=0)+
   facet_wrap(~fct_reorder(IMDtext,IMD),scale="free")+
   scale_x_continuous(expand=expansion(0,0))+
   

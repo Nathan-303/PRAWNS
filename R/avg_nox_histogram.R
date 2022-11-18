@@ -19,7 +19,7 @@ avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
 
   histo <- ggplot(data=raw)+
 
-    geom_histogram(bins=80,aes(x=Total))+
+    geom_histogram(bins=80,aes(x=Total),boundary=0)+
 
     geom_vline(aes(xintercept = mean(Total),colour="Mean"),size=1,key_glyph="path")+
 
