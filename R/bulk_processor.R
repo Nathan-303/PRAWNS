@@ -165,7 +165,9 @@ if(gotta_go_fast != "zooom"){
 #Make a histogram showing the distribution of NOx averages
 print("Making a histogram of pollutant averages")
 
-  noxxogram <- avg_nox_histogram(prawn_path)
+  noxxogram <- avg_nox_histogram(prawn_path=prawn_path,
+                                 pollutant=pollutant,
+                                 year=year)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=noxxogram[[1]],
@@ -388,6 +390,8 @@ if(gotta_go_fast=="No"){
               file_format = file_format,
               type=2,
               scaling=0.7)
+
+  rm(areas)
 }
 
 

@@ -11,7 +11,7 @@
 #' @export
 #' @examples
 #' avg_nox_histogram()
-avg_nox_histogram <- function(prawn_path, pollutant="NOx", year =2020){
+avg_nox_histogram <- function(prawn_path, pollutant, year){
 
   raw <- read.csv(prawn_path,
                   row.names=1,
