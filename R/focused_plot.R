@@ -7,7 +7,7 @@
 #' focused_plot()
 focused_plot <- function(focused_prawn_path,base_prawn_path,pollutant,year){
 
-active_stack <- read.csv(focus,
+active_stack <- read.csv(focused_prawn_path,
                                  check.names = FALSE,
                                  row.names = 1)
 
