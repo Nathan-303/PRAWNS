@@ -33,17 +33,18 @@ active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibb
   mutate(expanse=expanse/10^6,face=ntile(expanse,12)) 
 
 faces <- ggplot(data=active_stack)+
-  aes(x=IMD,y=emissions,group=Emission_source)+
-  geom_line(stat="summary",aes(linetype="Average points",colour="Mean"))+
-  facet_wrap(~face,scale="free")
+  aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
+  geom_line(stat="summary")+
+  facet_wrap(~face,scale="free")+
+  scale_colour_viridis_d(option = "turbo",name="Emission source")
+  
 
-trimmed_stack <- 
-LSOA_sizes <- ggplot(data=active_stack)+
+trimmed_stack <- active_stack %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
+  filter(expanse<=bound&Emission_source=="Total")
+LSOA_sizes <- ggplot(data=trimmed_stack)+
   aes(x=expanse)+
   geom_histogram()+
-  scale_x_continuous(limits=c(0,100))+
-  scale_y_continuous(limits=c)
-  facet_wrap(~IMD,scale="free_y")
+  facet_wrap(~IMD,scale="free")
 
 LSOA_sizes
 #sort the sizes into 
