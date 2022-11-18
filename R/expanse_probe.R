@@ -41,6 +41,7 @@ faces <- ggplot(data=active_stack)+
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
+  scale_y_continuous(expand=expansion(mult=c(0,0.05),add=c(0.5,0)))+
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=NULL
