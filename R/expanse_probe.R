@@ -36,16 +36,32 @@ faces <- ggplot(data=active_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
   geom_line(stat="summary")+
   facet_wrap(~face,scale="free")+
-  scale_colour_viridis_d(option = "turbo",name="Emission source")
+  scale_colour_viridis_d(option = "turbo",name="Emission source")+
+  scale_x_continuous(
+    breaks=c(1:10),
+    expand = expansion(mult=0,add=0),
+    minor_breaks = FALSE)+
+  labs(x=paste0("IMD decile where 10 is least deprived"),
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       title=NULL
+  )
   
 
 trimmed_stack <- active_stack %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
-  filter(expanse<=bound&Emission_source=="Total")
+  filter(expanse<=bound&Emission_source=="Total") %>% mutate(IMDtext=paste0("IMD decile: ", IMD))
 LSOA_sizes <- ggplot(data=trimmed_stack)+
   aes(x=expanse)+
-  geom_histogram()+
-  facet_wrap(~IMD,scale="free")
+  geom_histogram(bins=120,center=0)+
+  facet_wrap(~fct_reorder(IMDtext,IMD),scale="free")+
+  scale_x_continuous(expand=expansion(0,0))+
+  
+  labs(x=bquote("LSOA area / "~km^2),
+       y="Frequency",
+       title=NULL
+  )
 
-LSOA_sizes
+output <- list(faces,LSOA_sizes)
+
+output
 #sort the sizes into 
 } 
