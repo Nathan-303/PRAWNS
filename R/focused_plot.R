@@ -81,9 +81,9 @@ focused_window <- ggplot(data = focused_long_prawn)+
                 colour = "Total"),
             size=1)+
 
-  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"))+
+  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"),name = "Line plotted")+
 
-  scale_colour_manual(breaks = c("Total","Total for\nEngland"),
+  scale_colour_manual(breaks = c("London","England\nwithout\nLondon"),
                       values=c("orange","blue"))+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),

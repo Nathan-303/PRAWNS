@@ -4,7 +4,7 @@
 \alias{avg_nox_histogram}
 \title{Create a histogram of the average NOx per LSOA with the median and mean values labelled}
 \usage{
-avg_nox_histogram(prawn_path, pollutant = "NOx", year = 2020)
+avg_nox_histogram(prawn_path, pollutant, year)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
