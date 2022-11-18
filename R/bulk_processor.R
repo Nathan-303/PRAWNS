@@ -372,7 +372,23 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 
 rm(sourceogram)
 
+if(gotta_go_fast=="No"){
+  areas <- expanse_probe(prawn_path = prawn_path,
+                         pollutant=pollutant,
+                         year=year)
 
+  graph_saver(filename= paste0(proc_tag,"/emissions by source faceted by size 12.",file_format1),
+              plot=areas[[1]],
+              file_format = file_format,
+              type=3,
+              scaling=0.7)
+
+  graph_saver(filename= paste0(proc_tag,"/histogram of LSOA areas faceted by IMD.",file_format1),
+              plot=areas[[2]],
+              file_format = file_format,
+              type=2,
+              scaling=0.7)
+}
 
 
  print(paste0("Graphing pass ",index," of 3 successful"))
