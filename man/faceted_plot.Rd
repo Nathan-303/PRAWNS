@@ -5,7 +5,7 @@
 \title{Creates a graph wit a little window showing every item in the group separately
 e.g. if grouped by city there would be a tile for every city.}
 \usage{
-faceted_plot(prawn_path, group, pollutant)
+faceted_plot(prawn_path, group, pollutant, facet_name)
 }
 \arguments{
 \item{prawn_path}{the data source to use, should be a quoted csv filepath}
@@ -15,6 +15,8 @@ anything else to group by county/UA, this is due to jerry rigging a path
 around non standard evaluation}
 
 \item{pollutant}{the name of the pollutant, used to name the graphs}
+
+\item{facet_name}{a string used to name what the data is being faceted by in the graph title}
 }
 \description{
 Creates a graph wit a little window showing every item in the group separately
