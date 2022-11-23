@@ -12,25 +12,25 @@
 #' @export
 #' @examples
 #' expanse_probe()
-#' 
+#'
 
 expanse_probe <- function(prawn_path,pollutant,year){
-  
-active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>% 
+
+active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
   mutate(point_sources=Total-Total_no_points)%>%
-  
+
   rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
          `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%
-  
+
   pivot_longer(
     cols=c("Agricultural","Domestic combustion","Energy production",
            "Industrial combustion","Industrial production","Natural",
            `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
            ,`Waste treatment \nand disposal`,"Point sources"),
     names_to = "Emission_source",
-    values_to = "emissions") %>% group_by(Emission_source)%>% 
+    values_to = "emissions") %>% group_by(Emission_source)%>%
   #convert to km2
-  mutate(expanse=expanse/10^6,face=ntile(expanse,12)) 
+  mutate(expanse=expanse/10^6,face=ntile(expanse,12))
 
 faces <- ggplot(data=active_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
@@ -46,16 +46,16 @@ faces <- ggplot(data=active_stack)+
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=NULL
   )
-  
 
-trimmed_stack <- active_stack %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
+
+trimmed_stack <- active_stack %>% group_by(IMD) %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
   filter(expanse<=bound&Emission_source=="Total") %>% mutate(IMDtext=paste0("IMD decile: ", IMD))
 LSOA_sizes <- ggplot(data=trimmed_stack)+
   aes(x=expanse)+
   geom_histogram(bins=120,boundary=0)+
   facet_wrap(~fct_reorder(IMDtext,IMD),scale="free")+
   scale_x_continuous(expand=expansion(0,0))+
-  
+
   labs(x=bquote("LSOA area / "~km^2),
        y="Frequency",
        title=NULL
@@ -64,5 +64,5 @@ LSOA_sizes <- ggplot(data=trimmed_stack)+
 output <- list(faces,LSOA_sizes)
 
 output
-#sort the sizes into 
-} 
+#sort the sizes into
+}

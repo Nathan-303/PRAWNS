@@ -233,7 +233,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted by city.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_city.",file_format1),
         plot=city_facets,
         file_format = file_format,
         type=3,
@@ -247,7 +247,7 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
                               group= "fireball or something",
                               pollutant = pollutant)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted by area.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_area.",file_format1),
          plot=area_facets,
          file_format = file_format,
          type=3,
@@ -379,7 +379,7 @@ if(gotta_go_fast=="No"){
                          pollutant=pollutant,
                          year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/emissions by source faceted by size 12.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/emissions_by_sector_in_12_size_percentiles.",file_format1),
               plot=areas[[1]],
               file_format = file_format,
               type=3,
