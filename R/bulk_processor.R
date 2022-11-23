@@ -231,7 +231,8 @@ if(gotta_go_fast == "No"){
 print("Faceting by city, this may take a while")
 city_facets <- faceted_plot(prawn_path = prawn_path,
                             group= "TCITY15NM",
-                            pollutant = pollutant)
+                            pollutant = pollutant,
+                            facet_name="city")
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_city.",file_format1),
         plot=city_facets,
@@ -244,8 +245,9 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
 #Facet the mean and median pollutant levels by county/unitary authority
 print("Faceting by county/UA, this may take a while")
 area_facets <- faceted_plot(prawn_path = prawn_path,
-                              group= "fireball or something",
-                              pollutant = pollutant)
+                              group= "counties",
+                              pollutant = pollutant,
+                              facet_name="county/unitary authority")
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_area.",file_format1),
          plot=area_facets,
