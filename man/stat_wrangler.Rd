@@ -7,7 +7,12 @@ between the mean and median of the intercept and actual value at the top and
 bottom deciles, operates from a file or an object depending on if prawn or
 input path is used. The error values are currently not very well labeled}
 \usage{
-stat_wrangler(prawn_path = FALSE, input_path = FALSE, MSE_tinker = 0.999)
+stat_wrangler(
+  prawn_path = FALSE,
+  input_path = FALSE,
+  MSE_tinker = 0.999,
+  pollutant
+)
 }
 \arguments{
 \item{prawn_path}{the path for the data source, defaults to FALSE this should
