@@ -69,7 +69,11 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999){
 
     scale_y_continuous(expand=c(0,0))+
 
-    facet_wrap(~Emission_source,scale="free")
+    facet_wrap(~Emission_source,scale="free")+
+
+
+    labs(x=bquote("Residual values for "~.(pollutant)~"emissions when fitted to a linear model/ tonnes "~km^2),
+         y="Frequency")
 
   deeper_down <- down_the_rabbit_hole+
 
@@ -79,10 +83,11 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999){
                             #Scale the line so it's visible
                             tapply(resids,Emission_source,rangeffs)[PANEL]/60*nrow(data)))
 
-  res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids^2))+
+  res_plot <- ggplot(data=hmm,aes(x=factor(IMD),y=resids))+
     geom_violin(trim=TRUE)+
     geom_hline(yintercept = 0)+
-    facet_wrap(~Emission_source,scale="free_y")
+    facet_wrap(~Emission_source,scale="free_y")+
+    labs(y=bquote("Residual values for "~.(pollutant)~"emissions when fitted to a linear model/ tonnes "~km^2))
 
 
   RMSE <- resid %>% group_by(Emission_source) %>% mutate(resids=resids^2) %>% summarise(MSE=mean(resids)) %>% mutate(RMSE=MSE^0.5)
