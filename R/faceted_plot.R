@@ -7,10 +7,12 @@
 #' around non standard evaluation
 #'
 #' @param pollutant the name of the pollutant, used to name the graphs
+#'
+#' @param facet_name a string used to name what the data is being faceted by in the graph title
 #' @export
 #' faceted_plot
 
-faceted_plot <- function(prawn_path,group,pollutant){
+faceted_plot <- function(prawn_path,group,pollutant,facet_name){
 
 filtered_data <- read.csv(prawn_path) %>% tibble()
 
@@ -26,7 +28,7 @@ City_profile <- ggplot(data=filtered_data)+
 
   labs(x="IMD decile",
        y=paste0(pollutant," emissions"),
-       title=paste0(" ", pollutant, "emission"))+
+       title=paste0("Total ", pollutant, " emissions, faceted by ",facet_name))+
 
   #Plot the line of best fit for the mean
   geom_smooth(method="lm",
