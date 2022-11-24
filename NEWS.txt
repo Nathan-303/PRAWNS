@@ -571,13 +571,15 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Aesthetic tweaks to a few graphs
 
-0.10.15
+0.10.15 (Uploaded 24/11/22)
 
 	Improved facet by LSOA size
 
 	Improved many axis labels
 
 	Removed titles from some graphs
+
+	Updated to R 4.2.2 (No issues)
 
 0.11.0
 
