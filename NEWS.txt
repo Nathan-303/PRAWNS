@@ -559,12 +559,25 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Patched population density function into bulk processor
 
-0.10.13
+0.10.13 (Uploaded 18/11/22)
 
 	Fixed some defaults causing problems
 
 	Rescaled some outputs
 
+0.10.14 (Uploaded 23/11/22)
+
+	Rescaled full page output so a caption could be fitted
+
+	Aesthetic tweaks to a few graphs
+
+0.10.15
+
+	Improved facet by LSOA size
+
+	Improved many axis labels
+
+	Removed titles from some graphs
 
 0.11.0
 
@@ -591,6 +604,8 @@ Minor details:
 	Improve internal folder structure 
 
 	Check and improve all vignettes
+
+	Fix scale on faceted sizes
 
 Planned content updates:
 

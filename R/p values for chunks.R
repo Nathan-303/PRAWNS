@@ -41,7 +41,9 @@ reveal <- ggplot(data=aha)+
   aes(x=p.value_IMD)+
   geom_histogram(boundary=0,bins = 60)+
   facet_wrap(~Emission_source,scale="free_y")+
-  coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")
+  coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")+
+  labs(x="P value for linear model linking IMD and NOx emissions",
+       y= "Frequency")
 }else{
   reveal <- ggplot(data)+geom_bar(aes(x=IMD))+labs(title="Not here")
 }
