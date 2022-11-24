@@ -19,14 +19,14 @@ expanse_probe <- function(prawn_path,pollutant,year){
 active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
   mutate(point_sources=Total-Total_no_points)%>%
 
-  rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
-         `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%
+  rename("Other transport and \nmobile machinery"=`Other transport and mobile machinery`,
+         `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%mutate(Other_sources=Solvents+Natural+`Energy production`+`Waste treatment \nand disposal`+Agricultural) %>%
 
   pivot_longer(
-    cols=c("Agricultural","Domestic combustion","Energy production",
-           "Industrial combustion","Industrial production","Natural",
-           `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
-           ,`Waste treatment \nand disposal`,"Point sources"),
+    cols=c("Domestic combustion",
+           "Industrial combustion","Industrial production",
+           "Other transport and \nmobile machinery","Road transport","Total"
+           ,"Point sources","Other_sources"),
     names_to = "Emission_source",
     values_to = "emissions") %>% group_by(Emission_source)%>%
   #convert to km2
