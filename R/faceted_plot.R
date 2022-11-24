@@ -25,11 +25,6 @@ City_profile <- ggplot(data=filtered_data)+
     minor_breaks = FALSE,
     expand = expansion(mult=0,add=0))+
 
-
-  labs(x="IMD decile",
-       y=paste0(pollutant," emissions"),
-       title=paste0("Total ", pollutant, " emissions, faceted by ",facet_name))+
-
   #Plot the line of best fit for the mean
   geom_smooth(method="lm",
               formula=y~x,
