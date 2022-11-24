@@ -45,7 +45,8 @@ faces <- ggplot(data=active_stack)+
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=NULL
-  )
+  )+
+  guides(colour=guide_legend(override.aes = list(size=2)))
 
 
 trimmed_stack <- active_stack %>% group_by(IMD) %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
