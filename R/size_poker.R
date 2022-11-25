@@ -45,10 +45,11 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     geom_line(aes(colour=Emission_source))+
 
     scale_x_continuous(breaks=c(1:10),
-                       labels=paste0(c(1:10),"\n",axticks))+
+                       labels=paste0(c(1:10),"\n",axticks),
+                       expand=expansion(0,0))+
 
-    labs(x=bquote("LSOA expanse decile \n Area of the largest LSOA in this decile /"~km^2),
-              y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))
+    labs(x=expression(atop("LSOA expanse decile","Area of the largest LSOA in this decile /"~km^2)),
+              y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))
 
 
 
