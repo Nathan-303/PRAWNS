@@ -33,7 +33,7 @@ size_poker <- function(prawn_path,pollutant,year){
     group_by(size_decile,Emission_source)
 
 
-axticks <- quantile(reformed_data$expanse,probs=seq(0.1,1,0.1)) %>% signif(2)
+axticks <- quantile(reformed_data$expanse,probs=seq(0.1,1,0.1)) %>% signif(2) %>% as.numeric()
 
 axticks2 <- paste0(c(1:10),"\n",axticks,"km^2")
 almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
@@ -45,10 +45,10 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     geom_line(aes(colour=Emission_source))+
 
     scale_x_continuous(breaks=c(1:10),
-                       labels=axticks2)+
+                       labels=paste0(c(1:10),"\n",axticks))+
 
-    labs(labs(x=paste0("LSOA expanse decile and the area of the largest LSOA in this decile"),
-              y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2)))
+    labs(x=bquote("LSOA expanse decile \n Area of the largest LSOA in this decile /"~km^2),
+              y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))
 
 
 
