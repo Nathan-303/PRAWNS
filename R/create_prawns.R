@@ -111,11 +111,10 @@ create_prawns <- function(raster_path=FALSE,
     tibble() %>%
     rename(LSOA11CD=LSOA.code..2011.) %>%
     inner_join(city_data,by="LSOA11CD")%>%
-    inner_join(rural_urban,by=c("LSOA11NM"="LSOA11NM"))
+    inner_join(rural_urban,by=c("LSOA11CD"="LSOA11CD"))
 
   #Links the demographic data to the references to the shapefile
-  demo_linked_reference <- inner_join(city_data,LSOA_demographics,by=c("LSOA11CD"="LSOA11CD","FID"="FID",
-                                                                       "LSOA11NM"="LSOA11NM","TCITY15CD"="TCITY15CD",
+  demo_linked_reference <- inner_join(city_data,LSOA_demographics,by=c("LSOA11CD"="LSOA11CD","FID"="FID","TCITY15CD"="TCITY15CD",
                                                                        "TCITY15NM"="TCITY15NM"))
 
   #Reads the county lookup data
