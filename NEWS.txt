@@ -581,7 +581,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Updated to R 4.2.2 (No issues)
 
-0.11.0
+0.11.0 (Uploaded 25/11/22)
 
 	[Busting the ghosts in the machine]
 
@@ -600,6 +600,18 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Upgraded RUC_IMD (0.10.11)
 
 	Removed redundancies from startup (0.10.10)
+
+	Updated to R 4.2.2 (0.10.15)
+
+0.11.1
+
+	Got size_poker working and folded it into bulk_processor
+
+0.12.0
+
+	[Darkest before the dawn]
+
+	size_poker function
 
 Minor details:
 

@@ -15,8 +15,15 @@ size_poker <- function(prawn_path,pollutant,year){
 
   reformed_data <- data %>%
     #aggregate all non
-    mutate(`Other sources`=Solvents+Natural+`Energy production`+`Waste treatment and disposal`+`Agricultural`+
-             `Point sources`+`Domestic combustion`+`Industrial combustion`+`Industrial production`+
+    mutate(`Other sources`=Solvents+
+             Natural+
+             `Energy production`+
+             `Waste treatment and disposal`+
+             `Agricultural`+
+             `Point sources`+
+             `Domestic combustion`+
+             `Industrial combustion`+`
+           Industrial production`+
            `Other transport and mobile machinery`) %>%
 
     pivot_longer(
