@@ -22,8 +22,8 @@ size_poker <- function(prawn_path,pollutant,year){
              `Agricultural`+
              `Point sources`+
              `Domestic combustion`+
-             `Industrial combustion`+`
-           Industrial production`+
+             `Industrial combustion`+
+             `Industrial production`+
            `Other transport and mobile machinery`) %>%
 
     pivot_longer(
