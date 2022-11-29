@@ -12,11 +12,11 @@ p_values_for_chunks <- function(prawn_path){
                  row.names=1,
                  check.names=FALSE)
 
-set.seed(8653)
-if (nrow(data)<=73*384){
-test <- sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace=FALSE)
 
-chunkable <- bind_cols(data,test) %>% rename(chunk=`...85`) %>% group_by(chunk)
+if (nrow(data)<=73*384){
+test <- tibble(chunk=sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace=FALSE))
+
+chunkable <- bind_cols(data,test)%>% group_by(chunk)
 
 long_data <- chunkable %>% pivot_longer(
   cols=c("Agricultural","Domestic combustion","Energy production",
