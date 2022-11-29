@@ -23,7 +23,6 @@ part_boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(Total,c(
 boxxy <- part_boxxy%>%
   pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
 
-outliers <- active_stack %>% inner_join(part_boxxy,by="IMD") %>% filter(Total>q90|Total<q10)
 
 focused_long_prawn <- active_stack %>% pivot_longer(cols=c("Total"),
                                                            values_to = "Emissions",
@@ -34,21 +33,22 @@ focused_window <- ggplot(data = focused_long_prawn)+
       y=Emissions)+
   geom_boxplot(data=boxxy,
                aes(x=IMD,group=IMD,y=Emissions),
-               coef=3) +
+               coef=3,
+               show.legend = FALSE) +
 
   geom_quantile(quantiles=0.5,
-                size =1,
+                linewidth =1,
                 formula=y~x,
-                aes(colour=Source,
+                aes(colour="London",
                     linetype="Median"))+
 
   geom_quantile(data=allthings,
                 quantiles=0.5,
-                size =1,
+                linewidth =1,
                 formula=y~x,
                 aes(x=IMD,
                     y=Total,
-                    colour="Total for\nEngland",
+                    colour="England\nwithout\nLondon",
                     linetype="Median"))+
 
   geom_smooth(data=focused_long_prawn %>% filter(Source=="Total"),
@@ -59,7 +59,7 @@ focused_window <- ggplot(data = focused_long_prawn)+
               aes(x=IMD,
                   y=Emissions,
                   linetype="Mean",
-                  colour="Total"),
+                  colour="London"),
               )+
 
   geom_smooth(data=allthings,
@@ -70,7 +70,7 @@ focused_window <- ggplot(data = focused_long_prawn)+
               aes(x=IMD,
                   y=Total,
                   linetype="Mean",
-                  colour="Total for\nEngland"),
+                  colour="England\nwithout\nLondon"),
               )+
 
   geom_line(data=focused_long_prawn %>% filter(Source=="Total"),
@@ -78,13 +78,14 @@ focused_window <- ggplot(data = focused_long_prawn)+
             aes(x=IMD,
                 y=Emissions,
                 linetype="Mean points",
-                colour = "Total"),
-            size=1)+
+                colour = "London"),
+            linewidth=1)+
 
   scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"),name = "Line plotted")+
 
   scale_colour_manual(breaks = c("London","England\nwithout\nLondon"),
-                      values=c("orange","blue"))+
+                      values=c("orange","blue"),
+                      name="LSOAs in\nEngland used")+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
