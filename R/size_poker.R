@@ -26,8 +26,10 @@ size_poker <- function(prawn_path,pollutant,year){
              `Industrial production`+
            `Other transport and mobile machinery`) %>%
 
+    mutate(true_sum=`Other sources`+`Road transport`)
+
     pivot_longer(
-      cols=c("Road transport","Total","Other sources"),
+      cols=c("Road transport","Total","Other sources","true_sum"),
       names_to = "Emission_source",
       values_to = "emissions") %>%
     #sort into thirds based on IMD rank
@@ -58,8 +60,8 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     labs(x=expression(atop("LSOA expanse decile","Area of the largest LSOA in this decile /"~km^2)),
               y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))+
 
-    scale_colour_manual(breaks=c("Total","Road transport","Other sources"),
-                        values=c("black","blue","orange"),
+    scale_colour_manual(breaks=c("Total","Road transport","Other sources","true_sum"),
+                        values=c("black","blue","orange","green"),
                         name="Emission source")
 
 
