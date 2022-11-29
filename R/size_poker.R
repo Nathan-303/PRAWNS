@@ -26,7 +26,7 @@ size_poker <- function(prawn_path,pollutant,year){
              `Industrial production`+
            `Other transport and mobile machinery`) %>%
 
-    mutate(true_sum=`Other sources`+`Road transport`)
+    mutate(true_sum=`Other sources`+`Road transport`) %>%
 
     pivot_longer(
       cols=c("Road transport","Total","Other sources","true_sum"),
@@ -37,7 +37,7 @@ size_poker <- function(prawn_path,pollutant,year){
          third=ntile(Index.of.Multiple.Deprivation..IMD..Rank..where.1.is.most.deprived.,5),
          size_decile=ntile(expanse,10)) %>%
 
-    filter(third==1) %>%
+  #  filter(third==1) %>%
 
     group_by(size_decile,Emission_source)
 
