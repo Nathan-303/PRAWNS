@@ -18,8 +18,6 @@ faceted_sources <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
-  mutate(point_sources=Total-Total_no_points)%>%
-
   rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
          `Waste treatment \nand disposal`=`Waste treatment and disposal`,
          ) %>%
