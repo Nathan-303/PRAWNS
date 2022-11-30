@@ -146,8 +146,8 @@ create_prawns <- function(raster_path=FALSE,
 
     NamedList <- c("Agricultural","Domestic combustion","Energy production",
                    "Industrial combustion","Industrial production","Natural",
-                   "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
-                   ,"Total_no_points","Waste treatment and disposal")
+                   "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area"
+                   ,"Total","Waste treatment and disposal")
 
     Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste","pntsrc"),pollutant_data_name,last_two_digits_year)
 
@@ -168,7 +168,7 @@ create_prawns <- function(raster_path=FALSE,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total-Total_no_points) %>%
+  ) %>% mutate("Point sources"=Total-Tot_area) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
 
