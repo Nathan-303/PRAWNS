@@ -149,7 +149,7 @@ create_prawns <- function(raster_path=FALSE,
                    "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
                    ,"Total_no_points","Waste treatment and disposal")
 
-    Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","total","totarea","waste","pntsrc"),pollutant_data_name,last_two_digits_year)
+    Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste","pntsrc"),pollutant_data_name,last_two_digits_year)
 
     tracer <- colnames(data) %in% Nmdlst
 
@@ -168,7 +168,7 @@ create_prawns <- function(raster_path=FALSE,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total-Total_no_points) %>%
+  ) %>% mutate("Point sources"=Total_no_points-Total) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
 
