@@ -168,7 +168,7 @@ create_prawns <- function(raster_path=FALSE,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total_no_points-Total) %>%
+  ) %>% mutate("Point sources"=Total-Total_no_points) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
 

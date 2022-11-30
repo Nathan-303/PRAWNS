@@ -20,7 +20,6 @@ size_poker <- function(prawn_path,pollutant,year){
              `Energy production`+
              `Waste treatment and disposal`+
              `Agricultural`+
-             `Point sources`+
              `Domestic combustion`+
              `Industrial combustion`+
              `Industrial production`+
