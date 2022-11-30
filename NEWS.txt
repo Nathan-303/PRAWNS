@@ -603,15 +603,25 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Updated to R 4.2.2 (0.10.15)
 
-0.11.1
+0.11.1 (Uploaded 29/11/22)
 
 	Got size_poker working and folded it into bulk_processor
+
+	Fixed emergent bug in p values for chunks
+
+0.11.2 (Uploaded 30/11/22)
+
+	Updated all colour schemes to blue/orange
+
+	Clarified labels for London only
 
 0.12.0
 
 	[Darkest before the dawn]
 
 	size_poker function
+
+	Unified colour schemes
 
 Minor details:
 
