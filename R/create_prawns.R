@@ -53,9 +53,9 @@ create_prawns <- function(raster_path=FALSE,
     full.names = TRUE)
 
   #Store the rasters as a stack
-  source_stack <- rast(filelist[1])
+  source_stack <- rast(filelist[1]) %>% terra::subst(is.na,0)
   for(index in 2:length(filelist)){
-    source_stack <- c(source_stack,rast(filelist[index]))
+    source_stack <- c(source_stack,rast(filelist[index]) %>% terra::subst(is.na,0))
   }
   }
   #If its a tif
@@ -168,7 +168,7 @@ create_prawns <- function(raster_path=FALSE,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total-Tot_area) %>%
+  ) %>% mutate("Point sources"=Tot_area-Total) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
   #Return the resulting object
 
