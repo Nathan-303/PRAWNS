@@ -53,9 +53,9 @@ create_prawns <- function(raster_path=FALSE,
     full.names = TRUE)
 
   #Store the rasters as a stack
-  source_stack <- rast(filelist[1]) %>% terra::subst(is.na,0)
+  source_stack <- rast(filelist[1]) %>% terra::subst(NA,0)
   for(index in 2:length(filelist)){
-    source_stack <- c(source_stack,rast(filelist[index]) %>% terra::subst(is.na,0))
+    source_stack <- c(source_stack,rast(filelist[index]) %>% terra::subst(NA,0))
   }
   }
   #If its a tif
