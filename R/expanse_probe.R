@@ -38,7 +38,7 @@ converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>% mutat
 faces <- ggplot(data=converted_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
   geom_line(stat="summary")+
-  facet_wrap(~name,scale="free")+
+  facet_wrap(~name)+
   scale_colour_viridis_d(option = "turbo",name="Emission source")+
   scale_x_continuous(
     breaks=c(1:10),
