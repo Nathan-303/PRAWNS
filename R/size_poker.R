@@ -15,21 +15,20 @@ size_poker <- function(prawn_path,pollutant,year){
 
   reformed_data <- data %>%
     #aggregate all non
-    mutate(`Other sources`=Solvents+
-             Natural+
+    mutate(`Industrial sources`=Solvents+
              `Energy production`+
              `Waste treatment and disposal`+
-             `Agricultural`+
-             `Domestic combustion`+
              `Industrial combustion`+
              `Industrial production`+
-             `Point sources`+
-           `Other transport and mobile machinery`+`Offshore`) %>%
+             `Point sources`,
 
-    mutate(true_sum=`Other sources`+`Road transport`) %>%
+           `Other sources`=Natural+
+             `Agricultural`+
+             `Other transport and mobile machinery`+
+             `Domestic combustion`) %>%
 
     pivot_longer(
-      cols=c("Road transport","Total","Other sources"),
+      cols=c("Road transport","Total","Other sources","Industrial sources"),
       names_to = "Emission_source",
       values_to = "emissions") %>%
     #sort into thirds based on IMD rank
@@ -55,13 +54,14 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
 
     scale_x_continuous(breaks=c(1:10),
                        labels=paste0(c(1:10),"\n",axticks),
-                       expand=expansion(0,0))+
+                       expand=expansion(0,0),
+                       minor_breaks = FALSE)+
 
     labs(x=expression(atop("LSOA expanse decile","Area of the largest LSOA in this decile /"~km^2)),
               y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))+
 
-    scale_colour_manual(breaks=c("Total","Road transport","Other sources"),
-                        values=c("black","blue","orange"),
+    scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial sources"),
+                        values=c("black","blue","orange","pink"),
                         name="Emission source")
 
 
