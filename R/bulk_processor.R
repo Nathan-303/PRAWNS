@@ -325,17 +325,6 @@ numbers <- stat_wrangler(prawn_path = prawn_path,pollutant=pollutant)
   }
   print("Putting the change in concentration from most to least deprived on a bar graph")
 
-  pie <- gradient_bar(pollutant = pollutant,
-                      #The input path is the same as the output file for numbers
-                      input_path=paste0(proc_tag,"/difference between deciles.csv"))
-
-  graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ in total difference betweem most and least deprived.",file_format1),
-              plot=pie,
-              file_format = file_format,
-              type=1,
-              scaling=0.4)
-
-  rm(pie)
 #end skip if going in fastest mode
 }
 #Begin skip if going in anything but slowest mode
