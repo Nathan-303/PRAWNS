@@ -19,24 +19,26 @@ expanse_probe <- function(prawn_path,pollutant,year){
 active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
   rename("Other transport and \nmobile machinery"=`Other transport and mobile machinery`,
-         `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%mutate(Other_sources=Solvents+Natural+`Energy production`+`Waste treatment \nand disposal`+Agricultural) %>%
+         `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%mutate(`Other sources`=Solvents+Natural+`Energy production`+`Waste treatment \nand disposal`+Agricultural) %>%
 
   pivot_longer(
     cols=c("Domestic combustion",
            "Industrial combustion","Industrial production",
            "Other transport and \nmobile machinery","Road transport","Total"
-           ,"Point sources","Other_sources"),
+           ,"Point sources","Other sources"),
     names_to = "Emission_source",
     values_to = "emissions") %>% group_by(Emission_source)%>%
   #convert to km2
   mutate(expanse=expanse/10^6,face=ntile(expanse,12))
 
-axticks <- quantile(reformed_data$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric()
-
-faces <- ggplot(data=active_stack)+
+axticks <- tibble(hi=quantile(reformed_data$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric())
+axticks <- axticks %>% mutate(lo=c(0,axtickshi) %>%  head(-1),
+                              key=c(1:12))
+converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>% mutate(name=paste0("LSOAs ranging from ",lo,"  to",hi,"km^2"))
+faces <- ggplot(data=converted_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
   geom_line(stat="summary")+
-  facet_wrap(~face,scale="free")+
+  facet_wrap(~name,scale="free")+
   scale_colour_viridis_d(option = "turbo",name="Emission source")+
   scale_x_continuous(
     breaks=c(1:10),
