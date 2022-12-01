@@ -17,7 +17,6 @@
 expanse_probe <- function(prawn_path,pollutant,year){
 
 active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
-  mutate(point_sources=Total-Total_no_points)%>%
 
   rename("Other transport and \nmobile machinery"=`Other transport and mobile machinery`,
          `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%mutate(Other_sources=Solvents+Natural+`Energy production`+`Waste treatment \nand disposal`+Agricultural) %>%
@@ -31,6 +30,8 @@ active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibb
     values_to = "emissions") %>% group_by(Emission_source)%>%
   #convert to km2
   mutate(expanse=expanse/10^6,face=ntile(expanse,12))
+
+axticks <- quantile(reformed_data$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric()
 
 faces <- ggplot(data=active_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
