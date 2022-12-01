@@ -615,6 +615,15 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Clarified labels for London only
 
+0.11.3 (Uploaded 30/11/22)
+
+	Figured out and fixed the point source discrepancy
+
+0.11.4 (Uploaded 1/12/22)
+
+	Upgraded expanse_probe to be more descriptive and useful
+
+	Removed bar graph of change in sources from bulk processor as it was a waste of time
 0.12.0
 
 	[Darkest before the dawn]
