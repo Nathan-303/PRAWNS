@@ -34,7 +34,10 @@ active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibb
 axticks <- tibble(hi=quantile(reformed_data$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric())
 axticks <- axticks %>% mutate(lo=c(0,axtickshi) %>%  head(-1),
                               key=c(1:12))
-converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>% mutate(name=paste0("LSOAs ranging from ",lo,"  to",hi,"km^2"))
+converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>%
+  mutate(name=paste0("LSOAs ranging from ",lo,"  to",hi,"km^2")) %>%
+  group_by(name,IMD,Emission_source) %>%
+  summarise(emissions=mean(emissions))
 faces <- ggplot(data=converted_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
   geom_line(stat="summary")+
