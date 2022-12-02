@@ -378,6 +378,7 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 rm(sourceogram)
 
 if(gotta_go_fast=="No"){
+print("Plotting inequalities for size slices")
   areas <- expanse_probe(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
