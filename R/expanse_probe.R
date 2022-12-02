@@ -31,17 +31,17 @@ active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibb
   #convert to km2
   mutate(expanse=expanse/10^6,face=ntile(expanse,12))
 
-axticks <- tibble(hi=quantile(reformed_data$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric())
-axticks <- axticks %>% mutate(lo=c(0,axtickshi) %>%  head(-1),
+axticks <- tibble(hi=quantile(active_stack$expanse,probs=seq(0.08333,1,0.08333)) %>% signif(2) %>% as.numeric())
+axticks <- axticks %>% mutate(lo=c(0,hi) %>%  head(-1),
                               key=c(1:12))
 converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>%
-  mutate(name=paste0("LSOAs ranging from ",lo,"  to",hi,"km^2")) %>%
+  mutate(name=paste0("LSOAs ranging from ",lo," to ",hi," km^2")) %>%
   group_by(name,IMD,Emission_source) %>%
-  summarise(emissions=mean(emissions))
+  summarise(emissions=mean(emissions),face=face)
 faces <- ggplot(data=converted_stack)+
   aes(x=IMD,y=emissions,colour=fct_reorder(Emission_source,emissions,mean,na.rm=TRUE,.desc=TRUE))+
   geom_line(stat="summary")+
-  facet_wrap(~name)+
+  facet_wrap(~fct_reorder(name,face))+
   scale_colour_viridis_d(option = "turbo",name="Emission source")+
   scale_x_continuous(
     breaks=c(1:10),
