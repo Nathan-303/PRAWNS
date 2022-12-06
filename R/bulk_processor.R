@@ -377,6 +377,19 @@ graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by s
 
 rm(sourceogram)
 
+print("plotting emissions vs LSOA expanse faceted by source sector")
+emexpanse <- emissions_by_expanse(prawn_path,
+                                  pollutant,
+                                  year)
+
+graph_saver(filename= paste0(proc_tag,"/",pollutant,"emissions by LSOA expanse faceted by source.",file_format1),
+            plot=emexpanse,
+            file_format = file_format,
+            type=2,
+            scaling=0.7)
+
+rm(emexpanse)
+
 if(gotta_go_fast=="No"){
 print("Plotting inequalities for size slices")
   areas <- expanse_probe(prawn_path = prawn_path,
