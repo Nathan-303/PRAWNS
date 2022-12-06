@@ -624,6 +624,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Upgraded expanse_probe to be more descriptive and useful
 
 	Removed bar graph of change in sources from bulk processor as it was a waste of time
+
+0.11.5 (Uploaded 6/12/22)
+
+	Added emissions_by_expanse function and folded into bulk processor
+
 0.12.0
 
 	[Darkest before the dawn]
@@ -631,6 +636,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	size_poker function
 
 	Unified colour schemes
+
+	emissions_by_expanse function
 
 Minor details:
 
