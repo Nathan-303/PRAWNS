@@ -49,7 +49,7 @@ output <- ggplot()+
   geom_point(data=grouped_chunk %>% filter(exnum<2))+
   #plot the data outside a nice x range
   geom_point(data=text_points,aes(x=dummy,y=Emissions),
-             colour="blue")+
+             colour="orange")+
   # geom_text_repel(data=text_points,
   #           aes(x=dummy,
   #               y=Emissions,
@@ -61,9 +61,9 @@ output <- ggplot()+
   #           point.padding = 3)+
   
   scale_x_continuous(limits=c(0,3),
-                     expand=expansion(c(0,0.1)),
+                     expand=expansion(c(0,0.05)),
                      breaks=c(0:3),
-                     labels = c(0,1,2,"hmm"))
+                     labels = c(0,1,2,"n.a."))
 
 output
 
