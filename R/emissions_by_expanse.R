@@ -49,7 +49,10 @@ output <- ggplot()+
   geom_point(data=grouped_chunk %>% filter(exnum<2))+
   #plot the data outside a nice x range
   geom_point(data=text_points,aes(x=dummy,y=Emissions),
-             colour="orange")+
+             colour="orange",
+             shape=4,
+             stroke=1.5
+             )+
   # geom_text_repel(data=text_points,
   #           aes(x=dummy,
   #               y=Emissions,
@@ -63,7 +66,10 @@ output <- ggplot()+
   scale_x_continuous(limits=c(0,3),
                      expand=expansion(c(0,0.05)),
                      breaks=c(0:3),
-                     labels = c(0,1,2,"n.a."))
+                     labels = c(0,1,2,"n.a."))+
+  
+  labs(x=bquote("LSOA area / "~km^2),
+       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^2))
 
 output
 
