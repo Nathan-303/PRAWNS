@@ -70,22 +70,6 @@ faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
   guides(colour=guide_legend(override.aes = list(size=2)))
 
 
-trimmed_stack <- active_stack %>% group_by(IMD) %>% mutate(bound=quantile(expanse,probs=0.9)) %>%
-  filter(expanse<=bound&Emission_source=="Total") %>% mutate(IMDtext=paste0("IMD decile: ", IMD))
-
-LSOA_sizes <- ggplot(data=trimmed_stack)+
-  aes(x=expanse)+
-  geom_histogram(bins=120,boundary=0)+
-  facet_wrap(~fct_reorder(IMDtext,IMD),scale="free")+
-  scale_x_continuous(expand=expansion(0,0))+
-
-  labs(x=bquote("LSOA area / "~km^2),
-       y="Frequency",
-       title=NULL
-  )
-
-output <- list(faces,LSOA_sizes)
-
-output
+faces
 #sort the sizes into
 }
