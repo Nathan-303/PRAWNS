@@ -177,6 +177,18 @@ print("Making a histogram of pollutant averages")
 
   rm(noxxogram)
 
+print("Plotting inequality for expanse quintiles")
+exquint <- expanse_quintile_inequality(prawn_path=prawn_path,
+                                       pollutant=pollutant,
+                                       year=year)
+graph_saver(filename= paste0(proc_tag,"/",pollutant," emission inequality for expanse quintiles.",file_format1),
+            plot=exquint,
+            file_format = file_format,
+            type=1,
+            scaling=0.6)
+
+rm(exquint)
+
 #Make and save a graph where the sources are all faceted
 print("Making a faceted graph of sources")
 source_facets <- faceted_sources(prawn_path = prawn_path,
