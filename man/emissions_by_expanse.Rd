@@ -16,3 +16,6 @@ emissions_by_expanse(prawn_path, pollutant, year)
 \description{
 Make a nice graph
 }
+\examples{
+please no error message
+}
