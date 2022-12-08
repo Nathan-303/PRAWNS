@@ -46,13 +46,27 @@ faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
                          name=bquote("LSOA area / "~km^2))+
   scale_x_continuous(
     breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
+    expand = expansion(mult=0,add=0.1),
     minor_breaks = FALSE)+
+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=c(0.5,0)))+
+
   labs(x=paste0("IMD decile where 10 is least deprived"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=NULL
   )+
+
+  geom_point(aes(x=IMD,
+                 y=emissions,
+                 colour=name,
+                 shape=as.factor(face)),
+             stroke=1.5,
+             size=1.5)+
+
+  scale_shape_manual(values=c("1"=21,"2"=22,"3"=23,"4"=24,"5"=25),
+                     name=bquote("LSOA area / "~km^2),
+                     labels=unique(converted_stack$name))
+
   guides(colour=guide_legend(override.aes = list(size=2)))
 
 
