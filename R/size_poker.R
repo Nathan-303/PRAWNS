@@ -61,7 +61,7 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
               y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2))+
 
     scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial sources"),
-                        values=c("black","blue","orange","pink"),
+                        values=c("black","royalblue","#FB8022FF","olivedrab1"),
                         name="Emission source")
 
 

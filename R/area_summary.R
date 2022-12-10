@@ -145,7 +145,7 @@ area_summary <- function(prawn_path,
 
       scale_colour_manual(name="Line type",
                           breaks = c('Mean','Median','UK Average'),
-                          values=c('Mean'='blue','Median'="#FB8022FF",'UK Average'='black'))
+                          values=c('Mean'='royalblue','Median'="#FB8022FF",'UK Average'='black'))
 
 
     #Creates a cumulative distribution plot showing what fractions of each decile are exposed to less than the amount of NOx on the axis

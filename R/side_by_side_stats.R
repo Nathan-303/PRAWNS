@@ -105,7 +105,7 @@ source_summary <- ggplot(temp)+
                       labels=c("Average points","Linear regression"),
                       guide="legend")+
 
-  scale_colour_viridis_d(option="turbo")+
+  scale_colour_manual(values=c("Median"="royalblue","Mean"="#FB8022FF",'UK mean'='black'))+
 
   guides(colour=guide_legend(override.aes=list(size=3)),
 
@@ -113,7 +113,9 @@ source_summary <- ggplot(temp)+
                                                   colour="black",
                                                   shape=c(NA,NA),
                                                   size=c(1,1)))
-  )
+  )+
+
+  theme_classic()
 
 source_summary
 

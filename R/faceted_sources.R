@@ -98,7 +98,7 @@ geom_quantile(quantiles=0.5,
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-  scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
+  scale_colour_manual(values = c("Median"="royalblue","Mean"="#FB8022FF"),
                       name= "Average used")+
 
 

@@ -43,7 +43,7 @@ faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
   aes(x=IMD,y=emissions,colour=name)+
   geom_line(stat="summary",linewidth=2)+
 
-  scale_colour_manual(values=c("black","dodgerblue","olivedrab1","#FB8022FF","deeppink2"),
+  scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
                          name=bquote("LSOA area / "~km^2))+
   scale_x_continuous(
     breaks=c(1:10),
@@ -57,7 +57,9 @@ faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
        title=NULL
   )+
 
-  guides(colour=guide_legend(override.aes = list(linewidth=2)))
+  guides(colour=guide_legend(override.aes = list(linewidth=2)))+
+
+  theme_classic()
 
 
 faces

@@ -105,7 +105,7 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
     expand = expansion(mult=0,add=0.1),
     minor_breaks = FALSE)+
 
-  scale_colour_manual(values = c("Median"="blue","Mean"="orange"),
+  scale_colour_manual(values = c("Median"="royalblue","Mean"="#FB8022FF"),
                       name= "Average used")
 
 Area_population <- ggplot(data=active_stack)+
