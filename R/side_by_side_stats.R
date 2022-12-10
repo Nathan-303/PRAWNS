@@ -10,9 +10,9 @@
 #'
 side_by_side_stats <- function(pollutant,year,prawn_path){
 
-active_stack <- read.csv(prawn_path,
+active_stack <- read.csv(file=prawn_path,
                          check.names = FALSE,
-                         row.names = 1)%>%
+                          row.names = 1)%>%
   replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
                                                              "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
                                                              "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
@@ -105,17 +105,18 @@ source_summary <- ggplot(temp)+
                       labels=c("Average points","Linear regression"),
                       guide="legend")+
 
-  scale_colour_manual(values=c("Median"="royalblue","Mean"="#FB8022FF",'UK mean'='black'))+
+  scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"))+
 
   guides(colour=guide_legend(override.aes=list(size=3)),
 
          linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                   colour="black",
                                                   shape=c(NA,NA),
-                                                  size=c(1,1)))
+                                                  linewidth=c(1,1)))
   )+
 
-  theme_classic()
+  theme(panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
 
 source_summary
 
