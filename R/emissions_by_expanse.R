@@ -49,7 +49,7 @@ output <- ggplot()+
   geom_point(data=grouped_chunk %>% filter(exnum<2))+
   #plot the data outside a nice x range
   geom_point(data=text_points,aes(x=dummy,y=Emissions),
-             colour="orange",
+             colour="#FB8022FF",
              shape=4,
              stroke=1.5
              )+

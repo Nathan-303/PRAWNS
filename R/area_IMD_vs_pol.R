@@ -49,7 +49,7 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
               se=FALSE,)+
 
   geom_point(data=area_rank,
-             colour="orange",
+             colour="#FB8022FF",
              shape="cross",
              size=1.5,
              stroke=1.5)+

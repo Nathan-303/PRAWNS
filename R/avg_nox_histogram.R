@@ -26,7 +26,7 @@ avg_nox_histogram <- function(prawn_path, pollutant, year){
     geom_vline(aes(xintercept = median(Total),colour="Median"),size=1,key_glyph="path")+
 
     scale_colour_manual(name="Averages",
-                        values=c("Mean"="orange","Median"="blue"),
+                        values=c("Mean"="#FB8022FF","Median"="blue"),
                         breaks=c("Mean","Median"),
                         guide=guide_legend(override.aes = list(size=c(2,2))))+
 
