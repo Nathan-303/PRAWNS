@@ -41,9 +41,9 @@ converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>%
 
 faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
   aes(x=IMD,y=emissions,colour=name)+
-  geom_line(stat="summary")+
+  geom_line(stat="summary",linewidth=2)+
 
-  scale_colour_manual(values=c("black","blue","#A2FC3CFF","#FB8022FF","deeppink1"),
+  scale_colour_manual(values=c("black","dodgerblue","olivedrab1","#FB8022FF","deeppink2"),
                          name=bquote("LSOA area / "~km^2))+
   scale_x_continuous(
     breaks=c(1:10),
@@ -57,18 +57,7 @@ faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
        title=NULL
   )+
 
-  geom_point(aes(x=IMD,
-                 y=emissions,
-                 colour=name,
-                 shape=as.factor(face)),
-             stroke=1.5,
-             size=1.5)+
-
-  scale_shape_manual(values=c("1"=21,"2"=22,"3"=23,"4"=24,"5"=25),
-                     name=bquote("LSOA area / "~km^2),
-                     labels=unique(converted_stack$name))
-
-  guides(colour=guide_legend(override.aes = list(size=2)))
+  guides(colour=guide_legend(override.aes = list(linewidth=2)))
 
 
 faces
