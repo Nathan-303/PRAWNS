@@ -32,11 +32,11 @@ curiosity <- coeffs %>% filter(p.value<=0.05)
 
 test <- ggplot()+
   geom_histogram(data=coeffs,
-                 aes(x=estimate,fill="blue"),bins=50)+
+                 aes(x=estimate,fill="royalblue"),bins=50)+
 
   geom_histogram(data=curiosity,
                  aes(x=estimate,
-                     fill="orange"),
+                     fill="#FB8022FF"),
                  bins=50)+
 
   scale_fill_identity(guide="legend",labels=c("p>0.05","p<0.05"),breaks=c("royalblue","#FB8022FF"),name="p value")+
