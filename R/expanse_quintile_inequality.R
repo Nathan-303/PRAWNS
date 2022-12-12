@@ -41,7 +41,7 @@ converted_stack <- inner_join(active_stack,axticks,by=c("face"="key")) %>%
 
 faces <- ggplot(data=converted_stack %>% filter(Emission_source=="Total"))+
   aes(x=IMD,y=emissions,colour=name)+
-  geom_line(stat="summary",linewidth=2)+
+  geom_line(stat="summary",linewidth=1)+
 
   scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
                          name=bquote("LSOA area / "~km^2))+
