@@ -62,7 +62,10 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
 
     scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial sources"),
                         values=c("black","royalblue","#FB8022FF","olivedrab1"),
-                        name="Emission source")
+                        name="Emission source")+
+
+    theme(panel.background = element_blank(),
+          axis.line = element_line(colour = "black"))
 
 
 
