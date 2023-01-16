@@ -69,20 +69,20 @@ for ( index in c(1:3)){
       pollutant_data_name = pollutant_data_name,
       year=year,
       pollutant=pollutant,
-      output_path = paste0(proc_tag,"/PRAWN with NA.csv"))
+      output_path = prawn_path)
 
     #set all na values to 0
-    transformer <- read.csv(paste0(proc_tag,"/PRAWN with NA.csv"),
-                    row.names=1,
-                    check.names=FALSE) %>%
-
-      replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
-                      "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
-                      "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
-                      ,"Total_no_points"=0,"Waste treatment and disposal"=0))
-
-    write.csv(x=transformer,
-              file=prawn_path)
+    # transformer <- read.csv(paste0(proc_tag,"/PRAWN with NA.csv"),
+    #                 row.names=1,
+    #                 check.names=FALSE) %>%
+    #
+    #   replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
+    #                   "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
+    #                   "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
+    #                   ,"Total_no_points"=0,"Waste treatment and disposal"=0))
+    #
+    # write.csv(x=transformer,
+    #           file=prawn_path)
 
     shape_test <- shapefile_checker(shapefile_path)
 
@@ -181,6 +181,7 @@ print("Plotting inequality for expanse quintiles")
 exquint <- expanse_quintile_inequality(prawn_path=prawn_path,
                                        pollutant=pollutant,
                                        year=year)
+
 graph_saver(filename= paste0(proc_tag,"/",pollutant," emission inequality for expanse quintiles.",file_format1),
             plot=exquint,
             file_format = file_format,
