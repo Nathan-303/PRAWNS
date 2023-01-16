@@ -37,7 +37,7 @@ minimalist_graph <- function(prawn_path,pollutant,year){
     geom_smooth(aes(IMD,
                     emissions,
                     colour = fct_reorder(Emission_source,emissions,mean,.desc=TRUE)),
-    linewidth=2,
+    linewidth=1.2,
     method = "lm",
     se=FALSE)+
   
@@ -45,10 +45,10 @@ minimalist_graph <- function(prawn_path,pollutant,year){
               aes(x=IMD,
                 y=emissions,
                 colour = Emission_source),
-                linewidth=1)+
+                linewidth=0.6)+
     
     labs(x="IMD decile where 10 is least deprived",
-         y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+         y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
          colour="Emission source")+
     
     scale_x_continuous(
@@ -60,14 +60,14 @@ minimalist_graph <- function(prawn_path,pollutant,year){
 
 
     scale_size_identity(name= "Line plotted",
-                        breaks=c(1,2),
+                        breaks=c(0.6,1.2),
                         labels=c("Average points","Linear regression"),
                         guide="legend")+
     
     scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF"))+
     
-    # guides(colour=guide_legend(override.aes=list(size=3))
-    # )+
+    guides(colour=guide_legend(override.aes=list(size=3))
+    )+
     
     theme(panel.background = element_blank(),
           axis.line = element_line(colour = "black"))
