@@ -126,9 +126,12 @@ dec_histo <- ggplot(data=temp)+aes(x=decile)+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))
 
 dec_histo2 <- ggplot(data=temp)+aes(x=decile)+
-  facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE),scale="free_y")+geom_bar()+
+  facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE),scale="free_y")+
+  geom_bar()+
   scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE,expand=expansion(mult=0,add=0.1))+
-  scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))
+  scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))+
+  labs(x="IMD deprivation decile",
+       y="Frequency")
 
 
 output <- list(RUC_summary,Area_population,dec_histo,dec_histo2,RUC_linear_model)
