@@ -50,9 +50,7 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
 
   geom_point(data=area_rank,
              colour="#FB8022FF",
-             shape="cross",
-             size=1.5,
-             stroke=0.8)+
+             size=0.8)+
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
