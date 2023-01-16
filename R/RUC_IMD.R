@@ -131,7 +131,7 @@ dec_histo2 <- ggplot(data=temp)+aes(x=decile)+
   scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE,expand=expansion(mult=0,add=0.1))+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0))+
   labs(x="IMD deprivation decile",
-       y="Frequency")
+       y="Number of LSOAs")
 
 
 output <- list(RUC_summary,Area_population,dec_histo,dec_histo2,RUC_linear_model)
