@@ -56,6 +56,16 @@ graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
             scaling=scaling)
    }
 
-
+#Grpahical abstract thumbnail
+  if (type==4){
+    ggsave(filename= filename,
+         plot=plot,
+         width=4,
+         height=8,
+         units = "mm",
+         dpi = 600,
+         device=file_format,
+         scaling=scaling)
+  }
 }
 
