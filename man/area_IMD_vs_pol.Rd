@@ -13,6 +13,8 @@ area_IMD_vs_pol(prawn_path, pollutant, area_type, year)
 \item{pollutant}{The pollutant name, used in graph annotations}
 
 \item{area_type}{can be "City" or "County/UA"}
+
+\item{year}{}
 }
 \description{
 Plots the average IMD vs the average NOx for geographical areas (cities or
