@@ -7,6 +7,8 @@
 #'
 #'@param area_type can be "City" or "County/UA"
 #'
+#'@param year
+#'
 #'@export
 
 area_IMD_vs_pol <- function(prawn_path,pollutant,area_type,year){
@@ -43,18 +45,36 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
                show.legend = FALSE,
                outlier.shape = NA)+
 
-  geom_smooth(
-              method="lm",
-              formula=y~x,
-              se=FALSE,)+
 
   geom_point(data=area_rank,
              colour="#FB8022FF",
-             size=0.8)+
+             shape="cross",
+             size=1.1,
+             stroke=0.6)+
+  #reimpose the lines on top of the points, its janky but necessary
+  geom_boxplot(data=area_rank %>% filter(NOx_average=="Mean"),
+               aes(x=dep,
+                   group=tile,
+                   y=token),
+               show.legend = FALSE,
+               alpha=0,
+               outlier.shape = NA)+
+  geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
+               aes(x=dep,
+                   group=tile,
+                   y=token),
+               show.legend = FALSE,
+               alpha=0,
+               outlier.shape = NA)+
+  geom_smooth(
+    method="lm",
+    formula=y~x,
+    se=FALSE)+
+
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
-       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
        title=NULL)+
 
   facet_wrap(~NOx_average)
