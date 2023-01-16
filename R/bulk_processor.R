@@ -232,7 +232,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
          plot=RUC_breakdown[[4]],
          file_format = file_format,
          type=2,
-         scaling=0.4)
+         scaling=1)
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
 
