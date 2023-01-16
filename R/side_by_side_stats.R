@@ -13,10 +13,7 @@ side_by_side_stats <- function(pollutant,year,prawn_path){
 active_stack <- read.csv(file=prawn_path,
                          check.names = FALSE,
                           row.names = 1)%>%
-  replace_na(list("Agricultural"=0,"Domestic combustion"=0,"Energy production"=0,
-                                                             "Industrial combustion"=0,"Industrial production"=0,"Natural"=0,
-                                                             "Offshore"=0,"Other transport and mobile machinery"=0,"Road transport"=0,"Solvents"=0,"Total"=0
-                                                             ,"Total_no_points"=0,"Waste treatment and disposal"=0)) %>%
+
 
   #mutate in the columns you want (removing natural NOx)
   mutate(
