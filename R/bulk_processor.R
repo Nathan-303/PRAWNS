@@ -231,7 +231,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
   graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
          file_format = file_format,
-         type=1,
+         type=2,
          scaling=0.4)
 
   write.csv(x=RUC_breakdown[[5]],file = paste0(proc_tag,"/analysis of RUC linear models.csv"))
@@ -296,7 +296,7 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
        plot=area_histogram,
        file_format = file_format,
        type=1,
-       scaling=0.5)
+       scaling=0.37)
 
   rm(area_histogram)
 
@@ -309,8 +309,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
          plot=avg_imd_pol[[1]],
          file_format = file_format,
-         type=1,
-         scaling=0.5)
+         type=2,
+         scaling=1.2)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
