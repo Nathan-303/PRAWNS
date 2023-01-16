@@ -162,6 +162,20 @@ if(gotta_go_fast != "zooom"){
   }
 #End a skip if in the fastest mode
 }
+  #do the bare minumum graph for abstracts
+print("making a minimalistic graph")
+minimal <- minimalist_graph(prawn_path=prawn_path,
+                            pollutant=pollutant,
+                            year=year)
+
+graph_saver(filename= paste0(proc_tag,"/Minimalistic",pollutant," emissions.",file_format1),
+            plot=minimal,
+            file_format = file_format,
+            type=4,
+            scaling=0.5)
+
+rm(londonless_prawn)
+
 #Make a histogram showing the distribution of NOx averages
 print("Making a histogram of pollutant averages")
 
