@@ -635,13 +635,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Made a graph showing emissions inequality over size quintiles
 
-0.11.7
+0.11.7 (Uploaded 12/12/22)
 
 	Substituted orange for a better orange in orange/blue scales
 
 	Used the new scale in 4/5 colour scales
 
-0.11.8
+0.11.8 (Uploaded 16/1/23)
 
 	Altered area_IMD_vs_pol
 		Improved plot visinility by bodging render order
@@ -653,6 +653,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
  	Created minimalist grapbh function for making a graphical abstract
 		folded into bulk processor
+
+0.11.9
+	
+	Improved minimalist graph
+
+	Improved yaxis labels on expanse quintile inequality
 
 0.12.0
 
