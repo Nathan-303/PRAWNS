@@ -654,13 +654,13 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
  	Created minimalist grapbh function for making a graphical abstract
 		folded into bulk processor
 
-0.11.9
+0.11.9 (Uploaded 23/1/23)
 	
 	Improved minimalist graph
 
 	Improved yaxis labels on expanse quintile inequality
 
-0.12.0
+0.12.0 (Uploaded 23/1/23)
 
 	[Darkest before the dawn]
 
