@@ -13,4 +13,5 @@ library(stars)
 library(devtools)
 library(roxygen2)
 library(ragg)
+library(raster)
 }

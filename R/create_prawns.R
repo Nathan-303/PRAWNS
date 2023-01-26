@@ -94,7 +94,7 @@ create_prawns <- function(raster_path=FALSE,
     }else{
       raw_path <- paste0(tools::file_path_sans_ext(output_path),"raw.csv")
         write.csv(file=output_path,
-                    x = output)
+                    x = output)}}
 
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
@@ -138,7 +138,7 @@ create_prawns <- function(raster_path=FALSE,
 
   prawns <- inner_join(output,refined_chunk,by="LSOA11CD")
 
-
+  if(raster_path!=FALSE){
   renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
 # Rename the columns for readability --------------------------------------
@@ -168,8 +168,10 @@ create_prawns <- function(raster_path=FALSE,
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% mutate("Point sources"=Total-Tot_area) %>%
+  )
+  prawns <- prawns %>% mutate("Point sources"=Total-Tot_area) %>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
+  }
   #Return the resulting object
 
 # Output the results ------------------------------------------------------
@@ -181,5 +183,5 @@ if (output_path!=FALSE){
 
 prawns
   }
-}}
+
 
