@@ -65,7 +65,8 @@ create_prawns <- function(raster_path=FALSE,
   }
   #If it's a csv
   if(csv_coordinates_path!=FALSE){
-    csv_raster <- read.csv(file="Data/pm2.5test.csv",skip = 5,
+    csv_raster <- read.csv(file=csv_coordinates_path,
+                           skip = 5,
                            row.names=1,
                            check.names=FALSE) %>% tibble()
 
@@ -136,7 +137,8 @@ create_prawns <- function(raster_path=FALSE,
 # Combine the pollution means with the additional data --------------------
 
 
-  prawns <- inner_join(output,refined_chunk,by="LSOA11CD")
+  prawns <- inner_join(output,refined_chunk,by="LSOA11CD")%>%
+    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
 
   if(raster_path!=FALSE){
   renamer <- function(data,last_two_digits_year,pollutant_data_name){
@@ -169,8 +171,7 @@ create_prawns <- function(raster_path=FALSE,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   )
-  prawns <- prawns %>% mutate("Point sources"=Total-Tot_area) %>%
-    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
+  prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
   #Return the resulting object
 
