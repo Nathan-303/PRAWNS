@@ -167,12 +167,12 @@ area_summary <- function(prawn_path,
 
 
     #Create a pivoted copy of the data so the sources can be graphed as separate variables
-    long_chunk <- filtered_data %>% tibble() %>% mutate(point_sources=Total-Total_no_points)%>%
+    long_chunk <- filtered_data %>% tibble() %>%
       pivot_longer(
         cols=c("Agricultural","Domestic combustion","Energy production",
                "Industrial combustion","Industrial production","Natural",
                "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total"
-               ,"Waste treatment and disposal","point_sources"),
+               ,"Waste treatment and disposal","Point sources"),
         names_to = "Emission_source",
         values_to = "emissions")
     long_chunk$Emission_source <- factor(long_chunk$Emission_source)
