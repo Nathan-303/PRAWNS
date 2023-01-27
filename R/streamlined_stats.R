@@ -52,18 +52,18 @@ source_summary <- ggplot(temp)+
   geom_smooth(aes(decile,
                   value,
                   colour = Emission_source,
-                  linetype = stat,
-                  size=2
                   ),
+              linewidth=1.2,
               method = "lm",
               se=FALSE,
               )+
   geom_line(aes(decile,
                  value,
                  colour = Emission_source,
-                 linetype = stat,
-                size=1
-                ))+
+                ),
+            linewidth=0.6)+
+
+facet_wrap(~stat)+
 
   labs(x="IMD decile where 10 is least deprived",
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
@@ -76,17 +76,6 @@ source_summary <- ggplot(temp)+
     minor_breaks = FALSE)+
 
   scale_y_continuous(expand=c(0,0))+
-#
-#   theme(text=element_text(size=30),
-#         panel.spacing.x = unit(3,"lines"),
-#         legend.key.size = unit(2,"lines"),
-#         legend.key.height = unit(4,"lines")
-#         )+
-
-  scale_size_identity(name= "Line plotted",
-                      breaks=c(1,2),
-                      labels=c("Average points","Linear regression"),
-                      guide="legend")+
 
   scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2","grey"))+
 
