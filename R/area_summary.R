@@ -179,16 +179,9 @@ area_summary <- function(prawn_path,
 
     long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
 
-    city_sources <- Decile_vs_emission_by_variable(
-      active_stack = long_chunk,
-      chosen_decile = IMD,
-      chosen_grouping = Emission_source,
-      xaxis = "IMD Decile",
-      yaxis = "NOx emissions",
-      title = paste0("Source breakdown for ",targets),
-      chosen_variable = emissions
-    )+
-      geom_quantile(quantiles=0.5,linetype=2)
+    city_sources <- streamlined_stats(pollutant="NOx",
+                                      year=2019,
+                                      input=filtered_data)
 
     #Create the gridded oputput object
     output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
