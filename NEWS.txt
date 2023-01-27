@@ -670,11 +670,19 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	emissions_by_expanse function
 
-0.12.1
+0.12.1 (Uploaded 27/1/23)
 
 	Improved csv processing capacity of dreate prawns by resolving a bug
 
 	Added model_plot function
+
+0.12.2 (Uploaded 27/1/23)
+
+	Updated area_summary to use the new naming conventions and efficiency in prawns
+
+	Streamplined_plot function
+
+	Fullscreen graph size in graph saver
 
 0.13.0 
 
@@ -682,9 +690,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improve capacity to use modelled data
 
-	Upgrade csv processing
+	Upgrade csv processing (0.12.1)
 
-	Automate graphs from csv data
+	Automate graphs from csv data (0.12.1)
+
+	Fullscreen graph size in graph saver (0.12.2)
+
 Minor details:
 
 	Improve internal folder structure 
