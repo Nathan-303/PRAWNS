@@ -67,5 +67,16 @@ graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
          device=file_format,
          scaling=scaling)
   }
+
+#full page powerpoint slide
+  if (type==5){
+    ggsave(filename= filename,
+           plot=plot,
+           width=1920,
+           height=1080,
+           units = "pixels",
+           device=file_format,
+           scaling=scaling)
+  }
 }
 
