@@ -76,12 +76,12 @@ source_summary <- ggplot(temp)+
     minor_breaks = FALSE)+
 
   scale_y_continuous(expand=c(0,0))+
-
-  theme(text=element_text(size=30),
-        panel.spacing.x = unit(3,"lines"),
-        legend.key.size = unit(2,"lines"),
-        legend.key.height = unit(4,"lines")
-        )+
+#
+#   theme(text=element_text(size=30),
+#         panel.spacing.x = unit(3,"lines"),
+#         legend.key.size = unit(2,"lines"),
+#         legend.key.height = unit(4,"lines")
+#         )+
 
   scale_size_identity(name= "Line plotted",
                       breaks=c(1,2),
