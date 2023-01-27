@@ -327,7 +327,8 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          scaling=1.2)
 
   write.csv(x=avg_imd_pol[[2]],
-            file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by city .csv"))
+            file = paste0(proc_tag,"/model analysis for",
+                          pollutant," average vs average IMD by city .csv"))
 
   area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="City")
 
