@@ -8,11 +8,9 @@
 #' @examples
 #' side_by_sidestats()
 #'
-stremlined_stats <- function(pollutant,year,prawn_path){
+streamlined_stats <- function(pollutant,year,prawn_path=1,input=1){
 
-active_stack <- read.csv(file=prawn_path,
-                         check.names = FALSE,
-                          row.names = 1)%>%
+  active_stack <- input %>%
 
 
   #mutate in the columns you want (removing natural NOx)
@@ -38,18 +36,11 @@ long_stack$Emission_source <- factor(long_stack$Emission_source)
 
 long_stack <- long_stack %>% mutate(Emission_source=fct_reorder(Emission_source,NOx_emissions,mean,.desc=TRUE))
 
-temp = bind_rows(
-  long_stack %>%
-    mutate(justLondon = "With London"),
-  london_free %>%
-    mutate(justLondon = "Without London")
-) %>%
+temp = long_stack  %>%
   dplyr::select(decile = IMD,
          NOx_emissions,
-         justLondon,
          Emission_source) %>%
-  group_by(justLondon,
-           Emission_source,
+  group_by(Emission_source,
            decile) %>%
   summarise(Mean = mean(NOx_emissions, na.rm = T),
             Median = median(NOx_emissions, na.rm =T )) %>%
@@ -61,7 +52,7 @@ source_summary <- ggplot(temp)+
   geom_smooth(aes(decile,
                   value,
                   colour = Emission_source,
-                  linetype = justLondon,
+                  linetype = stat,
                   size=2
                   ),
               method = "lm",
@@ -70,11 +61,9 @@ source_summary <- ggplot(temp)+
   geom_line(aes(decile,
                  value,
                  colour = Emission_source,
-                 linetype = justLondon,
+                 linetype = stat,
                 size=1
                 ))+
-
-  facet_wrap(~stat)+
 
   labs(x="IMD decile where 10 is least deprived",
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
@@ -99,7 +88,7 @@ source_summary <- ggplot(temp)+
                       labels=c("Average points","Linear regression"),
                       guide="legend")+
 
-  scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"))+
+  scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2","grey"))+
 
   guides(colour=guide_legend(override.aes=list(size=3)),
 
