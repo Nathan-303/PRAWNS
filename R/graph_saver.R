@@ -74,7 +74,7 @@ graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
            plot=plot,
            width=1920,
            height=1080,
-           units = "pixels",
+           units = "px",
            device=file_format,
            scaling=scaling)
   }
