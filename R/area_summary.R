@@ -184,7 +184,14 @@ area_summary <- function(prawn_path,
                                       input=filtered_data)
 
     #Create the gridded oputput object
-    output <- ggarrange(Decile_distribution,Pollutant_distribution,City_histogram,City_profile,city_sources,city_freq,nrow=3,ncol=2) %>%
+    output <- ggarrange(Decile_distribution,
+                        Pollutant_distribution,
+                        City_histogram,
+                        City_profile,
+                        city_sources,
+                        city_freq,
+                        nrow=2,
+                        ncol=3) %>%
       annotate_figure(top=text_grob(paste0("Summary of ",pollutant," exposure in ",targets)))
 
 # Archive results ---------------------------------------------------------
