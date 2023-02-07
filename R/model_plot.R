@@ -11,11 +11,11 @@ active_stack <- read.csv(model_prawn_path,
                                  check.names = FALSE,
                                  row.names = 1)
 
-part_boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(poll_mean,c(0.90)),
-                                                          q10=quantile(poll_mean,c(0.10)),
-                                                          q1=quantile(poll_mean,c(0.25)),
-                                                          q3=quantile(poll_mean,c(0.75)),
-                                                          med=quantile(poll_mean,c(0.5)))
+part_boxxy <- active_stack %>% group_by(IMD) %>% summarise(q90=quantile(poll_mean,c(0.90),na.rm=TRUE),
+                                                          q10=quantile(poll_mean,c(0.10),na.rm=TRUE),
+                                                          q1=quantile(poll_mean,c(0.25),na.rm=TRUE),
+                                                          q3=quantile(poll_mean,c(0.75),na.rm=TRUE),
+                                                          med=quantile(poll_mean,c(0.5),na.rm=TRUE))
 
 boxxy <- part_boxxy%>%
   pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "Emissions")
