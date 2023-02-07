@@ -129,7 +129,7 @@ area_summary <- function(prawn_path,
                   , aes(
                     x=IMD,
                     y=Total,
-                    color='UK Mean'),
+                    color='England mean'),
                   method="lm",
                   formula=y~x,
                   se=FALSE,
@@ -140,13 +140,13 @@ area_summary <- function(prawn_path,
                 fun=mean,
                 aes(
         x=IMD,
-        y=Total,colour='UK Average'),
+        y=Total,colour='England mean'),
         show.legend = FALSE
       )+
 
       scale_colour_manual(name="Line type",
-                          breaks = c('Mean','Median','UK Average'),
-                          values=c('Mean'='royalblue','Median'="#FB8022FF",'UK Average'='black'))
+                          breaks = c('Mean','Median','England mean'),
+                          values=c('Mean'='royalblue','Median'="#FB8022FF",'England mean'='black'))
 
 
     #Creates a cumulative distribution plot showing what fractions of each decile are exposed to less than the amount of NOx on the axis
