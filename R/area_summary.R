@@ -58,8 +58,8 @@ area_summary <- function(prawn_path,
       labs(title=paste0("IMD distribution"))+
       theme(axis.text.x = element_blank(),
             axis.text.y = element_blank(),
-            axis.ticks = element_blank())+
-      guides(fill=guide_legend(ncol=2, byrow=FALSE))
+            axis.ticks = element_blank(),
+            legend.position="none")
 
     #Create a heatmap for the Nox in the area
     Pollutant_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size =0.05)+
@@ -68,7 +68,8 @@ area_summary <- function(prawn_path,
       labs(title=paste0(pollutant," distribution"))+
       theme(axis.text.x = element_blank(),
             axis.text.y = element_blank(),
-            axis.ticks = element_blank())
+            axis.ticks = element_blank(),
+            legend.position="none")
 
     #Create a histogram showing the prevalence of each decile in the area
     City_histogram <- ggplot(data=stitched_shapefile)+
@@ -76,7 +77,7 @@ area_summary <- function(prawn_path,
       aes(x=IMD,fill=IMD )+
       geom_bar()+
       labs(x="IMD decile",
-           title=paste0(targets," IMD histogram"))+
+           title=paste0("IMD scores in ",targets))+
       scale_x_discrete(
         breaks=c(1:10),
         expand = expansion(mult=0,add=0))+
@@ -96,7 +97,7 @@ area_summary <- function(prawn_path,
 
       labs(x="IMD decile",
            y=paste0(pollutant," emissions"),
-           title=paste0(targets," ", pollutant, "emission"))+
+           title=paste0(pollutant, " emissions in ",targets))+
 
       #Plot the line of best fit for the mean
       geom_smooth(method="lm",
@@ -128,7 +129,7 @@ area_summary <- function(prawn_path,
                   , aes(
                     x=IMD,
                     y=Total,
-                    color='UK Average'),
+                    color='UK Mean'),
                   method="lm",
                   formula=y~x,
                   se=FALSE,
@@ -191,8 +192,8 @@ area_summary <- function(prawn_path,
                         City_profile,
                         city_sources,
                         nrow=2,
-                        ncol=2) %>%
-      annotate_figure(top=text_grob(paste0("Summary of ",pollutant," emissions in ",targets)))
+                        ncol=2)# %>%
+      #annotate_figure(top=text_grob(paste0("Summary of ",pollutant," emissions in ",targets)))
 
 # Archive results ---------------------------------------------------------
 
