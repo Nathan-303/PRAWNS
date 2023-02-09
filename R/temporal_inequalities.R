@@ -6,13 +6,15 @@
 #' and correspond with its name in the data
 #' @param name_generator the procedure to generate the input filename, should be
 #'  a function with year as the imput
+#'@param output_path to specify a place to put the output, will otherwise just 
+#'output to the working directory to stay file structure agnostic
 #` @keywords faceted, sources
 #' @export
 #' @examples
 #' temporal_inequalities()
 #' 
 
-temporal_inequalities <- function(time_range,pollutant,name_generator){
+temporal_inequalities <- function(time_range,pollutant,name_generator,output_path=""){
   
   for (year in time_range){
     
@@ -35,7 +37,7 @@ temporal_inequalities <- function(time_range,pollutant,name_generator){
                              pollutant=pollutant,
                              year=year)
     
-    graph_saver(filename= paste0("Outputs/timenox/Modelled",pollutant," concentrations by decile ",year,".",file_format1),
+    graph_saver(filename= paste0("Outputs/Modelled",pollutant," concentrations by decile ",year,".",file_format1),
                 plot=basic_plot,
                 file_format = file_format,
                 type=2,
@@ -124,9 +126,9 @@ temporal_inequalities <- function(time_range,pollutant,name_generator){
   }
   
   write.csv(x=amalgm,
-            file=paste0("Outputs/yearly ",pollutant," emissions.csv"))
+            filepaste0(output_path,"yearly ",pollutant," emissions.csv"))
   
-  temporal_inequalities <- read.csv(file=paste0("Outputs/yearly ",pollutant," emissions.csv"))
+  temporal_inequalities <- read.csv(file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
   
   flatdiff <- ggplot(data=temporal_inequalities)+
     

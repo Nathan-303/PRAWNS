@@ -684,6 +684,16 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Fullscreen graph size in graph saver
 
+0.12.3 (Uploaded 7/2/23)
+
+	Streamlined area summary
+
+	Improved steamlined_plot
+
+0.12.4
+
+	temporal_inequality function
+
 0.13.0 
 
 	[Pickmans model]
@@ -695,6 +705,10 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 	Automate graphs from csv data (0.12.1)
 
 	Fullscreen graph size in graph saver (0.12.2)
+
+	Streamlined area_summary (0.12.3)
+
+ 	temporal inequality function (0.12.4)
 
 Minor details:
 
