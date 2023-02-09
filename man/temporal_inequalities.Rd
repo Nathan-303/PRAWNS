@@ -4,7 +4,13 @@
 \alias{temporal_inequalities}
 \title{Plot the progression in pollutant inequality over time}
 \usage{
-temporal_inequalities(time_range, pollutant, name_generator, output_path = "")
+temporal_inequalities(
+  time_range,
+  pollutant,
+  name_generator,
+  output_path = "",
+  premade = "no"
+)
 }
 \arguments{
 \item{time_range}{the years to be used, used for tracking filenames, should
@@ -18,6 +24,10 @@ a function with year as the imput}
 
 \item{output_path}{to specify a place to put the output, will otherwise just
 output to the working directory to stay file structure agnostic}
+
+\item{premade}{defaults to no, used if it's been run before and the file with
+a summary of the different years exists so you can save time, if inputting
+then it should be a filepath}
 }
 \description{
 Plot the progression in pollutant inequality over time

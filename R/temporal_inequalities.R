@@ -6,16 +6,21 @@
 #' and correspond with its name in the data
 #' @param name_generator the procedure to generate the input filename, should be
 #'  a function with year as the imput
-#'@param output_path to specify a place to put the output, will otherwise just
-#'output to the working directory to stay file structure agnostic
+#' @param output_path to specify a place to put the output, will otherwise just
+#'  output to the working directory to stay file structure agnostic
+#' @param premade defaults to no, used if it's been run before and the file with
+#'  a summary of the different years exists so you can save time, if inputting
+#'  then it should be a filepath
+#'
 #` @keywords faceted, sources
 #' @export
 #' @examples
 #' temporal_inequalities()
 #'
 
-temporal_inequalities <- function(time_range,pollutant,name_generator,output_path=""){
+temporal_inequalities <- function(time_range,pollutant,name_generator,output_path="",premade="no"){
 
+  if(premade=="no"){
   for (year in time_range){
 
     file_format="agg_png"
@@ -130,7 +135,9 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
             file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
 
   combined_years <- read.csv(file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
-
+  }else{
+  combined_years <- read.csv(file=premade)
+}
   flatdiff <- ggplot(data=combined_years)+
 
     aes(x=year)+
@@ -192,7 +199,7 @@ geom_line(aes(y=median_1,
        y=paste0("Background ",pollutant," levels")
        )
 
-graph_saver(filename= paste0(output_path,"diference between ",pollutant," background for most and least deprived.png"),
+graph_saver(filename= paste0(output_path,"difference between ",pollutant," background for most and least deprived.png"),
             plot=onevsten,
             file_format = "agg_png",
             type=5,
