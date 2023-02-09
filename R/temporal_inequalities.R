@@ -184,7 +184,17 @@ geom_line(aes(y=median_1,
   )+
 
   scale_colour_manual(values = c("Most deprived"="#FB8022FF","Least deprived"="royalblue"),
-                      name= "Average used")
+                      name= "Decile represented")+
 
+  scale_linetype_discrete(name="Average used")+
 
+  labs(x="Year",
+       y=paste0("Background ",pollutant," levels")
+       )
+
+graph_saver(filename= paste0(output_path,"diference between ",pollutant," background for most and least deprived.png"),
+            plot=onevsten,
+            file_format = "agg_png",
+            type=5,
+            scaling=0.7)
 }
