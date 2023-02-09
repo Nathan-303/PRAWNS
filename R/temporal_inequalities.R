@@ -129,9 +129,9 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
   write.csv(x=amalgm,
             file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
 
-  temporal_inequalities <- read.csv(file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
+  combined_years <- read.csv(file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
 
-  flatdiff <- ggplot(data=temporal_inequalities)+
+  flatdiff <- ggplot(data=combined_years)+
 
     aes(x=year)+
 
@@ -147,7 +147,7 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
               type=5,
               scaling=0.7)
 
-  percdiff <- ggplot(data=temporal_inequalities)+
+  percdiff <- ggplot(data=combined_years)+
 
     aes(x=year)+
 
@@ -161,6 +161,27 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
               file_format = "agg_png",
               type=5,
               scaling=0.7)
+
+onevsten <- ggplot(data=combined_years)+
+  aes(x=year)+
+  geom_line(aes(y=mean_1,
+                colour="Most deprived",
+                linetype="Mean")
+  )+
+
+  geom_line(aes(y=mean_10,
+                colour="Least deprived",
+                linetype="Mean")
+  )+
+geom_line(aes(y=median_1,
+              colour="Most deprived",
+              linetype="Median")
+)+
+
+  geom_line(aes(y=median_10,
+                colour="Least deprived",
+                linetype="Median")
+  )
 
 
 }
