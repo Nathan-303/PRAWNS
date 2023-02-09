@@ -690,7 +690,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved steamlined_plot
 
-0.12.4
+0.12.4 (Uploaded 9/2/23)
 
 	temporal_inequality function
 
