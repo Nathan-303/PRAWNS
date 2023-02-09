@@ -31,13 +31,14 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
     )
 
     write.csv(x=modelled_pollutant,
-              file = paste0("Outputs/Modelled ",pollutant," emissions in ",year,".csv"))
+              file = paste0(output_path,"Modelled ",pollutant," emissions in ",year,".csv"))
 
-    basic_plot <- model_plot(model_prawn_path=paste0("Outputs/Modelled ",pollutant," emissions in ",year,".csv"),
+    basic_plot <- model_plot(model_prawn_path=paste0(output_path,"Modelled ",pollutant," emissions in ",year,".csv"),
                              pollutant=pollutant,
                              year=year)
 
-    graph_saver(filename= paste0("Outputs/Modelled",pollutant," concentrations by decile ",year,".",file_format1),
+    graph_saver(filename= paste0(output_path,
+                                 pollutant," concentrations by decile ",year,".",file_format1),
                 plot=basic_plot,
                 file_format = file_format,
                 type=2,
@@ -126,7 +127,7 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
   }
 
   write.csv(x=amalgm,
-            filepaste0(output_path,"yearly ",pollutant," emissions.csv"))
+            file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
 
   temporal_inequalities <- read.csv(file=paste0(output_path,"yearly ",pollutant," emissions.csv"))
 
@@ -140,7 +141,7 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
     geom_line(aes(y=flat_median_regression_differnce,
                   colour="Median"))
 
-  graph_saver(filename= paste0("Outputs/temporal inequality in ",pollutant,"flat values.png"),
+  graph_saver(filename= paste0(output_path,"temporal inequality in ",pollutant,"flat values.png"),
               plot=flatdiff,
               file_format = "agg_png",
               type=5,
@@ -155,7 +156,7 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
 
     geom_line(aes(y=percentage_median_regression,
                   colour="Median"))
-  graph_saver(filename= paste0("Outputs/temporal inequality in ",pollutant,"percentage values.png"),
+  graph_saver(filename= paste0(output_path,"temporal inequality in ",pollutant,"percentage values.png"),
               plot=percdiff,
               file_format = "agg_png",
               type=5,
