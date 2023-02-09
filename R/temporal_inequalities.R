@@ -181,7 +181,10 @@ geom_line(aes(y=median_1,
   geom_line(aes(y=median_10,
                 colour="Least deprived",
                 linetype="Median")
-  )
+  )+
+
+  scale_colour_manual(values = c("Most deprived"="#FB8022FF","Least deprived"="royalblue"),
+                      name= "Average used")
 
 
 }
