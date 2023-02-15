@@ -694,7 +694,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	temporal_inequality function
 
-0.13.0 
+0.13.0 (Uploaded 9/2/23)
 
 	[Pickmans model]
 
@@ -708,8 +708,15 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Streamlined area_summary (0.12.3)
 
- 	temporal inequality function (0.12.4)
+ 	initiated temporal inequality function (0.12.4)
 
+0.13.1 (Uploaded 9/2/23)
+
+	Got temporal inequality function working properly
+
+	added the capacity to use an existing file rather than redoing everything
+
+0.13.2
 
 0.14.0
 

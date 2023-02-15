@@ -146,7 +146,12 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
                   colour="Mean"))+
 
     geom_line(aes(y=flat_median_regression_differnce,
-                  colour="Median"))
+                  colour="Median"))+
+
+    labs(xaxis="Year"
+      yaxis=bquote("Difference between the value of a linear regression line for the most and least deprived deciles/ "~
+                      mu~
+                        "g "~m^"-3")
 
   graph_saver(filename= paste0(output_path,"temporal inequality in ",pollutant,"flat values.png"),
               plot=flatdiff,
@@ -158,11 +163,14 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
 
     aes(x=year)+
 
-    geom_line(aes(y=percentage_mean_regression,
+    geom_line(aes(y=percentage_mean_regression*100,
                   colour="Mean"))+
 
-    geom_line(aes(y=percentage_median_regression,
-                  colour="Median"))
+    geom_line(aes(y=percentage_median_regression*100,
+                  colour="Median"))+
+
+    labs(xaxis="Year",
+         yaxis=paste0("Percentage difference between most and least deprived deciles by linear regression"))
   graph_saver(filename= paste0(output_path,"temporal inequality in ",pollutant,"percentage values.png"),
               plot=percdiff,
               file_format = "agg_png",
