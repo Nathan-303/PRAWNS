@@ -13,7 +13,7 @@ highest_emissions <- function(prawn_path,pollutant,year){
                    check.names=FALSE)
 
 
-  reformed_data <- data %>% group_by(IMD)%>% mutate(emdec=ntile(Total,20)) %>% filter(emdec==20) %>%
+  reformed_data <- data %>% group_by(IMD)%>% mutate(emdec=ntile(Total,10)) %>% filter(emdec==10) %>%
     #aggregate some sources so it can be small
     mutate(`Industrial sources`=Solvents+
              `Energy production`+
@@ -48,6 +48,16 @@ highest_emissions <- function(prawn_path,pollutant,year){
                 y=emissions,
                 colour = Emission_source,
                 linetype="Average points"))+
+
+      geom_line(data=(reformed_data),
+                aes(x=IMD,
+                    y=emissions,
+                    colour = Emission_source),
+                stat="summary",
+                fun=median)+
+
+      geom_quantile(quantiles=0.5,
+                    aes(linetype="Linear regression",colour="Median")
 
     labs(x="IMD decile where 10 is least deprived",
          y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
