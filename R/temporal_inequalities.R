@@ -148,10 +148,11 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
     geom_line(aes(y=flat_median_regression_differnce,
                   colour="Median"))+
 
-    labs(xaxis="Year"
-      yaxis=bquote("Difference between the value of a linear regression line for the most and least deprived deciles/ "~
+    labs(xaxis="Year",
+         yaxis=bquote("Difference between the value of a linear regression line for the most and least deprived deciles/ "~
                       mu~
                         "g "~m^"-3")
+    )
 
   graph_saver(filename= paste0(output_path,"temporal inequality in ",pollutant,"flat values.png"),
               plot=flatdiff,

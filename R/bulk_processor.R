@@ -335,7 +335,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
          file_format = file_format,
-         type=1,
+         type=2,
          scaling=0.4)
 
   rm(avg_imd_pol)
