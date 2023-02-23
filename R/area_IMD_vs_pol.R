@@ -74,7 +74,7 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
   theme(legend.key.size = unit(2,"lines"))+
 
   labs(x="Mean deprivation decile",
-       y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL)+
 
   facet_wrap(~NOx_average)

@@ -69,7 +69,7 @@ output <- ggplot()+
                      labels = c(0,1,2,"n.a."))+
 
   labs(x=bquote("LSOA area / "~km^2),
-       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^2))
+       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^"-2"))
 
 output
 

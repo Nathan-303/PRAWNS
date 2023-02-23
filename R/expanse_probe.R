@@ -49,7 +49,7 @@ faces <- ggplot(data=converted_stack)+
     minor_breaks = FALSE)+
   scale_y_continuous(expand=expansion(mult=c(0,0.05),add=c(0.5,0)))+
   labs(x=paste0("IMD decile where 10 is least deprived"),
-       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+       y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
   guides(colour=guide_legend(override.aes = list(size=2)))

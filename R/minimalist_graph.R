@@ -3,6 +3,7 @@
 #' @param prawn_path the filepath to load data from
 #' @param pollutant the pollutant investigated, used to name axis
 #' @param year the year the data is from, used to name axis
+#' @export
 #' @examples
 #' minimalist_graph()
 
@@ -49,7 +50,7 @@ minimalist_graph <- function(prawn_path,pollutant,year){
                 linetype="Average points"))+
 
     labs(x="IMD decile where 10 is least deprived",
-         y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^2),
+         y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
          colour="Emission source")+
 
     scale_x_continuous(

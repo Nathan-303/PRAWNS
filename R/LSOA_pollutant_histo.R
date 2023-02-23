@@ -33,13 +33,13 @@ axis_key <- long_data %>% summarise(min=quantile(emissions,probs=0),bound=quanti
 hmm <- inner_join(long_data %>% dplyr::select(Emission_source,emissions),axis_key, by="Emission_source") %>% filter(emissions<=bound)
 
 histo <- ggplot(data=hmm)+
-  
+
   geom_histogram(bins=80,aes(x=emissions))+
-  
+
   coord_cartesian(expand=FALSE)+
-labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
+labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^"-2"),
        y="Frequency")+
-  
+
   facet_wrap(~Emission_source,scale="free")
 
 histo

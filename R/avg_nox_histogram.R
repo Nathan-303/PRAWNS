@@ -32,7 +32,7 @@ avg_nox_histogram <- function(prawn_path, pollutant, year){
 
     coord_cartesian(expand=FALSE)+
 
-    labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^2),
+    labs(x=bquote("Average "~.(pollutant)~"emissions for an LSOA in "~.(year)~"/ tonnes "~km^"-2"),
          y="Frequency")
   caveat <- "top1percent"
 

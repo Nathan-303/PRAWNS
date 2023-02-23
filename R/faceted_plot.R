@@ -62,7 +62,7 @@ geom_smooth(data=read.csv(prawn_path) %>% tibble %>% dplyr::select(-c(TCITY15NM,
                       values = c("Median"="royalblue","Mean"="#FB8022FF",'UK mean'='black'))+
 
   labs(x="IMD decile where 10 is least deprived",
-       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^2))+
+       y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^"-2"))+
 
   theme(legend.position = "bottom")
 
