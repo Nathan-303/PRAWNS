@@ -310,7 +310,7 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
        plot=area_histogram,
        file_format = file_format,
        type=1,
-       scaling=0.37)
+       scaling=0.7)
 
   rm(area_histogram)
 
