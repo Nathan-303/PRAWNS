@@ -72,7 +72,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999,po
     facet_wrap(~Emission_source,scale="free")+
 
 
-    labs(x=bquote("Residual values for "~.(pollutant)~"emissions when fitted to a linear model/ tonnes "~km^2),
+    labs(x=bquote("Residual values for "~.(pollutant)~"emissions when fitted to a linear model/ tonnes "~km^"-2"),
          y="Frequency")
 
   deeper_down <- down_the_rabbit_hole+
@@ -87,7 +87,7 @@ stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999,po
     geom_violin(trim=TRUE)+
     geom_hline(yintercept = 0)+
     facet_wrap(~Emission_source,scale="free_y")+
-    labs(y=bquote("Residual values for "~.(pollutant)~"emissions when fitted to a linear model/ tonnes "~km^2),
+    labs(y=bquote("Residuals for linear model linking "~.(pollutant)~"emissions and IMD/ tonnes "~km^"-2"),
          x="IMD decile where 10 is least deprived")
 
 
