@@ -716,7 +716,15 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	added the capacity to use an existing file rather than redoing everything
 
-0.13.2
+0.13.2 (Uploaded 21/2/23)
+
+	Improved temporal inequalities
+
+	Added floundering and highest emimissins, one or both will be cut
+
+0.13.3
+
+	Fixed the units being km2 rather than km-2
 
 0.14.0
 
