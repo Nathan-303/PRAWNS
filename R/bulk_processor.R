@@ -336,7 +336,7 @@ avg_imd_pol <- area_IMD_vs_pol(prawn_path=prawn_path,
          plot=area_histogram,
          file_format = file_format,
          type=2,
-         scaling=0.4)
+         scaling=1.2)
 
   rm(avg_imd_pol)
 
