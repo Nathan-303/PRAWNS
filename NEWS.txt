@@ -726,11 +726,17 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Fixed the units being km2 rather than km-2
 
+	Improved residual axis labels
+
+	Improved label size of gradient histo
+
 0.14.0
 
 	[Out of time]
 
-	Plot results as a time series
+	temporal_inequality function (0.13.2)
+
+	Fixed axis scales (0.13.3)
 
 
 Minor details:
