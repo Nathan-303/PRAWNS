@@ -26,10 +26,8 @@
 
 #' @keywords data
 #' @export
-
 #'
 #' @examples
-#' create_prawns()
 #'
 
 process_create_prawns <- function(raster_path=FALSE,

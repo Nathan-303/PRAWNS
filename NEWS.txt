@@ -748,9 +748,9 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Gave procedural names to most functions
 
-0.14.2
+0.14.2 (Uploaded 7/3/23)
 
-	Described variables in all functions
+	Procedurally named process functions, left startup, imports and bulk processor intact
 
 0.15.0
 
