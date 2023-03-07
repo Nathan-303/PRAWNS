@@ -179,12 +179,12 @@ rm(londonless_prawn)
 #Make a histogram showing the distribution of NOx averages
 print("Making a histogram of pollutant averages")
 
-  noxxogram <- avg_nox_histogram(prawn_path=prawn_path,
+  total_emission_histogram <- histogram_total_emissions_src(prawn_path=prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
-         plot=noxxogram[[1]],
+         plot=total_emission_histogram[[1]],
          file_format = file_format,
          type=1,
          scaling=0.6)
