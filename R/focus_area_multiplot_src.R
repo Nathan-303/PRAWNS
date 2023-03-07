@@ -21,7 +21,7 @@
 #' @examples
 #' area_summary()
 #'
-area_summary <- function(prawn_path,
+focus_area_multiplot_src <- function(prawn_path,
                          shapefile_path,
                          targets,
                          pollutant,
