@@ -2,17 +2,19 @@
 % Please edit documentation in R/cartesian_area_gradients_src.R
 \name{cartesian_area_gradients_src}
 \alias{cartesian_area_gradients_src}
-\title{Create a histogram showign the gradients for every county/ua or city}
+\title{Create a histogram showing the emission gradient for each area (city or
+county/UA) and whether it has a p value of below 0.05}
 \usage{
 cartesian_area_gradients_src(prawn_path, area_type)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 
-\item{area_type}{They type of area to group by, either city or county/UA}
+\item{area_type}{The type of area to group by, either city or county/UA}
 }
 \description{
-Create a histogram showign the gradients for every county/ua or city
+Create a histogram showing the emission gradient for each area (city or
+county/UA) and whether it has a p value of below 0.05
 }
 \examples{
 plot_area_gradients()

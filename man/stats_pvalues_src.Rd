@@ -2,7 +2,8 @@
 % Please edit documentation in R/stats_pvalues_src.R
 \name{stats_pvalues_src}
 \alias{stats_pvalues_src}
-\title{Create a faceted histogram showing all but the top 1\% of the nox emission average across lsoas}
+\title{Calculate p values for a linear regression model used on each source sector.
+The data is split into random chunks}
 \usage{
 stats_pvalues_src(prawn_path)
 }
@@ -10,7 +11,8 @@ stats_pvalues_src(prawn_path)
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
 \description{
-Create a faceted histogram showing all but the top 1\% of the nox emission average across lsoas
+Calculate p values for a linear regression model used on each source sector.
+The data is split into random chunks
 }
 \examples{
 p_values_for_chunks()

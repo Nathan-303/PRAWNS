@@ -2,23 +2,20 @@
 % Please edit documentation in R/cartesian_expanse_quintile_src.R
 \name{cartesian_expanse_quintile_src}
 \alias{cartesian_expanse_quintile_src}
-\title{A function for looking at the relationship between IMD and emissions for
-different LSOA sizes
-populations}
+\title{Plot the relationship between IMD and emissions, grouped by LSOA size quintiles}
 \usage{
 cartesian_expanse_quintile_src(prawn_path, pollutant, year)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 
-\item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names}
+\item{pollutant}{The name of the pollutant that's being examined, this is
+used in the graph names}
 
 \item{year}{The year the dat is from, used for axis labels}
 }
 \description{
-A function for looking at the relationship between IMD and emissions for
-different LSOA sizes
-populations
+Plot the relationship between IMD and emissions, grouped by LSOA size quintiles
 }
 \examples{
 expanse_probe()

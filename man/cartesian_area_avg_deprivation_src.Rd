@@ -3,7 +3,7 @@
 \name{cartesian_area_avg_deprivation_src}
 \alias{cartesian_area_avg_deprivation_src}
 \title{Plots the average IMD vs the average NOx for geographical areas (cities or
-county/UA)}
+counties/unitary authorities)}
 \usage{
 cartesian_area_avg_deprivation_src(prawn_path, pollutant, area_type, year)
 }
@@ -12,11 +12,11 @@ cartesian_area_avg_deprivation_src(prawn_path, pollutant, area_type, year)
 
 \item{pollutant}{The pollutant name, used in graph annotations}
 
-\item{area_type}{can be "City" or "County/UA"}
+\item{area_type}{The type of area investigated, can be "City" or "County/UA"}
 
-\item{year}{}
+\item{year}{The year of the data, used in graph annotations}
 }
 \description{
 Plots the average IMD vs the average NOx for geographical areas (cities or
-county/UA)
+counties/unitary authorities)
 }

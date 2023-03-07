@@ -1,5 +1,5 @@
 #' Create a faceted histogram showing all but the top 1% of the nox emission
-#' average for each emission sector
+#' average faceted by emission sector
 #'
 #' @param prawn_path The filepath for the prawn CSV that is to be used
 #'

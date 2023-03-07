@@ -2,7 +2,7 @@
 % Please edit documentation in R/facet_all_areas_src.R
 \name{facet_all_areas_src}
 \alias{facet_all_areas_src}
-\title{Creates a graph wit a little window showing every item in the group separately
+\title{Creates a graph with a little window showing every item in the group separately
 e.g. if grouped by city there would be a tile for every city.}
 \usage{
 facet_all_areas_src(prawn_path, group, pollutant, facet_name)
@@ -19,6 +19,6 @@ around non standard evaluation}
 \item{facet_name}{a string used to name what the data is being faceted by in the graph title}
 }
 \description{
-Creates a graph wit a little window showing every item in the group separately
+Creates a graph with a little window showing every item in the group separately
 e.g. if grouped by city there would be a tile for every city.
 }

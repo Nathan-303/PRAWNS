@@ -2,9 +2,8 @@
 % Please edit documentation in R/facet_expanse_src.R
 \name{facet_expanse_src}
 \alias{facet_expanse_src}
-\title{A function for looking at the relationship between IMD and emissions for
-different LSOA sizes
-populations}
+\title{Facet into 12 size groupings of LSOA and plot emissions inequality from
+each source sector}
 \usage{
 facet_expanse_src(prawn_path, pollutant, year)
 }
@@ -16,9 +15,8 @@ facet_expanse_src(prawn_path, pollutant, year)
 \item{year}{The year the dat is from, used for axis labels}
 }
 \description{
-A function for looking at the relationship between IMD and emissions for
-different LSOA sizes
-populations
+Facet into 12 size groupings of LSOA and plot emissions inequality from
+each source sector
 }
 \examples{
 expanse_probe()

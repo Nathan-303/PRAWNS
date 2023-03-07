@@ -16,7 +16,7 @@ agg family}
 
 \item{type}{The graph size to save to 1 is a single column figure on a two
 column page, 2 is a full page spread, both use a 16:9 aspect ratio, 3 is an
-entire page}
+entire page, 4 is a graphical abstract}
 
 \item{scaling}{The =scaling parameter to use, flexible because there are many
 things at play when the default is picked}

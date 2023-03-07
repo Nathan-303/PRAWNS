@@ -2,7 +2,8 @@
 % Please edit documentation in R/focus_area_multiplot_src.R
 \name{focus_area_multiplot_src}
 \alias{focus_area_multiplot_src}
-\title{A function for creating a graphic summarising a city}
+\title{A function for creating a graphic summarising a city through tiling smaller
+graphs}
 \usage{
 focus_area_multiplot_src(
   prawn_path,
@@ -29,10 +30,6 @@ to FALSE}
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas
 matching an inputted parameter
-}
-\examples{
-area_summary()
-
 }
 \keyword{graph,}
 \keyword{heatmap,}

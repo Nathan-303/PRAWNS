@@ -2,7 +2,8 @@
 % Please edit documentation in R/histogram_total_emissions_src.R
 \name{histogram_total_emissions_src}
 \alias{histogram_total_emissions_src}
-\title{Create a histogram of the average NOx per LSOA with the median and mean values labelled}
+\title{Create a histogram of the average total emissions with the median and mean
+values labelled}
 \usage{
 histogram_total_emissions_src(prawn_path, pollutant, year)
 }
@@ -14,7 +15,8 @@ histogram_total_emissions_src(prawn_path, pollutant, year)
 \item{year}{The year of measurements, used in axis title, defaults to 2020}
 }
 \description{
-Create a histogram of the average NOx per LSOA with the median and mean values labelled
+Create a histogram of the average total emissions with the median and mean
+values labelled
 }
 \examples{
 avg_nox_histogram()

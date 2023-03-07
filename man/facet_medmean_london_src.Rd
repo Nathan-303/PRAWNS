@@ -2,7 +2,7 @@
 % Please edit documentation in R/facet_medmean_london_src.R
 \name{facet_medmean_london_src}
 \alias{facet_medmean_london_src}
-\title{Make a nice graph}
+\title{Plot the mean and median emissions with and without London next to each other}
 \usage{
 facet_medmean_london_src(pollutant, year, prawn_path)
 }
@@ -14,7 +14,7 @@ facet_medmean_london_src(pollutant, year, prawn_path)
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 }
 \description{
-Make a nice graph
+Plot the mean and median emissions with and without London next to each other
 }
 \examples{
 side_by_sidestats()

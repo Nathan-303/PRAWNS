@@ -2,19 +2,21 @@
 % Please edit documentation in R/cartesian_area_for_most_deprived_src.R
 \name{cartesian_area_for_most_deprived_src}
 \alias{cartesian_area_for_most_deprived_src}
-\title{Create a graph showing how size affects emissions}
+\title{Create a graph showing emissions from the major source clusters  for the most
+deprived 20\% of LSOAs}
 \usage{
 cartesian_area_for_most_deprived_src(prawn_path, pollutant, year)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
+
+\item{year}{The year of the data, used in graph annotations}
+
+\item{area_type}{The type of area investigated, can be "City" or "County/UA"}
 }
 \description{
-Create a graph showing how size affects emissions
-}
-\examples{
-size_poker()
-
+Create a graph showing emissions from the major source clusters  for the most
+deprived 20\% of LSOAs
 }
 \keyword{faceted,}
 \keyword{sources}

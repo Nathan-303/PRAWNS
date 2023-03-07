@@ -2,15 +2,21 @@
 % Please edit documentation in R/histogram_sources_src.R
 \name{histogram_sources_src}
 \alias{histogram_sources_src}
-\title{Create a faceted histogram showing all but the top 1\% of the nox emission average across lsoas}
+\title{Create a faceted histogram showing all but the top 1\% of the nox emission
+average faceted by emission sector}
 \usage{
 histogram_sources_src(prawn_path, pollutant = "NOx", year = 2020)
 }
 \arguments{
-\item{prawn_path}{The filepath for the prawn CSV that is to be used.}
+\item{prawn_path}{The filepath for the prawn CSV that is to be used}
+
+\item{pollutant}{the pollutant investigated, used to name axis}
+
+\item{year}{the year the data is from, used to name axis}
 }
 \description{
-Create a faceted histogram showing all but the top 1\% of the nox emission average across lsoas
+Create a faceted histogram showing all but the top 1\% of the nox emission
+average faceted by emission sector
 }
 \examples{
 LSOA_pollutant_histo()
