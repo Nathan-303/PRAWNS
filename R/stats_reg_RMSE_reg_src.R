@@ -21,7 +21,7 @@
 #'
 #'
 
-stat_wrangler <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999,pollutant){
+stats_reg_RMSE_reg_src <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999,pollutant){
   #read the input file if a filepath is given
   if (prawn_path != FALSE){
     data <- read.csv(prawn_path,

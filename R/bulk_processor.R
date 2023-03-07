@@ -344,7 +344,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
 if(!(gotta_go_fast%in%c("zooom"))){
 print("Doing lots of maths")
 # calculate and record the difference between the mean and median points and regression lines at deciles 1 and 10
-numbers <- stat_wrangler(prawn_path = prawn_path,pollutant=pollutant)
+numbers <- stats_reg_RMSE_reg_src(prawn_path = prawn_path,pollutant=pollutant)
 
   statnames <- c("Mean regression model","Median regression model","difference between deciles")
   for (position in c(1:3)){
