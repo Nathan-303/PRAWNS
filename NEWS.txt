@@ -722,13 +722,17 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Added floundering and highest emimissins, one or both will be cut
 
-0.13.3
+0.13.3 (Uploaded 2/3/23)
 
 	Fixed the units being km2 rather than km-2
 
 	Improved residual axis labels
 
 	Improved label size of gradient histo
+
+0.13.4
+
+	Renamed highest emissions function
 
 0.14.0
 
@@ -738,6 +742,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Fixed axis scales (0.13.3)
 
+0.15.0
+
+	[The necronomicon]
+
+	Ensure all functions have proper documentation
 
 Minor details:
 
