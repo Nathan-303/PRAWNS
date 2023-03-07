@@ -206,7 +206,7 @@ rm(exquint)
 
 #Make and save a graph where the sources are all faceted
 print("Making a faceted graph of sources")
-source_facets <- faceted_sources(prawn_path = prawn_path,
+source_facets <- facet_sources_src(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
@@ -395,7 +395,7 @@ graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LS
 rm(expanse_scale)
 
 print("Plotting a histogram of all the sources")
-sourceogram <- LSOA_pollutant_histo(prawn_path)
+sourceogram <- histogram_sources_src(prawn_path)
 
 graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
             plot=sourceogram,

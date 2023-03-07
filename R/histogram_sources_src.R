@@ -9,7 +9,7 @@
 #' @examples
 #' LSOA_pollutant_histo()
 
-LSOA_pollutant_histo <- function(prawn_path,pollutant="NOx",year=2020){
+histogram_sources_src <- function(prawn_path,pollutant="NOx",year=2020){
 
 raw <- read.csv(prawn_path,
                 row.names=1,
