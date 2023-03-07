@@ -420,7 +420,7 @@ rm(emexpanse)
 
 if(gotta_go_fast=="No"){
 print("Plotting inequalities for size slices")
-  areas <- expanse_probe(prawn_path = prawn_path,
+  areas <- facet_expanse_src(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 
