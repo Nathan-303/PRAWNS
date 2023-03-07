@@ -84,7 +84,7 @@ for ( index in c(1:3)){
     # write.csv(x=transformer,
     #           file=prawn_path)
 
-    shape_test <- shapefile_checker(shapefile_path)
+    shape_test <- process_shapefile_checker(shapefile_path)
 
     ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
            plot=shape_test,

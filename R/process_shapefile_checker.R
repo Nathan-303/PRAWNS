@@ -4,7 +4,7 @@
 #'@export
 #
 
-shapefile_checker <- function(shapefile_path){
+process_shapefile_checker <- function(shapefile_path){
   raw_shapefile <- st_read(shapefile_path)
 
   output <- ggplot(raw_shapefile)+geom_sf()
