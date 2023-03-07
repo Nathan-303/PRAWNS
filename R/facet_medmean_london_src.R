@@ -1,4 +1,4 @@
-#' Make a nice graph
+#' Plot the mean and median emissions with and without London next to each other
 #'
 #' @param year the year the data was taken, used for axis titles
 #' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data

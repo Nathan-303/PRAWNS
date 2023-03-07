@@ -1,6 +1,5 @@
-#' A function for looking at the relationship between IMD and emissions for
-#' different LSOA sizes
-#'  populations
+#' Facet into 12 size groupings of LSOA and plot emissions inequality from
+#' each source sector
 #'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'

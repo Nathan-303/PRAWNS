@@ -1,4 +1,5 @@
-#' A function for creating a graphic summarising a city
+#' A function for creating a graphic summarising a city through tiling smaller
+#' graphs
 #'
 #' This function takes a prawns CSV and produces a summary of the geographic areas
 #' matching an inputted parameter
@@ -18,8 +19,6 @@
 
 #' @keywords heatmap, graph,
 #' @export
-#' @examples
-#' area_summary()
 #'
 focus_area_multiplot_src <- function(prawn_path,
                          shapefile_path,

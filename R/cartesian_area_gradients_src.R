@@ -1,8 +1,9 @@
-#' Create a histogram showign the gradients for every county/ua or city
+#' Create a histogram showing the emission gradient for each area (city or
+#' county/UA) and whether it has a p value of below 0.05
 
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
-#' @param area_type They type of area to group by, either city or county/UA
+#' @param area_type The type of area to group by, either city or county/UA
 
 #'
 #' @keywords faceted, sources

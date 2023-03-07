@@ -1,10 +1,9 @@
-#' A function for looking at the relationship between IMD and emissions for
-#' different LSOA sizes
-#'  populations
+#' Plot the relationship between IMD and emissions, grouped by LSOA size quintiles
 #'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
-#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#' @param pollutant The name of the pollutant that's being examined, this is
+#' used in the graph names
 #'
 #' @param year The year the dat is from, used for axis labels
 #'

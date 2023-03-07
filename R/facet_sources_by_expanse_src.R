@@ -1,4 +1,4 @@
-#' Plo
+#' Plot the relationship between emissions and LSOA expanse for each emissions sector
 #'
 #' @param prawn_path the filepath to the prawn csv file used for the graph
 #' @param pollutant the pollutant looked at, used in graph titles

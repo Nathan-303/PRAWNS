@@ -1,14 +1,13 @@
 #'Plots the average IMD vs the average NOx for geographical areas (cities or
-#'county/UA)
+#'counties/unitary authorities)
 #'
 #'@param prawn_path The filepath for the csv to work from
 #'
 #'@param pollutant The pollutant name, used in graph annotations
 #'
-#'@param area_type can be "City" or "County/UA"
+#'@param year The year of the data, used in graph annotations
 #'
-#'@param year
-#'
+#'@param area_type The type of area investigated, can be "City" or "County/UA"
 #'@export
 
 cartesian_area_avg_deprivation_src <- function(prawn_path,pollutant,area_type,year){

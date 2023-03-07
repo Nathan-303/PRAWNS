@@ -1,4 +1,5 @@
-#' Create a histogram of the average NOx per LSOA with the median and mean values labelled
+#' Create a histogram of the average total emissions with the median and mean
+#' values labelled
 
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'

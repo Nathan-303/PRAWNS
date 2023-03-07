@@ -1,4 +1,4 @@
-#' Creates a graph wit a little window showing every item in the group separately
+#' Creates a graph with a little window showing every item in the group separately
 #' e.g. if grouped by city there would be a tile for every city.
 #' @param prawn_path the data source to use, should be a quoted csv filepath
 #'

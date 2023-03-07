@@ -1,5 +1,5 @@
-#' Create a faceted histogram showing all but the top 1% of the nox emission average across lsoas
-
+#' Calculate p values for a linear regression model used on each source sector.
+#' The data is split into random chunks
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
 #' @keywords faceted, sources

@@ -1,8 +1,11 @@
-#' Create a faceted histogram showing all but the top 1% of the nox emission average across lsoas
-
-#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#' Create a faceted histogram showing all but the top 1% of the nox emission
+#' average for each emission sector
 #'
-
+#' @param prawn_path The filepath for the prawn CSV that is to be used
+#'
+#' @param pollutant the pollutant investigated, used to name axis
+#'
+#' @param year the year the data is from, used to name axis
 #'
 #' @keywords faceted, sources
 #' @export

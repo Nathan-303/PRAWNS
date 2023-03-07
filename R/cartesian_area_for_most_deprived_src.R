@@ -1,11 +1,13 @@
-#' Create a graph showing how size affects emissions
+#' Create a graph showing emissions from the major source clusters  for the most
+#' deprived 20% of LSOAs
 
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
+#' @param year The year of the data, used in graph annotations
+#'
+#' @param area_type The type of area investigated, can be "City" or "County/UA"
 #' @keywords faceted, sources
 #' @export
-#' @examples
-#' size_poker()
 #'
 
 cartesian_area_for_most_deprived_src <- function(prawn_path,pollutant,year){
