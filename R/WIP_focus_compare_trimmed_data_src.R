@@ -1,11 +1,19 @@
-#' Make a nice graph
+#' Compare a trimmed data set with the whole, this function doesn't cover the
+#' trimming, provide it with two prawns and it'll do the work
 #'
-#' @param focused_prawn_path the filepath to the prawn csv file that contains only rhe target region
-#' @param base_prawn_path the filepath to the prawn csv with the whole data set, used to plot an average line for comparison
+#' @param focused_prawn_path the filepath to the prawn csv file that contains
+#' only the target region
+#'
+#' @param base_prawn_path the filepath to the prawn csv with the whole data set,
+#'  used to plot an average line for comparison
+#'
+#' @param year The year the data is from, used to generate axis titles
+#'
+#' @param pollutant The pollutant investigated, used to generate axis titles
 #' @export
 #' @examples
 #' focused_plot()
-focused_plot <- function(focused_prawn_path,base_prawn_path,pollutant,year){
+focus_compare_trimmed_data_src <- function(focused_prawn_path,base_prawn_path,pollutant,year){
 
 active_stack <- read.csv(focused_prawn_path,
                                  check.names = FALSE,
