@@ -5,7 +5,7 @@
 #' @param year the year of the measurement, used in axis labels
 #' @export
 #' @examples please no error message
-emissions_by_expanse <- function(prawn_path,pollutant,year){
+cartesian_expanse_src <- function(prawn_path,pollutant,year){
 #read data
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
