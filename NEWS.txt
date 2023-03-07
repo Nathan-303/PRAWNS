@@ -730,11 +730,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Improved label size of gradient histo
 
-0.13.4
+0.13.4 (Uploaded 7/3/23)
 
 	Renamed highest emissions function
 
-0.14.0
+0.14.0 (Uploaded 7/3/23)
 
 	[Out of time]
 
