@@ -371,7 +371,7 @@ graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1)
  rm(numbers)
 
 print("Calculating p values for randomly sliced and diced data")
-p_plot <- p_values_for_chunks(prawn_path)
+p_plot <- stats_pvalues_src(prawn_path)
 
 graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format1),
             plot=p_plot,

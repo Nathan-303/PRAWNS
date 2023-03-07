@@ -7,7 +7,7 @@
 #' @examples
 #' p_values_for_chunks()
 
-p_values_for_chunks <- function(prawn_path){
+stats_pvalues_src <- function(prawn_path){
   data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
