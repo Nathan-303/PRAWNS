@@ -8,13 +8,14 @@
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names, should be a string
 #'
 #' @param year The year of the data, used in graph labelling
+#'
 #' @keywords faceted, sources
 #' @export
 #' @examples
 #' faceted_sources()
 #'
 
-floundering <- function(prawn_path,pollutant,year){
+compare_highest_in_decile <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
   group_by(IMD)%>%
