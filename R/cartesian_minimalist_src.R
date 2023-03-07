@@ -7,7 +7,7 @@
 #' @examples
 #' minimalist_graph()
 
-minimalist_graph <- function(prawn_path,pollutant,year){
+cartesian_minimalist_src <- function(prawn_path,pollutant,year){
 
   data <- read.csv(prawn_path,
                    row.names=1,

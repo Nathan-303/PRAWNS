@@ -164,7 +164,7 @@ if(gotta_go_fast != "zooom"){
 }
   #do the bare minumum graph for abstracts
 print("making a minimalistic graph")
-minimal <- minimalist_graph(prawn_path=prawn_path,
+minimal <- cartesian_minimalist_src(prawn_path=prawn_path,
                             pollutant=pollutant,
                             year=year)
 
