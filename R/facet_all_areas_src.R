@@ -12,7 +12,7 @@
 #' @export
 #' faceted_plot
 
-faceted_plot <- function(prawn_path,group,pollutant,facet_name){
+facet_all_areas_src <- function(prawn_path,group,pollutant,facet_name){
 
 filtered_data <- read.csv(prawn_path) %>% tibble()
 

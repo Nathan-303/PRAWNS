@@ -256,7 +256,7 @@ RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
 if(gotta_go_fast == "No"){
 #Facet the mean and median pollutantlevels by city
 print("Faceting by city, this may take a while")
-city_facets <- faceted_plot(prawn_path = prawn_path,
+city_facets <- facet_all_areas_src(prawn_path = prawn_path,
                             group= "TCITY15NM",
                             pollutant = pollutant,
                             facet_name="city")
@@ -271,7 +271,7 @@ city_facets <- faceted_plot(prawn_path = prawn_path,
 
 #Facet the mean and median pollutant levels by county/unitary authority
 print("Faceting by county/UA, this may take a while")
-area_facets <- faceted_plot(prawn_path = prawn_path,
+area_facets <- facet_all_areas_src(prawn_path = prawn_path,
                               group= "counties",
                               pollutant = pollutant,
                               facet_name="county/unitary authority")

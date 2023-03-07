@@ -14,7 +14,7 @@
 #' faceted_sources()
 #'
 
-faceted_sources <- function(prawn_path,pollutant,year){
+facet_sources_src <- function(prawn_path,pollutant,year){
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
