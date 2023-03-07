@@ -1,11 +1,11 @@
-#' Make a nice graph
+#' Plo
 #'
 #' @param prawn_path the filepath to the prawn csv file used for the graph
 #' @param pollutant the pollutant looked at, used in graph titles
 #' @param year the year of the measurement, used in axis labels
 #' @export
 #' @examples please no error message
-cartesian_expanse_src <- function(prawn_path,pollutant,year){
+facet_sources_by_expanse_src <- function(prawn_path,pollutant,year){
 #read data
 
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%

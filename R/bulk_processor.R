@@ -406,7 +406,7 @@ process_graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissi
 rm(sourceogram)
 
 print("plotting emissions vs LSOA expanse faceted by source sector")
-emexpanse <- cartesian_expanse_src(prawn_path,
+emexpanse <- facet_sources_by_expanse_src(prawn_path,
                                   pollutant,
                                   year)
 
