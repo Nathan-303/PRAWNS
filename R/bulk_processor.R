@@ -304,7 +304,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
   rm(avg_imd_pol)
 
 print("Calculating the individual gradients for each county/UA and putting them on a histogram")
-area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="County/UA")
+area_histogram <- cartesian_area_gradients_src(prawn_path=prawn_path,area_type="County/UA")
 
 graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
        plot=area_histogram,

@@ -9,7 +9,7 @@
 #' @export
 #' @examples
 #' plot_area_gradients()
-plot_area_gradients <- function(prawn_path,area_type){
+cartesian_area_gradients_src <- function(prawn_path,area_type){
 
 raw <- read.csv(prawn_path,
                 row.names=1,
