@@ -8,7 +8,7 @@
 #' @examples
 #' side_by_sidestats()
 #'
-side_by_side_stats <- function(pollutant,year,prawn_path){
+facet_medmean_london_src <- function(pollutant,year,prawn_path){
 
 active_stack <- read.csv(file=prawn_path,
                          check.names = FALSE,

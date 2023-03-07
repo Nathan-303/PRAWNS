@@ -90,7 +90,7 @@ for ( index in c(1:3)){
            plot=shape_test,
            device="png")
 
-    stat_facet <- side_by_side_stats(pollutant=pollutant,
+    stat_facet <- facet_medmean_london_src(pollutant=pollutant,
                                     prawn_path=prawn_path,
                                     year=year)
 
