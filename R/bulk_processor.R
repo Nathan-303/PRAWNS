@@ -192,7 +192,7 @@ print("Making a histogram of pollutant averages")
   rm(noxxogram)
 
 print("Plotting inequality for expanse quintiles")
-exquint <- expanse_quintile_inequality(prawn_path=prawn_path,
+exquint <- cartesian_expanse_quintile_src(prawn_path=prawn_path,
                                        pollutant=pollutant,
                                        year=year)
 

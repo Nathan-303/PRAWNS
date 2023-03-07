@@ -14,7 +14,7 @@
 #' expanse_probe()
 #'
 
-expanse_quintile_inequality <- function(prawn_path,pollutant,year){
+cartesian_expanse_quintile_src <- function(prawn_path,pollutant,year){
 
 active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
