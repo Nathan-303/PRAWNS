@@ -147,7 +147,7 @@ if(gotta_go_fast != "zooom"){
     write.csv(x = londonless_prawn,
               file=prawn_path)
 
-    london_focus <- focused_plot(prawn_path,raw_path,pollutant,year)
+    london_focus <- WIP_focus_compare_trimmed_data_src(prawn_path,raw_path,pollutant,year)
 
     graph_saver(filename= paste0(proc_tag,"/Total",pollutant," emissions for London.",file_format1),
                 plot=london_focus,
@@ -183,7 +183,7 @@ print("Making a histogram of pollutant averages")
                                  pollutant=pollutant,
                                  year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",noxxogram[[2]]," entries cropped to right of limit.",file_format1),
+  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",total_emission_histogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=total_emission_histogram[[1]],
          file_format = file_format,
          type=1,
@@ -330,7 +330,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
             file = paste0(proc_tag,"/model analysis for",
                           pollutant," average vs average IMD by city .csv"))
 
-  area_histogram <- plot_area_gradients(prawn_path=prawn_path,area_type="City")
+  area_histogram <- cartesian_area_gradients_src(prawn_path=prawn_path,area_type="City")
 
   graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
