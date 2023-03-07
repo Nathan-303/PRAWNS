@@ -220,7 +220,7 @@ source_facets <- facet_sources_src(prawn_path = prawn_path,
 
 #Make and save a graph showing IMD based inequality for each RUC code
 print("Graphing IMD vs pollutant for each RUC")
-RUC_breakdown <- RUC_IMD(prawn_path = prawn_path,
+RUC_breakdown <- facet_RUC_src(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 

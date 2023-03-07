@@ -13,7 +13,7 @@
 #' RUC_IMD()
 #'
 
-RUC_IMD <- function(prawn_path,
+facet_RUC_src <- function(prawn_path,
                     pollutant,
                     year){
 #Read in the data with NA valuse changed to unclassified, raising red flags if necessary
