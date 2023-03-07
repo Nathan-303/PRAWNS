@@ -9,8 +9,8 @@
 #' @param pollutant the name of the pollutant, used to name the graphs
 #'
 #' @param facet_name a string used to name what the data is being faceted by in the graph title
+#'
 #' @export
-#' faceted_plot
 
 facet_all_areas_src <- function(prawn_path,group,pollutant,facet_name){
 
