@@ -8,7 +8,7 @@
 #' size_poker()
 #'
 
-size_poker <- function(prawn_path,pollutant,year){
+cartesian_area_for_most_deprived_src <- function(prawn_path,pollutant,year){
   data <- read.csv(prawn_path,
                    row.names=1,
                    check.names=FALSE)

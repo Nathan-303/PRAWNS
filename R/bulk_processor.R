@@ -383,9 +383,9 @@ graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format
 #End skip if going in anything but slowest mode, numbers was created outside the skip and is removed inside, so this tidies it up if the skil happened
 }else{rm(numbers)}
 
-print("Plottingt the change in road transport as a contribution to the total for the most deprived 20%")
+print("Plotting the change in road transport as a contribution to the total for the most deprived 20%")
 
-expanse_scale <- size_poker(prawn_path,pollutant,year)
+expanse_scale <- cartesian_area_for_most_deprived_src(prawn_path,pollutant,year)
 
 graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LSOA area for most deprived.",file_format1),
             plot=expanse_scale,
