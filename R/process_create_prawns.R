@@ -32,7 +32,7 @@
 #' create_prawns()
 #'
 
-create_prawns <- function(raster_path=FALSE,
+process_create_prawns <- function(raster_path=FALSE,
                           tif_path=FALSE,
                           csv_coordinates_path=FALSE,
                           shapefile_path,

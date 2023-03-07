@@ -63,7 +63,7 @@ for ( index in c(1:3)){
     dir.create(path=paste0(proc_tag))
 
     #create the base prawn for this function, it will also be used by iterations 2 and 3 but filtered, it is created with NA values included so the data can be analysed
-    create_prawns(
+    process_create_prawns(
       raster_path= raster_path,
       shapefile_path = shapefile_path,
       pollutant_data_name = pollutant_data_name,
