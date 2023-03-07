@@ -94,7 +94,7 @@ for ( index in c(1:3)){
                                     prawn_path=prawn_path,
                                     year=year)
 
-    graph_saver(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
+    process_graph_saver(filename= paste0(proc_tag,"/medmeancomp.",file_format1),
            plot=stat_facet,
            file_format = file_format,
            type=2,
@@ -149,7 +149,7 @@ if(gotta_go_fast != "zooom"){
 
     london_focus <- WIP_focus_compare_trimmed_data_src(prawn_path,raw_path,pollutant,year)
 
-    graph_saver(filename= paste0(proc_tag,"/Total",pollutant," emissions for London.",file_format1),
+    process_graph_saver(filename= paste0(proc_tag,"/Total",pollutant," emissions for London.",file_format1),
                 plot=london_focus,
                 file_format = file_format,
                 type=1,
@@ -168,7 +168,7 @@ minimal <- cartesian_minimalist_src(prawn_path=prawn_path,
                             pollutant=pollutant,
                             year=year)
 
-graph_saver(filename= paste0(proc_tag,"/Minimalistic",pollutant," emissions.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/Minimalistic",pollutant," emissions.",file_format1),
             plot=minimal,
             file_format = file_format,
             type=4,
@@ -183,7 +183,7 @@ print("Making a histogram of pollutant averages")
                                  pollutant=pollutant,
                                  year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",total_emission_histogram[[2]]," entries cropped to right of limit.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," emission average per IMD histogram with ",total_emission_histogram[[2]]," entries cropped to right of limit.",file_format1),
          plot=total_emission_histogram[[1]],
          file_format = file_format,
          type=1,
@@ -196,7 +196,7 @@ exquint <- cartesian_expanse_quintile_src(prawn_path=prawn_path,
                                        pollutant=pollutant,
                                        year=year)
 
-graph_saver(filename= paste0(proc_tag,"/",pollutant," emission inequality for expanse quintiles.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/",pollutant," emission inequality for expanse quintiles.",file_format1),
             plot=exquint,
             file_format = file_format,
             type=1,
@@ -210,7 +210,7 @@ source_facets <- facet_sources_src(prawn_path = prawn_path,
                                  pollutant=pollutant,
                                  year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," faceted sources.",file_format1),
          plot=source_facets,
          file_format = file_format,
          type=2,
@@ -224,25 +224,25 @@ RUC_breakdown <- facet_RUC_src(prawn_path = prawn_path,
                          pollutant=pollutant,
                          year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC breakdown.",file_format1),
          plot=RUC_breakdown[[1]],
          file_format = file_format,
          type=2,
          scaling=0.8)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," RUC populationbreakdown.",file_format1),
          plot=RUC_breakdown[[2]],
          file_format = file_format,
          type=1,
          scaling=0.4)
 
-  graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram.",file_format1),
          plot=RUC_breakdown[[3]],
          file_format = file_format,
          type=1,
          scaling=0.4)
 
-  graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram2.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/RUC IMD histogram2.",file_format1),
          plot=RUC_breakdown[[4]],
          file_format = file_format,
          type=2,
@@ -261,7 +261,7 @@ city_facets <- facet_all_areas_src(prawn_path = prawn_path,
                             pollutant = pollutant,
                             facet_name="city")
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_city.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_city.",file_format1),
         plot=city_facets,
         file_format = file_format,
         type=3,
@@ -276,7 +276,7 @@ area_facets <- facet_all_areas_src(prawn_path = prawn_path,
                               pollutant = pollutant,
                               facet_name="county/unitary authority")
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_area.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant,"_faceted_by_area.",file_format1),
          plot=area_facets,
          file_format = file_format,
          type=3,
@@ -292,7 +292,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
                                area_type = "County/UA",
                                year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by county UA.",file_format1),
        plot=avg_imd_pol[[1]],
        file_format = file_format,
        type=1,
@@ -306,7 +306,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
 print("Calculating the individual gradients for each county/UA and putting them on a histogram")
 area_histogram <- cartesian_area_gradients_src(prawn_path=prawn_path,area_type="County/UA")
 
-graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
        plot=area_histogram,
        file_format = file_format,
        type=1,
@@ -320,7 +320,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
                                  area_type = "City",
                                  year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," average vs average IMD by city.",file_format1),
          plot=avg_imd_pol[[1]],
          file_format = file_format,
          type=2,
@@ -332,7 +332,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
 
   area_histogram <- cartesian_area_gradients_src(prawn_path=prawn_path,area_type="City")
 
-  graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for cities.",file_format1),
          plot=area_histogram,
          file_format = file_format,
          type=2,
@@ -357,13 +357,13 @@ numbers <- stats_reg_RMSE_reg_src(prawn_path = prawn_path,pollutant=pollutant)
 }
 #Begin skip if going in anything but slowest mode
 if(!(gotta_go_fast%in%c("zooom","yes"))){
-graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1),
             plot=numbers[4][[1]],
             file_format = file_format,
             type=2,
             scaling=0.7)
 
-  graph_saver(filename= paste0(proc_tag,"/histogram of linear fit residuals.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/histogram of linear fit residuals.",file_format1),
               plot=numbers[5][[1]],
               file_format = file_format,
               type=2,
@@ -373,7 +373,7 @@ graph_saver(filename= paste0(proc_tag,"/residuals for linear fit.",file_format1)
 print("Calculating p values for randomly sliced and diced data")
 p_plot <- stats_pvalues_src(prawn_path)
 
-graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",file_format1),
             plot=p_plot,
             file_format = file_format,
             type=2,
@@ -387,7 +387,7 @@ print("Plotting the change in road transport as a contribution to the total for 
 
 expanse_scale <- cartesian_area_for_most_deprived_src(prawn_path,pollutant,year)
 
-graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LSOA area for most deprived.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LSOA area for most deprived.",file_format1),
             plot=expanse_scale,
             file_format = file_format,
             type=1,
@@ -397,7 +397,7 @@ rm(expanse_scale)
 print("Plotting a histogram of all the sources")
 sourceogram <- histogram_sources_src(prawn_path)
 
-graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
             plot=sourceogram,
             file_format = file_format,
             type=2,
@@ -410,7 +410,7 @@ emexpanse <- cartesian_expanse_src(prawn_path,
                                   pollutant,
                                   year)
 
-graph_saver(filename= paste0(proc_tag,"/",pollutant,"emissions by LSOA expanse faceted by source.",file_format1),
+process_graph_saver(filename= paste0(proc_tag,"/",pollutant,"emissions by LSOA expanse faceted by source.",file_format1),
             plot=emexpanse,
             file_format = file_format,
             type=2,
@@ -424,13 +424,13 @@ print("Plotting inequalities for size slices")
                          pollutant=pollutant,
                          year=year)
 
-  graph_saver(filename= paste0(proc_tag,"/emissions_by_sector_in_12_size_percentiles.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/emissions_by_sector_in_12_size_percentiles.",file_format1),
               plot=areas[[1]],
               file_format = file_format,
               type=3,
               scaling=0.7)
 
-  graph_saver(filename= paste0(proc_tag,"/histogram of LSOA areas faceted by IMD.",file_format1),
+  process_graph_saver(filename= paste0(proc_tag,"/histogram of LSOA areas faceted by IMD.",file_format1),
               plot=areas[[2]],
               file_format = file_format,
               type=2,

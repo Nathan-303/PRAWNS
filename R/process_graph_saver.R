@@ -14,7 +14,7 @@
 #' @examples
 #' graph_saver()
 
-graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
+process_graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
 
 
 
