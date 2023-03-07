@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #' model_plot()
-model_plot <- function(model_prawn_path,pollutant,year){
+cartesian_modelled_flat <- function(model_prawn_path,pollutant,year){
 
 active_stack <- read.csv(model_prawn_path,
                                  check.names = FALSE,
