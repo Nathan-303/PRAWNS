@@ -287,7 +287,7 @@ area_facets <- faceted_plot(prawn_path = prawn_path,
 }
 #Plot the average pollutant vs average IMD grouped by county/ua
 print("Plotting county/UA as a scatter where the axes are average IMD and average pollutant")
-avg_imd_pol <- cartesian_area_avg_deprivation_sources(prawn_path=prawn_path,
+avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
                                pollutant = pollutant,
                                area_type = "County/UA",
                                year=year)
@@ -315,7 +315,7 @@ graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for coun
   rm(area_histogram)
 
 print("Repeating what was done for county/UA but for cities instead")
-avg_imd_pol <- cartesian_area_avg_deprivation_sources(prawn_path=prawn_path,
+avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
                                  pollutant = pollutant,
                                  area_type = "City",
                                  year=year)
