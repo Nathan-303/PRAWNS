@@ -15,8 +15,6 @@
 #' @param pollutant_data_name what the pollutant is referred to as in the raw data, should be quoted
 #'
 #' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
-
-#' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
 #' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
 #'
