@@ -41,7 +41,7 @@ bulk_processor <- function(raster_path,
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
 #store the procedural tag as a variable to save space and make the code clearer
-
+  print("Testing")
 proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
 
 if(grepl("agg_",file_format)==TRUE){
@@ -52,7 +52,7 @@ for ( index in c(1:3)){
 
   #Create the folder for the results using the raw data
   if (index==1){
-    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration)
+    proc_tag <- paste0("Outputs/",pollutant,"_emissions_in_",year,"_v",iteration)
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #The base path remains unchanged and is used to fetch a raw copy of the prawn for processed versions
     raw_path <- paste0(proc_tag,"/PRAWN.csv")
@@ -69,6 +69,7 @@ for ( index in c(1:3)){
       pollutant=pollutant,
       output_path = prawn_path)
 
+    print("Test2")
     #set all na values to 0
     # transformer <- read.csv(paste0(proc_tag,"/PRAWN with NA.csv"),
     #                 row.names=1,
@@ -82,11 +83,11 @@ for ( index in c(1:3)){
     # write.csv(x=transformer,
     #           file=prawn_path)
 
-    shape_test <- process_shapefile_checker(shapefile_path)
-
-    ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
-           plot=shape_test,
-           device="png")
+    # shape_test <- process_shapefile_checker(shapefile_path)
+    #
+    # ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
+    #        plot=shape_test,
+    #        device="png")
 
     stat_facet <- facet_medmean_london_src(pollutant=pollutant,
                                     prawn_path=prawn_path,
@@ -108,7 +109,7 @@ for ( index in c(1:3)){
 if(gotta_go_fast != "zooom"){
   #create the results without London,
   if (index==2){
-    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/Londonless")
+    proc_tag <- paste0("Outputs/",pollutant,"_emissions_in_",year,"_v",iteration,"/Londonless")
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
@@ -129,7 +130,7 @@ if(gotta_go_fast != "zooom"){
   }
 
   if (index==3){
-    proc_tag <- paste0(pollutant,"_emissions_in_",year,"_v",iteration,"/London_only")
+    proc_tag <- paste0("Outputs/",pollutant,"_emissions_in_",year,"_v",iteration,"/London_only")
     prawn_path <- paste0(proc_tag,"/PRAWN.csv")
     #create the folder that everything goes in
     dir.create(path=paste0(proc_tag))
@@ -187,7 +188,7 @@ print("Making a histogram of pollutant averages")
          type=1,
          scaling=0.6)
 
-  rm(noxxogram)
+  rm(total_emission_histogram)
 
 print("Plotting inequality for expanse quintiles")
 exquint <- cartesian_expanse_quintile_src(prawn_path=prawn_path,
