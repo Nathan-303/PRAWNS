@@ -41,7 +41,7 @@ process_create_prawns <- function(raster_path=FALSE,
                           is_raw=FALSE){
 
 # Calculate the average pollution for each area ----------------------------
-
+print("is this thing on")
 #Three chained if statements, which trigger if there is a path to the appropriate file in the function call
   #If its'a raster
   if(raster_path!=FALSE){
@@ -56,6 +56,7 @@ process_create_prawns <- function(raster_path=FALSE,
     source_stack <- c(source_stack,rast(filelist[index])%>% terra::subst(NA,0))
   }
   }
+  print("Begin alt methods")
   #If its a tif
   if(tif_path!=FALSE){
     source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
@@ -72,6 +73,7 @@ process_create_prawns <- function(raster_path=FALSE,
 
     source_stack <- rast(base_raster)
   }
+  print("End alt methods")
   #Read the shapefile
   LSOA_shapefile <- vect(shapefile_path)
 
@@ -84,13 +86,15 @@ process_create_prawns <- function(raster_path=FALSE,
                    LSOA11CD=LSOA_shapefile$LSOA11CD,
                    expanse=expanse(LSOA_shapefile)
                    ) %>% unnest(poll_mean)
+  print("Destruction imminent?")
   #output a csv with minimum processing
   if(output_path!=FALSE){
     if (is_raw==TRUE){
     write.csv(file=output_path,
               x = output)
+     print("Got this far")
       output
-    }else{
+    }else{print("IS it here")
       raw_path <- paste0(tools::file_path_sans_ext(output_path),"raw.csv")
         write.csv(file=output_path,
                     x = output)}}
@@ -137,7 +141,7 @@ process_create_prawns <- function(raster_path=FALSE,
 
   prawns <- inner_join(output,refined_chunk,by="LSOA11CD")%>%
     rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
-
+write("another truefalse")
   if(raster_path!=FALSE){
   renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
@@ -160,7 +164,7 @@ process_create_prawns <- function(raster_path=FALSE,
       if(tracer[index] == TRUE){
         colnames(data)[index] <- NamedList[index-starter]
       }}
-
+write("still searching")
     data
   }
 
@@ -172,15 +176,14 @@ process_create_prawns <- function(raster_path=FALSE,
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
   #Return the resulting object
-
+print("error imminent")
 # Output the results ------------------------------------------------------
-if (output_path!=FALSE){
+if (output_path!="undefined"){
   write.csv(prawns,
             file=output_path)
 }
-
-
-prawns
+  print("WHy is exiting so hard")
+TRUE
   }
 
 
