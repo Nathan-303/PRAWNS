@@ -37,7 +37,8 @@ bulk_processor <- function(raster_path,
                            iteration=as.character(packageVersion("PRAWNS")),
                            dpi=600,
                            file_format="png",
-                           gotta_go_fast="No"){
+                           gotta_go_fast="No",
+                           output_path="undefined"){
   #work out the version pf the package for reproducibility, calculating it here makes the code more streamlined
 
 #store the procedural tag as a variable to save space and make the code clearer
