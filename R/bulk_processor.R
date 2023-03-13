@@ -406,7 +406,7 @@ process_graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",fil
 
 
 print("Plotting a histogram of all the sources")
-sourceogram <- histogram_sources_src(prawn_path)
+sourceogram <- facet_histogram_sources_src(prawn_path)
 
 process_graph_saver(filename= paste0(proc_tag,"/histogram of ",pollutant,"emissions by source.",file_format1),
             plot=sourceogram,
