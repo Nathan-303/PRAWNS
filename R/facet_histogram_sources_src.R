@@ -21,14 +21,15 @@ raw <- read.csv(prawn_path,
 pollutant <- "NOx"
 year <- 2020
 #Make the data long to eneble grouping by source
-long_data <- raw %>% pivot_longer(
-  cols=c("Agricultural","Domestic combustion","Energy production",
-         "Industrial combustion","Industrial production","Natural",
-         "Other transport and mobile machinery","Road transport","Solvents","Total"
-         ,"Waste treatment and disposal","Point sources"),
-  names_to = "Emission_source",
-  values_to = "emissions") %>%
-  group_by(Emission_source) %>%
+end_of_sources <- which(colnames(raw)=="LSOA11CD")-1
+
+source_list <- colnames(raw)[c(1:end_of_sources)]
+
+long_data <- raw %>%
+  pivot_longer(
+    cols=all_of(c(source_list,"Point sources")),
+    names_to = "Emission_source",
+    values_to = "emissions") %>% group_by(Emission_source)%>%
   mutate(emissions=replace_na(emissions,0))
 
 axis_key <- long_data %>% summarise(min=quantile(emissions,probs=0),bound=quantile(emissions,probs=0.99)) %>% group_by(Emission_source) %>% tibble
