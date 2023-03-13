@@ -17,14 +17,8 @@ cartesian_expanse_quintile_src <- function(prawn_path,pollutant,year){
 
 active_stack <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
 
-  rename("Other transport and \nmobile machinery"=`Other transport and mobile machinery`,
-         `Waste treatment \nand disposal`=`Waste treatment and disposal`) %>%mutate(`Other sources`=Solvents+Natural+`Energy production`+`Waste treatment \nand disposal`+Agricultural) %>%
-
   pivot_longer(
-    cols=c("Domestic combustion",
-           "Industrial combustion","Industrial production",
-           "Other transport and \nmobile machinery","Road transport","Total"
-           ,"Point sources","Other sources"),
+    cols=c("Road transport","Total"),
     names_to = "Emission_source",
     values_to = "emissions") %>% group_by(Emission_source)%>%
   #convert to km2
