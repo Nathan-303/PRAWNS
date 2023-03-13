@@ -116,6 +116,17 @@ if (ncol(checkcols)==86){
                         file_format = file_format,
                         type=4,
                         scaling=0.5)
+
+    print("Plotting the change in road transport as a contribution to the total for the most deprived 20%")
+
+    expanse_scale <- cartesian_area_for_most_deprived_src(prawn_path,pollutant,year)
+
+    process_graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LSOA area for most deprived.",file_format1),
+                        plot=expanse_scale,
+                        file_format = file_format,
+                        type=1,
+                        scaling=0.4)
+    rm(expanse_scale)
     #close the two that specific sources to be present
 }
 rm(checkcols)
@@ -392,16 +403,7 @@ process_graph_saver(filename= paste0(proc_tag,"/p_values for random chunks.",fil
 #End skip if going in anything but slowest mode, numbers was created outside the skip and is removed inside, so this tidies it up if the skil happened
 }else{rm(numbers)}
 
-print("Plotting the change in road transport as a contribution to the total for the most deprived 20%")
 
-expanse_scale <- cartesian_area_for_most_deprived_src(prawn_path,pollutant,year)
-
-process_graph_saver(filename= paste0(proc_tag,"/how ",pollutant," sources differ with LSOA area for most deprived.",file_format1),
-            plot=expanse_scale,
-            file_format = file_format,
-            type=1,
-            scaling=0.4)
-rm(expanse_scale)
 
 print("Plotting a histogram of all the sources")
 sourceogram <- histogram_sources_src(prawn_path)
