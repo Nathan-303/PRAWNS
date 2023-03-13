@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' focused_plot()
-focus_compare_trimmed_data_src <- function(focused_prawn_path,base_prawn_path,pollutant,year){
+WIP_focus_compare_trimmed_data_src <- function(focused_prawn_path,base_prawn_path,pollutant,year){
 
 active_stack <- read.csv(focused_prawn_path,
                                  check.names = FALSE,
