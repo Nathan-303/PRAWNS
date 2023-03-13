@@ -90,7 +90,7 @@ for ( index in c(1:3)){
     #        plot=shape_test,
     #        device="png")
 #trigger these graphs only if the prawn is of the correct length to indicate all categories exist
-checkcols <- read.csv(x=prawn_path)
+checkcols <- read.csv(file=prawn_path)
 if (ncol(checkcols==86)){
     stat_facet <- facet_medmean_london_src(pollutant=pollutant,
                                     prawn_path=prawn_path,
