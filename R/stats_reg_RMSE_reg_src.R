@@ -21,21 +21,21 @@
 #'
 #'
 
-stats_reg_RMSE_reg_src <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker=0.999,pollutant){
+stats_reg_RMSE_reg_src <- function(prawn_path="unspecified", input_path="unspecified",MSE_tinker=0.999,pollutant){
   #read the input file if a filepath is given
-  if (prawn_path != FALSE){
+  if (prawn_path != "unspecified"){
     data <- read.csv(prawn_path,
                      row.names=1,
                      check.names=FALSE)
   }
 
   #reference an existing object if an object name is given
-  if (input_path != FALSE){
+  if (input_path != "unspecified"){
     data <- input_path
   }
 
 
-  end_of_sources <- which(colnames(data)=="Waste treatment \nand disposal")
+  end_of_sources <- which(colnames(data)=="Waste treatment and disposal")
 
   source_list <- colnames(data)[c(1:end_of_sources)]
 
