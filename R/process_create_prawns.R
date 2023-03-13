@@ -150,31 +150,35 @@ print("4")
 print("ffs")
     renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
-# Rename the columns for readability --------------------------------------
-  print(last_two_digits_year)
-  print(pollutant_data_name)
+      NamedList <- c("Agricultural","Domestic combustion","Energy production",
+                     "Industrial combustion","Industrial production","Natural",
+                     "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total","Tot_area"
+                     ,"Waste treatment and disposal")
 
-    NamedList <- c("Agricultural","Domestic combustion","Energy production",
-                   "Industrial combustion","Industrial production","Natural",
-                   "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total","Tot_area"
-                   ,"Waste treatment and disposal")
+      Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year)
 
-    Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste","pntsrc"),pollutant_data_name,last_two_digits_year)
-print("4.5")
-    tracer <- colnames(data) %in% Nmdlst
+      core <- tibble(Output=NamedList,Match=Nmdlst)
 
-    #Finds the first position where matches start
-    starter <- detect_index(tracer,is_true)-1
 
-    for(index in 1:length(tracer)){
-      if(tracer[index] == TRUE){
-        colnames(data)[index] <- NamedList[index-starter]
-      }}
-    print(colnames(data))
-    data
+      for(Index in c(1:17)){
+        #if the column name matches any of the renamable vectors then rename it
+        if(colnames(data)[Index] %in% core$Match){
+          track <- colnames(data)[Index]
+
+          replace <- core %>% filter(Match==track)
+
+          colnames(data)[Index] <- replace$Output
+          #Break the loop if there's no match, adds efficiency
+        }else{break}
+        #Close the for loop
+      }
+      #Output data
+      data
+      #Close the function
     }
     print("sneaky")
-
+write.csv(x = prawns,
+          file="Outputs/mysteries.csv")
   prawns <- renamer(
     data=prawns,
     last_two_digits_year=year-2000,
