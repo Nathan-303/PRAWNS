@@ -89,7 +89,9 @@ for ( index in c(1:3)){
     # ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
     #        plot=shape_test,
     #        device="png")
-
+#trigger these graphs only if the prawn is of the correct length to indicate all categories exist
+checkcols <- read.csv(x=prawn_path)
+if (ncol(checkcols==86)){
     stat_facet <- facet_medmean_london_src(pollutant=pollutant,
                                     prawn_path=prawn_path,
                                     year=year)
@@ -100,6 +102,19 @@ for ( index in c(1:3)){
            type=2,
            scaling=0.3)
 
+    print("making a minimalistic graph")
+    minimal <- cartesian_minimalist_src(prawn_path=prawn_path,
+                                        pollutant=pollutant,
+                                        year=year)
+
+    process_graph_saver(filename= paste0(proc_tag,"/Minimalistic",pollutant," emissions.",file_format1),
+                        plot=minimal,
+                        file_format = file_format,
+                        type=4,
+                        scaling=0.5)
+    #close the two that specific sources to be present
+}
+rm(checkcols)
   #clear up
     rm(shape_test)
     rm(stat_facet)
@@ -163,16 +178,6 @@ if(gotta_go_fast != "zooom"){
 #End a skip if in the fastest mode
 }
   #do the bare minumum graph for abstracts
-print("making a minimalistic graph")
-minimal <- cartesian_minimalist_src(prawn_path=prawn_path,
-                            pollutant=pollutant,
-                            year=year)
-
-process_graph_saver(filename= paste0(proc_tag,"/Minimalistic",pollutant," emissions.",file_format1),
-            plot=minimal,
-            file_format = file_format,
-            type=4,
-            scaling=0.5)
 
 rm(londonless_prawn)
 

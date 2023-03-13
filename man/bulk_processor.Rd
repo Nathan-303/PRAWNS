@@ -14,7 +14,8 @@ bulk_processor(
   iteration = as.character(packageVersion("PRAWNS")),
   dpi = 600,
   file_format = "png",
-  gotta_go_fast = "No"
+  gotta_go_fast = "No",
+  output_path = "undefined"
 )
 }
 \arguments{
