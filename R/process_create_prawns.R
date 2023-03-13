@@ -41,7 +41,7 @@ process_create_prawns <- function(raster_path="undefined",
                           is_raw=FALSE){
 
 # Calculate the average pollution for each area ----------------------------
-print("is this thing on")
+
 
 #Three chained if statements, which trigger if there is a path to the appropriate file in the function call
   #If its'a raster
@@ -57,7 +57,6 @@ print("is this thing on")
     source_stack <- c(source_stack,rast(filelist[index])%>% terra::subst(NA,0))
   }
   }
-  print("Begin alt methods")
   #If its a tif
   if(tif_path!=FALSE){
     source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
@@ -74,7 +73,7 @@ print("is this thing on")
 
     source_stack <- rast(base_raster)
   }
-  print("End alt methods")
+
   #Read the shapefile
   LSOA_shapefile <- vect(shapefile_path)
 
@@ -87,19 +86,19 @@ print("is this thing on")
                    LSOA11CD=LSOA_shapefile$LSOA11CD,
                    expanse=expanse(LSOA_shapefile)
                    ) %>% unnest(poll_mean)
-  print("Destruction imminent?")
+
   #output a csv with minimum processing
   if(output_path!=FALSE){
     if (is_raw==TRUE){
     write.csv(file=output_path,
               x = output)
-     print("Got this far")
+
       output
-    }else{print("IS it here")
-      print("or here")
+    }else{
+
         write.csv(file=output_path,
                     x = output)}}
-  print("maybe here")
+
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
@@ -110,7 +109,7 @@ print("is this thing on")
     tibble()
   #Renames a column to avoid a special character that makes things go wrong
   colnames(city_data)[1] <- "LSOA11CD"
-  print("1")
+
   #Reads the demographic information about the LSOAs, binds them by LSOA code so the FID is incorporated
   LSOA_demographics <- read.csv("Data/LSOA_statistics/2019_LSOA_Stats.csv") %>%
     tibble() %>%
@@ -121,7 +120,7 @@ print("is this thing on")
   #Links the demographic data to the references to the shapefile
   demo_linked_reference <- inner_join(city_data,LSOA_demographics,by=c("LSOA11CD"="LSOA11CD","FID"="FID","TCITY15CD"="TCITY15CD",
                                                                        "TCITY15NM"="TCITY15NM"))
-  print("2")
+
   #Reads the county lookup data
   county_lookup <- read.csv("Data/LSOA_statistics/county lookup 2019.csv",row.names = 1)
 
@@ -142,12 +141,12 @@ print("is this thing on")
   rm(county_chunk)
 # Combine the pollution means with the additional data --------------------
 
-  print("3")
+
   prawns <- inner_join(output,refined_chunk,by="LSOA11CD")%>%
     rename(IMD=`Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.`)
-print("4")
+
   if(raster_path!="undefined"){
-print("ffs")
+
     renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
       NamedList <- c("Agricultural","Domestic combustion","Energy production",
@@ -176,7 +175,6 @@ print("ffs")
       data
       #Close the function
     }
-    print("sneaky")
 write.csv(x = prawns,
           file="Outputs/mysteries.csv")
   prawns <- renamer(
@@ -184,18 +182,17 @@ write.csv(x = prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   )
-  print(colnames(prawns))
-  print("soon surely")
+
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
-  #Return the resulting object
-print("error imminent")
+
+
 # Output the results ------------------------------------------------------
 if (output_path!="undefined"){
   write.csv(prawns,
             file=output_path)
 }
-  print("WHy is exiting so hard")
+
 TRUE
   }
 
