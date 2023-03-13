@@ -34,15 +34,16 @@ stats_reg_RMSE_reg_src <- function(prawn_path=FALSE, input_path=FALSE,MSE_tinker
     data <- input_path
   }
 
-  #make the data long so the sources can be processed separately
-  long_data <- data %>% pivot_longer(
-    cols=c("Agricultural","Domestic combustion","Energy production",
-           "Industrial combustion","Industrial production","Natural",
-  "Other transport and mobile machinery","Road transport","Solvents","Total"
-           ,"Waste treatment and disposal","Point sources"),
-    names_to = "Emission_source",
-    values_to = "emissions") %>%
-    group_by(Emission_source) %>%
+
+  end_of_sources <- which(colnames(data)=="Waste treatment \nand disposal")
+
+  source_list <- colnames(data)[c(1:end_of_sources)]
+
+  long_data <- data %>%
+    pivot_longer(
+      cols=all_of(c(source_list,"Point sources")),
+      names_to = "Emission_source",
+      values_to = "emissions") %>% group_by(Emission_source)%>%
     mutate(emissions=replace_na(emissions,0))
 
 

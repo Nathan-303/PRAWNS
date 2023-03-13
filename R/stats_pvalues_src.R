@@ -18,13 +18,15 @@ test <- tibble(chunk=sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace
 
 chunkable <- bind_cols(data,test)%>% group_by(chunk)
 
-long_data <- chunkable %>% pivot_longer(
-  cols=c("Agricultural","Domestic combustion","Energy production",
-         "Industrial combustion","Industrial production","Natural",
-         "Other transport and mobile machinery","Road transport","Solvents","Total"
-         ,"Waste treatment and disposal","Point sources"),
-  names_to = "Emission_source",
-  values_to = "emissions") %>%
+end_of_sources <- which(colnames(data)=="Waste treatment \nand disposal")
+
+source_list <- colnames(data)[c(1:end_of_sources)]
+
+long_data <- data %>%
+  pivot_longer(
+    cols=all_of(c(source_list,"Point sources")),
+    names_to = "Emission_source",
+    values_to = "emissions") %>%
   group_by(Emission_source,chunk) %>%
   mutate(emissions=replace_na(emissions,0))
 
