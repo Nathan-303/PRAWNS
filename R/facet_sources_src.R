@@ -16,17 +16,21 @@
 
 facet_sources_src <- function(prawn_path,pollutant,year){
 
-long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
+long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
+  #conditional renames of columns
+  if("Other transport and mobile machinery" %in% colnames(long_chunk)){
+    long_chunk <- long_chunk %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`)
+  }
 
-  rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
-         `Waste treatment \nand disposal`=`Waste treatment and disposal`,
-         ) %>%
+if("Waste treatment and disposal" %in% colnames(long_chunk)){
+  long_chunk <- long_chunk %>% rename(`Waste treatment \nand disposal`=`Waste treatment and disposal`)
+}
+#Find the column which waste treatment is at, this is used to pivot in all the sources
+end_of_sources <- which(colnames(long_chunk)=="Waste treatment \nand disposal")
 
+source_list <- colnames(long_chunk)[c(1:end_of_sources)]
   pivot_longer(
-    cols=c("Agricultural","Domestic combustion","Energy production",
-           "Industrial combustion","Industrial production","Natural",
-           `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
-           ,`Waste treatment \nand disposal`,"Point sources"),
+    cols=c(source_list,"Point sources"),
     names_to = "Emission_source",
     values_to = "emissions") %>% group_by(Emission_source)
 
