@@ -70,7 +70,7 @@ for ( index in c(1:3)){
       pollutant=pollutant,
       output_path = prawn_path)
 
-    print("Test2")
+    print("Prawn created")
     #set all na values to 0
     # transformer <- read.csv(paste0(proc_tag,"/PRAWN with NA.csv"),
     #                 row.names=1,
@@ -89,9 +89,13 @@ for ( index in c(1:3)){
     # ggsave(filename= paste0(proc_tag,"/shapefile_test.png"),
     #        plot=shape_test,
     #        device="png")
+    # rm(shape_test)
 #trigger these graphs only if the prawn is of the correct length to indicate all categories exist
 checkcols <- read.csv(file=prawn_path)
-if (ncol(checkcols==86)){
+
+if (ncol(checkcols)==86){
+  print(prawn_path)
+  print("WHy is this still rendering")
     stat_facet <- facet_medmean_london_src(pollutant=pollutant,
                                     prawn_path=prawn_path,
                                     year=year)
@@ -116,7 +120,7 @@ if (ncol(checkcols==86)){
 }
 rm(checkcols)
   #clear up
-    rm(shape_test)
+
     rm(stat_facet)
 
     print("Basic PRAWN creation and data tests successful")
