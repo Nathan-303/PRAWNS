@@ -8,8 +8,8 @@ bottom deciles, operates from a file or an object depending on if prawn or
 input path is used. The error values are currently not very well labeled}
 \usage{
 stats_reg_RMSE_reg_src(
-  prawn_path = FALSE,
-  input_path = FALSE,
+  prawn_path = "unspecified",
+  input_path = "unspecified",
   MSE_tinker = 0.999,
   pollutant
 )

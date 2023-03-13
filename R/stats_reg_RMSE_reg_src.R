@@ -35,7 +35,7 @@ stats_reg_RMSE_reg_src <- function(prawn_path="unspecified", input_path="unspeci
   }
 
 
-  end_of_sources <- which(colnames(data)=="Waste treatment and disposal")
+  end_of_sources <- which(colnames(data)=="LSOA11CD")-1
 
   source_list <- colnames(data)[c(1:end_of_sources)]
 

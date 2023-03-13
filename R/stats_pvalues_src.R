@@ -18,7 +18,7 @@ test <- tibble(chunk=sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace
 
 chunkable <- bind_cols(data,test)%>% group_by(chunk)
 
-end_of_sources <- which(colnames(data)=="Waste treatment and disposal")
+end_of_sources <- which(colnames(data)=="LSOA11CD")-1
 
 source_list <- colnames(data)[c(1:end_of_sources)]
 

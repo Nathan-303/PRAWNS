@@ -26,7 +26,7 @@ if("Waste treatment and disposal" %in% colnames(long_chunk)){
   long_chunk <- long_chunk %>% rename(`Waste treatment \nand disposal`=`Waste treatment and disposal`)
 }
 #Find the column which waste treatment is at, this is used to pivot in all the sources
-end_of_sources <- which(colnames(long_chunk)=="Waste treatment \nand disposal")
+end_of_sources <- which(colnames(long_chunk)=="LSOA11CD")-1
 
 source_list <- colnames(long_chunk)[c(1:end_of_sources)]
 
