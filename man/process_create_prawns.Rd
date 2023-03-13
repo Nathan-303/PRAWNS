@@ -5,7 +5,7 @@
 \title{A function for creating the data source for PRAWNS functions``}
 \usage{
 process_create_prawns(
-  raster_path = FALSE,
+  raster_path = "undefined",
   tif_path = FALSE,
   csv_coordinates_path = FALSE,
   shapefile_path,

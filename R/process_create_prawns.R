@@ -30,7 +30,7 @@
 #' @examples
 #'
 
-process_create_prawns <- function(raster_path=FALSE,
+process_create_prawns <- function(raster_path="undefined",
                           tif_path=FALSE,
                           csv_coordinates_path=FALSE,
                           shapefile_path,
@@ -42,6 +42,7 @@ process_create_prawns <- function(raster_path=FALSE,
 
 # Calculate the average pollution for each area ----------------------------
 print("is this thing on")
+
 #Three chained if statements, which trigger if there is a path to the appropriate file in the function call
   #If its'a raster
   if(raster_path!=FALSE){
@@ -95,20 +96,21 @@ print("is this thing on")
      print("Got this far")
       output
     }else{print("IS it here")
-      raw_path <- paste0(tools::file_path_sans_ext(output_path),"raw.csv")
+      print("or here")
         write.csv(file=output_path,
                     x = output)}}
-
+  print("maybe here")
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
 
-  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv") %>% tibble %>%  dplyr::select(-FID)
+  rural_urban <- read.csv("Data/LSOA_statistics/LSOA_urban_rural.csv") %>%
+    tibble %>%  dplyr::select(-FID)
 
   city_data <- read.csv("Data/LSOA_statistics/city lookup 2011.csv") %>%
     tibble()
   #Renames a column to avoid a special character that makes things go wrong
   colnames(city_data)[1] <- "LSOA11CD"
-
+  print("1")
   #Reads the demographic information about the LSOAs, binds them by LSOA code so the FID is incorporated
   LSOA_demographics <- read.csv("Data/LSOA_statistics/2019_LSOA_Stats.csv") %>%
     tibble() %>%
@@ -119,7 +121,7 @@ print("is this thing on")
   #Links the demographic data to the references to the shapefile
   demo_linked_reference <- inner_join(city_data,LSOA_demographics,by=c("LSOA11CD"="LSOA11CD","FID"="FID","TCITY15CD"="TCITY15CD",
                                                                        "TCITY15NM"="TCITY15NM"))
-
+  print("2")
   #Reads the county lookup data
   county_lookup <- read.csv("Data/LSOA_statistics/county lookup 2019.csv",row.names = 1)
 
@@ -134,19 +136,23 @@ print("is this thing on")
     mutate(Area_Type="Unitary Authority",Area=Local.Authority.District.name..2019.)# %>%
   #inner_join(demo_linked_reference,by="LSOA11CD")
 
+  rm(unitary_list)
   refined_chunk <- bind_rows(unitary_chunk,county_chunk) %>% tibble()
-
+  rm(unitary_chunk)
+  rm(county_chunk)
 # Combine the pollution means with the additional data --------------------
 
-
+  print("3")
   prawns <- inner_join(output,refined_chunk,by="LSOA11CD")%>%
-    rename(IMD=Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.)
-write("another truefalse")
-  if(raster_path!=FALSE){
-  renamer <- function(data,last_two_digits_year,pollutant_data_name){
+    rename(IMD=`Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.`)
+print("4")
+  if(raster_path!="undefined"){
+print("ffs")
+    renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
 # Rename the columns for readability --------------------------------------
-
+  print(last_two_digits_year)
+  print(pollutant_data_name)
 
     NamedList <- c("Agricultural","Domestic combustion","Energy production",
                    "Industrial combustion","Industrial production","Natural",
@@ -154,7 +160,7 @@ write("another truefalse")
                    ,"Waste treatment and disposal")
 
     Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste","pntsrc"),pollutant_data_name,last_two_digits_year)
-
+print("4.5")
     tracer <- colnames(data) %in% Nmdlst
 
     #Finds the first position where matches start
@@ -164,15 +170,18 @@ write("another truefalse")
       if(tracer[index] == TRUE){
         colnames(data)[index] <- NamedList[index-starter]
       }}
-write("still searching")
+    print(colnames(data))
     data
-  }
+    }
+    print("sneaky")
 
   prawns <- renamer(
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   )
+  print(colnames(prawns))
+  print("soon surely")
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
   #Return the resulting object
