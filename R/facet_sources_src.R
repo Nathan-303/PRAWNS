@@ -29,8 +29,10 @@ if("Waste treatment and disposal" %in% colnames(long_chunk)){
 end_of_sources <- which(colnames(long_chunk)=="Waste treatment \nand disposal")
 
 source_list <- colnames(long_chunk)[c(1:end_of_sources)]
+
+long_chunk <- long_chunk %>%
   pivot_longer(
-    cols=c(source_list,"Point sources"),
+    cols=all_of(c(source_list,"Point sources")),
     names_to = "Emission_source",
     values_to = "emissions") %>% group_by(Emission_source)
 
