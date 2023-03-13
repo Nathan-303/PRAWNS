@@ -8,23 +8,30 @@
 facet_sources_by_expanse_src <- function(prawn_path,pollutant,year){
 #read data
 
-long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble() %>%
+long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
 
-  rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`,
-         `Waste treatment \nand disposal`=`Waste treatment and disposal`,
-  ) %>%
+if("Other transport and mobile machinery" %in% colnames(long_chunk)){
+  long_chunk <- long_chunk %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`)
+}
+
+if("Waste treatment and disposal" %in% colnames(long_chunk)){
+  long_chunk <- long_chunk %>% rename(`Waste treatment \nand disposal`=`Waste treatment and disposal`)
+}
+
+end_of_sources <- which(colnames(long_chunk)=="LSOA11CD")-1
+
+source_list <- colnames(long_chunk)[c(1:end_of_sources)]
+
   #convert expanse to km2
-  mutate(expanse=expanse/10^6,
+ long_chunk <- long_chunk %>%  mutate(expanse=expanse/10^6,
          #split expanse into tiles
          extile=ntile(expanse,20)) %>%
 
-  pivot_longer(
-    cols=c("Agricultural","Domestic combustion","Energy production",
-           "Industrial combustion","Industrial production","Natural",
-           `Other transport and \nmobile machinery`,"Road transport","Solvents","Total"
-           ,`Waste treatment \nand disposal`,"Point sources"),
-    names_to = "Emission_source",
-    values_to = "emissions")
+   pivot_longer(
+     cols=all_of(c(source_list,"Point sources")),
+     names_to = "Emission_source",
+     values_to = "emissions") %>%
+   group_by(Emission_source)
 
 
 quants <- tibble(exnum=quantile(long_chunk$expanse,probs=seq(0.05,1,0.05)),
