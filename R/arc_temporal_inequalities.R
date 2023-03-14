@@ -26,14 +26,15 @@ temporal_inequalities <- function(time_range,pollutant,name_generator,output_pat
     file_format="agg_png"
     if(grepl("agg_",file_format)==TRUE){
       file_format1 <- gsub(pattern="agg_",x=file_format,replacement = "")}
-
-    modelled_pollutant <- create_prawns(csv_coordinates_path = name_generator(year),
+  print("Calling creator")
+    modelled_pollutant <- process_create_prawns(csv_coordinates_path = name_generator(year),
                                         shapefile_path = "Data/2011_LSOA_shapefile_20m_generalised",
                                         pollutant_data_name = pollutant,
                                         year = year,
                                         pollutant = pollutant,
                                         is_raw = TRUE
     )
+    print("prawns made")
 
     write.csv(x=modelled_pollutant,
               file = paste0(output_path,"Modelled ",pollutant," emissions in ",year,".csv"))
