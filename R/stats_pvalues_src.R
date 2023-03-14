@@ -22,7 +22,7 @@ end_of_sources <- which(colnames(data)=="LSOA11CD")-1
 
 source_list <- colnames(data)[c(1:end_of_sources)]
 
-long_data <- data %>%
+long_data <- chunkable%>%
   pivot_longer(
     cols=all_of(c(source_list,"Point sources")),
     names_to = "Emission_source",
