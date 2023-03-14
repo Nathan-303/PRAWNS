@@ -5,12 +5,14 @@
 \title{Create a histogram showing the emission gradient for each area (city or
 county/UA) and whether it has a p value of below 0.05}
 \usage{
-cartesian_area_gradients_src(prawn_path, area_type)
+cartesian_area_gradients_src(prawn_path, area_type, pollutant)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
 
 \item{area_type}{The type of area to group by, either city or county/UA}
+
+\item{pollutant}{The pollutant being investigated, used for graph labelling}
 }
 \description{
 Create a histogram showing the emission gradient for each area (city or

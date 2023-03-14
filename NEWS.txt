@@ -752,6 +752,28 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Procedurally named process functions, left startup, imports and bulk processor intact
 
+
+0.14.3 (Uploaded 7/3/23)
+
+	Improved a lot of variable descriptions in functions
+
+0.14.4 (Uploaded 13/3/23)
+
+	Lots of degug flags for tempura compatibility
+
+	Made some aspects in bulk processor skip if there aren't all the columns
+
+	Reworked renamer subfunction in create_prawns to make it work when sources are missing
+
+
+0.14.5 (Uploaded 14/3/23)
+
+	Made functions that pivot out by source work regardless of number of sources
+
+	Protected more functions that throw errors without all sources
+
+	made the reps in dummy variable adaptive so it doesn't throw errors
+
 0.15.0
 
 	[The necronomicon]

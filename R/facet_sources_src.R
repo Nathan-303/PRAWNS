@@ -25,6 +25,7 @@ long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble
 if("Waste treatment and disposal" %in% colnames(long_chunk)){
   long_chunk <- long_chunk %>% rename(`Waste treatment \nand disposal`=`Waste treatment and disposal`)
 }
+
 #Find the column which waste treatment is at, this is used to pivot in all the sources
 end_of_sources <- which(colnames(long_chunk)=="LSOA11CD")-1
 
