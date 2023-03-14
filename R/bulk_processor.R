@@ -106,6 +106,8 @@ if (ncol(checkcols)==86){
            type=2,
            scaling=0.3)
 
+    rm(stat_facet)
+
     print("making a minimalistic graph")
     minimal <- cartesian_minimalist_src(prawn_path=prawn_path,
                                         pollutant=pollutant,
@@ -132,7 +134,7 @@ if (ncol(checkcols)==86){
 rm(checkcols)
   #clear up
 
-    rm(stat_facet)
+
 
     print("Basic PRAWN creation and data tests successful")
   }
