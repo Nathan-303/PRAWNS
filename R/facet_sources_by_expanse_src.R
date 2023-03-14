@@ -39,13 +39,7 @@ quants <- tibble(exnum=quantile(long_chunk$expanse,probs=seq(0.05,1,0.05)),
 
 grouped_chunk <- long_chunk %>%  group_by(extile,Emission_source) %>% summarise(Emissions=mean(emissions)) %>% inner_join(quants,by="extile")
 
-text_points <- grouped_chunk %>% ungroup() %>% filter(exnum>2)
 
-text_points <- text_points %>%
-#set the dummy values to be plotted in geom text
-  mutate(dummy=base::rep(x=seq(2.2,3,0.2),each=(nrow(text_points)/5)),
-         #round the true x values to be labelled in geom text
-         label=signif(exnum,2))
 
 output <- ggplot()+
 
@@ -56,12 +50,6 @@ output <- ggplot()+
   )+
   #plot the normal data
   geom_point(data=grouped_chunk %>% filter(exnum<2))+
-  #plot the data outside a nice x range
-  geom_point(data=text_points,aes(x=dummy,y=Emissions),
-             colour="#FB8022FF",
-             shape=4,
-             stroke=1.5
-             )+
   # geom_text_repel(data=text_points,
   #           aes(x=dummy,
   #               y=Emissions,
@@ -79,6 +67,25 @@ output <- ggplot()+
 
   labs(x=bquote("LSOA area / "~km^2),
        y=bquote("Average "~.(pollutant)~"emissions/ tonnes "~km^"-2"))
+
+#execute this code only if the number of rows is divisible by 5
+if(ncol(grouped_chunk)%%5==0){
+
+text_points <- grouped_chunk %>% ungroup() %>% filter(exnum>2)
+
+text_points <- text_points %>%
+  #set the dummy values to be plotted in geom text
+  mutate(dummy=base::rep(x=seq(2.2,3,0.2),each=(nrow(text_points)/5)),
+         #round the true x values to be labelled in geom text
+         label=signif(exnum,2))
+output <- ouptut+
+  #plot the data outside a nice x range
+  geom_point(data=text_points,aes(x=dummy,y=Emissions),
+             colour="#FB8022FF",
+             shape=4,
+             stroke=1.5
+  )
+}
 
 output
 
