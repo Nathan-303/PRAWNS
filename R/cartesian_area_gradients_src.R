@@ -4,13 +4,15 @@
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
 #' @param area_type The type of area to group by, either city or county/UA
+#'
+#' @param pollutant The pollutant being investigated, used for graph labelling
 
 #'
 #' @keywords faceted, sources
 #' @export
 #' @examples
 #' plot_area_gradients()
-cartesian_area_gradients_src <- function(prawn_path,area_type){
+cartesian_area_gradients_src <- function(prawn_path,area_type,pollutant){
 
 raw <- read.csv(prawn_path,
                 row.names=1,
@@ -42,7 +44,7 @@ test <- ggplot()+
 
   scale_fill_identity(guide="legend",labels=c("p>0.05","p<0.05"),breaks=c("royalblue","#FB8022FF"),name="p value")+
   scale_y_continuous(expand=expansion(add =c(0,1)))+
-  labs(x=bquote("Gradient / tonnes NOx "~km^"-2"~IMD^-1, ),
+  labs(x=bquote("Gradient / tonnes "~pollutant~" "~km^"-2"~IMD^-1, ),
        y="Frequency"
   )
 test
