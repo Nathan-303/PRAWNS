@@ -31,10 +31,10 @@
 #'
 
 process_create_prawns <- function(raster_path="undefined",
-                          tif_path=FALSE,
-                          csv_coordinates_path=FALSE,
+                          tif_path="undefined",
+                          csv_coordinates_path="undefined",
                           shapefile_path,
-                          output_path=FALSE,
+                          output_path="undefined",
                           pollutant_data_name,
                           year,
                           pollutant,
@@ -45,7 +45,7 @@ process_create_prawns <- function(raster_path="undefined",
 
 #Three chained if statements, which trigger if there is a path to the appropriate file in the function call
   #If its'a raster
-  if(raster_path!=FALSE){
+  if(raster_path!="undefined"){
   #Create a list of all the raster files present in the folder specified by raster_path
   filelist <- list.files(raster_path,
     pattern = ".asc",
@@ -58,38 +58,44 @@ process_create_prawns <- function(raster_path="undefined",
   }
   }
   #If its a tif
-  if(tif_path!=FALSE){
+  if(tif_path!="undefined"){
     source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
 
   }
   #If it's a csv
-  if(csv_coordinates_path!=FALSE){
+  if(csv_coordinates_path!="undefined"){
+    print(csv_coordinates_path)
     csv_raster <- read.csv(file=csv_coordinates_path,
                            skip = 5,
                            row.names=1,
                            check.names=FALSE) %>% tibble()
-
+  print("csv made")
     base_raster <- rasterFromXYZ(csv_raster,crs="OSGB")
-
+  print("raster next")
     source_stack <- rast(base_raster)
   }
-
+print("vect call")
   #Read the shapefile
   LSOA_shapefile <- vect(shapefile_path)
-
+print("index call")
   #Calculate the average for each polygon in the shapefile
   index <-  c(1:length(LSOA_shapefile))
+  print("stftft call")
   transient <- sf::st_as_sf(LSOA_shapefile[index])
+  print("exactextract call")
   pollution_mean <- exact_extract(source_stack,transient,'mean')
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
+  print("output call")
   output <- tibble(poll_mean=pollution_mean,
                    LSOA11CD=LSOA_shapefile$LSOA11CD,
                    expanse=expanse(LSOA_shapefile)
                    ) %>% unnest(poll_mean)
 
   #output a csv with minimum processing
-  if(output_path!=FALSE){
+  if(output_path!="undefined"){
+    print("outputting?")
     if (is_raw==TRUE){
+      print("writing file")
     write.csv(file=output_path,
               x = output)
 
