@@ -138,7 +138,8 @@ output
 
 histogram <- ggplot(data=plottable)+
   aes(x=IMD)+
-  facet_wrap(~caption)
+  facet_wrap(~caption)+
+  geom_histogram()
 
 histogram
 }
