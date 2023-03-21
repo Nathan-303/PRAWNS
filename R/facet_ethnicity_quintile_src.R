@@ -92,7 +92,7 @@ output <- ggplot(data=plottable
               se=FALSE,
               aes(linetype="Linear regression",colour="Mean"),
 
-              size=1,
+              linewidth=1,
               na.rm = TRUE)+
 
   #Plot the line of best fit for the median
@@ -100,7 +100,7 @@ output <- ggplot(data=plottable
                 aes(linetype="Linear regression",colour="Median"),
 
                 formula=y~x,
-                size=1,
+                linewidth=1,
                 na.rm=TRUE)+
 
 
@@ -123,7 +123,9 @@ output <- ggplot(data=plottable
 
   scale_linetype_manual(name= "Line plotted:",
                         values = c("Linear regression"="solid","Average points"="dashed"),
-                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
+                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),
+                                                               colour="black",shape=c(NA,NA),
+                                                               linewidth=c(1,1)))
   )+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
@@ -134,4 +136,9 @@ output <- ggplot(data=plottable
 
 output
 
+histogram <- ggplot(data=plottable)+
+  aes(x=IMD)+
+  facet_wrap(~caption)
+
+histogram
 }
