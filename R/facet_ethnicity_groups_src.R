@@ -59,14 +59,14 @@ output <- ggplot(data=plottable
 
   aes(x=IMD,
       y=Total,
-      colour=caption)+
+      colour=`Diversity_quintile`)+
 
   facet_wrap(~`Broad group`
   )+
 
   geom_line(stat="summary",
-            aes(linetype="Average points",
-                linewidth=0.5),
+            aes(linetype="Mean"),
+            linewidth=0.5,
             fun=mean,
             na.rm=TRUE
   )+
@@ -75,15 +75,13 @@ output <- ggplot(data=plottable
   geom_smooth(method="lm",
               formula=y~x,
               se=FALSE,
-              aes(linetype="Linear regression"),
-
+              aes(linetype="Mean"),
               linewidth=1,
               na.rm = TRUE)+
 
   #Plot the line of best fit for the median
   geom_quantile(quantiles=0.5,
-                aes(linetype="Linear regression"),
-
+                aes(linetype="Median"),
                 formula=y~x,
                 linewidth=1,
                 na.rm=TRUE)+
@@ -93,9 +91,8 @@ output <- ggplot(data=plottable
   #Plot a line through the medians for each decile
   geom_line(stat="summary",
             fun=median,
-            aes(linetype="Average points",
-                linewidth=0.5),
-
+            aes(linetype="Median"),
+            linewidth=0.5,
             na.rm=TRUE)+
 
   scale_x_continuous(
@@ -105,7 +102,7 @@ output <- ggplot(data=plottable
 
 
   scale_linetype_manual(name= "Line plotted:",
-                        values = c("Linear regression"="solid","Average points"="dashed"),
+                        values = c("Mean"="solid","Median"="dashed"),
                         guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),
                                                                colour="black",shape=c(NA,NA),
                                                                linewidth=c(1,1)))
