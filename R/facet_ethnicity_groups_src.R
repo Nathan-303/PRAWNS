@@ -59,7 +59,7 @@ output <- ggplot(data=plottable
 
   aes(x=IMD,
       y=Total,
-      colour=`Diversity_quintile`)+
+      colour=as.factor(`Diversity_quintile`))+
 
   facet_wrap(~`Broad group`
   )+
