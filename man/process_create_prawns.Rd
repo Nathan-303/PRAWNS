@@ -6,10 +6,10 @@
 \usage{
 process_create_prawns(
   raster_path = "undefined",
-  tif_path = FALSE,
-  csv_coordinates_path = FALSE,
+  tif_path = "undefined",
+  csv_coordinates_path = "undefined",
   shapefile_path,
-  output_path = FALSE,
+  output_path = "undefined",
   pollutant_data_name,
   year,
   pollutant,
