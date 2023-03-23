@@ -157,7 +157,7 @@ print("index call")
 
       NamedList <- c("Agricultural","Domestic combustion","Energy production",
                      "Industrial combustion","Industrial production","Natural",
-                     "Offshore","Other transport and mobile machinery","Road transport","Solvents","Total","Tot_area"
+                     "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area""Total",
                      ,"Waste treatment and disposal")
 
       Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year)
