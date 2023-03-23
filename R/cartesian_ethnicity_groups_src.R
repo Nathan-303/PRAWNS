@@ -5,7 +5,7 @@
 #' @keywords faceted, sources
 #' @export
 #' @examples
-facet_ethnicity_groups_src <- function(prawn_path,pollutant,year){
+cartesian_ethnicity_groups_src <- function(prawn_path,pollutant,year){
 data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
@@ -13,6 +13,17 @@ data <- read.csv(prawn_path,
 edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
                   check.names=FALSE,
                   sep="|") %>%
+  rename("Asian, Asian British or\n Asian Welsh"=
+           `Ethnic group: Asian, Asian British or Asian Welsh`,
+         "Black, Black British, \n Black Welsh, Caribbean or African" =
+         `Ethnic group: Black, Black British, Black Welsh, Caribbean or African`,
+         "Mixed or Multiple \nethnic groups"=
+         `Ethnic group: Mixed or Multiple ethnic groups`,
+         "White"=
+         `Ethnic group: White`,
+         "Other ethnic\ngroup"=
+         `Ethnic group: Other ethnic group`
+         )
   #Pivot the broadest subdivisions out
   pivot_longer(
     cols=c(
@@ -30,42 +41,28 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
 
 foray <- edata %>%
   mutate(Diversity_quintile = ntile(x=Percentage,
-                                    n=5))
+                                    n=10)) %>%
+  group_by(`Broad group`,Diversity_quintile)
 
-#Create a column for naming the facets
-Diversity_bounds <- quantile(foray$Percentage,probs=seq(0,1,0.2)) %>% signif(2)*100
-Diversity_brackets <- vector()
-for(index in c(1:5)){
-  Diversity_brackets[index] <- paste0(Diversity_bounds[index],
-                                  "% to ",Diversity_bounds[index+1],"%")
-}
 
-Diversity_tibble <- tibble(Diversity_quintile=c(1,2,3,4,5),caption=Diversity_brackets)
-plottable <- inner_join(
+plottable <- foray %>% inner_join(
   x=data,
   y=foray,
   by=c("LSOA11CD"="geography code")
 ) %>%
-#Bind on the captions
-  inner_join(
-    y=Diversity_tibble,
-    by="Diversity_quintile"
-  )
+  group_by(`Broad group`,Diversity_quintile) %>%
+  summarise(Mean=mean(Total))
 
 #Plot a faceted graph
 
 output <- ggplot(data=plottable
 )+
 
-  aes(x=IMD,
-      y=Total,
-      colour=as.factor(`Diversity_quintile`))+
-
-  facet_wrap(~`Broad group`
-  )+
+  aes(x=Diversity_quintile,
+      y=Mean,
+      colour=`Broad group`)+
 
   geom_line(stat="summary",
-            aes(linetype="Mean"),
             linewidth=0.5,
             fun=mean,
             na.rm=TRUE
@@ -75,44 +72,20 @@ output <- ggplot(data=plottable
   geom_smooth(method="lm",
               formula=y~x,
               se=FALSE,
-              aes(linetype="Mean"),
               linewidth=1,
               na.rm = TRUE)+
 
-  #Plot the line of best fit for the median
-  geom_quantile(quantiles=0.5,
-                aes(linetype="Median"),
-                formula=y~x,
-                linewidth=1,
-                na.rm=TRUE)+
-
-
-
-  #Plot a line through the medians for each decile
-  geom_line(stat="summary",
-            fun=median,
-            aes(linetype="Median"),
-            linewidth=0.5,
-            na.rm=TRUE)+
 
   scale_x_continuous(
     breaks=c(1:10),
     expand = expansion(mult=0,add=0),
     minor_breaks = FALSE)+
 
-
-  scale_linetype_manual(name= "Line plotted:",
-                        values = c("Mean"="solid","Median"="dashed"),
-                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),
-                                                               colour="black",shape=c(NA,NA),
-                                                               linewidth=c(1,1)))
-  )+
-
-  labs(x=paste0("IMD decile where 10 is least deprived"),
+  labs(x=paste0("Decile where 10 contains the most people within the group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
-  theme(legend.position = "bottom",legend.key.width = unit(1.5,"cm"))+
+  theme(legend.position = "right",legend.key.width = unit(1.5,"cm"))+
 
   scale_colour_viridis_d()
 
