@@ -13,25 +13,25 @@ data <- read.csv(prawn_path,
 edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
                   check.names=FALSE,
                   sep="|") %>%
-  rename("Asian, Asian British or\n Asian Welsh"=
+  rename(`Asian, Asian British or\nAsian Welsh`=
            `Ethnic group: Asian, Asian British or Asian Welsh`,
-         "Black, Black British, \n Black Welsh, Caribbean or African" =
+         `Black, Black British, \nBlack Welsh, Caribbean\nor African` =
          `Ethnic group: Black, Black British, Black Welsh, Caribbean or African`,
-         "Mixed or Multiple \nethnic groups"=
+         `Mixed or Multiple \nethnic groups`=
          `Ethnic group: Mixed or Multiple ethnic groups`,
-         "White"=
+         `White`=
          `Ethnic group: White`,
-         "Other ethnic\ngroup"=
+         `Other ethnic\ngroup`=
          `Ethnic group: Other ethnic group`
-         )
+         ) %>%
   #Pivot the broadest subdivisions out
   pivot_longer(
     cols=c(
-      `Ethnic group: Asian, Asian British or Asian Welsh`,
-      `Ethnic group: Black, Black British, Black Welsh, Caribbean or African`,
-      `Ethnic group: Mixed or Multiple ethnic groups`,
-      `Ethnic group: White`,
-      `Ethnic group: Other ethnic group`),
+      `Asian, Asian British or\nAsian Welsh`,
+      `Black, Black British, \nBlack Welsh, Caribbean\nor African`,
+      `Mixed or Multiple \nethnic groups`,
+      `White`,
+      `Other ethnic\ngroup`),
     names_to = "Broad group",
     values_to = "flat population"
   ) %>%
