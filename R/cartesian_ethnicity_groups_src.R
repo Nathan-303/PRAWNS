@@ -32,17 +32,17 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
       `Mixed or Multiple \nethnic groups`,
       `White`,
       `Other ethnic\ngroup`),
-    names_to = "Broad group",
+    names_to = "Ethnic group",
     values_to = "flat population"
   ) %>%
   #convert flat population into percentage
   mutate("Percentage"=`flat population`/`Ethnic group: Total: All usual residents`) %>%
-    group_by(`Broad group`)
+    group_by(`Ethnic group`)
 
 foray <- edata %>%
   mutate(Diversity_quintile = ntile(x=Percentage,
                                     n=10)) %>%
-  group_by(`Broad group`,Diversity_quintile)
+  group_by(`Ethnic group`,Diversity_quintile)
 
 
 plottable <- foray %>% inner_join(
@@ -50,7 +50,7 @@ plottable <- foray %>% inner_join(
   y=foray,
   by=c("LSOA11CD"="geography code")
 ) %>%
-  group_by(`Broad group`,Diversity_quintile) %>%
+  group_by(`Ethnic group`,Diversity_quintile) %>%
   summarise(Mean=mean(Total))
 
 #Plot a faceted graph
@@ -60,7 +60,7 @@ output <- ggplot(data=plottable
 
   aes(x=Diversity_quintile,
       y=Mean,
-      colour=`Broad group`)+
+      colour=`Ethnic group`)+
 
   geom_line(stat="summary",
             linewidth=0.5,
@@ -85,9 +85,13 @@ output <- ggplot(data=plottable
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
-  theme(legend.position = "right",legend.key.width = unit(1.5,"cm"))+
+  theme(legend.position = "right",
+        legend.key.width = unit(0.5,"cm"),
+        legend.key.height = unit(1.3,"cm"))+
 
-  scale_colour_viridis_d()
+  scale_colour_viridis_d()+
+
+  guides(fill = guide_legend(byrow = TRUE))
 
 output
 
