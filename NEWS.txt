@@ -791,6 +791,12 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	facet_ethnicity_groups function
 
+0.15.2 (Uploaded 23/3/23)
+
+	Improved facet ethnicity groups
+
+	Flipped point sources calculation as it was going negative somehow
+
 	
 0.16.0
 
