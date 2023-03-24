@@ -1,10 +1,21 @@
 #' Bind ethnicity data to the prawn and create graphs based on it
+#'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
 #' @param pollutant The pollutant being investigated, used in graph titles
+#'
 #' @param year The year being investigated, used in graph titles
+#'
 #' @keywords faceted, sources
+#'
 #' @export
+#'
 #' @examples
+#' cartesian_ethnicity_groups_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019)
+
 cartesian_ethnicity_groups_src <- function(prawn_path,pollutant,year){
 data <- read.csv(prawn_path,
                  row.names=1,

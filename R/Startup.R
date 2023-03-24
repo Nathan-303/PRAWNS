@@ -1,5 +1,10 @@
+#' Load in all ther packages as a jerry rigged fix to figuring out namespace
+#'
 #' @export
-#Load in all ther packages as a jerry rigged fix to figuring out namespace
+#'
+#' @examples
+#' Startup()
+
 Startup <- function(){
 library(sf)
 library(tidyverse)

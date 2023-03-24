@@ -10,8 +10,11 @@
 #' @keywords RUC
 #' @export
 #' @examples
-#' RUC_IMD()
-#'
+#' facet_RUC_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
 
 facet_RUC_src <- function(prawn_path,
                     pollutant,

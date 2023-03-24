@@ -8,10 +8,16 @@
 #' @param year The year the dat is from, used for axis labels
 #'
 #' @keywords expanse
-#' @export
-#' @examples
-#' expanse_probe()
 #'
+#' @export
+#'
+#' @examples
+#' facet_expanse_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
+
 
 facet_expanse_src <- function(prawn_path,pollutant,year){
 

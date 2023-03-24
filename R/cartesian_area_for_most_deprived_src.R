@@ -6,9 +6,16 @@
 #' @param year The year of the data, used in graph annotations
 #'
 #' @param area_type The type of area investigated, can be "City" or "County/UA"
+#'
 #' @keywords faceted, sources
+#'
 #' @export
 #'
+#' @examples
+#' cartesian_area_for_most_deprived_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019)
 
 cartesian_area_for_most_deprived_src <- function(prawn_path,pollutant,year){
   data <- read.csv(prawn_path,

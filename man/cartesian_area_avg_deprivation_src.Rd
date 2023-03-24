@@ -20,3 +20,10 @@ cartesian_area_avg_deprivation_src(prawn_path, pollutant, area_type, year)
 Plots the average IMD vs the average NOx for geographical areas (cities or
 counties/unitary authorities)
 }
+\examples{
+  cartesian_area_avg_deprivation_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  area_type="City",
+  year=2019)
+}

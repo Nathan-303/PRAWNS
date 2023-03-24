@@ -1,13 +1,23 @@
 #' Plot the mean and median emissions with and without London next to each other
 #'
 #' @param year the year the data was taken, used for axis titles
-#' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
-#' @param prawn_path The filepath for the prawn CSV that is to be used.
-#` @keywords faceted, sources
-#' @export
-#' @examples
-#' side_by_sidestats()
 #'
+#' @param pollutant the pollutant being investigated, this should be in quotes
+#' and correspond with its name in the data
+#'
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+#' @keywords faceted, sources
+#'
+#' @export
+#'
+#' @examples
+#' side_by_sidestats(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
+
 facet_medmean_london_src <- function(pollutant,year,prawn_path){
 
 active_stack <- read.csv(file=prawn_path,

@@ -2,6 +2,7 @@
 #'between the mean and median of the intercept and actual value at the top and
 #'bottom deciles, operates from a file or an object depending on if prawn or
 #'input path is used. The error values are currently not very well labeled
+#'
 #'@param prawn_path the path for the data source, defaults to FALSE this should
 #'reference a csv file
 #'
@@ -13,13 +14,15 @@
 #'calculated from a model where data above the 99th percentile is removed. if
 #'small alterations to this change RMSE dramatically it shows that the highest
 #'values are having a large inmact on the RMSE
+#'
 #' @keywords data
+#'
 #' @export
 #'
 #' @examples
-#' stat_wrangler()
-#'
-#'
+#' stats_reg_RMSE_reg_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx")
 
 stats_reg_RMSE_reg_src <- function(prawn_path="unspecified", input_path="unspecified",MSE_tinker=0.999,pollutant){
   #read the input file if a filepath is given

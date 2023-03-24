@@ -1,11 +1,18 @@
 #' Make a minimalist graph suitable for a graphical abstract
 #'
 #' @param prawn_path the filepath to load data from
+#'
 #' @param pollutant the pollutant investigated, used to name axis
+#'
 #' @param year the year the data is from, used to name axis
+#'
 #' @export
+#'
 #' @examples
-#' minimalist_graph()
+#' minimalist_graph(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019)
 
 cartesian_minimalist_src <- function(prawn_path,pollutant,year){
 

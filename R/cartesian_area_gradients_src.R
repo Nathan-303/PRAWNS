@@ -11,7 +11,11 @@
 #' @keywords faceted, sources
 #' @export
 #' @examples
-#' plot_area_gradients()
+#' plot_area_gradients(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   area_type="City")
+
 cartesian_area_gradients_src <- function(prawn_path,area_type,pollutant){
 
 raw <- read.csv(prawn_path,

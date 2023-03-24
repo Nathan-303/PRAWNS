@@ -8,18 +8,28 @@
 #'
 #' @param shapefile_path The filepath for the shapefile that is to be used
 #'
-#' @param targets The name of the thing you're trying to isolate e.g. "Manchester"
+#' @param targets The name of the thing you're trying to isolate e.g.
+#' "Manchester"
 #' can also be a vector of valid values
 #'
-#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#' @param pollutant The name of the pollutant that's being examined, this is
+#' used in the graph names
 #'
 #' @param output_path The filepath to output to, a folder will be created at
 #' this location which contains all the graphs produced by this code. Defaults
 #' to FALSE
 
 #' @keywords heatmap, graph,
+#'
 #' @export
 #'
+#'@examples
+#'focus_area_multiplot_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
+
 focus_area_multiplot_src <- function(prawn_path,
                          shapefile_path,
                          targets,

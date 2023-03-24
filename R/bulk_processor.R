@@ -10,24 +10,40 @@
 #'
 #' @param shapefile_path The filepath for the shapefile to be used
 #'
-#' @param pollutant the pollutant being investigated, this should be in quotes and correspond with its name in the data
+#' @param pollutant the pollutant being investigated, this should be in quotes
+#' and correspond with its name in the data
 #'
-#' @param pollutant_data_name what the pollutant is referred to as in the raw data, should be quoted
+#' @param pollutant_data_name what the pollutant is referred to as in the raw
+#' data, should be quoted
 #'
-#' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
+#' @param year the year the data is from, used to standardise column names,
+#' currently doesnt work for years before 2000
 #'
-#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names
+#' @param pollutant The name of the pollutant that's being examined, this is
+#' used in the graph names
 #'
-#' @param dpi The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process
+#' @param dpi The dpi to save graphs with, defaults to 600, the minimum for
+#' figures in an RSC publication, higher values will take longer to process
 #'
-#' @param file_format The file format to save in, should be all lower case and in quotes, as it's piped straight into a ggsave function
+#' @param file_format The file format to save in, should be all lower case and
+#' in quotes, as it's piped straight into a ggsave function
 #'
-#' @param gotta_go_fast Allows the code to sacrifice things that take a long time to get it to run faster, defaults to "No"
+#' @param gotta_go_fast Allows the code to sacrifice things that take a long
+#' time to get it to run faster, defaults to "No"
+#'
+#' @param iteration Used in naming the output folder, defaults to the version
+#' of PRAWNS used but can be used to apply custom labels, should be a string
+#'
 #' @keywords faceted, sources
 #' @export
 #' @examples
-#' bulk_processor()
-#'
+#' bulk_processor(
+#'   raster_path="example_raster_folder",
+#'   shapefile_path="example_shapefile_location",
+#'   pollutant_data_name="nox",
+#'   year=2019,
+#'   pollutant="NOx"
+#'   )
 
 bulk_processor <- function(raster_path,
                            shapefile_path,

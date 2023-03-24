@@ -23,12 +23,18 @@
 #' @param year the year the data is from, used to standardise column names, currently doesnt work for years before 2000
 #'
 #' @param is_raw whether or not to output a csv only containing the LSOAs mapped to the emissions
-
+#'
 #' @keywords data
+#'
 #' @export
 #'
 #' @examples
-#'
+#' process_create_prawns(
+#'   raster_path="The folder containing the rasters",
+#'   shapefile_path="Where the shapefiles are",
+#'   pollutant_data_name="nox",
+#'   year="2019",
+#'   pollutant="NOx")
 
 process_create_prawns <- function(raster_path="undefined",
                           tif_path="undefined",
@@ -157,7 +163,7 @@ print("index call")
 
       NamedList <- c("Agricultural","Domestic combustion","Energy production",
                      "Industrial combustion","Industrial production","Natural",
-                     "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area""Total",
+                     "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area","Total",
                      ,"Waste treatment and disposal")
 
       Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year)

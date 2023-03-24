@@ -11,6 +11,13 @@
 #' @param facet_name a string used to name what the data is being faceted by in the graph title
 #'
 #' @export
+#'
+#' @examples
+#' facet_all_areas_srv(
+#'   prawn_path="PRAWN.csv",
+#'   group="TCITY15NM",
+#'   pollutant="NOx",
+#'   facet_name="City")
 
 facet_all_areas_src <- function(prawn_path,group,pollutant,facet_name){
 

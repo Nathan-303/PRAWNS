@@ -24,17 +24,26 @@ compatible with folders containing multiple raster layers}
 
 \item{shapefile_path}{The filepath for the shapefile to be used}
 
-\item{pollutant_data_name}{what the pollutant is referred to as in the raw data, should be quoted}
+\item{pollutant_data_name}{what the pollutant is referred to as in the raw
+data, should be quoted}
 
-\item{year}{the year the data is from, used to standardise column names, currently doesnt work for years before 2000}
+\item{year}{the year the data is from, used to standardise column names,
+currently doesnt work for years before 2000}
 
-\item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names}
+\item{pollutant}{The name of the pollutant that's being examined, this is
+used in the graph names}
 
-\item{dpi}{The dpi to save graphs with, defaults to 600, the minimum for figures in an RSC publication, higher values will take longer to process}
+\item{iteration}{Used in naming the output folder, defaults to the version
+of PRAWNS used but can be used to apply custom labels, should be a string}
 
-\item{file_format}{The file format to save in, should be all lower case and in quotes, as it's piped straight into a ggsave function}
+\item{dpi}{The dpi to save graphs with, defaults to 600, the minimum for
+figures in an RSC publication, higher values will take longer to process}
 
-\item{gotta_go_fast}{Allows the code to sacrifice things that take a long time to get it to run faster, defaults to "No"}
+\item{file_format}{The file format to save in, should be all lower case and
+in quotes, as it's piped straight into a ggsave function}
+
+\item{gotta_go_fast}{Allows the code to sacrifice things that take a long
+time to get it to run faster, defaults to "No"}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas
@@ -42,7 +51,13 @@ matching an inputted parameter. Refer to the vignette setting_up_data sources
 to obtain the correct input files and structure them for compatibility
 }
 \examples{
-bulk_processor()
+bulk_processor(
+  raster_path="example_raster_folder",
+  shapefile_path="example_shapefile_location",
+  pollutant_data_name="nox",
+  year=2019,
+  pollutant="NOx"
+  )
 
 }
 \keyword{faceted,}

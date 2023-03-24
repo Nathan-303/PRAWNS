@@ -6,12 +6,18 @@
 #' @param pollutant The pollutant used, shows in axis title, defaults to NOx
 #'
 #' @param year The year of measurements, used in axis title, defaults to 2020
-
 #'
 #' @keywords faceted, sources
+#'
 #' @export
+#'
 #' @examples
-#' avg_nox_histogram()
+#' histogram_total_emissions_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
+
 histogram_total_emissions_src <- function(prawn_path, pollutant, year){
 
   raw <- read.csv(prawn_path,

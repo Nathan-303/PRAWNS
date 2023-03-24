@@ -1,18 +1,26 @@
 #' A function for faceting the sources of a pollutant
 #'
-#' This function takes a prawns CSV and produces a summary of the geographic areas
-#' matching an inputted parameter
+#' This function takes a prawns CSV and produces a summary of the geographic
+#' areas matching an inputted parameter
 #'
-#' @param prawn_path The filepath for the prawn CSV that is to be used, should be quoted
+#' @param prawn_path The filepath for the prawn CSV that is to be used, should
+#' be quoted
 #'
-#' @param pollutant The name of the pollutant that's being examined, this is used in the graph names, should be a string
+#' @param pollutant The name of the pollutant that's being examined, this is
+#' used in the graph names, should be a string
 #'
 #' @param year The year of the data, used in graph labelling
-#' @keywords faceted, sources
-#' @export
-#' @examples
-#' faceted_sources()
 #'
+#' @keywords faceted, sources
+#'
+#' @export
+#'
+#' @examples
+#' facet_sources_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
 
 facet_sources_src <- function(prawn_path,pollutant,year){
 

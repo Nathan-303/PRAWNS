@@ -1,10 +1,21 @@
 #' Plot modelled data
 #'
-#' @param model_prawn_path the filepath to the prawn csv file that contains only rhe target region
+#' @param model_prawn_path the filepath to the prawn csv file that contains only
+#' the target region
+#'
 #' @param pollutant the pollutant analysed, used for naming axis
+#'
+#' @param year the year being investigated, used in graph labels
+#'
 #' @export
+#'
 #' @examples
-#' model_plot()
+#'
+#' model_plot(
+#'   model_prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019)
+
 cartesian_modelled_flat <- function(model_prawn_path,pollutant,year){
 
 active_stack <- read.csv(model_prawn_path,

@@ -1,19 +1,32 @@
 #' Save ggplot2 graphs with sensible scaling and size options ready for publication
 #'
 #' @param plot The ggplot2 object to plot
+#'
 #' @param filename The location to save the file to
+#'
 #' @param file_format The format to save using, this can include agg_png and the
 #'  agg family
+#'
 #' @param type The graph size to save to 1 is a single column figure on a two
 #' column page, 2 is a full page spread, both use a 16:9 aspect ratio, 3 is an
 #' entire A4 page, 4 is a graphical abstract
+#'
 #' @param scaling The =scaling parameter to use, flexible because there are many
 #'  things at play when the default is picked
-#` @keywords faceted, sources
+#'
+#' @keywords faceted, sources
+#'
 #' @export
+#'
 #' @examples
+#' process_graph_saver(
+#'   plot=object_plotted,
+#'   filename="Save_it_here.png",
+#'   file_format="agg_png",
+#'   type=2,
+#'   scaling=1)
 
-process_graph_saver <- function(plot, filename,file_format,type,scaling=0.2){
+process_graph_saver <- function(plot, filename,file_format,type,scaling=1){
 
 
 

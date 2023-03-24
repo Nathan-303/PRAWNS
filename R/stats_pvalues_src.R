@@ -1,11 +1,15 @@
 #' Calculate p values for a linear regression model used on each source sector.
 #' The data is split into random chunks
+#'
 #' @param prawn_path The filepath for the prawn CSV that is to be used.
 #'
 #' @keywords faceted, sources
+#'
 #' @export
+#'
 #' @examples
-#' p_values_for_chunks()
+#' stats_pvalues_src(
+#'  prawn_path="PRAWN.csv")
 
 stats_pvalues_src <- function(prawn_path){
   data <- read.csv(prawn_path,

@@ -8,9 +8,15 @@
 #' @param year the year the data is from, used to name axis
 #'
 #' @keywords faceted, sources
+#'
 #' @export
+#'
 #' @examples
-#' LSOA_pollutant_histo()
+#' LSOA_pollutant_histo(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019
+#'   )
 
 facet_histogram_sources_src <- function(prawn_path,pollutant="NOx",year=2020){
 
