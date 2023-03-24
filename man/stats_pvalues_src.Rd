@@ -15,7 +15,8 @@ Calculate p values for a linear regression model used on each source sector.
 The data is split into random chunks
 }
 \examples{
-p_values_for_chunks()
+stats_pvalues_src(
+ prawn_path="PRAWN.csv")
 }
 \keyword{faceted,}
 \keyword{sources}

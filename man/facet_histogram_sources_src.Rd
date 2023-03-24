@@ -19,7 +19,11 @@ Create a faceted histogram showing all but the top 1\% of the nox emission
 average faceted by emission sector
 }
 \examples{
-LSOA_pollutant_histo()
+LSOA_pollutant_histo(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
 \keyword{faceted,}
 \keyword{sources}

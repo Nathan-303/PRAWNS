@@ -19,7 +19,11 @@ Create a histogram of the average total emissions with the median and mean
 values labelled
 }
 \examples{
-avg_nox_histogram()
+histogram_total_emissions_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
 \keyword{faceted,}
 \keyword{sources}

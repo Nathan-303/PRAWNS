@@ -7,7 +7,8 @@
 facet_medmean_london_src(pollutant, year, prawn_path)
 }
 \arguments{
-\item{pollutant}{the pollutant being investigated, this should be in quotes and correspond with its name in the data}
+\item{pollutant}{the pollutant being investigated, this should be in quotes
+and correspond with its name in the data}
 
 \item{year}{the year the data was taken, used for axis titles}
 
@@ -17,6 +18,11 @@ facet_medmean_london_src(pollutant, year, prawn_path)
 Plot the mean and median emissions with and without London next to each other
 }
 \examples{
-side_by_sidestats()
-
+side_by_sidestats(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
+\keyword{faceted,}
+\keyword{sources}

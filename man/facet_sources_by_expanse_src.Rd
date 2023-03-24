@@ -2,7 +2,8 @@
 % Please edit documentation in R/facet_sources_by_expanse_src.R
 \name{facet_sources_by_expanse_src}
 \alias{facet_sources_by_expanse_src}
-\title{Plot the relationship between emissions and LSOA expanse for each emissions sector}
+\title{Plot the relationship between emissions and LSOA expanse for each emissions
+sector}
 \usage{
 facet_sources_by_expanse_src(prawn_path, pollutant, year)
 }
@@ -14,8 +15,13 @@ facet_sources_by_expanse_src(prawn_path, pollutant, year)
 \item{year}{the year of the measurement, used in axis labels}
 }
 \description{
-Plot the relationship between emissions and LSOA expanse for each emissions sector
+Plot the relationship between emissions and LSOA expanse for each emissions
+sector
 }
 \examples{
-please no error message
+facet_sources_by_expanse_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }

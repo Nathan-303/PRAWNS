@@ -21,7 +21,10 @@ a graph of the emissions by decile for each classification, output 2 is their
 populations
 }
 \examples{
-RUC_IMD()
-
+facet_RUC_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
 \keyword{RUC}

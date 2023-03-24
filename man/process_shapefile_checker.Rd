@@ -12,3 +12,7 @@ process_shapefile_checker(shapefile_path)
 \description{
 Outputs the shapefile as a graphic so it can be visually checked
 }
+\examples{
+process_shapefile_checker(
+shapefile_path="Shapefile_location")
+}

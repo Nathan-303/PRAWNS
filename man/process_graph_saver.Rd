@@ -4,7 +4,7 @@
 \alias{process_graph_saver}
 \title{Save ggplot2 graphs with sensible scaling and size options ready for publication}
 \usage{
-process_graph_saver(plot, filename, file_format, type, scaling = 0.2)
+process_graph_saver(plot, filename, file_format, type, scaling = 1)
 }
 \arguments{
 \item{plot}{The ggplot2 object to plot}
@@ -24,3 +24,13 @@ things at play when the default is picked}
 \description{
 Save ggplot2 graphs with sensible scaling and size options ready for publication
 }
+\examples{
+process_graph_saver(
+  plot=object_plotted,
+  filename="Save_it_here.png",
+  file_format="agg_png",
+  type=2,
+  scaling=1)
+}
+\keyword{faceted,}
+\keyword{sources}

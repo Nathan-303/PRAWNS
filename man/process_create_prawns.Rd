@@ -42,4 +42,12 @@ worked out then linked to statistics associated with those areas. Refer to +
 the vignette setting_up_data sources to obtain the correct input files and
 structure them for compatibility
 }
+\examples{
+process_create_prawns(
+  raster_path="The folder containing the rasters",
+  shapefile_path="Where the shapefiles are",
+  pollutant_data_name="nox",
+  year="2019",
+  pollutant="NOx")
+}
 \keyword{data}

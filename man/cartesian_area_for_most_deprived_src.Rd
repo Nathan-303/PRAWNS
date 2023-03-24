@@ -18,5 +18,11 @@ cartesian_area_for_most_deprived_src(prawn_path, pollutant, year)
 Create a graph showing emissions from the major source clusters  for the most
 deprived 20\% of LSOAs
 }
+\examples{
+cartesian_area_for_most_deprived_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019)
+}
 \keyword{faceted,}
 \keyword{sources}

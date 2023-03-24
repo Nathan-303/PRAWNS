@@ -19,7 +19,10 @@ Create a histogram showing the emission gradient for each area (city or
 county/UA) and whether it has a p value of below 0.05
 }
 \examples{
-plot_area_gradients()
+plot_area_gradients(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  area_type="City")
 }
 \keyword{faceted,}
 \keyword{sources}

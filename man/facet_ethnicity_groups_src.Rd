@@ -16,5 +16,12 @@ facet_ethnicity_groups_src(prawn_path, pollutant, year)
 \description{
 Bind ethnicity data to the prawn and create graphs based on it
 }
+\examples{
+facet_ethnicity_groups_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
+}
 \keyword{faceted,}
 \keyword{sources}

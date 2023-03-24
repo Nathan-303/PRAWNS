@@ -7,13 +7,20 @@
 cartesian_modelled_flat(model_prawn_path, pollutant, year)
 }
 \arguments{
-\item{model_prawn_path}{the filepath to the prawn csv file that contains only rhe target region}
+\item{model_prawn_path}{the filepath to the prawn csv file that contains only
+the target region}
 
 \item{pollutant}{the pollutant analysed, used for naming axis}
+
+\item{year}{the year being investigated, used in graph labels}
 }
 \description{
 Plot modelled data
 }
 \examples{
-model_plot()
+
+model_plot(
+  model_prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019)
 }

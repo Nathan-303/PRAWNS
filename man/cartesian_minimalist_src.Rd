@@ -17,5 +17,8 @@ cartesian_minimalist_src(prawn_path, pollutant, year)
 Make a minimalist graph suitable for a graphical abstract
 }
 \examples{
-minimalist_graph()
+minimalist_graph(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019)
 }

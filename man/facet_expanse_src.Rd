@@ -19,7 +19,10 @@ Facet into 12 size groupings of LSOA and plot emissions inequality from
 each source sector
 }
 \examples{
-expanse_probe()
-
+facet_expanse_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
 \keyword{expanse}

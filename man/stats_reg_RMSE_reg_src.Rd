@@ -34,8 +34,8 @@ bottom deciles, operates from a file or an object depending on if prawn or
 input path is used. The error values are currently not very well labeled
 }
 \examples{
-stat_wrangler()
-
-
+stats_reg_RMSE_reg_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx")
 }
 \keyword{data}

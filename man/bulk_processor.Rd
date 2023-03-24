@@ -58,7 +58,6 @@ bulk_processor(
   year=2019,
   pollutant="NOx"
   )
-
 }
 \keyword{faceted,}
 \keyword{sources}

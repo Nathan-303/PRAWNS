@@ -22,3 +22,10 @@ around non standard evaluation}
 Creates a graph with a little window showing every item in the group separately
 e.g. if grouped by city there would be a tile for every city.
 }
+\examples{
+facet_all_areas_srv(
+  prawn_path="PRAWN.csv",
+  group="TCITY15NM",
+  pollutant="NOx",
+  facet_name="City")
+}

@@ -7,19 +7,24 @@
 facet_sources_src(prawn_path, pollutant, year)
 }
 \arguments{
-\item{prawn_path}{The filepath for the prawn CSV that is to be used, should be quoted}
+\item{prawn_path}{The filepath for the prawn CSV that is to be used, should
+be quoted}
 
-\item{pollutant}{The name of the pollutant that's being examined, this is used in the graph names, should be a string}
+\item{pollutant}{The name of the pollutant that's being examined, this is
+used in the graph names, should be a string}
 
 \item{year}{The year of the data, used in graph labelling}
 }
 \description{
-This function takes a prawns CSV and produces a summary of the geographic areas
-matching an inputted parameter
+This function takes a prawns CSV and produces a summary of the geographic
+areas matching an inputted parameter
 }
 \examples{
-faceted_sources()
-
+facet_sources_src(
+  prawn_path="PRAWN.csv",
+  pollutant="NOx",
+  year=2019
+  )
 }
 \keyword{faceted,}
 \keyword{sources}
