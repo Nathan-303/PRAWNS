@@ -164,7 +164,7 @@ print("index call")
       NamedList <- c("Agricultural","Domestic combustion","Energy production",
                      "Industrial combustion","Industrial production","Natural",
                      "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area","Total",
-                     ,"Waste treatment and disposal")
+                     "Waste treatment and disposal")
 
       Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year)
 
@@ -187,8 +187,7 @@ print("index call")
       data
       #Close the function
     }
-write.csv(x = prawns,
-          file="Outputs/mysteries.csv")
+
   prawns <- renamer(
     data=prawns,
     last_two_digits_year=year-2000,
@@ -200,7 +199,9 @@ write.csv(x = prawns,
 
 
 # Output the results ------------------------------------------------------
-if (output_path!="undefined"){
+print("Down to the save")
+  if (output_path!="undefined"){
+    print("Down to the save")
   write.csv(prawns,
             file=output_path)
 }
