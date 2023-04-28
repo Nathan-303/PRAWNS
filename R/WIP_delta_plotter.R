@@ -112,20 +112,22 @@ penultimate_pivot <- delta_table %>% pivot_longer(
 final_pivot <- penultimate_pivot %>%
   pivot_wider(names_from=Measure,
               values_from = value)
-ggplot(data=weighted_data)+
 
-  aes(x=`Weighted deprivation`,
-      y=`Weighted emissions`,
-      colour=`Ethnic group`)+
 
-  geom_boxplot(aes(group=tile))+
+ggplot(data=final_pivot)+
 
-  #geom_point(alpha=0.1)+
+  aes(x=`dep`,
+      y=`ems`)+
 
-  geom_smooth(se = FALSE)+
+  #geom_boxplot(aes(group=tile))+
 
-  facet_wrap(~`Ethnic group`)+
+  geom_point(alpha=0.1)+
 
-  coord_cartesian(ylim=c(0,30),expand = FALSE)
+  geom_abline(slope=-1.45,
+              intercept=0)+
+
+  #geom_smooth(se = FALSE)+
+
+  facet_wrap(~Ethnicity)
 
 }
