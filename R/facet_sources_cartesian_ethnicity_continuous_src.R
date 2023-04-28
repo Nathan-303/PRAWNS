@@ -95,7 +95,7 @@ output <- ggplot(data=plottable
 
   scale_colour_viridis_d()+
 
-  facet_wrap(~`Emission_source`,scale="free_x")+
+  facet_wrap(~`Emission_source`,scale="free_y")+
 
   guides(fill = guide_legend(byrow = TRUE))
 
