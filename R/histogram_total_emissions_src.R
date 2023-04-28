@@ -22,7 +22,11 @@ histogram_total_emissions_src <- function(prawn_path, pollutant, year){
 
   raw <- read.csv(prawn_path,
                   row.names=1,
-                  check.names=FALSE) %>% mutate(upperbound=quantile(Total,0.99)) %>% filter(Total<=upperbound)
+                  check.names=FALSE) %>%
+
+    mutate(upperbound=quantile(Total,0.99)) %>%
+
+    filter(Total<=upperbound)
 
   histo <- ggplot(data=raw)+
 
