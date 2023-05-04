@@ -54,6 +54,9 @@ end_of_sources <- which(colnames(data)=="LSOA11CD")-1
 
 source_list <- colnames(data)[c(1:end_of_sources)]
 
+source_list_trimmer <- !(source_list %in% c("Offshore","Tot_area"))
+
+source_list <- source_list[source_list_trimmer]
 long_chunk <- data %>%
   pivot_longer(
     cols=all_of(c(source_list,"Point sources")),
