@@ -147,10 +147,10 @@ output <- ggplot(data=plottable
 
 output
 
-histogram <- ggplot(data=plottable)+
-  aes(x=IMD)+
-  facet_wrap(~caption)+
-  geom_histogram()
-
-histogram
+# histogram <- ggplot(data=plottable)+
+#   aes(x=IMD)+
+#   facet_wrap(~caption)+
+#   geom_histogram()
+#
+# histogram
 }

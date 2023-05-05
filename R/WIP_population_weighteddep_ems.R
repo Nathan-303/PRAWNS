@@ -16,7 +16,7 @@
 #'   pollutant="NOx",
 #'   year=2019)
 
-facet_sources_cartesian_ethnicity_groups_src <- function(prawn_path,pollutant,year){
+facet_area_weightet_heatmap_src <- function(prawn_path,pollutant,year){
 data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
@@ -82,13 +82,40 @@ ggplot(data=weighted_data)+
   geom_smooth(method="lm",
               formula=y~x)+
 
-  geom_abline(slope=-1.45,
-              intercept=23.5)+
-
-  geom_smooth()+
+  geom_smooth(data=data %>%
+                group_by(LAD19NM) %>%
+                summarise(meanEms=mean(Total),meanIMD=mean(IMD)),
+              aes(x=meanIMD,
+                  y=meanEms),
+              formula=y~x,
+              method="lm",
+              colour="pink")+
 
   #geom_smooth(se = FALSE)+
 
-  facet_wrap(~`Ethnic group`)
+  facet_wrap(~`Ethnic group`)+
+
+  coord_cartesian(ylim=c(0,30))
+
+
+ggplot(data=weighted_data)+
+
+  aes(x=`Weighted deprivation`,
+      y=`Weighted emissions`)+
+
+  geom_density_2d_filled(contour_var = "ndensity")+
+
+  facet_wrap(~`Ethnic group`)+
+
+  coord_cartesian(ylim=c(0,30),expand = FALSE)+
+
+  geom_smooth(data=data %>%
+                group_by(LAD19NM) %>%
+                summarise(meanEms=mean(Total),meanIMD=mean(IMD)),
+              aes(x=meanIMD,
+                  y=meanEms),
+              formula=y~x,
+              method="lm",
+              colour="pink")
 
 }

@@ -90,5 +90,15 @@ process_graph_saver <- function(plot, filename,file_format,type,scaling=1){
            device=file_format,
            scaling=scaling)
   }
+#Powerpoint slide with space for a title
+  if (type==6){
+    ggsave(filename= filename,
+           plot=plot,
+           width=1920,
+           height=819,
+           units = "px",
+           device=file_format,
+           scaling=scaling)
+  }
 }
 
