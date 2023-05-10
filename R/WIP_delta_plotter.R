@@ -16,7 +16,7 @@
 #'   pollutant="NOx",
 #'   year=2019)
 
-facet_sources_cartesian_ethnicity_groups_src <- function(prawn_path,pollutant,year){
+wip_delta_plotter <- function(prawn_path,pollutant,year){
 data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
