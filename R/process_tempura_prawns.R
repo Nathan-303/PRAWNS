@@ -87,16 +87,16 @@ print("vect call")
   vectorised_shapefile <- vect(LSOA_shapefile)
 print("index call")
   #Calculate the average for each polygon in the shapefile
-  index <-  c(1:length(vectorised))
+  index <-  c(1:length(vectorised_shapefile))
   print("stftft call")
-  transient <- sf::st_as_sf(vectorised[index])
+  transient <- sf::st_as_sf(vectorised_shapefile[index])
   print("exactextract call")
   pollution_mean <- exact_extract(source_stack,transient,'mean')
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
   print("output call")
   output <- tibble(poll_mean=pollution_mean,
                    LSOA11CD=LSOA_shapefile$LSOA11CD,
-                   expanse=expanse(LSOA_shapefile)
+                   expanse=expanse(vectorised_shapefile)
                    ) %>% unnest(poll_mean)
 
   #output a csv with minimum processing
