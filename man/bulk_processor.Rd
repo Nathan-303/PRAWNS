@@ -13,7 +13,7 @@ bulk_processor(
   pollutant,
   iteration = as.character(packageVersion("PRAWNS")),
   dpi = 600,
-  file_format = "png",
+  file_format = "agg_png",
   gotta_go_fast = "No",
   output_path = "undefined"
 )
@@ -43,7 +43,8 @@ figures in an RSC publication, higher values will take longer to process}
 in quotes, as it's piped straight into a ggsave function}
 
 \item{gotta_go_fast}{Allows the code to sacrifice things that take a long
-time to get it to run faster, defaults to "No"}
+time to get it to run faster, defaults to "No". Other options are "yes" and
+"zooom"}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic areas
