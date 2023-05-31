@@ -69,10 +69,9 @@ process_tempura_prawns <- function(raster_path="undefined",
 
 print("vect call")
   #Beware recursion
-  library(PRAWNSdata)
+
   vectorised_shapefile <- vect(LSOA_shapefile)
-  refined_chunk <- refined_chunk
-  detach("package:PRAWNSdata", unload = TRUE)
+
 print("index call")
   #Calculate the average for each polygon in the shapefile
   index <-  c(1:length(vectorised_shapefile))
