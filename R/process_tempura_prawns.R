@@ -65,26 +65,14 @@ process_tempura_prawns <- function(raster_path="undefined",
     source_stack <- c(source_stack,rast(filelist[index])%>% terra::subst(NA,0))
   }
   }
-  #If its a tif
-  if(tif_path!="undefined"){
-    source_stack <- read_stars("Data/2019_modelled_NOx.tif") %>% rast()
 
-  }
-  #If it's a csv
-  if(csv_coordinates_path!="undefined"){
-    print(csv_coordinates_path)
-    csv_raster <- read.csv(file=csv_coordinates_path,
-                           skip = 5,
-                           row.names=1,
-                           check.names=FALSE) %>% tibble()
-  print("csv made")
-    base_raster <- rasterFromXYZ(csv_raster,crs="OSGB")
-  print("raster next")
-    source_stack <- rast(base_raster)
-  }
+
 print("vect call")
   #Beware recursion
+  library(PRAWNSdata)
   vectorised_shapefile <- vect(LSOA_shapefile)
+  refined_chunk <- refined_chunk
+  detach("package:PRAWNSdata", unload = TRUE)
 print("index call")
   #Calculate the average for each polygon in the shapefile
   index <-  c(1:length(vectorised_shapefile))
@@ -92,6 +80,7 @@ print("index call")
   transient <- sf::st_as_sf(vectorised_shapefile[index])
   print("exactextract call")
   pollution_mean <- exact_extract(source_stack,transient,'mean')
+  rm(vectorised_shapefile)
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
   print("output call")
   output <- tibble(poll_mean=pollution_mean,
@@ -99,25 +88,14 @@ print("index call")
                    expanse=expanse(vectorised_shapefile)
                    ) %>% unnest(poll_mean)
 
-  #output a csv with minimum processing
-  if(output_path!="undefined"){
-    print("outputting?")
-    if (is_raw==TRUE){
-      print("writing file")
-    write.csv(file=output_path,
-              x = output)
-
-      output
-    }else{
-
-        write.csv(file=output_path,
-                    x = output)}}
-
+  rm(vectorised_shapefile)
 
 # Refined_chunk is obtained from PRAWNSdata----------------------------------------------------------------
 
   prawns <- inner_join(output,refined_chunk,by="LSOA11CD")%>%
     rename(IMD=`Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.`)
+
+  rm(output)
 
   if(raster_path!="undefined"){
 
