@@ -79,7 +79,6 @@ print("index call")
   transient <- sf::st_as_sf(vectorised_shapefile[index])
   print("exactextract call")
   pollution_mean <- exact_extract(source_stack,transient,'mean')
-  rm(vectorised_shapefile)
   #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
   print("output call")
   output <- tibble(poll_mean=pollution_mean,
