@@ -55,15 +55,8 @@ process_tempura_prawns <- function(raster_path="undefined",
   #If its'a raster
   if(raster_path!="undefined"){
   #Create a list of all the raster files present in the folder specified by raster_path
-  filelist <- list.files(raster_path,
-    pattern = ".asc",
-    full.names = TRUE)
-
-  #Store the rasters as a stack
-  source_stack <- rast(filelist[1]) %>% terra::subst(NA,0)
-  for(index in 2:length(filelist)){
-    source_stack <- c(source_stack,rast(filelist[index])%>% terra::subst(NA,0))
-  }
+  filelist <- grep('\\.asc$', unzip(here::here(raster_path), list=TRUE)$Name,
+                   ignore.case=TRUE, value=TRUE)
   }
 
 
@@ -71,6 +64,13 @@ print("vect call")
   #Beware recursion
 
   vectorised_shapefile <- vect(LSOA_shapefile)
+
+  for(index in 2:length(filelist)){
+    #unzip only the layer being extracted to minimise memory use
+    transient_raster <- unzip(here::here(raster_path,filelist[index])) %>%
+      rast()%>%
+      terra::subst(NA,0))
+  }
 
 print("index call")
   #Calculate the average for each polygon in the shapefile
