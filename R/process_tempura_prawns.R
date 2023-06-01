@@ -70,7 +70,7 @@ print("still alive")
 index <- c(1:length(vectorised_shapefile))
 transient <- sf::st_as_sf(vectorised_shapefile[index])
   for(source_number in 1:length(filelist)){
-    #incProgress(1/length(filelist), detail = paste("Doing part", source_number))
+    incProgress(1/length(filelist), detail = paste("Processing rasters this will take a while, currently on source ", source_number, " of ",length(filelist) ))
     #unzip only the layer being extracted to minimise memory use
     transient_raster <- unzip(zipfile = raster_path,
                               files=filelist[source_number]) %>%
