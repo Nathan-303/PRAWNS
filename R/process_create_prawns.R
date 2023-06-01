@@ -180,7 +180,7 @@ print("index call")
 
           colnames(data)[Index] <- replace$Output
           #Break the loop if there's no match, adds efficiency
-        }else{break}
+        }#ermoved to prevent bad triggers else{break}
         #Close the for loop
       }
       #Output data
