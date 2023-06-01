@@ -41,7 +41,7 @@
 process_tempura_prawns <- function(raster_path="undefined",
                           tif_path="undefined",
                           csv_coordinates_path="undefined",
-                          shapefile_path,
+                          shapefile_path="Data/2011_LSOA_shapefile_20m_generalised",
                           output_path="undefined",
                           pollutant_data_name,
                           year,
@@ -55,7 +55,7 @@ process_tempura_prawns <- function(raster_path="undefined",
   #If its'a raster
   if(raster_path!="undefined"){
   #Create a list of all the raster files present in the folder specified by raster_path
-  filelist <- grep('\\.asc$', unzip(here::here(raster_path), list=TRUE)$Name,
+  filelist <- grep('\\.asc$', unzip((raster_path), list=TRUE)$Name,
                    ignore.case=TRUE, value=TRUE)
   }
 
@@ -67,9 +67,9 @@ print("vect call")
 
   for(index in 2:length(filelist)){
     #unzip only the layer being extracted to minimise memory use
-    transient_raster <- unzip(here::here(raster_path,filelist[index])) %>%
+    transient_raster <- unzip(here::here(raster_path,filelist[index])) #%>%
       rast()%>%
-      terra::subst(NA,0))
+      terra::subst(NA,0)
   }
 
 print("index call")
