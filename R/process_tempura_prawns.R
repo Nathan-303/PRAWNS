@@ -65,27 +65,24 @@ print("vect call")
 
   vectorised_shapefile <- vect(LSOA_shapefile)
 
-  for(index in 2:length(filelist)){
+  output <- tibble(LSOA11CD=vectorised_shapefile$LSOA11CD,
+                   expanse=expanse(vectorised_shapefile))
+print("still alive")
+  for(source_number in 1:length(filelist)){
+    #incProgress(1/length(filelist), detail = paste("Doing part", source_number))
     #unzip only the layer being extracted to minimise memory use
-    transient_raster <- unzip(here::here(raster_path,filelist[index])) #%>%
+    transient_raster <- unzip(zipfile = raster_path,
+                              files=filelist[source_number]) %>%
       rast()%>%
       terra::subst(NA,0)
+
+  pollution_mean <- exact_extract(transient_raster,transient,'mean') %>%
+    tibble()
+  #rename the column for smoother binding, dplyr rename not used becaus eit was being awkwa
+  colnames(pollution_mean)[1]=filelist[source_number]
+
+  output <- output %>% bind_cols(pollution_mean)
   }
-
-print("index call")
-  #Calculate the average for each polygon in the shapefile
-  index <-  c(1:length(vectorised_shapefile))
-  print("stftft call")
-  transient <- sf::st_as_sf(vectorised_shapefile[index])
-  print("exactextract call")
-  pollution_mean <- exact_extract(source_stack,transient,'mean')
-  #Output the results as a tibble containing the indexed position, the pollution mean and the LSOA code, a property from the shapefile that enables binding on LSOA statistics
-  print("output call")
-  output <- tibble(poll_mean=pollution_mean,
-                   LSOA11CD=LSOA_shapefile$LSOA11CD,
-                   expanse=expanse(vectorised_shapefile)
-                   ) %>% unnest(poll_mean)
-
   rm(vectorised_shapefile)
 
 # Refined_chunk is obtained from PRAWNSdata----------------------------------------------------------------
@@ -104,7 +101,7 @@ print("index call")
                      "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area","Total",
                      "Waste treatment and disposal")
 
-      Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year)
+      Nmdlst <- paste0("mean.",c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year,".asc")
 
       core <- tibble(Output=NamedList,Match=Nmdlst)
 
