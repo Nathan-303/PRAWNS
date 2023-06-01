@@ -65,8 +65,10 @@ print("vect call")
 
   vectorised_shapefile <- vect(LSOA_shapefile)
 
-  output <- tibble(LSOA11CD=vectorised_shapefile$LSOA11CD))
+  output <- tibble(LSOA11CD=vectorised_shapefile$LSOA11CD)
 print("still alive")
+index <- c(1:length(vectorised_shapefile))
+transient <- sf::st_as_sf(vectorised_shapefile[index])
   for(source_number in 1:length(filelist)){
     #incProgress(1/length(filelist), detail = paste("Doing part", source_number))
     #unzip only the layer being extracted to minimise memory use
@@ -74,6 +76,7 @@ print("still alive")
                               files=filelist[source_number]) %>%
       rast()%>%
       terra::subst(NA,0)
+
 
   pollution_mean <- exact_extract(transient_raster,transient,'mean') %>%
     tibble()
@@ -83,6 +86,8 @@ print("still alive")
   output <- output %>% bind_cols(pollution_mean)
   }
   rm(vectorised_shapefile)
+  rm(index)
+  rm(transient)
 
 # Refined_chunk is obtained from PRAWNSdata----------------------------------------------------------------
 
@@ -100,7 +105,9 @@ print("still alive")
                      "Offshore","Other transport and mobile machinery","Road transport","Solvents","Tot_area","Total",
                      "Waste treatment and disposal")
 
-      Nmdlst <- paste0(c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),pollutant_data_name,last_two_digits_year,".asc")
+      Nmdlst <- paste0(c("agric","domcom","energyprod","indcom","indproc","nature","offshore","othertrans","roadtrans","solvents","totarea","total","waste"),
+                       pollutant_data_name,last_two_digits_year,
+                       ".asc")
 
       core <- tibble(Output=NamedList,Match=Nmdlst)
 
@@ -114,7 +121,7 @@ print("still alive")
 
           colnames(data)[Index] <- replace$Output
           #Break the loop if there's no match, adds efficiency
-        }else{break}
+        }
         #Close the for loop
       }
       #Output data
