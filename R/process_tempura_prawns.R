@@ -65,8 +65,7 @@ print("vect call")
 
   vectorised_shapefile <- vect(LSOA_shapefile)
 
-  output <- tibble(LSOA11CD=vectorised_shapefile$LSOA11CD,
-                   expanse=expanse(vectorised_shapefile))
+  output <- tibble(LSOA11CD=vectorised_shapefile$LSOA11CD))
 print("still alive")
   for(source_number in 1:length(filelist)){
     #incProgress(1/length(filelist), detail = paste("Doing part", source_number))
