@@ -23,8 +23,9 @@
 #'   )
 
 facet_sources_src <- function(prawn_path,pollutant,year){
-
+if (prawn_path!="input_prawn"){
 long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
+}else{long_chunk <- input_prawn}
   #conditional renames of columns
   if("Other transport and mobile machinery" %in% colnames(long_chunk)){
     long_chunk <- long_chunk %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`)
