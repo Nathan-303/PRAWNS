@@ -143,14 +143,8 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
 
 
 # Output the results ------------------------------------------------------
-print("Down to the save")
-  if (output_path!="undefined"){
-    print("Down to the save")
-  write.csv(prawns,
-            file=output_path)
-}
 
-TRUE
+prawns
   }
 
 
