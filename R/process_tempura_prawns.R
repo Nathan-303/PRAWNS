@@ -70,7 +70,7 @@ print("still alive")
 index <- c(1:length(vectorised_shapefile))
 transient <- sf::st_as_sf(vectorised_shapefile[index])
   for(source_number in 1:length(filelist)){
-    incProgress(1/length(filelist), detail = paste("Processing rasters this will take a while, currently on source ", source_number, " of ",length(filelist) ))
+    #incProgress(1/length(filelist), detail = paste("Processing rasters this will take a while, currently on source ", source_number, " of ",length(filelist) ))
     #unzip only the layer being extracted to minimise memory use
     transient_raster <- unzip(zipfile = raster_path,
                               files=filelist[source_number]) %>%
@@ -83,7 +83,7 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
   #rename the column for smoother binding, dplyr rename not used becaus eit was being awkwa
   colnames(pollution_mean)[1]=filelist[source_number]
 
-  output <- output %>% bind_cols(pollution_mean)
+  output <- pollution_mean %>% bind_cols(output)
   }
   rm(vectorised_shapefile)
   rm(index)
