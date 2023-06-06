@@ -11,6 +11,8 @@
 #'
 #' @param year The year of the data, used in graph labelling
 #'
+#' @param input_prawn Use to directly input a prawns object
+#'
 #' @keywords faceted, sources
 #'
 #' @export
@@ -22,10 +24,13 @@
 #'   year=2019
 #'   )
 
-facet_sources_src <- function(prawn_path,pollutant,year){
-if (prawn_path!="input_prawn"){
-long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
-}else{long_chunk <- input_prawn}
+facet_sources_src <- function(prawn_path="blank",pollutant,year,input_prawn="blank"){
+if (prawn_path!="blank"){
+  long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
+}
+if (input_prawn!="blank"){
+  long_chunk <- input_prawn
+}
   #conditional renames of columns
   if("Other transport and mobile machinery" %in% colnames(long_chunk)){
     long_chunk <- long_chunk %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`)

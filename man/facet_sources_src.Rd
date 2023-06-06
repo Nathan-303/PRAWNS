@@ -4,7 +4,7 @@
 \alias{facet_sources_src}
 \title{A function for faceting the sources of a pollutant}
 \usage{
-facet_sources_src(prawn_path, pollutant, year)
+facet_sources_src(prawn_path = "blank", pollutant, year, input_prawn = "blank")
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used, should
@@ -14,6 +14,8 @@ be quoted}
 used in the graph names, should be a string}
 
 \item{year}{The year of the data, used in graph labelling}
+
+\item{input_prawn}{Use to directly input a prawns object}
 }
 \description{
 This function takes a prawns CSV and produces a summary of the geographic
