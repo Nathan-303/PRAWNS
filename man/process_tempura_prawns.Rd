@@ -10,7 +10,7 @@ process_tempura_prawns(
   raster_path = "undefined",
   tif_path = "undefined",
   csv_coordinates_path = "undefined",
-  shapefile_path,
+  shapefile_path = "Data/2011_LSOA_shapefile_20m_generalised",
   output_path = "undefined",
   pollutant_data_name,
   year,
