@@ -5,7 +5,7 @@
 \title{Create a histogram of the average total emissions with the median and mean
 values labelled}
 \usage{
-histogram_total_emissions_src(prawn_path, pollutant, year)
+histogram_total_emissions_src(prawn_path, pollutant, year, input_prawn)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}
@@ -13,6 +13,8 @@ histogram_total_emissions_src(prawn_path, pollutant, year)
 \item{pollutant}{The pollutant used, shows in axis title, defaults to NOx}
 
 \item{year}{The year of measurements, used in axis title, defaults to 2020}
+
+\item{input_prawn}{Uses a prawns object already present in R rther than reading a csv}
 }
 \description{
 Create a histogram of the average total emissions with the median and mean

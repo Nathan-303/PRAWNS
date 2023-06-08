@@ -4,7 +4,7 @@
 \alias{facet_sources_src}
 \title{A function for faceting the sources of a pollutant}
 \usage{
-facet_sources_src(prawn_path = "blank", pollutant, year, input_prawn = "blank")
+facet_sources_src(prawn_path = "blank", pollutant, year, input_prawn)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used, should

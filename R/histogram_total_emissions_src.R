@@ -20,7 +20,7 @@
 #'   year=2019
 #'   )
 
-histogram_total_emissions_src <- function(prawn_path, pollutant, year,input_prawn){
+histogram_total_emissions_src <- function(prawn_path="blank", pollutant, year,input_prawn="blank"){
 
   if (prawn_path!="blank"){
     raw <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
