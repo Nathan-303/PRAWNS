@@ -76,13 +76,16 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
     incProgress(1/length(filelist), detail = paste("Processing rasters this will take a while, currently on source ", source_number, " of ",length(filelist) ))
     #unzip only the layer being extracted to minimise memory use
     transient_raster <- unzip(zipfile = raster_path,
-                              files=filelist[source_number]) %>%
+                              files=filelist[source_number],
+                              exdir=here::here(tempdir())) %>%
       rast()%>%
       terra::subst(NA,0)
 
 
   pollution_mean <- exact_extract(transient_raster,transient,'mean') %>%
     tibble()
+
+  unlist(here::here("tempdir"))
   #rename the column for smoother binding, dplyr rename not used becaus eit was being awkwa
   colnames(pollution_mean)[1]=filelist[source_number]
 
