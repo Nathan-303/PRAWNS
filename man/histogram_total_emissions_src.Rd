@@ -5,7 +5,12 @@
 \title{Create a histogram of the average total emissions with the median and mean
 values labelled}
 \usage{
-histogram_total_emissions_src(prawn_path, pollutant, year, input_prawn)
+histogram_total_emissions_src(
+  prawn_path = "blank",
+  pollutant,
+  year,
+  input_prawn = "blank"
+)
 }
 \arguments{
 \item{prawn_path}{The filepath for the prawn CSV that is to be used.}

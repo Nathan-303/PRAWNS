@@ -28,9 +28,7 @@ histogram_total_emissions_src <- function(prawn_path="blank", pollutant, year,in
     raw <- input_prawn
   }
 
-  raw <- read.csv(prawn_path,
-                  row.names=1,
-                  check.names=FALSE) %>%
+  raw <- raw %>%
 
     mutate(upperbound=quantile(Total,0.99)) %>%
 
