@@ -7,6 +7,8 @@
 #'
 #' @param year The year of measurements, used in axis title, defaults to 2020
 #'
+#' @param input_prawn Uses a prawns object already present in R rther than reading a csv
+#'
 #' @keywords faceted, sources
 #'
 #' @export
@@ -18,7 +20,13 @@
 #'   year=2019
 #'   )
 
-histogram_total_emissions_src <- function(prawn_path, pollutant, year){
+histogram_total_emissions_src <- function(prawn_path, pollutant, year,input_prawn){
+
+  if (prawn_path!="blank"){
+    raw <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
+  }else{
+    raw <- input_prawn
+  }
 
   raw <- read.csv(prawn_path,
                   row.names=1,
