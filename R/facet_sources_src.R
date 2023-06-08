@@ -24,11 +24,10 @@
 #'   year=2019
 #'   )
 
-facet_sources_src <- function(prawn_path="blank",pollutant,year,input_prawn="blank"){
+facet_sources_src <- function(prawn_path="blank",pollutant,year,input_prawn){
 if (prawn_path!="blank"){
   long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
-}
-if (input_prawn!="blank"){
+}else{
   long_chunk <- input_prawn
 }
   #conditional renames of columns
