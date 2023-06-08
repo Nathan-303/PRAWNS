@@ -83,7 +83,7 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
 
 
   pollution_mean <- exact_extract(transient_raster,transient,'mean') %>%
-    tibble()
+    tibble() %>% signif(digits=4)
 
   unlist(here::here("tempdir"))
   #rename the column for smoother binding, dplyr rename not used becaus eit was being awkwa
