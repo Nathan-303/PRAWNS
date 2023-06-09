@@ -59,7 +59,6 @@ process_tempura_prawns <- function(raster_path="undefined",
                    ignore.case=TRUE, value=TRUE)
   }
 
-
 print("vect call")
   #Beware recursion
 
@@ -74,7 +73,7 @@ index <- c(1:length(vectorised_shapefile))
 transient <- sf::st_as_sf(vectorised_shapefile[index])
   for(source_number in 1:length(filelist)){
     incProgress(1/length(filelist), detail = paste("Processing rasters this will take a while, currently on source ", source_number, " of ",length(filelist) ))
-    #unzip only the layer being extracted to minimise memory use
+    #unzip only the layer being extracted to minimise memory use, skip offshore
     transient_raster <- unzip(zipfile = raster_path,
                               files=filelist[source_number],
                               exdir=here::here(tempdir())) %>%
@@ -126,7 +125,7 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
           replace <- core %>% filter(Match==track)
 
           colnames(data)[Index] <- replace$Output
-          #Break the loop if there's no match, adds efficiency
+
         }
         #Close the for loop
       }
@@ -139,7 +138,7 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  )
+  ) %>% select(-any_of(c("Tot_area","Offshore")))
 
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
