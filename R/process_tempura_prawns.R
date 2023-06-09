@@ -138,7 +138,7 @@ transient <- sf::st_as_sf(vectorised_shapefile[index])
     data=prawns,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
-  ) %>% select(-any_of(c("Tot_area","Offshore")))
+  ) %>% dplyr::select(-any_of(c("Tot_area","Offshore")))
 
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
   }
