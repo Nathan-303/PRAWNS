@@ -82,7 +82,10 @@ RUC_summary <- ggplot(temp)+
 
   scale_linetype_manual(name= "Line plotted:",
                         values = c("Linear regression"="solid","Average points"="dashed"),
-                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
+                        guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),
+                                                               colour="black",
+                                                               shape=c(NA,NA),
+                                                               size=c(1,1)))
   )+
 
 
@@ -91,12 +94,14 @@ labs(x="IMD decile where 10 is least deprived",
      colour="Average used",
      title=NULL)+
 
-guides(linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
+guides(linetype=guide_legend(override.aes =list(linetype=c("dashed","solid"),
                                                 colour="black",
                                                 shape=c(NA,NA),
                                                 size=c(1,1)),
-       keywidth = 3),
-       colour=guide_legend(byrow=TRUE),
+                             keywidth = 3),
+       colour=guide_legend(byrow=TRUE,
+                           override.aes = list(linewidth=3),
+                           keydidth=3),
        ncol=2)+
 
   theme(legend.position = "bottom")+
