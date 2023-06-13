@@ -71,21 +71,24 @@ temp = bind_rows(
 
 
 source_summary <- ggplot(temp)+
+
+  geom_line(aes(decile,
+                value,
+                colour = Emission_source,
+                linetype = justLondon,
+                linewidth=1
+  ))+
+
   geom_smooth(aes(decile,
                   value,
                   colour = Emission_source,
                   linetype = justLondon,
-                  size=2
+                  linewidth=3
                   ),
               method = "lm",
               se=FALSE,
               )+
-  geom_line(aes(decile,
-                 value,
-                 colour = Emission_source,
-                 linetype = justLondon,
-                size=1
-                ))+
+
 
   facet_wrap(~stat)+
 
@@ -101,29 +104,32 @@ source_summary <- ggplot(temp)+
 
   scale_y_continuous(expand=c(0,0))+
 
-  theme(text=element_text(size=30),
-        panel.spacing.x = unit(3,"lines"),
-        legend.key.size = unit(2,"lines"),
-        legend.key.height = unit(4,"lines")
-        )+
-
-  scale_size_identity(name= "Line plotted",
-                      breaks=c(1,2),
+  scale_linewidth_identity(name= "Line plotted",
+                      breaks=c(1,3),
                       labels=c("Average points","Linear regression"),
                       guide="legend")+
 
   scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"))+
 
-  guides(colour=guide_legend(override.aes=list(size=3)),
+  guides(colour=guide_legend(override.aes=list(linewidth=5),fill=NA),
 
          linetype=guide_legend(override.aes =list(linetype=c("solid","dashed"),
                                                   colour="black",
                                                   shape=c(NA,NA),
-                                                  linewidth=c(1,1)))
+                                                  linewidth=c(1,1))),
+
+         linewidth=guide_legend(override.aes = list(colour="black"))
   )+
 
-  theme(panel.background = element_blank(),
-        axis.line = element_line(colour = "black"))
+  theme(text=element_text(size=30),
+        panel.spacing.x = unit(3,"lines"),
+        legend.key.size = unit(2,"lines"),
+        legend.key.height = unit(4,"lines"),
+        legend.key.width = unit(2,"cm"),
+        legend.key = element_rect(fill=NA),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black")
+        )
 
 source_summary
 
