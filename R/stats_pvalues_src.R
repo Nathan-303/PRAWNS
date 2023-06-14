@@ -43,8 +43,11 @@ aha <- hmm %>% pivot_wider(names_from=term,
                           std.error,
                           statistic))
 
-reveal <- ggplot(data=aha)+
-  aes(x=p.value_IMD)+
+#Perform a benjamnini hochberg adjustment on the p values
+ben_hoch <- aha %>% mutate(adjusted=p.adjust(p.value_IMD,method="fdr")
+
+reveal <- ggplot(data=ben_hoch)+
+  aes(x=adjusted)+
   geom_histogram(boundary=0,bins = 60)+
   facet_wrap(~Emission_source,scale="free_y")+
   coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")+
