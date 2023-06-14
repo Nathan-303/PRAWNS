@@ -44,7 +44,7 @@ aha <- hmm %>% pivot_wider(names_from=term,
                           statistic))
 
 #Perform a benjamnini hochberg adjustment on the p values
-ben_hoch <- aha %>% mutate(adjusted=p.adjust(p.value_IMD,method="fdr")
+ben_hoch <- aha %>% mutate(adjusted=p.adjust(p.value_IMD,method="fdr"))
 
 reveal <- ggplot(data=ben_hoch)+
   aes(x=adjusted)+
