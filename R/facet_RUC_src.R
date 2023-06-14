@@ -137,7 +137,7 @@ dec_histo2 <- ggplot(data=temp)+aes(x=decile)+
   facet_wrap(~fct_reorder(Classification,Emissions,mean,na.rm=TRUE,.desc=TRUE),scale="free_y")+
   geom_bar()+
   scale_x_continuous(breaks = c(1:10),minor_breaks = FALSE,expand=expansion(mult=0,add=0.1))+
-  scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0),breaks=pretty_breaks())+
+  scale_y_continuous(expand=expansion(mult=c(0,0.05),add=0),breaks=breaks_pretty())+
   labs(x="IMD deprivation decile",
        y="Number of LSOAs")
 

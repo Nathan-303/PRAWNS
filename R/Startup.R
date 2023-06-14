@@ -17,4 +17,5 @@ library(viridis)
 library(stars)
 library(ragg)
 library(raster)
+library(scales)
 }
