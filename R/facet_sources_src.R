@@ -124,7 +124,7 @@ geom_quantile(quantiles=0.5,
 
   scale_linetype_manual(name= "Line plotted:",
                           values = c("Linear regression"="solid","Average points"="dashed"),
-                          guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),size=c(1,1)))
+                          guide=guide_legend(override.aes = list(linetype=c("solid","dashed"),colour="black",shape=c(NA,NA),linewidth=c(1,1)))
                       )+
 
   labs(x=paste0("IMD decile where 10 is least deprived"),
