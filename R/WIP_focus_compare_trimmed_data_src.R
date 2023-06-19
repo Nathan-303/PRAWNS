@@ -47,7 +47,7 @@ focused_window <- ggplot(data = focused_long_prawn)+
   geom_quantile(quantiles=0.5,
                 linewidth =1,
                 formula=y~x,
-                aes(colour="In London",
+                aes(colour="London",
                     linetype="Median"))+
 
   geom_quantile(data=allthings,
@@ -67,7 +67,7 @@ focused_window <- ggplot(data = focused_long_prawn)+
               aes(x=IMD,
                   y=Emissions,
                   linetype="Mean",
-                  colour="In London"),
+                  colour="London"),
               )+
 
   geom_smooth(data=allthings,
@@ -85,13 +85,15 @@ focused_window <- ggplot(data = focused_long_prawn)+
             stat="summary",
             aes(x=IMD,
                 y=Emissions,
-                linetype="Mean points",
-                colour = "In London"),
-            show.legend = FALSE)+
+                colour = "London"),
+            show.legend = FALSE,
+            shape="cross",
+            size=1.8,
+            stroke=1.3)+
 
-  scale_linetype_manual(values=c("Median"="solid","Mean"="dashed","Mean points"="dotted"),name = "Line plotted")+
+  scale_linetype_manual(values=c("Median"="dashed","Mean"="solid"),name = "Line plotted")+
 
-  scale_colour_manual(breaks = c("In London","Outside\nLondon"),
+  scale_colour_manual(breaks = c("London","Outside\nLondon"),
                       values=c("#FB8022FF","royalblue"),
                       name="LSOA\nlocation")+
 
