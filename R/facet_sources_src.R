@@ -13,6 +13,8 @@
 #'
 #' @param input_prawn Use to directly input a prawns object
 #'
+#' @param trim If trim is true then the firlds tot_area and offshore are trimmed for reduncancy
+#'
 #' @keywords faceted, sources
 #'
 #' @export
@@ -24,12 +26,13 @@
 #'   year=2019
 #'   )
 
-facet_sources_src <- function(prawn_path="blank",pollutant,year,input_prawn){
+facet_sources_src <- function(prawn_path="blank",pollutant,year,input_prawn,trim=TRUE){
 if (prawn_path!="blank"){
   long_chunk <- read.csv(file=prawn_path,row.names=1,check.names=FALSE) %>% tibble()
 }else{
   long_chunk <- input_prawn
 }
+if (trim==TRUE){long_chunk <- long_chunk %>% dplyr::select(-c(Tot_area,Offshore))}
   #conditional renames of columns
   if("Other transport and mobile machinery" %in% colnames(long_chunk)){
     long_chunk <- long_chunk %>% rename(`Other transport and \nmobile machinery`=`Other transport and mobile machinery`)
