@@ -59,7 +59,8 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
 
     aes(x=size_decile,y=emissions)+
 
-    geom_line(aes(colour=Emission_source))+
+    geom_line(aes(colour=Emission_source),
+              linewidth=2)+
 
     scale_x_continuous(breaks=c(1:10),
                        labels=paste0(c(1:10),"\n",axticks),
@@ -70,11 +71,13 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
               y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"))+
 
     scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial sources"),
-                        values=c("black","royalblue","#FB8022FF","olivedrab1"),
+                        values=c("black","royalblue","#FB8022FF","deeppink2"),
                         name="Emission source")+
 
     theme(panel.background = element_blank(),
-          axis.line = element_line(colour = "black"))
+          axis.line = element_line(colour = "black"))+
+
+    guides(colour=guide_legend(override.aes=list(linewidth=2),fill=NA)
 
 
 
