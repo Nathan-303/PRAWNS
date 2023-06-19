@@ -348,8 +348,8 @@ area_histogram <- cartesian_area_gradients_src(prawn_path=prawn_path,area_type="
 process_graph_saver(filename= paste0(proc_tag,"/",pollutant," emission gradient for counties and UAs.",file_format1),
        plot=area_histogram,
        file_format = file_format,
-       type=1,
-       scaling=0.7)
+       type=2,
+       scaling=1.2)
 
   rm(area_histogram)
 
