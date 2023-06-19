@@ -77,7 +77,7 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     theme(panel.background = element_blank(),
           axis.line = element_line(colour = "black"))+
 
-    guides(colour=guide_legend(override.aes=list(linewidth=2),fill=NA)
+    guides(colour=guide_legend(override.aes=list(linewidth=2),fill=NA))
 
 
 
