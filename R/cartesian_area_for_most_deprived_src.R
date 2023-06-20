@@ -70,7 +70,7 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     labs(x=expression(atop("LSOA expanse decile","Area of the largest LSOA in this decile /"~km^2)),
               y=bquote("Mean "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"))+
 
-    scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial sources"),
+    scale_colour_manual(breaks=c("Total","Road transport","Other sources","Industrial\nsources"),
                         values=c("black","royalblue","#FB8022FF","deeppink2"),
                         name="Emission source")+
 
