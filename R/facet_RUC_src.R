@@ -101,7 +101,7 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("dashed","solid"),
                              keywidth = 3),
        colour=guide_legend(byrow=TRUE,
                            override.aes = list(linewidth=3),
-                           keydidth=3),
+                           keywidth=3),
        ncol=2)+
 
   theme(legend.position = "bottom")+
