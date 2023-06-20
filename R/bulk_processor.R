@@ -144,7 +144,7 @@ if (ncol(checkcols)==86){
                         plot=expanse_scale,
                         file_format = file_format,
                         type=1,
-                        scaling=0.4)
+                        scaling=0.55)
     rm(expanse_scale)
     #close the two that specific sources to be present
 }
@@ -202,7 +202,7 @@ if(gotta_go_fast != "zooom"){
                 plot=london_focus,
                 file_format = file_format,
                 type=1,
-                scaling=0.5)
+                scaling=0.6)
 
     rm(londonless_prawn)
 
