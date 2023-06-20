@@ -91,7 +91,7 @@ RUC_summary <- ggplot(temp)+
 
 labs(x="IMD decile where 10 is least deprived",
      y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
-     colour="Average used",
+     colour="Average used:",
      title=NULL)+
 
 guides(linetype=guide_legend(override.aes =list(linetype=c("dashed","solid"),
@@ -100,7 +100,7 @@ guides(linetype=guide_legend(override.aes =list(linetype=c("dashed","solid"),
                                                 size=c(1,1)),
                              keywidth = 3),
        colour=guide_legend(byrow=TRUE,
-                           override.aes = list(linewidth=3),
+                           override.aes = list(linewidth=2),
                            keywidth=3),
        ncol=2)+
 
