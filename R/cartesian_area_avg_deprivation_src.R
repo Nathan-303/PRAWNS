@@ -28,7 +28,7 @@ active_stack <- read.csv(prawn_path) %>% group_by(Area)
 area_rank <- active_stack %>% summarise(Mean =mean(Total),
                                           Median=median(Total),
                                           dep=mean(IMD)) %>%
-  pivot_longer(c(Mean, Median), names_to = "NOx_average",values_to = "token") %>%
+  pivot_longer(c(Mean, Median), names_to = paste0(pollutant,"_average"),values_to = "token") %>%
   group_by(NOx_average) %>%
   mutate(tile=ntile(dep,8))
 
@@ -56,8 +56,8 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
   geom_point(data=area_rank,
              colour="#FB8022FF",
              shape="cross",
-             size=1.1,
-             stroke=0.6)+
+             size=0.9,
+             stroke=1)+
   #reimpose the lines on top of the points, its janky but necessary
   geom_boxplot(data=area_rank %>% filter(NOx_average=="Mean"),
                aes(x=dep,
@@ -83,6 +83,16 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
   labs(x="Mean deprivation decile",
        y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL)+
+  #tim the axis and add in the outlier cropped
+  coord_cartesian(ylim=c(0,35),xlim=c(2.3,9.3),expand=FALSE)+
+
+  geom_point(data=area_rank %>%
+               dplyr::filter(token>35) %>%
+               mutate(token=34),
+             colour="deeppink2",
+             shape=1,
+             size=1.1,
+             stroke=1)+
 
   facet_wrap(~NOx_average)
 

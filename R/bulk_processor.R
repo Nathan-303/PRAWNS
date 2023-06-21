@@ -335,7 +335,7 @@ avg_imd_pol <- cartesian_area_avg_deprivation_src(prawn_path=prawn_path,
        plot=avg_imd_pol[[1]],
        file_format = file_format,
        type=1,
-       scaling=0.6)
+       scaling=0.68)
 
   write.csv(x=avg_imd_pol[[2]],
             file = paste0(proc_tag,"/model analysis for",pollutant," average vs average IMD by county UA .csv"))
