@@ -75,9 +75,11 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
                         name="Emission source")+
 
     theme(panel.background = element_blank(),
-          axis.line = element_line(colour = "black"))+
+          axis.line = element_line(colour = "black"),
+          axis.title.y = element_text(hjust=0.95))+
 
     guides(colour=guide_legend(override.aes=list(linewidth=2),fill=NA))
+
 
 
 

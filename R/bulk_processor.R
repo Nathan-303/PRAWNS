@@ -144,7 +144,7 @@ if (ncol(checkcols)==86){
                         plot=expanse_scale,
                         file_format = file_format,
                         type=1,
-                        scaling=0.55)
+                        scaling=0.6)
     rm(expanse_scale)
     #close the two that specific sources to be present
 }
