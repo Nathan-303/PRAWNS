@@ -56,7 +56,7 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
   geom_point(data=area_rank,
              colour="#FB8022FF",
              shape="cross",
-             size=0.9,
+             size=1.2,
              stroke=1)+
   #reimpose the lines on top of the points, its janky but necessary
   geom_boxplot(data=area_rank %>% filter(NOx_average=="Mean"),
@@ -92,7 +92,7 @@ geom_boxplot(data=area_rank %>% filter(NOx_average=="Median"),
              colour="deeppink2",
              shape=1,
              size=1.1,
-             stroke=1)+
+             stroke=0.9)+
 
   facet_wrap(~NOx_average)
 
