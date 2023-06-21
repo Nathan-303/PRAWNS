@@ -813,6 +813,14 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 0.15.5 (Uploaded 19/6/23)
 
 	Numerous graphing improvements
+
+0.15.6
+
+	Reintroduced london only section
+
+	Corrected facet sources legend
+
+	Resized some outputs for better sized text
 0.16.0
 
 	[Bugs? Get out]
