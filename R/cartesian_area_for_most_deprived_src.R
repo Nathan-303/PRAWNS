@@ -24,7 +24,7 @@ cartesian_area_for_most_deprived_src <- function(prawn_path,pollutant,year){
 
   reformed_data <- data %>%
     #aggregate all non
-    mutate(`Industrial sources`=Solvents+
+    mutate(`Industrial\nsources`=Solvents+
              `Energy production`+
              `Waste treatment and disposal`+
              `Industrial combustion`+
@@ -37,7 +37,7 @@ cartesian_area_for_most_deprived_src <- function(prawn_path,pollutant,year){
              `Domestic combustion`) %>%
 
     pivot_longer(
-      cols=c("Road transport","Total","Other sources","Industrial sources"),
+      cols=c("Road transport","Total","Other sources","Industrial\nsources"),
       names_to = "Emission_source",
       values_to = "emissions") %>%
     #sort into thirds based on IMD rank
