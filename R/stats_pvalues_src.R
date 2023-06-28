@@ -44,9 +44,6 @@ aha <- hmm %>% pivot_wider(names_from=term,
                           std.error,
                           statistic))
 
-#Perform a benjamnini hochberg adjustment on the p values
-ben_hoch <- aha %>% group_by(Emission_source) %>%
-  mutate(adjusted=p.adjust(p.value_IMD,method="fdr"))
 
 plist <- aha %>% ungroup() %>%
  # filter(Emission_source=="Total") %>%
@@ -72,34 +69,11 @@ reveal <- ggplot(data=plottable)+
   geom_histogram(boundary=0,bins = 60)+
   facet_wrap(~Emission_source,scale="free_y")+
   coord_cartesian(xlim=c(0,1),expand=FALSE)+geom_vline(xintercept=0.05,colour="orange")+
-  labs(x="FDR adjusted P value for linear model linking IMD and NOx emissions",
+  labs(x="FDR adjusted p-value for linear model linking IMD and NOx emissions",
        y= "Frequency")
 }else{
   reveal <- ggplot(data)+geom_bar(aes(x=IMD))+labs(title="Not here")
 }
-alpha <- 0.05
-pvector <- aha %>% group_by(Emission_source) %>% dplyr::select(Emission_source,p.value_IMD)
-#arrange them in order
-sorted_pvector <- pvector %>%
-  filter(Emission_source=="Total") %>%
-  arrange(by.group=TRUE,p.value_IMD)
-
-m <- nrow(sorted_pvector)
-test <- sorted_pvector %>%
-  mutate(k=c(1:m)) %>%
-  filter(p.value_IMD<=((k/m)*alpha))
-
-
-#plot the results
-  ggplot(sorted_pvector)+
-
-    aes(x=k,y=p.value_IMD)+
-
-    geom_point()+
-
-    geom_abline(slope = )
-
-#Find the first one that fulfils the requirement
 
 
 reveal
