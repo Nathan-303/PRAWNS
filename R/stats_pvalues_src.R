@@ -19,8 +19,9 @@ stats_pvalues_src <- function(prawn_path){
 
 
 if (nrow(data)<=73*384){
+#By changing which line is commented out you can adjust sample size to see how that affects the p-values
 test <- tibble(chunk=sample(rep.int(x=c(1:384),times=73),size=nrow(data),replace=FALSE))
-
+#test <- tibble(chunk=sample(rep.int(x=c(1:192),times=146),size=nrow(data),replace=FALSE))
 chunkable <- bind_cols(data,test)%>% group_by(chunk)
 
 end_of_sources <- which(colnames(data)=="LSOA11CD")-1
