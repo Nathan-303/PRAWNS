@@ -47,7 +47,7 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
     values_to = "flat population"
   ) %>%
   #convert flat population into percentage
-  mutate("Percentage"=`flat population`/`Ethnic group: Total: All usual residents`) %>%
+  mutate("Percentage"=`flat population`/`Ethnic group: Total: All usual residents`*100) %>%
     group_by(`Ethnic group`)
 
 foray <- edata %>%
@@ -60,43 +60,33 @@ plottable <- edata %>% inner_join(
   x=data,
   y=foray,
   by=c("LSOA11CD"="geography code")
-) %>%
+) %>%group_by(`Ethnic group`) %>%
 mutate(tile=ntile(Percentage,8))
 
-area_rank <- plottable %>%
-  dplyr::select(Total,`Ethnic group`,Percentage) %>%
-  group_by(`Ethnic group`) %>%
-  summarise(Mean =mean(Total),
-                                        Median=median(Total),
-                                        perc=mean(Percentage)) %>%
-  pivot_longer(c(Mean, Median), names_to = paste0(pollutant,"_average"),values_to = "token") %>%
-  group_by(NOx_average) %>%
-  mutate(tile=ntile(perc,8))
-
 boxrigger <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise()
-boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(q90=quantile(Total,c(0.90)),
-                                                                    q10=quantile(Total,c(0.10)),
-                                                                    q1=quantile(Total,c(0.25)),
-                                                                    q3=quantile(Total,c(0.75)),
-                                                                    med=quantile(Total,c(0.5)),
+boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(high=quantile(Total,c(0.95)),
+                                                                   low=quantile(Total,c(0.05)),
                                                                    maxper=max(Percentage),
                                                                    minper=min(Percentage)) %>%
-  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions") %>%
   mutate(center=(maxper+minper)/2)
 #Plot a faceted graph
 
 output <- ggplot(data=plottable
 )+
+  geom_errorbar(data=boxxy,
+                aes(x=center,
+                    ymin=low,
+                    ymax=high))+
 
-  geom_boxplot(data=boxxy,
+  geom_boxplot(data=plottable,
                inherit.aes=FALSE,
-               aes(x=center,
-                   y=emissions,
+               aes(x=Percentage,
+                   y=Total,
                    group=tile),
-               width=0.2,
-               coef=10000000000000000000000000000000000000000000000000000000000000)+
+               outlier.shape = NA,
+               coef=0)+
 
-  labs(x=paste0("Decile where 10 contains the most people within the group"),
+  labs(x=paste0("Percentage of the LSOA population\nidentifying within that ethnic group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
@@ -104,7 +94,9 @@ output <- ggplot(data=plottable
 
   guides(fill = guide_legend(byrow = TRUE))+
 
-  facet_wrap(~`Ethnic group`,scale="free_x")
+  facet_wrap(~`Ethnic group`,scale="free_x")+
+
+  coord_cartesian(ylim=c(0,40))
 
 output
 
