@@ -56,41 +56,37 @@ foray <- edata %>%
   group_by(`Ethnic group`,Diversity_quintile)
 
 
-plottable <- foray %>% inner_join(
+plottable <- edata %>% inner_join(
   x=data,
   y=foray,
   by=c("LSOA11CD"="geography code")
 ) %>%
-  group_by(`Ethnic group`,Diversity_quintile) %>%
-  summarise(Mean=mean(Total))
+mutate(tile=ntile(Percentage,8))
 
+area_rank <- plottable %>%
+  dplyr::select(Total,`Ethnic group`,Percentage) %>%
+  group_by(`Ethnic group`) %>%
+  summarise(Mean =mean(Total),
+                                        Median=median(Total),
+                                        perc=mean(Percentage)) %>%
+  pivot_longer(c(Mean, Median), names_to = paste0(pollutant,"_average"),values_to = "token") %>%
+  group_by(NOx_average) %>%
+  mutate(tile=ntile(perc,8))
 #Plot a faceted graph
 
 output <- ggplot(data=plottable
 )+
 
-  aes(x=Diversity_quintile,
-      y=Mean,
-      colour=`Ethnic group`)+
+  aes(x=Percentage,
+      y=Total)+
 
-  geom_line(stat="summary",
-            linewidth=0.5,
-            fun=mean,
-            na.rm=TRUE
-  )+
+  geom_boxplot(aes(group=tile),outlier.shape = NA)+
 
-
-  geom_smooth(method="lm",
-              formula=y~x,
-              se=FALSE,
-              linewidth=1,
-              na.rm = TRUE)+
-
-
-  scale_x_continuous(
-    breaks=c(1:10),
-    expand = expansion(mult=0,add=0),
-    minor_breaks = FALSE)+
+  # geom_(stat="summary",
+  #           linewidth=0.5,
+  #           fun=mean,
+  #           na.rm=TRUE
+  # )+
 
   labs(x=paste0("Decile where 10 contains the most people within the group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
@@ -102,7 +98,9 @@ output <- ggplot(data=plottable
 
   scale_colour_viridis_d()+
 
-  guides(fill = guide_legend(byrow = TRUE))
+  guides(fill = guide_legend(byrow = TRUE))+
+
+  facet_wrap(~`Ethnic group`,scale="free_x")
 
 output
 
