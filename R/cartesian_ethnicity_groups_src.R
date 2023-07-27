@@ -72,30 +72,34 @@ area_rank <- plottable %>%
   pivot_longer(c(Mean, Median), names_to = paste0(pollutant,"_average"),values_to = "token") %>%
   group_by(NOx_average) %>%
   mutate(tile=ntile(perc,8))
+
+boxrigger <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise()
+boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(q90=quantile(Total,c(0.90)),
+                                                                    q10=quantile(Total,c(0.10)),
+                                                                    q1=quantile(Total,c(0.25)),
+                                                                    q3=quantile(Total,c(0.75)),
+                                                                    med=quantile(Total,c(0.5)),
+                                                                   maxper=max(Percentage),
+                                                                   minper=min(Percentage)) %>%
+  pivot_longer(cols=c(q90,q10,q1,q3,med),values_to = "emissions") %>%
+  mutate(center=(maxper+minper)/2)
 #Plot a faceted graph
 
 output <- ggplot(data=plottable
 )+
 
-  aes(x=Percentage,
-      y=Total)+
-
-  geom_boxplot(aes(group=tile),outlier.shape = NA)+
-
-  # geom_(stat="summary",
-  #           linewidth=0.5,
-  #           fun=mean,
-  #           na.rm=TRUE
-  # )+
+  geom_boxplot(data=boxxy,
+               inherit.aes=FALSE,
+               aes(x=center,
+                   y=emissions,
+                   group=tile),
+               width=0.2,
+               coef=10000000000000000000000000000000000000000000000000000000000000)+
 
   labs(x=paste0("Decile where 10 contains the most people within the group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
-  theme(legend.position = "right",
-        legend.key.width = unit(0.5,"cm"),
-        legend.key.height = unit(1.3,"cm"))+
-
   scale_colour_viridis_d()+
 
   guides(fill = guide_legend(byrow = TRUE))+
