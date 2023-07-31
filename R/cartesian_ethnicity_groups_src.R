@@ -68,23 +68,45 @@ boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(high=quantile
                                                                    low=quantile(Total,c(0.05)),
                                                                    maxper=max(Percentage),
                                                                    minper=min(Percentage)) %>%
-  mutate(center=(maxper+minper)/2)
-#Plot a faceted graph
+  mutate(center=(maxper+minper)/2) %>% filter(!tile%in%c(7,8))
 
-output <- ggplot(data=plottable
-)+
+rogue_boxxy <- boxxy %>% mutate
+#select the data that falls in range for a sensible scale
+main_data <- plottable %>% dplyr::filter(!tile%in%c(7,8),!`Ethnic group`=="White") %>%
+  rbind(plottable %>% dplyr::filter(!tile%in%c(1,2),`Ethnic group`=="White"))
+
+#create a tibble with the dummy x values
+xpositions <- tibble(
+  #set up the frame ready for entries
+  `Ethnic group`=rep(unique(transforming_data$`Ethnic group`),times=c(2,2,2,2,2)),
+  tile=c(1,2,rep(c(7,8),times=4)),
+  #manually enter the new breaks
+  dummy=c(75,80,#white
+          3.5,4,#mixed or multiple
+          2.5,3,#black
+          1.75,2,#other
+          7,8#Asian
+          )
+  )
+hmm2 <- transforming_data %>% inner_join(xpositions,join_by(`Ethnic group`))
+
+output <- ggplot(data=plottable)+
   geom_errorbar(data=boxxy,
                 aes(x=center,
                     ymin=low,
                     ymax=high))+
-
-  geom_boxplot(data=plottable,
+#plot the data that works nicely on a scale
+  geom_boxplot(data=main_data,
                inherit.aes=FALSE,
                aes(x=Percentage,
                    y=Total,
                    group=tile),
                outlier.shape = NA,
                coef=0)+
+
+  geom_point(data=xpositions,
+             aes(x=dummy,
+                 y=20))+
 
   labs(x=paste0("Percentage of the LSOA population\nidentifying within that ethnic group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
