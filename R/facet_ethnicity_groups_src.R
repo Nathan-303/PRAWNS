@@ -64,6 +64,10 @@ plottable <- inner_join(
     by="Diversity_quintile"
   )
 
+#split the data so you can manually mess with tiles that need to be removed from
+#the continuous axis and plotted with a footnot explaining their x position
+
+main_tiles <- plottable %>% dplyr::filter(tile!=7,8,)
 #Plot a faceted graph
 
 output <- ggplot(data=plottable
