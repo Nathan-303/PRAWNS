@@ -87,7 +87,8 @@ boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(high=quantile
   mutate(dummy=case_when(is.na(dummy)~center,
                          !is.na(dummy)~dummy))
 
-
+labels <- boxxy %>% filter(center!=dummy) %>%
+  mutate(xlabel=paste0(signif(center,digits=2),"%"))
 
 output <- ggplot(data=plottable)+
   geom_errorbar(data=boxxy,
@@ -117,7 +118,12 @@ output <- ggplot(data=plottable)+
        title=NULL
   )+
 
-  geom_text()
+  geom_text(data=labels,
+            aes(x=dummy,
+                label=xlabel,
+                y=20),
+            position=position_jitter())+
+
   scale_colour_viridis_d()+
 
   guides(fill = guide_legend(byrow = TRUE))+
