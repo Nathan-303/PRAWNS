@@ -118,11 +118,12 @@ output <- ggplot(data=plottable)+
        title=NULL
   )+
 
-  geom_text(data=labels,
+  geom_label_repel(data=labels,
             aes(x=dummy,
                 label=xlabel,
-                y=20),
-            position=position_jitter())+
+                y=high),
+            nudge_x = -1,
+            size=2.5,max.iter = 30000)+
 
   scale_colour_viridis_d()+
 
@@ -130,7 +131,7 @@ output <- ggplot(data=plottable)+
 
   facet_wrap(~`Ethnic group`,scale="free_x")+
 
-  coord_cartesian(ylim=c(0,40))
+  coord_cartesian(ylim=c(0,60))
 
 output
 
