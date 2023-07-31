@@ -50,6 +50,18 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
   mutate("Percentage"=`flat population`/`Ethnic group: Total: All usual residents`*100) %>%
     group_by(`Ethnic group`)
 
+xpositions <- tibble(
+  #set up the frame ready for entries
+  `Ethnic group`=rep(unique(transforming_data$`Ethnic group`),times=c(2,2,2,2,2)),
+  tile=c(1,2,rep(c(7,8),times=4)),
+  #manually enter the new breaks
+  dummy=c(80,82.5,#white
+          3.5,4,#mixed or multiple
+          2.5,3,#black
+          1.75,2,#other
+          7,8#Asian
+  )
+)
 foray <- edata %>%
   mutate(Diversity_quintile = ntile(x=Percentage,
                                     n=10)) %>%
@@ -68,31 +80,18 @@ boxxy <- plottable %>% group_by(`Ethnic group`,tile) %>% summarise(high=quantile
                                                                    low=quantile(Total,c(0.05)),
                                                                    maxper=max(Percentage),
                                                                    minper=min(Percentage)) %>%
-  mutate(center=(maxper+minper)/2) %>% filter(!tile%in%c(7,8))
+  mutate(center=(maxper+minper)/2) %>%
 
-rogue_boxxy <- boxxy %>% mutate
-#select the data that falls in range for a sensible scale
-main_data <- plottable %>% dplyr::filter(!tile%in%c(7,8),!`Ethnic group`=="White") %>%
-  rbind(plottable %>% dplyr::filter(!tile%in%c(1,2),`Ethnic group`=="White"))
+  left_join(xpositions,join_by(`Ethnic group`,tile)) %>%
 
-#create a tibble with the dummy x values
-xpositions <- tibble(
-  #set up the frame ready for entries
-  `Ethnic group`=rep(unique(transforming_data$`Ethnic group`),times=c(2,2,2,2,2)),
-  tile=c(1,2,rep(c(7,8),times=4)),
-  #manually enter the new breaks
-  dummy=c(75,80,#white
-          3.5,4,#mixed or multiple
-          2.5,3,#black
-          1.75,2,#other
-          7,8#Asian
-          )
-  )
-hmm2 <- transforming_data %>% inner_join(xpositions,join_by(`Ethnic group`))
+  mutate(dummy=case_when(is.na(dummy)~center,
+                         !is.na(dummy)~dummy))
+
+
 
 output <- ggplot(data=plottable)+
   geom_errorbar(data=boxxy,
-                aes(x=center,
+                aes(x=dummy,
                     ymin=low,
                     ymax=high))+
 #plot the data that works nicely on a scale
@@ -104,14 +103,21 @@ output <- ggplot(data=plottable)+
                outlier.shape = NA,
                coef=0)+
 
-  geom_point(data=xpositions,
-             aes(x=dummy,
-                 y=20))+
+  geom_boxplot(data=transformed_x,
+               inherit.aes=FALSE,
+               aes(x=dummy,
+                   y=Total,
+                   group=tile),
+               fill="blue",
+               outlier.shape = NA,
+               coef=0)+
 
   labs(x=paste0("Percentage of the LSOA population\nidentifying within that ethnic group"),
        y=bquote("Average "~.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
        title=NULL
   )+
+
+  geom_text()
   scale_colour_viridis_d()+
 
   guides(fill = guide_legend(byrow = TRUE))+
