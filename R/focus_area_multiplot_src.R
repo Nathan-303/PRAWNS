@@ -64,21 +64,21 @@ focus_area_multiplot_src <- function(prawn_path,
     Decile_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size=0.05)+
       aes(fill =IMD,geometry=geometry)+
       scale_fill_viridis_d()+
-      labs(title=paste0("IMD distribution"))+
-      theme(axis.text.x = element_blank(),
-            axis.text.y = element_blank(),
-            axis.ticks = element_blank(),
-            legend.position="none")
-
+      labs(title=paste0("Deprivation distribution where 1 is the most deprived"))
+      # theme(axis.text.x = element_blank(),
+      #       axis.text.y = element_blank(),
+      #       axis.ticks = element_blank(),
+      #       legend.position="none")
+  #calculate the value to wash out the scale at
+  scalecap <- quantile(filtered_data$Total,0.95)
     #Create a heatmap for the Nox in the area
-    Pollutant_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size =0.05)+
+    Pollutant_distribution <- ggplot()+geom_sf(data=stitched_shapefile %>%
+                                                 mutate(Total=case_when(Total>scalecap~scalecap,
+                                                                        Total<scalecap~Total)),
+                                               size =0.05)+
       aes(fill = Total,geometry=geometry)+
       scale_fill_continuous(type ="viridis",direction =-1)+
-      labs(title=paste0(pollutant," distribution"))+
-      theme(axis.text.x = element_blank(),
-            axis.text.y = element_blank(),
-            axis.ticks = element_blank(),
-            legend.position="none")
+      labs(title=paste0(pollutant," distribution"))
 
     #Create a histogram showing the prevalence of each decile in the area
     City_histogram <- ggplot(data=stitched_shapefile)+
@@ -189,9 +189,9 @@ focus_area_multiplot_src <- function(prawn_path,
 
     long_chunk <- long_chunk %>% mutate(Emission_source=fct_reorder(Emission_source,emissions,mean,.desc=TRUE))
 
-    city_sources <- streamlined_stats(pollutant="NOx",
+    city_sources <- facet_sources_src(pollutant="NOx",
                                       year=2019,
-                                      input=filtered_data)
+                                      input_prawn=filtered_data)
 
     #Create the gridded oputput object
     fusion <- ggarrange(Decile_distribution,Pollutant_distribution)
@@ -199,7 +199,7 @@ focus_area_multiplot_src <- function(prawn_path,
     output <- ggarrange(fusion,
                         City_histogram,
                         City_profile,
-                        city_sources,
+                        #city_sources,
                         nrow=2,
                         ncol=2)# %>%
       #annotate_figure(top=text_grob(paste0("Summary of ",pollutant," emissions in ",targets)))
