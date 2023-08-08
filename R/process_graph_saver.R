@@ -100,5 +100,17 @@ process_graph_saver <- function(plot, filename,file_format,type,scaling=1){
            device=file_format,
            scaling=scaling)
   }
+
+  if (type=="custom"){
+    ggsave(filename= filename,
+           plot=plot,
+           width=17.1,
+           height=8.2,
+           units = "cm",
+           dpi=600,
+           device=file_format,
+           scaling=scaling)
+  }
+
 }
 

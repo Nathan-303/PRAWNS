@@ -60,7 +60,7 @@ almalgm <- reformed_data %>% summarise(emissions=mean(emissions))
     aes(x=size_decile,y=emissions)+
 
     geom_line(aes(colour=Emission_source),
-              linewidth=2)+
+              linewidth=1)+
 
     scale_x_continuous(breaks=c(1:10),
                        labels=paste0(c(1:10),"\n",axticks),
