@@ -837,6 +837,8 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Bugfixes (0.15.2)
 	
+1.0.0
+
 
 Minor details:
 
