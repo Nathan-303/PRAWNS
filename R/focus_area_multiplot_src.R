@@ -59,12 +59,15 @@ focus_area_multiplot_src <- function(prawn_path,
     mutate(IMD=as.factor(IMD))
 
 
+
+
 # Graph creation ----------------------------------------------------------
     #Create a map showing hpw the population is distrubuted between the deciles in the chosen area,
     Decile_distribution <- ggplot()+geom_sf(data=stitched_shapefile,size=0.05)+
       aes(fill =IMD,geometry=geometry)+
       scale_fill_viridis_d()+
-      labs(title=paste0("Deprivation distribution where 1 is the most deprived"))
+    guides(fill=guide_legend(ncol=2))+
+    theme(axis.text = element_text(size = 5))
       # theme(axis.text.x = element_blank(),
       #       axis.text.y = element_blank(),
       #       axis.ticks = element_blank(),
@@ -78,21 +81,100 @@ focus_area_multiplot_src <- function(prawn_path,
                                                size =0.05)+
       aes(fill = Total,geometry=geometry)+
       scale_fill_continuous(type ="viridis",direction =-1)+
-      labs(title=paste0(pollutant," distribution"))
-
-    #Create a histogram showing the prevalence of each decile in the area
-    City_histogram <- ggplot(data=stitched_shapefile)+
-
-      aes(x=IMD,fill=IMD )+
-      geom_bar()+
-      labs(x="IMD decile",
-           title=paste0("IMD scores in ",targets))+
-      scale_x_discrete(
-        breaks=c(1:10),
-        expand = expansion(mult=0,add=0))+
-      scale_fill_viridis_d()+
-      guides(fill=guide_legend(ncol=2, byrow=FALSE))
+      theme(axis.text = element_text(size = 5))
+#
+#     #Create a histogram showing the prevalence of each decile in the area
+#     City_histogram <- ggplot(data=stitched_shapefile)+
+#
+#       aes(x=IMD,fill=IMD )+
+#       geom_bar()+
+#       labs(x="IMD decile",
+#            title=paste0("IMD scores in ",targets))+
+#       scale_x_discrete(
+#         breaks=c(1:10),
+#         expand = expansion(mult=0,add=0))+
+#       scale_fill_viridis_d()+
+#      guides(fill=guide_legend(ncol=2, byrow=FALSE))
 #This is where the largest graph (mean/median and UK average starts)
+
+    reformed_data <- raw_data %>% filter(!TCITY15NM%in%c("","London")) %>%
+      #aggregate some sources so it can be small
+      mutate(`Industrial sources`=Solvents+
+               `Energy production`+
+               `Waste treatment and disposal`+
+               `Industrial combustion`+
+               `Industrial production`+
+               `Point sources`,
+
+             `Other sources`=Natural+
+               `Agricultural`+
+               `Other transport and mobile machinery`+
+               `Domestic combustion`) %>%
+
+      pivot_longer(
+        cols=c("Road transport","Total","Other sources","Industrial sources"),
+        names_to = "Emission_source",
+        values_to = "emissions")
+
+    source_summary <- ggplot(reformed_data %>% filter(TCITY15NM==targets))+
+      geom_smooth(aes(IMD,
+                      emissions,
+                      colour = fct_reorder(Emission_source,emissions,mean,.desc=TRUE),
+                      linetype ="Linear regression"),
+                  method = "lm",
+                  se=FALSE)+
+
+      geom_line(data=reformed_data %>%
+                  group_by(IMD,Emission_source)%>%
+                  filter(TCITY15NM==targets)%>%
+                  summarise(emissions=mean(emissions)),
+                aes(x=IMD,
+                    y=emissions,
+                    colour = Emission_source,
+                    linetype="Average points"))+
+
+      geom_line(data=reformed_data %>%
+                  group_by(IMD,Emission_source)%>%
+                  filter(Emission_source=="Total")%>%
+                  summarise(emissions=mean(emissions)),
+                aes(x=IMD,
+                    y=emissions,
+                    colour = Emission_source,
+                    linetype="National average"))+
+
+      labs(x="IMD decile where 10 is least deprived",
+           y=bquote(.(pollutant)~"emissions in "~.(year)~"/ tonnes "~km^"-2"),
+           colour="Emission source")+
+
+      scale_x_continuous(
+        breaks=c(1:10),
+        expand = expansion(mult=0,add=0),
+        minor_breaks = FALSE)+
+
+      scale_y_continuous(expand=c(0,0))+
+
+      scale_linetype_manual(values=c("Average points"="dashed",
+                                     "Linear regression"="solid",
+                                     "National average"="dotted"),
+                            name="Values plotted")+
+
+      #
+      #     scale_linewidth(name= "Line plotted",
+      #                         labels=c("Average points","Linear regression"),
+      #                         guide="legend")+
+
+      scale_colour_manual(values=c("black","royalblue","olivedrab1","#FB8022FF"))+
+
+      guides(colour=guide_legend(override.aes=list(size=3)),
+
+             linetype=guide_legend(override.aes =list(colour="black",
+                                                      shape=c(NA,NA,NA),
+                                                      linewidth=c(1,1,1)))
+      )+
+
+      theme(panel.background = element_blank(),
+            axis.line = element_line(colour = "black"))
+    source_summary
     #Create a graph showing the relationship between NOx and decile within the chosen area
     City_profile <- ggplot(data=filtered_data)+
       aes(x=IMD,
@@ -194,41 +276,49 @@ focus_area_multiplot_src <- function(prawn_path,
                                       input_prawn=filtered_data)
 
     #Create the gridded oputput object
-    fusion <- ggarrange(Decile_distribution,Pollutant_distribution)
-
-    output <- ggarrange(fusion,
-                        City_histogram,
-                        City_profile,
-                        #city_sources,
-                        nrow=2,
-                        ncol=2)# %>%
-      #annotate_figure(top=text_grob(paste0("Summary of ",pollutant," emissions in ",targets)))
-
 # Archive results ---------------------------------------------------------
 
-
-
-if (output_path!=FALSE){
-
-    if (file.exists(output_path)) {
-
-      ggsave(filename=paste0(output_path,"/Nox in ",targets[index]),
-             plot=last_plot(),
-             units = "mm",height = 160,width=160,
-             device="png")
-
-    } else {
-
-      dir.create(output_path)
-
-      ggsave(filename=paste0(output_path,"/Nox in ",targets[index]),
-             plot=last_plot(),
-             units = "mm",height = 160,width=160,
-             device="png")
+#do some destination management
+    if(!file.exists(paste0("City emissions/",targets))){
+      dir.create(paste0("City emissions/",targets))
+      dir.create(paste0("City emissions/",targets,"/",pollutant))
+    }else{
+      if(!file.exists(paste0("City emissions/",targets,"/",pollutant))){
+        dir.create(paste0("City emissions/",targets,"/",pollutant))
+      }
     }
-}
 
-    output
+process_graph_saver(plot = city_sources,
+                    filename = paste0("City emissions/",targets,"/",pollutant,
+                                      "/comprehensive source summary.png"),
+                    file_format = "agg_png",
+                    type = 2,
+                    scaling = 1
+                    )
+
+process_graph_saver(plot = Pollutant_distribution,
+                    filename = paste0("City emissions/",targets,"/",pollutant,
+                                      "/pollutant_map.png"),
+                    file_format = "agg_png",
+                    type = 1,
+                    scaling = 1
+)
+
+process_graph_saver(plot = source_summary,
+                    filename = paste0("City emissions/",targets,"/",pollutant,
+                                      "/grouped source summary.png"),
+                    file_format = "agg_png",
+                    type = 2,
+                    scaling = 0.6
+)
+
+process_graph_saver(plot = Decile_distribution,
+                    filename = paste0("City emissions/",targets,"/",pollutant,
+                                      "/deprivation map.png"),
+                    file_format = "agg_png",
+                    type = 1,
+                    scaling = 0.8
+)
 }
 
 
