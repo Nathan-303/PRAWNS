@@ -102,46 +102,57 @@ point_size=case_when(
 
 ggplot(data=indexed_data)+
 
+  #Set the standard variables
   aes(x=`Weighted deprivation`,
       y=`Weighted emissions`,
       fill=`Ethnic group`
       )+
-  coord_cartesian(xlim=c(3,6),
-                  ylim=c(10,30),expand = FALSE
-                  )+
+  
+  # This one is for setting the legend without breaking the plot
+  geom_point(alpha=0
+  )+
 
- # This one is for setting the legend without breaking the plot
-  geom_point(alpha=0,
-             )+
-
+  #Plot the data with the aesthetics wanted
   geom_point(aes(x=`Weighted deprivation`,
                  y=`Weighted emissions`,
                  colour=broad_group,
                  shape=as.factor(subgroup),
                  size=as.factor(point_size)
-             ),
-             show.legend = FALSE)+
+                 ),
+  show.legend = FALSE
+  )+
   
-  scale_size_manual(breaks=c(1,2),
+  #define the scales used for plotting the data
+  scale_size_manual("the legend",
+                    breaks=c(1,2),
                     values=c(1,2))+
-
-scale_colour_manual("the legend",
-                    values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
-                    guide= guide_legend(override.aes = aes(colour="orange"))
-)+
-
+  
+  scale_colour_manual("the legend",
+                      values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
+                      guide= guide_legend(override.aes = aes(colour="orange"))
+  )+
+  
   scale_shape_manual("the legend",
                      values = c(15,16,17,18,19,6))+
+  #Trim the axis as the line makes the scale too big
+  coord_cartesian(xlim=c(3,6),
+                  ylim=c(10,30),expand = FALSE
+                  )+
+
   
-  scale_fill_viridis_d(guide=guide_legend(override.aes = list(colour=c(rep("black",6),
-                                                                            rep("royalblue",4),
-                                                                            rep("olivedrab1",5),
-                                                                            rep("#FB8022FF",3),
-                                                                            rep("deeppink2",5)),
-                                          alpha=1,
-                                          shape=indexed_data$point_shape,
-                                          size=indexed_data$point_size)))+
+
+  #Set the display parameters for the legend
+  scale_fill_viridis_d(guide=guide_legend(override.aes = list(
+    colour=c(rep("black",6),
+             rep("royalblue",4),
+             rep("olivedrab1",5),
+             rep("#FB8022FF",3),
+             rep("deeppink2",5)),
+    alpha=1,
+    shape=indexed_data$point_shape,
+    size=indexed_data$point_size)))+
   
+  #Plot the relationship between deprivation and emissions for the whole population
   geom_smooth(data=data,
               inherit.aes = FALSE,
               aes(x=IMD,
