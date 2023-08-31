@@ -88,15 +88,14 @@ point_size=case_when(
   subgroup==1~2,
   subgroup!=1~1
   )
-)%>% mutate(`Ethnic group`=`Ethnic group` %>% str_replace_all(
+)#%>% mutate(`Ethnic group`=`Ethnic group %>% str_replace_all(
   c("Asian, Asian British or Asian Welsh: "="",
-                         "Black, Black British, Black Welsh, Caribbean or African: "="",
-                         "Mixed or Multiple ethnic groups: "="",
-                         "Other ethnic group:"="")
+    "Black, Black British, Black Welsh, Caribbean or African: "="",
+    "Other ethnic group:"=""
+    )
   )
 #close mutate
-) #%>% mutate(`Ethnic group`=factor(`Ethnic group`,levels=row_number()))
-
+)
 
 
 
@@ -140,7 +139,13 @@ scale_colour_manual("the legend",
                                                                             rep("deeppink2",5)),
                                           alpha=1,
                                           shape=indexed_data$point_shape,
-                                          size=indexed_data$point_size)))+
+                                          size=indexed_data$point_size,
+                                          labels=indexed_data$`Ethnic group` %>% 
+                                            str_replace_all(c("Asian, Asian British or Asian Welsh: "="",
+                                                              "Black, Black British, Black Welsh, Caribbean or African: "="",
+                                                              "Mixed or Multiple ethnic groups: "="",
+                                                              "Other ethnic group:"=""))
+                                          )))+
   
   geom_smooth(data=data,
               inherit.aes = FALSE,
