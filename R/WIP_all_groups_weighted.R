@@ -79,19 +79,26 @@ ggplot(data=indexed_data)+
 
   aes(x=`Weighted deprivation`,
       y=`Weighted emissions`,
-      colour=broad_group,
-      shape=as.factor(subgroup)
+      fill=`Ethnic group`
       )+
 
   #geom_boxplot(aes(group=tile))+
+  geom_point(alpha=0)+
 
-  geom_point()+
+  geom_point(
+             aes(x=`Weighted deprivation`,
+                     y=`Weighted emissions`,
+                     colour=broad_group,
+                     shape=as.factor(subgroup)
+             ))+
 
-  scale_colour_manual("the legend",
-                      values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"))+
+scale_colour_manual("the legend",
+                    values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2")
+)+
 
   scale_shape_manual("the legend",
                      values = c(15,16,17,18,19,6))+
+  
   geom_smooth(data=data,
               inherit.aes = FALSE,
               aes(x=IMD,
@@ -105,26 +112,20 @@ ggplot(data=indexed_data)+
   coord_cartesian(xlim=c(3.5,6),
                   ylim=c(10,24),
                   expand = FALSE)+
-  theme(legend.position="bottom")
-
- ggplot(data=weighted_data)+
-
-  aes(x=`Weighted deprivation`,
-      y=`Weighted emissions`)+
-
-  geom_density_2d_filled(contour_var = "ndensity")+
-
-  facet_wrap(~`Ethnic group`)+
-
-  coord_cartesian(ylim=c(0,30),expand = FALSE)+
-
-  geom_smooth(data=data %>%
-                group_by(LAD19NM) %>%
-                summarise(meanEms=mean(Total),meanIMD=mean(IMD)),
-              aes(x=meanIMD,
-                  y=meanEms),
-              formula=y~x,
-              method="lm",
-              colour="pink")
-
-}
+  theme(legend.position="bottom")+
+  
+  guides(colour=guide_legend(override.aes = list(c(rep("black",6),
+                                                   rep("royalblue",4),
+                                                   rep("olivedrab1",5),
+                                                   rep("#FB8022FF",3),
+                                                   rep("deeppink2",5)))),
+         shape=guide_legend(override.aes = list(indexed_data$subgroup),
+         labels=guide_legend(override.aes = list(indexed_data$`Ethnic group`))
+         ))
+  
+process_graph_saver(plot=last_plot(),
+                    filename = "testing123.png",
+                    file_format = "agg_png",
+                    type = 3,
+                    scaling = 0.4
+                    )
