@@ -109,7 +109,7 @@ ggplot(data=indexed_data)+
       )+
   
   # This one is for setting the legend without breaking the plot
-  geom_point(alpha=0
+  geom_point(aes(colour=`Ethnic group`),alpha=0
   )+
 
   #Plot the data with the aesthetics wanted
@@ -168,6 +168,6 @@ ggplot(data=indexed_data)+
 process_graph_saver(plot=last_plot(),
                     filename = "testing123.png",
                     file_format = "agg_png",
-                    type = 3,
-                    scaling = 0.4
+                    type = 2,
+                    scaling = 1
                     )
