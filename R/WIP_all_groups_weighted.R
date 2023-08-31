@@ -75,6 +75,20 @@ for(index in 1:length(keys)){
   }
 }
 
+indexed_data <- indexed_data %>% mutate(
+point_shape=case_when(
+  subgroup==1~15,
+  subgroup==2~16,
+  subgroup==3~17,
+  subgroup==4~18,
+  subgroup==5~19,
+  subgroup==6~6,
+),
+point_size=case_when(
+  subgroup==1~2,
+  subgroup!=1~1)
+)
+
 ggplot(data=indexed_data)+
 
   aes(x=`Weighted deprivation`,
@@ -82,22 +96,33 @@ ggplot(data=indexed_data)+
       fill=`Ethnic group`
       )+
 
-  #geom_boxplot(aes(group=tile))+
-  geom_point(alpha=0)+
+ # This one is for setting the legend without breaking the plot
+  geom_point(alpha=0,
+             )+
 
-  geom_point(
-             aes(x=`Weighted deprivation`,
+  geom_point(aes(x=`Weighted deprivation`,
                      y=`Weighted emissions`,
                      colour=broad_group,
                      shape=as.factor(subgroup)
-             ))+
+             ),
+             show.legend = FALSE)+
 
 scale_colour_manual("the legend",
-                    values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2")
+                    values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
+                    guide= guide_legend(override.aes = aes(colour="orange"))
 )+
 
   scale_shape_manual("the legend",
                      values = c(15,16,17,18,19,6))+
+  
+  scale_fill_viridis_d(guide=guide_legend(override.aes = list(colour=c(rep("black",6),
+                                                                            rep("royalblue",4),
+                                                                            rep("olivedrab1",5),
+                                                                            rep("#FB8022FF",3),
+                                                                            rep("deeppink2",5))
+                                                              ,
+                                          alpha=1,
+                                          shape=indexed_data$point_shape)))+
   
   geom_smooth(data=data,
               inherit.aes = FALSE,
@@ -108,20 +133,19 @@ scale_colour_manual("the legend",
               colour="pink",
               show.legend = FALSE
               )+
-
-  coord_cartesian(xlim=c(3.5,6),
-                  ylim=c(10,24),
-                  expand = FALSE)+
-  theme(legend.position="bottom")+
   
-  guides(colour=guide_legend(override.aes = list(c(rep("black",6),
-                                                   rep("royalblue",4),
-                                                   rep("olivedrab1",5),
-                                                   rep("#FB8022FF",3),
-                                                   rep("deeppink2",5)))),
-         shape=guide_legend(override.aes = list(indexed_data$subgroup),
-         labels=guide_legend(override.aes = list(indexed_data$`Ethnic group`))
-         ))
+  theme(legend.position="bottom")#+
+
+  guides(fill=guide_legend(override.aes = list(
+    colour=(rep("black",6),
+            rep("royalblue",4),
+            rep("olivedrab1",5),
+            rep("#FB8022FF",3),
+            rep("deeppink2",5)
+            ),
+    shape=list(indexed_data$subgroup),
+    alpha=1
+         )))
   
 process_graph_saver(plot=last_plot(),
                     filename = "testing123.png",
