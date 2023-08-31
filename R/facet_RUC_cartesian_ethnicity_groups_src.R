@@ -19,6 +19,14 @@ data <- read.csv(prawn_path,
 edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
                   check.names=FALSE,
                   sep="|") %>%
+  dplyr::select(c(geography,
+                  `geography code`,
+                  `Ethnic group: Asian, Asian British or Asian Welsh`,
+                  `Ethnic group: Black, Black British, Black Welsh, Caribbean or African`,
+                  `Ethnic group: Mixed or Multiple ethnic groups`,
+                  `Ethnic group: White`,
+                  `Ethnic group: Other ethnic group`,
+                  `Ethnic group: Total: All usual residents`)) %>%
   rename(`Asian, Asian British or\nAsian Welsh`=
            `Ethnic group: Asian, Asian British or Asian Welsh`,
          `Black, Black British, \nBlack Welsh, Caribbean\nor African` =
@@ -66,8 +74,27 @@ plottable <- foray %>% inner_join(
   group_by(`Ethnic group`,Diversity_quintile,`Rural urban classification`) %>%
   summarise(Mean=mean(Total))
 
+RUC_frequency <- foray %>% inner_join(
+  x=data %>% dplyr::select(RUC11,Total,LSOA11CD),
+  y=foray,
+  by=c("LSOA11CD"="geography code")
+) %>%
+  mutate("Rural urban classification"=case_when(RUC11%in%c("Rural village and dispersed in a sparse setting",
+                                                           "Rural town and fringe in a sparse setting",
+                                                           "Urban city and town in a sparse setting")~"RUCs in a sparse setting",
+                                                !RUC11%in%c("Rural village and dispersed in a sparse setting",
+                                                            "Rural town and fringe in a sparse setting",
+                                                            "Urban city and town in a sparse setting")~RUC11,
+  )) %>%
 
+  group_by(`Ethnic group`,`Rural urban classification`) %>%
 
+  summarise(Total=sum(`flat population`))
+
+ruc_freq_plot <- ggplot(data=RUC_frequency)+
+  aes(y=Total,x=`Ethnic group`)+
+  geom_bar(stat="identity")+
+  facet_wrap(~`Rural urban classification`,scale="free_y")
 
 output <- ggplot(data=plottable
 )+

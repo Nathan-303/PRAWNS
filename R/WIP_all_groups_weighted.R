@@ -1,0 +1,130 @@
+#' Bind ethnicity data to the prawn and create graphs based on it
+#'
+#' @param prawn_path The filepath for the prawn CSV that is to be used.
+#'
+#' @param pollutant The pollutant being investigated, used in graph titles
+#'
+#' @param year The year being investigated, used in graph titles
+#'
+#' @keywords faceted, sources
+#'
+#' @export
+#'
+#' @examples
+#' cartesian_ethnicity_groups_src(
+#'   prawn_path="PRAWN.csv",
+#'   pollutant="NOx",
+#'   year=2019)
+
+facet_area_weightet_heatmap_src <- function(prawn_path,pollutant,year){
+data <- read.csv(prawn_path,
+                 row.names=1,
+                 check.names=FALSE)
+
+edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
+                  check.names=FALSE,
+                  sep="|") %>%
+  #Pivot the broadest subdivisions out
+  pivot_longer(
+    cols=-c(date,geography,`geography code`),
+    names_to = "Ethnic group",
+    values_to = "flat_population"
+  ) %>%
+
+  mutate(`Ethnic group`=str_sub(`Ethnic group`,start=14L))
+
+intermediate <- inner_join(data,edata,by=c("LSOA11CD"="geography code"))%>%
+
+  mutate(`Weighted emissions`= Total*flat_population,
+         `Weighted deprivation`=IMD*flat_population)
+
+
+weighted_data <- intermediate %>%
+
+  group_by(`Ethnic group`) %>%
+
+  summarise(popsum=sum(flat_population),
+            emissions_sum=sum(`Weighted emissions`),
+            IMD_sum=sum(`Weighted deprivation`)) %>%
+
+  mutate(`Weighted emissions`=emissions_sum/popsum,
+         `Weighted deprivation`=IMD_sum/popsum) %>%
+
+  group_by(`Ethnic group`)%>%
+
+  mutate(broad_group=case_when(
+    grepl(pattern="Asian, Asian British",`Ethnic group`)==1~"Asian",
+    grepl(pattern="Black, Black British",`Ethnic group`)==1~"Black",
+    grepl(pattern="Mixed or Multiple",`Ethnic group`)==1~"Mixed or Multiple",
+    grepl(pattern="Other ethnic group",`Ethnic group`)==1~"Other",
+    grepl(pattern="White:",`Ethnic group`)==1~"White",
+  ))
+
+keys <- unique(weighted_data$broad_group)
+
+for(index in 1:length(keys)){
+  chunk <- weighted_data %>% 
+    filter(broad_group==keys[index]) %>% 
+    ungroup() %>% 
+    mutate(subgroup=row_number())
+  
+  if(index==1){
+    indexed_data <- chunk
+  }else{
+    indexed_data <- rbind(indexed_data,chunk)
+  }
+}
+
+ggplot(data=indexed_data)+
+
+  aes(x=`Weighted deprivation`,
+      y=`Weighted emissions`,
+      colour=broad_group,
+      shape=as.factor(subgroup)
+      )+
+
+  #geom_boxplot(aes(group=tile))+
+
+  geom_point()+
+
+  scale_colour_manual("the legend",
+                      values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"))+
+
+  scale_shape_manual("the legend",
+                     values = c(15,16,17,18,19,6))+
+  geom_smooth(data=data,
+              inherit.aes = FALSE,
+              aes(x=IMD,
+                  y=Total),
+              formula=y~x,
+              method="lm",
+              colour="pink",
+              show.legend = FALSE
+              )+
+
+  coord_cartesian(xlim=c(3.5,6),
+                  ylim=c(10,24),
+                  expand = FALSE)+
+  theme(legend.position="bottom")
+
+ ggplot(data=weighted_data)+
+
+  aes(x=`Weighted deprivation`,
+      y=`Weighted emissions`)+
+
+  geom_density_2d_filled(contour_var = "ndensity")+
+
+  facet_wrap(~`Ethnic group`)+
+
+  coord_cartesian(ylim=c(0,30),expand = FALSE)+
+
+  geom_smooth(data=data %>%
+                group_by(LAD19NM) %>%
+                summarise(meanEms=mean(Total),meanIMD=mean(IMD)),
+              aes(x=meanIMD,
+                  y=meanEms),
+              formula=y~x,
+              method="lm",
+              colour="pink")
+
+}

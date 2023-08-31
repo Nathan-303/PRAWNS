@@ -293,7 +293,7 @@ process_graph_saver(plot = city_sources,
                                       "/comprehensive source summary.png"),
                     file_format = "agg_png",
                     type = 2,
-                    scaling = 1
+                    scaling = 0.6
                     )
 
 process_graph_saver(plot = Pollutant_distribution,
@@ -308,7 +308,7 @@ process_graph_saver(plot = source_summary,
                     filename = paste0("City emissions/",targets,"/",pollutant,
                                       "/grouped source summary.png"),
                     file_format = "agg_png",
-                    type = 2,
+                    type = 1,
                     scaling = 0.6
 )
 
