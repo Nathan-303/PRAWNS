@@ -58,7 +58,7 @@ weighted_data <- intermediate %>%
     grepl(pattern="Mixed or Multiple",`Ethnic group`)==1~"Mixed or Multiple",
     grepl(pattern="Other ethnic group",`Ethnic group`)==1~"Other",
     grepl(pattern="White:",`Ethnic group`)==1~"White",
-  ))
+  )) 
 
 keys <- unique(weighted_data$broad_group)
 
@@ -83,11 +83,21 @@ point_shape=case_when(
   subgroup==4~18,
   subgroup==5~19,
   subgroup==6~6,
-),
+  ),
 point_size=case_when(
   subgroup==1~2,
-  subgroup!=1~1)
+  subgroup!=1~1
+  )
+)#%>% mutate(`Ethnic group`=`Ethnic group %>% str_replace_all(
+  c("Asian, Asian British or Asian Welsh: "="",
+    "Black, Black British, Black Welsh, Caribbean or African: "="",
+    "Other ethnic group:"=""
+    )
+  )
+#close mutate
 )
+
+
 
 ggplot(data=indexed_data)+
 
@@ -95,17 +105,24 @@ ggplot(data=indexed_data)+
       y=`Weighted emissions`,
       fill=`Ethnic group`
       )+
+  coord_cartesian(xlim=c(3,6),
+                  ylim=c(10,30),expand = FALSE
+                  )+
 
  # This one is for setting the legend without breaking the plot
   geom_point(alpha=0,
              )+
 
   geom_point(aes(x=`Weighted deprivation`,
-                     y=`Weighted emissions`,
-                     colour=broad_group,
-                     shape=as.factor(subgroup)
+                 y=`Weighted emissions`,
+                 colour=broad_group,
+                 shape=as.factor(subgroup),
+                 size=as.factor(point_size)
              ),
              show.legend = FALSE)+
+  
+  scale_size_manual(breaks=c(1,2),
+                    values=c(1,2))+
 
 scale_colour_manual("the legend",
                     values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
@@ -119,10 +136,16 @@ scale_colour_manual("the legend",
                                                                             rep("royalblue",4),
                                                                             rep("olivedrab1",5),
                                                                             rep("#FB8022FF",3),
-                                                                            rep("deeppink2",5))
-                                                              ,
+                                                                            rep("deeppink2",5)),
                                           alpha=1,
-                                          shape=indexed_data$point_shape)))+
+                                          shape=indexed_data$point_shape,
+                                          size=indexed_data$point_size,
+                                          labels=indexed_data$`Ethnic group` %>% 
+                                            str_replace_all(c("Asian, Asian British or Asian Welsh: "="",
+                                                              "Black, Black British, Black Welsh, Caribbean or African: "="",
+                                                              "Mixed or Multiple ethnic groups: "="",
+                                                              "Other ethnic group:"=""))
+                                          )))+
   
   geom_smooth(data=data,
               inherit.aes = FALSE,
@@ -134,18 +157,7 @@ scale_colour_manual("the legend",
               show.legend = FALSE
               )+
   
-  theme(legend.position="bottom")#+
-
-  guides(fill=guide_legend(override.aes = list(
-    colour=(rep("black",6),
-            rep("royalblue",4),
-            rep("olivedrab1",5),
-            rep("#FB8022FF",3),
-            rep("deeppink2",5)
-            ),
-    shape=list(indexed_data$subgroup),
-    alpha=1
-         )))
+  theme(legend.position="bottom")
   
 process_graph_saver(plot=last_plot(),
                     filename = "testing123.png",
