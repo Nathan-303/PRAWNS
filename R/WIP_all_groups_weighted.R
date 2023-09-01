@@ -113,6 +113,8 @@ point_size=case_when(
   #move it so the entires for other come at the end of the category rather than anywhere else
   mutate(nicer_order = c(1,2,3,4,6,5,7,8,9,10,11,15,13,14,12,16,17,18,19,20,21,23,22)) %>%
 
+  arrange(nicer_order) %>%
+
   mutate(`Ethnic group`=factor(`Ethnic group`,levels=`Ethnic group`))
 
 
