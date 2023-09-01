@@ -95,12 +95,27 @@ point_size=case_when(
                          "Other ethnic group:"="")
   )
 #close mutate
-) %>% mutate(`Ethnic group`=factor(`Ethnic group`,levels=`Ethnic group`))
+) %>%
+  mutate(`Ethnic group`=str_trim(`Ethnic group`,"left")) %>%
+  mutate(`Ethnic group`=case_when(
+    `Ethnic group`=="Black, Black British, Black Welsh, Caribbean or African"~"Black, Black British, Black\nWelsh, Caribbean or African",
+    `Ethnic group`=="White: English, Welsh, Scottish, Northern Irish or British"~"White: English, Welsh, Scottish,\nNorthern Irish or British",
+    `Ethnic group`=="Asian, Asian British or Asian Welsh"~"Asian, Asian British\nor Asian Welsh",
+    `Ethnic group`=="Mixed or Multiple ethnic groups"~"Mixed or Multiple\nethnic groups",
+    `Ethnic group`=="Other Mixed or Multiple ethnic groups"~"Other Mixed or\nMultiple ethnic groups",
+    !`Ethnic group`%in%c("Black, Black British, Black Welsh, Caribbean or African",
+                         "White: English, Welsh, Scottish, Northern Irish or British",
+                         "Asian, Asian British or Asian Welsh",
+                         "Mixed or Multiple ethnic groups",
+                         "Other Mixed or Multiple ethnic groups"
+                         )~`Ethnic group`
+  ))
+%>% mutate(`Ethnic group`=factor(`Ethnic group`,levels=`Ethnic group`))
 
 
 
 
-ggplot(data=hmmm)+
+ggplot(data=indexed_data)+
 
   #Set the standard variables
   aes(x=`Weighted deprivation`,
@@ -136,7 +151,7 @@ ggplot(data=hmmm)+
                      values = c(1,16,17,18,4,15))+
   #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6),
-                  ylim=c(10,30),expand = FALSE
+                  ylim=c(10,25),expand = FALSE
                   )+
 
 
