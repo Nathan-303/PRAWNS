@@ -58,16 +58,16 @@ weighted_data <- intermediate %>%
     grepl(pattern="Mixed or Multiple",`Ethnic group`)==1~"Mixed or Multiple",
     grepl(pattern="Other ethnic group",`Ethnic group`)==1~"Other",
     grepl(pattern="White:",`Ethnic group`)==1~"White",
-  )) 
+  ))
 
 keys <- unique(weighted_data$broad_group)
 
 for(index in 1:length(keys)){
-  chunk <- weighted_data %>% 
-    filter(broad_group==keys[index]) %>% 
-    ungroup() %>% 
+  chunk <- weighted_data %>%
+    filter(broad_group==keys[index]) %>%
+    ungroup() %>%
     mutate(subgroup=row_number())
-  
+
   if(index==1){
     indexed_data <- chunk
   }else{
@@ -77,12 +77,12 @@ for(index in 1:length(keys)){
 
 indexed_data <- indexed_data %>% mutate(
 point_shape=case_when(
-  subgroup==1~15,
+  subgroup==1~1,
   subgroup==2~16,
   subgroup==3~17,
   subgroup==4~18,
-  subgroup==5~19,
-  subgroup==6~6,
+  subgroup==5~4,
+  subgroup==6~15,
   ),
 point_size=case_when(
   subgroup==1~2,
@@ -95,21 +95,21 @@ point_size=case_when(
                          "Other ethnic group:"="")
   )
 #close mutate
-) #%>% mutate(`Ethnic group`=factor(`Ethnic group`,levels=row_number()))
+) %>% mutate(`Ethnic group`=factor(`Ethnic group`,levels=`Ethnic group`))
 
 
 
 
-ggplot(data=indexed_data)+
+ggplot(data=hmmm)+
 
   #Set the standard variables
   aes(x=`Weighted deprivation`,
       y=`Weighted emissions`,
       fill=`Ethnic group`
       )+
-  
+
   # This one is for setting the legend without breaking the plot
-  geom_point(aes(colour=`Ethnic group`),alpha=0
+  geom_point(alpha=0
   )+
 
   #Plot the data with the aesthetics wanted
@@ -121,25 +121,25 @@ ggplot(data=indexed_data)+
                  ),
   show.legend = FALSE
   )+
-  
+
   #define the scales used for plotting the data
   scale_size_manual("the legend",
                     breaks=c(1,2),
                     values=c(1,2))+
-  
+
   scale_colour_manual("the legend",
                       values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2"),
                       guide= guide_legend(override.aes = aes(colour="orange"))
   )+
-  
+
   scale_shape_manual("the legend",
-                     values = c(15,16,17,18,19,6))+
+                     values = c(1,16,17,18,4,15))+
   #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6),
                   ylim=c(10,30),expand = FALSE
                   )+
 
-  
+
 
   #Set the display parameters for the legend
   scale_fill_viridis_d(guide=guide_legend(override.aes = list(
@@ -151,7 +151,7 @@ ggplot(data=indexed_data)+
     alpha=1,
     shape=indexed_data$point_shape,
     size=indexed_data$point_size)))+
-  
+
   #Plot the relationship between deprivation and emissions for the whole population
   geom_smooth(data=data,
               inherit.aes = FALSE,
@@ -162,12 +162,12 @@ ggplot(data=indexed_data)+
               colour="pink",
               show.legend = FALSE
               )+
-  
+
   theme(legend.position="bottom")
-  
+
 process_graph_saver(plot=last_plot(),
                     filename = "testing123.png",
                     file_format = "agg_png",
-                    type = 2,
-                    scaling = 1
+                    type = 3,
+                    scaling = 0.7
                     )
