@@ -38,20 +38,6 @@ intermediate <- inner_join(data,edata,by=c("LSOA11CD"="geography code"))%>%
   mutate(`Weighted emissions`= Total*flat_population,
          `Weighted deprivation`=IMD*flat_population)
 
-
-weighted_data <- intermediate %>%
-
-  group_by(`Ethnic group`) %>%
-
-  summarise(popsum=sum(flat_population),
-            emissions_sum=sum(`Weighted emissions`),
-            IMD_sum=sum(`Weighted deprivation`)) %>%
-
-  mutate(`Weighted emissions`=emissions_sum/popsum,
-         `Weighted deprivation`=IMD_sum/popsum) %>%
-
-  group_by(`Ethnic group`)%>%
-
   mutate(broad_group=case_when(
     grepl(pattern="Asian, Asian British",`Ethnic group`)==1~"Asian",
     grepl(pattern="Black, Black British",`Ethnic group`)==1~"Black",
