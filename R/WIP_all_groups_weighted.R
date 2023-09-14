@@ -57,7 +57,7 @@ weighted_data <- intermediate %>%
     grepl(pattern="Black, Black British",`Ethnic group`)==1~"Black",
     grepl(pattern="Mixed or Multiple",`Ethnic group`)==1~"Mixed or Multiple",
     grepl(pattern="Other ethnic group",`Ethnic group`)==1~"Other",
-    grepl(pattern="White:",`Ethnic group`)==1~"White",
+    grepl(pattern="White",`Ethnic group`)==1~"White",
   ))
 
 keys <- unique(weighted_data$broad_group)
@@ -111,7 +111,7 @@ point_size=case_when(
                          )~`Ethnic group`
   )) %>%
   #move it so the entires for other come at the end of the category rather than anywhere else
-  mutate(nicer_order = c(1,2,3,4,6,5,7,8,9,10,11,15,13,14,12,16,18,17,19,20,21,23,22)) %>%
+  mutate(nicer_order = c(1,2,3,4,6,5,7,8,9,10,11,15,13,14,12,16,18,17,19,20,21,22,24,23)) %>%
 
   arrange(nicer_order) %>%
 
@@ -157,7 +157,7 @@ ggplot(data=indexed_data)+
                      values = c(1,16,17,18,4,15))+
   #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6),
-                  ylim=c(10,25),expand = FALSE
+                  ylim=c(0,25),expand = FALSE
                   )+
 
 
@@ -168,7 +168,7 @@ ggplot(data=indexed_data)+
              rep("royalblue",4),
              rep("olivedrab1",5),
              rep("#FB8022FF",3),
-             rep("deeppink2",5)),
+             rep("deeppink2",6)),
     alpha=1,
     shape=indexed_data$point_shape,
     size=2)))+
