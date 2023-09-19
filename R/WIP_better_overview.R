@@ -36,7 +36,32 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
 intermediate <- inner_join(data,edata,by=c("LSOA11CD"="geography code"))%>%
 
   mutate(`Weighted emissions`= Total*flat_population,
-         `Weighted deprivation`=IMD*flat_population)
+         `Weighted deprivation`=IMD*flat_population) %>%
+
+  mutate(broad_group=case_when(
+    grepl(pattern="Asian, Asian British",`Ethnic group`)==1~"Asian",
+    grepl(pattern="Black, Black British",`Ethnic group`)==1~"Black",
+    grepl(pattern="Mixed or Multiple",`Ethnic group`)==1~"Mixed or Multiple",
+    grepl(pattern="Other ethnic group",`Ethnic group`)==1~"Other",
+    grepl(pattern="White:",`Ethnic group`)==1~"White",
+  )) %>%
+
+group_by(LSOA11CD,broad_group)
+
+thing <- intermediate %>% summarise(number_of_people=sum(flat_population))
+
+weighted_data <- intermediate %>%
+
+  group_by(`Ethnic group`) %>%
+
+  summarise(popsum=sum(flat_population),
+            emissions_sum=sum(`Weighted emissions`),
+            IMD_sum=sum(`Weighted deprivation`)) %>%
+
+  mutate(`Weighted emissions`=emissions_sum/popsum,
+         `Weighted deprivation`=IMD_sum/popsum) %>%
+
+  group_by(`Ethnic group`)%>%
 
   mutate(broad_group=case_when(
     grepl(pattern="Asian, Asian British",`Ethnic group`)==1~"Asian",
@@ -143,7 +168,7 @@ ggplot(data=indexed_data)+
                      values = c(1,16,17,18,4,15))+
   #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6),
-                  ylim=c(10,25),expand = FALSE
+                  ylim=c(0,25),expand = FALSE
                   )+
 
 
