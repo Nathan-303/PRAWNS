@@ -157,7 +157,7 @@ ggplot(data=indexed_data)+
                      values = c(1,16,17,18,4,15))+
   #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6),
-                  ylim=c(0,25),expand = FALSE
+                  ylim=c(0,5),expand = FALSE
                   )+
 
 
