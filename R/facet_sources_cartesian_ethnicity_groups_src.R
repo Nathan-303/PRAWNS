@@ -59,8 +59,9 @@ source_list_trimmer <- !(source_list %in% c("Offshore","Tot_area"))
 source_list <- source_list[source_list_trimmer]
 
 long_chunk <- data %>%
+  mutate(`Other sources`=`Waste treatment and disposal`+`Energy production`+Natural+Solvents+Agricultural) %>%
   pivot_longer(
-    cols=all_of(c(source_list,"Point sources")),
+    cols=all_of(c(source_list,"Point sources","Other sources")),
     names_to = "Emission_source",
     values_to = "emissions")
 #Plot a faceted graph
@@ -79,7 +80,8 @@ plottable <- foray %>% inner_join(
   filter(!Emission_source%in%c("Waste treatment and disposal",
                                "Energy production",
                                "Natural",
-                               "Solvents")) %>%
+                               "Solvents",
+                               "Agricultural")) %>%
   group_by(`Ethnic group`,Diversity_quintile,Emission_source) %>%
   summarise(Mean=mean(emissions))
 
@@ -125,7 +127,8 @@ output <- ggplot(data=plottable
   guides(fill = guide_legend(byrow = TRUE))+
 
   facet_wrap(~fct_reorder(Emission_source,Mean,mean,na.rm=TRUE,.desc=TRUE),
-             scale="free_y")
+             scale="free_y")+
+  theme_classic()
 
 output
 
