@@ -76,7 +76,7 @@ process_create_prawns <- function(raster_path="undefined",
                            row.names=1,
                            check.names=FALSE) %>% tibble()
   print("csv made")
-    base_raster <- rasterFromXYZ(csv_raster,crs="OSGB")
+    base_raster <- rasterFromXYZ(csv_raster)
   print("raster next")
     source_stack <- rast(base_raster)
   }
@@ -97,6 +97,10 @@ print("index call")
                    expanse=expanse(LSOA_shapefile)
                    ) %>% unnest(poll_mean)
 
+
+  if(csv_coordinates_path!="undefined"){
+    return(output)
+  }
   #output a csv with minimum processing
   if(output_path!="undefined"){
     print("outputting?")
@@ -105,7 +109,7 @@ print("index call")
     write.csv(file=output_path,
               x = output)
 
-      output
+      return(output)
     }else{
 
         write.csv(file=output_path,
@@ -206,7 +210,7 @@ print("Down to the save")
             file=output_path)
 }
 
-TRUE
+output
   }
 
 
