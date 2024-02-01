@@ -107,7 +107,7 @@ process_graph_saver <- function(plot, filename,file_format,type,scaling=1){
            width=17.1,
            height=8.2,
            units = "cm",
-           dpi=600,
+           dpi=2000,
            device=file_format,
            scaling=scaling)
   }
