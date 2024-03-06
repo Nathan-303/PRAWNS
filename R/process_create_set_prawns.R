@@ -63,7 +63,7 @@ LSOA_field <- intersect(potentials,as.character(names(LSOA_shapefile)))
 #potentials%in%names(LSOA_shapefile)
 LSOA_shapefile <- LSOA_shapefile %>% tidyterra::rename("LSOA"=LSOA_field)
 
-output <- tibble(LSOA=vectorised_shapefile$LSOA)
+output <- tibble(LSOA=LSOA_shapefile$LSOA)
 
 print("still alive")
 
@@ -90,8 +90,6 @@ for(source_number in 1:length(filelist)){
   output <- pollution_mean %>% bind_cols(output)
 }
 
-
-prawns <- output
 
     renamer <- function(data,last_two_digits_year,pollutant_data_name){
 
@@ -127,7 +125,7 @@ prawns <- output
     }
 
   prawns <- renamer(
-    data=prawns,
+    data=output,
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   )
@@ -137,7 +135,7 @@ print("Does it get here")
   # Read the additional data ----------------------------------------------------------------
   set_allocator <- read.csv("Data/Historic_stats/YearIMDCensus.csv")
 
-  chosen_set <- set_allocator %>% dplyr::filter(Year==year) %>% select(Set) %>% as.character()
+  chosen_set <- set_allocator %>% dplyr::filter(Year==year) %>% dplyr::select(Set) %>% as.character()
 
   #read in the set data, this is where any extra data should be added
   setdata <- read.csv(paste0("Data/Historic_stats/set",
