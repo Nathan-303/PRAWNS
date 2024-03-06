@@ -67,9 +67,9 @@ output <- tibble(LSOA=LSOA_shapefile$LSOA)
 
 print("still alive")
 
-index <- c(1:length(vectorised_shapefile))
+index <- c(1:length(LSOA_shapefile))
 
-transient <- sf::st_as_sf(vectorised_shapefile[index])
+transient <- sf::st_as_sf(LSOA_shapefile[index])
 for(source_number in 1:length(filelist)){
 
   #unzip only the layer being extracted to minimise memory use, skip offshore
