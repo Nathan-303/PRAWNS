@@ -54,8 +54,8 @@ process_create_set_prawns <- function(raster_path="undefined",
   #Create a list of all the raster files present in the folder specified by raster_path
   filelist <- grep('\\.asc$', unzip((raster_path), list=TRUE)$Name,
                    ignore.case=TRUE, value=TRUE)
-
-
+#only proceed if it isnt idk, all txt files for some stupid reason
+if(length(filelist!=0)){
 print("vect call")
 #Read the shapefile
 LSOA_shapefile <- vect(shapefile_path)
@@ -70,6 +70,7 @@ print("still alive")
 index <- c(1:length(LSOA_shapefile))
 
 transient <- sf::st_as_sf(LSOA_shapefile[index])
+
 for(source_number in 1:length(filelist)){
 
   #unzip only the layer being extracted to minimise memory use, skip offshore
@@ -132,6 +133,9 @@ for(source_number in 1:length(filelist)){
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
 
 prawns
+}else{
+  tibble(Value="Broken")
+}
   }
 
 
