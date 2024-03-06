@@ -129,32 +129,9 @@ for(source_number in 1:length(filelist)){
     last_two_digits_year=year-2000,
     pollutant_data_name = pollutant_data_name
   )
-print("Does it get here")
   prawns <- prawns %>% mutate("Point sources"=Total-Tot_area)
 
-  # Read the additional data ----------------------------------------------------------------
-  set_allocator <- read.csv("Data/Historic_stats/YearIMDCensus.csv")
-
-  chosen_set <- set_allocator %>% dplyr::filter(Year==year) %>% dplyr::select(Set) %>% as.character()
-
-  #read in the set data, this is where any extra data should be added
-  setdata <- read.csv(paste0("Data/Historic_stats/set",
-                             chosen_set,
-                             ".csv"))
-  # Combine the pollution means with the additional data --------------------
-
-
-  prawns <- inner_join(output,setdata,by="LSOA")
-
-# Output the results ------------------------------------------------------
-print("Down to the save")
-  if (output_path!="undefined"){
-    print("Down to the save")
-  write.csv(prawns,
-            file=output_path)
-}
-
-output
+prawns
   }
 
 
