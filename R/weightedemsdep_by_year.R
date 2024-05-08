@@ -192,7 +192,7 @@ if (chosen_set%in%c("E","F")){
     setdata <- setdata %>% dplyr::select(-c(X.1,X,date,geography,LSOA.name..2011.,Local.Authority.District.code..2013.,Local.Authority.District.name..2013.,Index.of.Multiple.Deprivation..IMD..Rank..where.1.is.most.deprived.)) %>%
       rename("IMD"="Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.")
   }
-  longset <- setdata %>% pivot_longer(pivot_longer(
+  longset <- setdata %>% pivot_longer(
     # cols=c("Ethnic.group..Total..All.usual.residents",
     #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh",
     #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Bangladeshi",
@@ -220,7 +220,7 @@ if (chosen_set%in%c("E","F")){
     #        [26] "Ethnic.group..Other.ethnic.group..Any.other.ethnic.group"   ),
     # names_to = "Ethnic group",
     # values_to = "flat_population"
-  ) #%>%
+  ) %>%
     #rename the ethnicity categories to tidy them up
     #trim the leading space
     mutate(`Ethnic group`=str_sub(`Ethnic group`,start=15L)) %>%
