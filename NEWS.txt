@@ -814,7 +814,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Numerous graphing improvements
 
-0.15.6
+0.15.6 (Uploaded 21/6/23)
 
 	Reintroduced london only section
 
@@ -822,10 +822,11 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Resized some outputs for better sized text
 
-0.15.7
+0.15.7 (Uploaded 29/6/23)
 
 	More graphical improvements
-0.16.0
+
+0.16.0 (Uploaded -/-/-)
 
 	[Bugs? Get out]
 
@@ -837,7 +838,7 @@ Major versions (x.0.0) will appear at the top of this document if they are a cur
 
 	Bugfixes (0.15.2)
 	
-1.0.0
+1.0.0 (Uploaded 8/8/23)
 
 
 Minor details:

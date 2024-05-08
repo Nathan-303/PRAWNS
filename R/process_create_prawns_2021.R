@@ -36,7 +36,7 @@
 #'   year="2019",
 #'   pollutant="NOx")
 
-process_create_prawns <- function(raster_path="undefined",
+process_create_prawns_2021 <- function(raster_path="undefined",
                           tif_path="undefined",
                           csv_coordinates_path="undefined",
                           shapefile_path,
@@ -101,19 +101,6 @@ print("index call")
   if(csv_coordinates_path!="undefined"){
     return(output)
   }
-  #output a csv with minimum processing
-  if(output_path!="undefined"){
-    print("outputting?")
-    if (is_raw==TRUE){
-      print("writing file")
-    write.csv(file=output_path,
-              x = output)
-
-      return(output)
-    }else{
-
-        write.csv(file=output_path,
-                    x = output)}}
 
 
 # Read the additional data as a list of tibbles----------------------------------------------------------------
@@ -124,7 +111,7 @@ print("index call")
   city_data <- read.csv("Data/LSOA_statistics/city lookup 2011.csv") %>%
     tibble()
   #Renames a column to avoid a special character that makes things go wrong
-  colnames(city_data)[1] <- "LSOA21CD"
+  colnames(city_data)[1] <- "LSOA11CD"
 
   #Reads the demographic information about the LSOAs, binds them by LSOA code so the FID is incorporated
   LSOA_demographics <- read.csv("Data/LSOA_statistics/2019_LSOA_Stats.csv") %>%

@@ -13,7 +13,7 @@ for(year in c(2010:2020)){
                      year,
                      "_",
                      pollutant,
-                     "_PRAWN.csv")
+                     "_PRAWN_setFgeogs.csv")
   #
   selected_key <- pollutant_key %>% filter(Pollutant==pollutant)
 
@@ -47,9 +47,7 @@ for(year in c(2010:2020)){
       year = year,
       pollutant = pollutant,
       output_path = paste0(pollutant," emissions in ",year,"PRAWN.csv"),
-      shapefile_path = paste0("Data/Historic_stats/",
-                              as.character(chosenset$LSOAs),
-                              "_LSOA")
+      shapefile_path = paste0("Data/Historic_stats/2021_LSOA")
     )
 
   write.csv(x=input_prawn,
