@@ -192,35 +192,35 @@ if (chosen_set%in%c("E","F")){
     setdata <- setdata %>% dplyr::select(-c(X.1,X,date,geography,LSOA.name..2011.,Local.Authority.District.code..2013.,Local.Authority.District.name..2013.,Index.of.Multiple.Deprivation..IMD..Rank..where.1.is.most.deprived.)) %>%
       rename("IMD"="Index.of.Multiple.Deprivation..IMD..Decile..where.1.is.most.deprived.10..of.LSOAs.")
   }
-  longset <- setdata %>% pivot_longer(pivot_longer(
-    # cols=c("Ethnic.group..Total..All.usual.residents",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Bangladeshi",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Chinese",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Indian",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Pakistani",
-    #        "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Other.Asian",
-    #        "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African",
-    #        "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..African",
-    #        "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..Caribbean",
-    #        "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..Other.Black",
-    #        "Ethnic.group..Mixed.or.Multiple.ethnic.groups",
-    #        "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Asian",
-    #        "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Black.African",
-    #        "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Black.Caribbean",
-    #        "Ethnic.group..Mixed.or.Multiple.ethnic.groups..Other.Mixed.or.Multiple.ethnic.groups",
-    #        "Ethnic.group..White",
-    #        "Ethnic.group..White..English..Welsh..Scottish..Northern.Irish.or.British",
-    #        "Ethnic.group..White..Irish",
-    #        "Ethnic.group..White..Gypsy.or.Irish.Traveller"
-    #        [22] "Ethnic.group..White..Roma"
-    #        [23] "Ethnic.group..White..Other.White"
-    #        [24] "Ethnic.group..Other.ethnic.group"
-    #        [25] "Ethnic.group..Other.ethnic.group..Arab"
-    #        [26] "Ethnic.group..Other.ethnic.group..Any.other.ethnic.group"   ),
-    # names_to = "Ethnic group",
-    # values_to = "flat_population"
-  ) #%>%
+  longset <- setdata %>% pivot_longer(
+    cols=c("Ethnic.group..Total..All.usual.residents",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Bangladeshi",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Chinese",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Indian",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Pakistani",
+           "Ethnic.group..Asian..Asian.British.or.Asian.Welsh..Other.Asian",
+           "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African",
+           "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..African",
+           "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..Caribbean",
+           "Ethnic.group..Black..Black.British..Black.Welsh..Caribbean.or.African..Other.Black",
+           "Ethnic.group..Mixed.or.Multiple.ethnic.groups",
+           "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Asian",
+           "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Black.African",
+           "Ethnic.group..Mixed.or.Multiple.ethnic.groups..White.and.Black.Caribbean",
+           "Ethnic.group..Mixed.or.Multiple.ethnic.groups..Other.Mixed.or.Multiple.ethnic.groups",
+           "Ethnic.group..White",
+           "Ethnic.group..White..English..Welsh..Scottish..Northern.Irish.or.British",
+           "Ethnic.group..White..Irish",
+           "Ethnic.group..White..Gypsy.or.Irish.Traveller",
+           "Ethnic.group..White..Roma",
+           "Ethnic.group..White..Other.White",
+           "Ethnic.group..Other.ethnic.group",
+           "Ethnic.group..Other.ethnic.group..Arab",
+           "Ethnic.group..Other.ethnic.group..Any.other.ethnic.group"   ),
+    names_to = "Ethnic group",
+    values_to = "flat_population"
+  ) %>%
     #rename the ethnicity categories to tidy them up
     #trim the leading space
     mutate(`Ethnic group`=str_sub(`Ethnic group`,start=15L)) %>%
