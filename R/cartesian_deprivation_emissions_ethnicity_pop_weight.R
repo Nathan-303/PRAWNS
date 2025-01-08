@@ -16,7 +16,7 @@
 #'   pollutant="NOx",
 #'   year=2019)
 
-cartesian_deprivation_emissions_ethnicity <- function(prawn_path,pollutant,year){
+cartesian_deprivation_emissions_ethnicity_density <- function(prawn_path,pollutant,year){
 data <- read.csv(prawn_path,
                  row.names=1,
                  check.names=FALSE)
@@ -36,7 +36,8 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
 intermediate <- inner_join(data,edata,by=c("LSOA11CD"="geography code"))%>%
 
   mutate(`Weighted emissions`= Total*flat_population,
-         `Weighted deprivation`=IMD*flat_population)
+         `Weighted deprivation`=IMD*flat_population,
+         density=ntile(expanse,n=5))
 
 refcalc <- intermediate %>% dplyr::filter(`Ethnic group`==" White: English, Welsh, Scottish, Northern Irish or British") %>%
   group_by(IMD) %>%
@@ -51,7 +52,7 @@ refmodel <- lm(emissions~IMD,
 
 weighted_data <- intermediate %>%
 
-  group_by(`Ethnic group`) %>%
+  group_by(`Ethnic group`,density) %>%
 
   summarise(popsum=sum(flat_population),
             emissions_sum=sum(`Weighted emissions`),
@@ -122,22 +123,12 @@ point_size=case_when(
                          )~`Ethnic group`
   )) %>%
   #move it so the entires for other come at the end of the category rather than anywhere else
-  mutate(nicer_order = c(1,2,3,4,6,5,7,8,9,10,11,15,13,14,12,16,18,17,19,20,21,22,23,24)) %>%
+  mutate(nicer_order = base::rep(x=c(1,2,3,4,6,5,7,8,9,10,11,15,13,14,12,16,18,17,19,20,21,22,23,24),
+                                 times=5)) %>%
 
-  arrange(nicer_order) %>%
+  arrange(nicer_order)
 
-  mutate(`Ethnic group`=factor(`Ethnic group`,levels=`Ethnic group`))
 
-reference <- indexed_data %>% dplyr::filter(`Ethnic group`=="White: English, Welsh, Scottish,\nNorthern Irish or British") %>%
-  rename("majority"="Weighted emissions")
-
-output_table <- indexed_data %>% mutate(majority=reference$majority,
-                                        scaled_white=`Weighted deprivation`*refmodel$coefficients[2]+
-                                          refmodel$coefficients[1]) %>%
-  mutate(percentage_up_major=`Weighted emissions`/majority,
-         percentage_scaled_major=`Weighted emissions`/scaled_white)
-
-write.csv(x=output_table,file = paste0(pollutant,"emission averages.csv"))
 output <- ggplot(data=indexed_data)+
 
   #Set the standard variables
@@ -163,40 +154,39 @@ output <- ggplot(data=indexed_data)+
                  y=`Weighted emissions`,
                  colour=broad_group,
                  shape=as.factor(subgroup),
-                 size=as.factor(point_size),
                  stroke=2
                  ),
   show.legend = FALSE
   )+
 
   #define the scales used for plotting the data, control point size here
-  scale_size_manual("the legend",
-                    breaks=c(1,2),
-                    values=c(4,6))+
-
-  scale_colour_manual("the legend",
-                      values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2")
-  )+
-
-  scale_shape_manual("the legend",
-                     values = c(1,16,17,18,4,15))+
-  #Trim the axis as the line makes the scale too big
+  # scale_size_manual("the legend",
+  #                   breaks=c(1,2),
+  #                   values=c(4,6))+
+  #
+  # scale_colour_manual("the legend",
+  #                     values=c("black","royalblue","olivedrab1","#FB8022FF","deeppink2")
+  # )+
+  #
+  # scale_shape_manual("the legend",
+  #                    values = c(1,16,17,18,4,15))+
+  # #Trim the axis as the line makes the scale too big
   coord_cartesian(xlim=c(3,6)
                   )+
 
 
 
   #Set the display parameters for the legend
-  scale_fill_viridis_d("Ethnic\ngroup",guide=guide_legend(override.aes = list(
-    colour=c(rep("black",6),
-             rep("royalblue",4),
-             rep("olivedrab1",5),
-             rep("#FB8022FF",3),
-             rep("deeppink2",6)),
-    alpha=1,
-    shape=indexed_data$point_shape,
-    size=2),
-    ncol=6))+
+  # scale_fill_viridis_d("Ethnic\ngroup",guide=guide_legend(override.aes = list(
+  #   colour=c(rep("black",6),
+  #            rep("royalblue",4),
+  #            rep("olivedrab1",5),
+  #            rep("#FB8022FF",3),
+  #            rep("deeppink2",6)),
+  #   alpha=1,
+  #   shape=indexed_data$point_shape,
+  #   size=2),
+  #   ncol=6))+
 
   # geom_smooth(data=refcalc,
   #             inherit.aes = FALSE,
@@ -207,16 +197,6 @@ output <- ggplot(data=indexed_data)+
   #             se = FALSE
   # )+
 
-  geom_smooth(data=refcalc,
-              inherit.aes=FALSE,
-              method="lm",
-              formula=y~x,
-              aes(x=IMD,
-                  y=emissions),
-              colour="deeppink2",
-              show.legend = FALSE,
-              se = FALSE
-  )+
   #
   # geom_point(data=refcalc,
   #             inherit.aes = FALSE,
@@ -232,7 +212,8 @@ output <- ggplot(data=indexed_data)+
   theme(legend.position="bottom")+
   expand_limits(y=0)+
   scale_y_continuous(expand = expansion(mult = c(0, .095)))+
-  scale_x_continuous(expand=c(0,0))
+  scale_x_continuous(expand=c(0,0))+
+  facet_wrap(~density)
 
 output
 }

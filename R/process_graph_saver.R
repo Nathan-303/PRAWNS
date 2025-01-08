@@ -101,16 +101,47 @@ process_graph_saver <- function(plot, filename,file_format,type,scaling=1){
            scaling=scaling)
   }
 
-  if (type=="custom"){
+  if (type=="custom_pos1"){
     ggsave(filename= filename,
            plot=plot,
-           width=17.1,
-           height=8.2,
+           height=12,
+           width=18,
            units = "cm",
            dpi=2000,
            device=file_format,
            scaling=scaling)
   }
+  if (type=="custom_pos2"){
+    ggsave(filename= filename,
+           plot=plot,
+           height=10.9,
+           width=19,
+           units = "cm",
+           dpi=1500,
+           device=file_format,
+           scaling=scaling)
+  }
+  if (type=="custom_pos3"){
+    ggsave(filename= filename,
+           plot=plot,
+           height=14.6,
+           width=11.3,
+           units = "cm",
+           dpi=1500,
+           device=file_format,
+           scaling=scaling)
+  }
+  if (type=="custompos4"){
+    # 2 column graphs
+    ggsave(filename= filename,
+           plot=plot,
+           width=17.1,
+           height=8,
+           units = "cm",
+           dpi = 600,
+           device=file_format,
+           scaling=scaling)
 
+  }
 }
 

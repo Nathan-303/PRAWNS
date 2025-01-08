@@ -89,20 +89,20 @@ edata <- read.csv("Data/LSOA_statistics/census2021-ts021-lsoa.csv",
     .default = `Ethnic group`))
 
 
-weightchunk <- inner_join(long_stack,edata,by=c("LSOA21CD"="geography code")) %>%
+weightchunk <- inner_join(long_stack,edata,by=c("LSOA11CD"="geography code")) %>%
   dplyr::select(LSOA11CD,`Ethnic group`,Emission_source,IMD,Emissions,flat_population,groupid) %>%
   group_by(`Ethnic group`,IMD,Emission_source) %>%
   mutate(weighted=Emissions*flat_population)
 
 plottable <- weightchunk %>%
   summarise(emsum=sum(weighted),popsum=sum(flat_population),id=mean(groupid)) %>%
-  mutate(avgems=emsum/popsum)%>% 
+  mutate(avgems=emsum/popsum)%>%
   dplyr::filter(`Ethnic group`%in%c("Black, Black British, Black\nWelsh, Caribbean or African",
                                     "White: English, Welsh, Scottish,\nNorthern Irish or British",
                                     "Asian, Asian British\nor Asian Welsh",
                                     "Mixed or Multiple\nethnic groups",
                                     "Other Mixed or\nMultiple ethnic groups",
-                                    "Minoritised white")) %>% 
+                                    "Minoritised white")) %>%
   mutate(linetype=case_when(
     `Ethnic group`=="Minoritised white"~"dashed",
     .default="straight"
@@ -115,7 +115,7 @@ output <- ggplot(data=plottable)+
   theme_classic()+
   scale_linetype_manual(values=c(5,1),)+
   guides(linetype="none",
-         colour=guide_legend(override.aes = 
+         colour=guide_legend(override.aes =
                                list(linetype=c(1,1,5,1,1,1)))
   )+
   scale_x_continuous(
